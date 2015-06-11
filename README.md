@@ -1,6 +1,8 @@
 CMSIS-SVD Repository and Parsers
 ================================
 
+[![Travis](https://img.shields.io/travis/posborne/cmsis-svd.svg)](https://travis-ci.org/posborne/cmsis-svd)
+
 What is this?
 -------------
 
