@@ -77,7 +77,7 @@ In general, the following rules apply:
   SVDs contained therein.  Look for files named the following for
   license information:
 * All other code is licensed under the terms of the Apache License
-  v2.0 (See [<LICENSE-APACHE>](LICENSE-APACHE).
+  v2.0 (See [LICENSE-APACHE](LICENSE-APACHE)).
 
 If you encounter an issue with the content of this repository or have
 a question, please do not hesitate to create an issue on Github.
