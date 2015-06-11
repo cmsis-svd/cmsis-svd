@@ -1,8 +1,8 @@
 CMSIS-SVD Repository and Parsers
---------------------------------
+================================
 
 What is this?
-=============
+-------------
 
 This repository seeks to provide value to devlopers targetting ARM
 platforms in two main ways:
@@ -14,7 +14,7 @@ platforms in two main ways:
    turn it into a data structure more easily used in that language.
 
 What is CMSIS-SVD
-=================
+-----------------
 
 ARM provides the following description of
 [CMSIS-SVD (System View Description)](http://www.keil.com/pack/doc/CMSIS/SVD/html/index.html)
@@ -40,7 +40,7 @@ EmbSysRegView and seeks to provide a repository of SVDs that is more
 accessible to a greater number of other projects.
 
 How Can the CMSIS-SVD Be Used
-=============================
+-----------------------------
 
 The generic description of each MCUs CPU and hardware registers is
 very valuable when generating code that can be used for talking to
@@ -52,7 +52,7 @@ The information can also be used for building debug tooling, test
 infrastructure, or whatever else.
 
 Contributing
-============
+------------
 
 Contributions from Silicon Vendors as well as community members are
 greatly appreciated.  Please feel free to create an issue on Github
@@ -60,7 +60,7 @@ and/or submit Pull Requests with proposed changes to the repository.
 These will be reviewed and pulled in if deemed appropriate.
 
 License
-=======
+-------
 
 The licensing for the contents of this repository is dependent on the
 directory in which files are located as well as the contents of the
