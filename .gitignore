@@ -1,0 +1,7 @@
+# Editor Files
+*~
+\#*
+.\#*
+
+# Python Files
+*.py[cod]
