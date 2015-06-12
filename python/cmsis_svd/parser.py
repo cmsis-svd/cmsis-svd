@@ -113,7 +113,12 @@ class SVDParser(object):
         for interrupt_node in peripheral_node.findall('./interrupt'):
             interrupts.append(self._parse_interrupt(interrupt_node))
 
-        address_block = self._parse_address_block(peripheral_node.findall('./addressBlock')[0])
+        address_block_nodes = peripheral_node.findall('./addressBlock')
+        if address_block_nodes:
+            address_block = self._parse_address_block(address_block_nodes[0])
+        else:
+            address_block = None
+
         return SVDPeripheral(
             name=_get_text(peripheral_node, 'name'),
             description=_get_text(peripheral_node, 'description'),
