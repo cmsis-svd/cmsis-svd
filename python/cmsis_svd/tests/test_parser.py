@@ -20,6 +20,25 @@ import unittest
 THIS_DIR = os.path.dirname(__file__)
 DATA_DIR = os.path.join(THIS_DIR, "..", "..", "..", "data")
 
+def make_svd_validator(svd_path):
+    def verify_svd_validity():
+        parser = SVDParser.for_xml_file(svd_path)
+        device = parser.get_device()
+        assert device is not None
+    mcu = os.path.basename(svd_path).replace('.xml', '').replace('_svd', '').replace('.', '-').lower()
+    vendor = os.path.split(os.path.dirname(svd_path))[-1].lower()
+    verify_svd_validity.__name__ = "test_{vendor}_{mcu}".format(vendor=vendor, mcu=mcu)
+    return verify_svd_validity
+
+#
+# Generate a test function for each SVD file that exists
+#
+for dirpath, _dirnames, filenames in os.walk(DATA_DIR):
+    for filename in (f for f in filenames if f.endswith('.xml')):
+        svd_path = os.path.join(dirpath, filename)
+        test = make_svd_validator(svd_path)
+        globals()[test.__name__] = test
+
 
 class TestParserFreescale(unittest.TestCase):
 
