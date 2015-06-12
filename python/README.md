@@ -23,6 +23,57 @@ you may need to update the version of pip you are using.
 pip install -U -e 'git+https://github.com/posborne/cmsis-svd.git#egg=cmsis-svd&subdirectory=python'
 ````
 
+Example
+-------
+
+There's a lot of information you can glean from the SVDs for various
+platforms.  Let's say, for instance, that I wanted to see the names
+and base address of each peripheral on the Freescale K20 (D7).  Since the
+K20 SVD is packaged with the library, I can do the following:
+
+```python
+from cmsis_svd.parser import SVDParser
+
+parser = SVDParser.for_packaged_svd('Freescale', 'MK20D7.xml')
+for peripheral in parser.get_device().peripherals:
+    print("%s @ 0x%08x" % (peripheral.name, peripheral.base_address))
+```
+
+This generates the following output:
+
+```
+FTFL_FlashConfig @ 0x00000400
+AIPS0 @ 0x40000000
+AIPS1 @ 0x40080000
+AXBS @ 0x40004000
+DMA @ 0x40008000
+FB @ 0x4000c000
+FMC @ 0x4001f000
+FTFL @ 0x40020000
+DMAMUX @ 0x40021000
+CAN0 @ 0x40024000
+SPI0 @ 0x4002c000
+SPI1 @ 0x4002d000
+...
+```
+
+Example 2: Convert to JSON
+--------------------------
+
+The data structures representing the SVD data have the ability to
+convert themselves to a dictionary suitable for serialization as
+JSON.  This works recursively.  To generate JSON data and pretty print
+it you can do something like the following:
+
+```python
+from cmsis_svd.parser import SVDParser
+
+parser = SVDParser.for_packaged_svd('Freescale', 'MK20D7.xml')
+svd_dict = parser.get_device().to_dict()
+print(json.dumps(svd_dict, sort_key=True,
+                 indent=4, separators=(',', ': ')))
+```
+
 Development
 -----------
 
