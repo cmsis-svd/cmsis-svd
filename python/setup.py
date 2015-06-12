@@ -31,12 +31,43 @@ if os.path.exists(DATA_SRC_DIR):
     shutil.copytree(DATA_SRC_DIR, DATA_DST_DIR)
 
 
+def get_long_description():
+    long_description = open('README.md').read()
+    try:
+        import subprocess
+        import pandoc
+
+        process = subprocess.Popen(
+            ['which pandoc'],
+            shell=True,
+            stdout=subprocess.PIPE,
+            universal_newlines=True)
+
+        pandoc_path = process.communicate()[0]
+        pandoc_path = pandoc_path.strip('\n')
+
+        pandoc.core.PANDOC_PATH = pandoc_path
+
+        doc = pandoc.Document()
+        doc.markdown = long_description
+        long_description = doc.rst
+        open("README.rst", "w").write(doc.rst)
+    except:
+        if os.path.exists("README.rst"):
+            long_description = open("README.rst").read()
+        else:
+            print("Could not find pandoc or convert properly")
+            print("  make sure you have pandoc (system) and pyandoc (python module) installed")
+
+    return long_description
+
+
 setup(
     name="cmsis-svd",
     version="0.1",
     description="CMSIS SVD data files and parser",
-    setup_requires=['setuptools-markdown'],
-    long_description_markdown_filename='README.md',
+    setup_requires=['pyandoc'],
+    long_description=get_long_description(),
     author="Paul Osborne",
     author_email="osbpau@gmail.com",
     license="Apache 2.0",
