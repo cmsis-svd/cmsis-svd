@@ -1,1 +1,1 @@
-recursive-include ../data *
+recursive-include cmsis_svd/data *

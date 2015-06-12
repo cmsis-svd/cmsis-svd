@@ -1,3 +1,6 @@
+# Data files copied over for distribution
+cmsis_svd/data
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
