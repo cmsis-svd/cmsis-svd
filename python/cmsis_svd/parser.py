@@ -22,6 +22,7 @@ from cmsis_svd.model import SVDAddressBlock
 from cmsis_svd.model import SVDRegister
 from cmsis_svd.model import SVDField
 from cmsis_svd.model import SVDEnumeratedValue
+import pkg_resources
 
 
 def _get_text(node, tag, default=None):
@@ -58,6 +59,14 @@ class SVDParser(object):
     @classmethod
     def for_xml_file(cls, path):
         return cls(ET.parse(path))
+
+    @classmethod
+    def for_packaged_svd(cls, vendor, filename):
+        resource = "data/{vendor}/{filename}".format(
+            vendor=vendor,
+            filename=filename
+        )
+        return cls.for_xml_file(pkg_resources.resource_filename("cmsis_svd", resource))
 
     def __init__(self, tree):
         self._tree = tree
