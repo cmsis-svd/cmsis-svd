@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+import json
 import six
 
 
@@ -34,30 +35,49 @@ def _check_type(value, expected_type):
         ))
     return value
 
-
-class SVDEnumeratedValue(object):
-
-    def __init__(self, name, description, value):
-        self.name = name
-        self.description = description
-        self.value = value
-
     def __repr__(self):
         return repr(self.__dict__)
 
 
-class SVDField(object):
+class SVDJSONEncoder(json.JSONEncoder):
+
+    def default(self, obj):
+        if isinstance(obj, SVDElement):
+            return obj.__dict__
+        else:
+            return json.JSONEncoder.default(self, obj)
+
+
+class SVDElement(object):
+    """Base class for all SVD Elements"""
+
+    def to_dict(self):
+        # This is a little convoluted but it works and ensures a
+        # json-compatible dictionary representation (at the cost of
+        # some computational overhead)
+        encoder = SVDJSONEncoder()
+        return json.loads(encoder.encode(self))
+
+
+class SVDEnumeratedValue(SVDElement):
+
+    def __init__(self, name, description, value):
+        SVDElement.__init__(self)
+        self.name = name
+        self.description = description
+        self.value = value
+
+
+class SVDField(SVDElement):
 
     def __init__(self, name, description, bit_offset, bit_width, access, enumerated_values):
+        SVDElement.__init__(self)
         self.name = name
         self.description = description
         self.bit_offset = bit_offset
         self.bit_width = bit_width
         self.access = access
         self.enumerated_values = enumerated_values
-
-    def __repr__(self):
-        return repr(self.__dict__)
 
     @property
     def is_enumerated_type(self):
@@ -69,9 +89,10 @@ class SVDField(object):
         return self.name.lower() == "reserved"
 
 
-class SVDRegister(object):
+class SVDRegister(SVDElement):
 
     def __init__(self, name, description, address_offset, size, access, reset_value, reset_mask, fields):
+        SVDElement.__init__(self)
         self.name = name
         self.description = description
         self.address_offset = address_offset
@@ -81,31 +102,28 @@ class SVDRegister(object):
         self.reset_mask = reset_mask
         self.fields = fields
 
-    def __repr__(self):
-        return repr(self.__dict__)
 
-
-class SVDAddressBlock(object):
+class SVDAddressBlock(SVDElement):
 
     def __init__(self, offset, size, usage):
+        SVDElement.__init__(self)
         self.offset = offset
         self.size = size
         self.usage = usage
 
-    def __repr__(self):
-        return repr(self.__dict__)
 
-
-class SVDInterrupt(object):
+class SVDInterrupt(SVDElement):
 
     def __init__(self, name, value):
+        SVDElement.__init__(self)
         self.name = name
         self.value = _check_type(value, six.integer_types)
 
 
-class SVDPeripheral(object):
+class SVDPeripheral(SVDElement):
 
     def __init__(self, name, description, prepend_to_name, base_address, address_block, interrupts, registers):
+        SVDElement.__init__(self)
         self.name = name
         self.description = description
         self.prepend_to_name = prepend_to_name
@@ -114,13 +132,11 @@ class SVDPeripheral(object):
         self.interrupts = interrupts
         self.registers = registers
 
-    def __repr__(self):
-        return repr(self.__dict__)
 
-
-class SVDDevice(object):
+class SVDDevice(SVDElement):
 
     def __init__(self, vendor, vendor_id, name, version, description, cpu, address_unit_bits, width, peripherals):
+        SVDElement.__init__(self)
         self.vendor = vendor
         self.vendor_id = vendor_id
         self.name = name
@@ -130,8 +146,3 @@ class SVDDevice(object):
         self.address_unit_bits = _check_type(address_unit_bits, six.integer_types)
         self.width = _check_type(width, six.integer_types)
         self.peripherals = peripherals
-
-    def __repr__(self):
-        return repr(self.__dict__)
-
-
