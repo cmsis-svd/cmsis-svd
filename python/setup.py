@@ -35,23 +35,9 @@ def get_long_description():
     long_description = open('README.md').read()
     try:
         import subprocess
-        import pandoc
-
-        process = subprocess.Popen(
-            ['which pandoc'],
-            shell=True,
-            stdout=subprocess.PIPE,
-            universal_newlines=True)
-
-        pandoc_path = process.communicate()[0]
-        pandoc_path = pandoc_path.strip('\n')
-
-        pandoc.core.PANDOC_PATH = pandoc_path
-
-        doc = pandoc.Document()
-        doc.markdown = long_description
-        long_description = doc.rst
-        open("README.rst", "w").write(doc.rst)
+        import pypandoc
+        long_description = pypandoc.convert('README.md', 'rst')
+        open("README.rst", "w").write(long_description)
     except:
         if os.path.exists("README.rst"):
             long_description = open("README.rst").read()
@@ -65,8 +51,8 @@ def get_long_description():
 setup(
     name="cmsis-svd",
     version="0.1",
+    url="https://github.com/posborne/cmsis-svd",
     description="CMSIS SVD data files and parser",
-    setup_requires=['pyandoc'],
     long_description=get_long_description(),
     author="Paul Osborne",
     author_email="osbpau@gmail.com",
@@ -75,6 +61,14 @@ setup(
         "Development Status :: 5 - Alpha",
         "License :: OSI Approved :: Apache Software License",
         "Programming Language :: Python",
+        "Topic :: System :: Hardware",
+        "Topic :: System :: Boot :: Init",
+        "Topic :: System :: Hardware :: Hardware Drivers",
+        "Topic :: Software Development :: Code Generators",
+        "Topic :: Software Development :: Embedded System",
+        "Topic :: System :: Operating System Kernels",
+        "Topic :: Utilities",
+        "Topic :: Text Processing :: Markup",
     ],
     install_requires=[
         'six',
