@@ -6,5 +6,6 @@ python:
   - "3.4"
 before_install:
   - cd python
+  - sudo apt-get install pandoc
 install: "pip install -r dev-requirements.txt"
 script: nosetests
