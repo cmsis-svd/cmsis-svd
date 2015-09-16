@@ -25,7 +25,7 @@ def make_svd_validator(svd_path):
         parser = SVDParser.for_xml_file(svd_path)
         device = parser.get_device()
         assert device is not None
-    mcu = os.path.basename(svd_path).replace('.xml', '').replace('_svd', '').replace('.', '-').lower()
+    mcu = os.path.basename(svd_path).replace('.svd', '').replace('_svd', '').replace('.', '-').lower()
     vendor = os.path.split(os.path.dirname(svd_path))[-1].lower()
     verify_svd_validity.__name__ = "test_{vendor}_{mcu}".format(vendor=vendor, mcu=mcu)
     return verify_svd_validity
@@ -34,7 +34,7 @@ def make_svd_validator(svd_path):
 # Generate a test function for each SVD file that exists
 #
 for dirpath, _dirnames, filenames in os.walk(DATA_DIR):
-    for filename in (f for f in filenames if f.endswith('.xml')):
+    for filename in (f for f in filenames if f.endswith('.svd')):
         svd_path = os.path.join(dirpath, filename)
         test = make_svd_validator(svd_path)
         globals()[test.__name__] = test
@@ -43,7 +43,7 @@ for dirpath, _dirnames, filenames in os.walk(DATA_DIR):
 class TestParserFreescale(unittest.TestCase):
 
     def setUp(self):
-        svd = os.path.join(DATA_DIR, "Freescale", "MKL25Z4.xml")
+        svd = os.path.join(DATA_DIR, "Freescale", "MKL25Z4.svd")
         self.parser = SVDParser.for_xml_file(svd)
 
     def test_device_attributes(self):
