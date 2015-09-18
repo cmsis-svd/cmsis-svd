@@ -91,7 +91,7 @@ class SVDParser(object):
         msb=_get_int(field_node, 'msb')
         lsb=_get_int(field_node, 'lsb')
         if bit_range is not None:
-            m=re.search('\[([0-9]+):([0-9]+)\]', bitRange)
+            m=re.search('\[([0-9]+):([0-9]+)\]', bit_range)
             bit_offset=int(m.group(2))
             bit_width=1+(int(m.group(1))-int(m.group(2)))     
         elif msb is not None:
