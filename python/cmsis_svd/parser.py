@@ -23,6 +23,7 @@ from cmsis_svd.model import SVDRegister
 from cmsis_svd.model import SVDField
 from cmsis_svd.model import SVDEnumeratedValue
 import pkg_resources
+import re
 
 
 def _get_text(node, tag, default=None):
@@ -83,12 +84,25 @@ class SVDParser(object):
         enumerated_values = []
         for enumerated_value_node in field_node.findall("./enumeratedValues/enumeratedValue"):
             enumerated_values.append(self._parse_enumerated_value(enumerated_value_node))
+			
+        bitRange=_get_text(field_node, 'bitRange')
+        bitOffset=_get_int(field_node, 'bitOffset')
+        bitWidth=_get_int(field_node, 'bitWidth')
+        msb=_get_int(field_node, 'msb')
+        lsb=_get_int(field_node, 'lsb')
+        if bitRange is not None:
+            m = re.search('\[([0-9]+):([0-9]+)\]', bitRange)
+            bitOffset = int(m.group(2))
+            bitWidth = 1 + (int(m.group(1)) - int(m.group(2)))     
+        elif msb is not None:
+            bitOffset = lsb;
+            bitWidth = 1 + (msb - lsb);
 
         return SVDField(
             name=_get_text(field_node, 'name'),
             description=_get_text(field_node, 'description'),
-            bit_offset=_get_int(field_node, 'bitOffset'),
-            bit_width=_get_int(field_node, 'bitWidth'),
+            bit_offset=bitOffset,
+            bit_width=bitWidth,
             access=_get_text(field_node, 'access'),
             enumerated_values=enumerated_values or None,
         )
