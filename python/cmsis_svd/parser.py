@@ -185,3 +185,35 @@ class SVDParser(object):
     def get_device(self):
         """Get the device described by this SVD"""
         return self._parse_device(self._root)
+        
+def duplicate_array_of_registers(input):    #expects a SVDRegister which is an array of registers    
+    output = []
+    assert(input.dim is len(input.dim_index))
+    for i in range(input.dim):
+        output.append(SVDRegister(
+                name=input.name % input.dim_index[i],
+                description=input.description,
+                address_offset=input.address_offset+input.dim_increment*i,
+                size=input.size,
+                access=input.access,
+                reset_value=input.reset_value,
+                reset_mask=input.reset_mask,
+                fields=input.fields,
+                dim=None, 
+                dim_increment=None, 
+                dim_index=None
+            )
+        )
+    return output
+        
+def duplicate_arrays_of_registers(input):   #expects a SVDDevice
+    for peripheral in input.peripherals:
+        for i in reversed(range(len(peripheral.registers))):    #reversed order allows us to insert without messing with the index
+            if peripheral.registers[i].dim is not None:
+                template = peripheral.registers[i]
+                del(peripheral.registers[i])
+                for reg in reversed(duplicate_array_of_registers(template)):
+                    peripheral.registers.insert(i,reg)
+                    
+                
+    return input
