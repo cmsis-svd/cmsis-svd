@@ -112,7 +112,15 @@ class TestParserFreescale(unittest.TestCase):
         self.assertEqual(bdh.access, "read-write")
         self.assertEqual(list(sorted([f.name for f in bdh.fields])),
                          ['LBKDIE', 'RXEDGIE', 'SBNS', 'SBR'])
-
+						 
+    def test_register_dim(self):
+        device = self.parser.get_device()
+        uart0 = [p for p in device.peripherals if p.name == "DMAMUX0"][0]
+        bdh = [r for r in uart0.registers if r.name == "CHCFG%s"][0]
+        self.assertEqual(bdh.dim, 4)
+        self.assertEqual(bdh.dim_increment, 1)
+        self.assertEqual(bdh.dim_index, ['0','1','2','3'])
+ 
     def test_field_details(self):
         device = self.parser.get_device()
         uart0 = [p for p in device.peripherals if p.name == "UART0"][0]

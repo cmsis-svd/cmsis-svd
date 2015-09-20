@@ -91,7 +91,7 @@ class SVDField(SVDElement):
 
 class SVDRegister(SVDElement):
 
-    def __init__(self, name, description, address_offset, size, access, reset_value, reset_mask, fields):
+    def __init__(self, name, description, address_offset, size, access, reset_value, reset_mask, fields, dim, dim_increment, dim_index):
         SVDElement.__init__(self)
         self.name = name
         self.description = description
@@ -101,6 +101,9 @@ class SVDRegister(SVDElement):
         self.reset_value = reset_value
         self.reset_mask = reset_mask
         self.fields = fields
+        self.dim = dim
+        self.dim_increment = dim_increment
+        self.dim_index = dim_index
 
 
 class SVDAddressBlock(SVDElement):

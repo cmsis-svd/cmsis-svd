@@ -111,6 +111,9 @@ class SVDParser(object):
         fields = []
         for field_node in register_node.findall('.//field'):
             fields.append(self._parse_field(field_node))
+        dim_index = _get_text(register_node, 'dimIndex')
+        if dim_index is not None:
+            dim_index = dim_index.split(',')
         return SVDRegister(
             name=_get_text(register_node, 'name'),
             description=_get_text(register_node, 'description'),
@@ -120,6 +123,9 @@ class SVDParser(object):
             reset_value=_get_int(register_node, 'resetValue'),
             reset_mask=_get_int(register_node, 'resetMask'),
             fields=fields,
+            dim=_get_int(register_node, 'dim'), 
+            dim_increment=_get_int(register_node, 'dimIncrement'), 
+            dim_index=dim_index
         )
 
     def _parse_address_block(self, address_block_node):
