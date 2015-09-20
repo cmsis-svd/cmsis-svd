@@ -214,6 +214,16 @@ def duplicate_arrays_of_registers(input):   #expects a SVDDevice
                 del(peripheral.registers[i])
                 for reg in reversed(duplicate_array_of_registers(template)):
                     peripheral.registers.insert(i,reg)
-                    
-                
+    return input
+
+        
+def remove_reserved(input):   #expects a SVDDevice
+    for peripheral in input.peripherals:
+        for i in reversed(range(len(peripheral.registers))):    #reversed order allows us to delete without messing with the index
+            if 'reserved' in peripheral.registers[i].name.lower():
+                del(peripheral.registers[i])
+            else:
+                for f in reversed(range(len(peripheral.registers[i].fields))): #reversed order allows us to delete without messing with the index
+                    if 'reserved' in peripheral.registers[i].fields[f].name.lower():
+                        del(peripheral.registers[i])
     return input
