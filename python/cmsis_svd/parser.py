@@ -22,6 +22,7 @@ from cmsis_svd.model import SVDAddressBlock
 from cmsis_svd.model import SVDRegister
 from cmsis_svd.model import SVDField
 from cmsis_svd.model import SVDEnumeratedValue
+from cmsis_svd.model import SVDCpu
 import pkg_resources
 import re
 
@@ -49,6 +50,10 @@ def _get_int(node, tag, default=None):
             # replace those bits with zeros.
             text_value = text_value.replace('x', '0')
             return int(text_value[1:], 2)  # binary
+        elif text_value.startswith('true'):
+            return 1
+        elif text_value.startswith('false'):
+            return 0
         else:
             return int(text_value)  # decimal
     return default
@@ -56,17 +61,22 @@ def _get_int(node, tag, default=None):
 
 class SVDParser(object):
     """THe SVDParser is responsible for mapping the SVD XML to Python Objects"""
+    
+    remove_reserved = 0
+    expand_arrays_of_registers = 0
 
     @classmethod
     def for_xml_file(cls, path):
         return cls(ET.parse(path))
 
     @classmethod
-    def for_packaged_svd(cls, vendor, filename):
+    def for_packaged_svd(cls, vendor, filename, remove_reserved = 0, expand_arrays_of_registers = 0):
         resource = "data/{vendor}/{filename}".format(
             vendor=vendor,
             filename=filename
         )
+        cls.remove_reserved = remove_reserved
+        cls.expand_arrays_of_registers = expand_arrays_of_registers
         return cls.for_xml_file(pkg_resources.resource_filename("cmsis_svd", resource))
 
     def __init__(self, tree):
@@ -110,10 +120,21 @@ class SVDParser(object):
     def _parse_register(self, register_node):
         fields = []
         for field_node in register_node.findall('.//field'):
-            fields.append(self._parse_field(field_node))
-        dim_index = _get_text(register_node, 'dimIndex')
-        if dim_index is not None:
-            dim_index = dim_index.split(',')
+            node = self._parse_field(field_node)
+            if self.remove_reserved is 0 or 'reserved' not in node.name.lower():
+                fields.append(node)
+        dim = _get_int(register_node, 'dim')
+        dim_index_text = _get_text(register_node, 'dimIndex')
+        if dim is not None:
+            if dim_index_text is None:
+                dim_index = range(0,dim)                        #some files omit dimIndex 
+            elif ',' in dim_index_text:
+                dim_index = dim_index_text.split(',')
+            elif '-' in dim_index_text:                              #some files use <dimIndex>0-3</dimIndex> as an inclusive inclusive range
+                m=re.search('([0-9]+)-([0-9]+)', dim_index_text)
+                dim_index = range(int(m.group(1)),int(m.group(2))+1)
+        else:
+            dim_index = None
         return SVDRegister(
             name=_get_text(register_node, 'name'),
             description=_get_text(register_node, 'description'),
@@ -123,7 +144,7 @@ class SVDParser(object):
             reset_value=_get_int(register_node, 'resetValue'),
             reset_mask=_get_int(register_node, 'resetMask'),
             fields=fields,
-            dim=_get_int(register_node, 'dim'), 
+            dim=dim, 
             dim_increment=_get_int(register_node, 'dimIncrement'), 
             dim_index=dim_index
         )
@@ -144,7 +165,12 @@ class SVDParser(object):
     def _parse_peripheral(self, peripheral_node):
         registers = []
         for register_node in peripheral_node.findall('./registers/register'):
-            registers.append(self._parse_register(register_node))
+            reg = self._parse_register(register_node)
+            if reg.dim and self.expand_arrays_of_registers is 1:
+                for r in duplicate_array_of_registers(reg):
+                    registers.append(r)
+            elif self.remove_reserved is 0 or 'reserved' not in reg.name.lower() :
+                registers.append(reg)
 
         interrupts = []
         for interrupt_node in peripheral_node.findall('./interrupt'):
@@ -170,13 +196,24 @@ class SVDParser(object):
         peripherals = []
         for peripheral_node in device_node.findall('.//peripheral'):
             peripherals.append(self._parse_peripheral(peripheral_node))
+        cpu_node = device_node.find('./cpu')
+        cpu = SVDCpu(
+            name = _get_text(cpu_node, 'name'),
+            revision = _get_text(cpu_node, 'revision'),
+            endian = _get_text(cpu_node, 'endian'),
+            mpu_present = _get_int(cpu_node, 'mpuPresent'),
+            fpu_present = _get_int(cpu_node, 'fpuPresent'),
+            vtor_present = _get_int(cpu_node, 'vtorPresent'),
+            nvic_prio_bits = _get_int(cpu_node, 'nvicPrioBits'),
+            vendor_systick_config = _get_text(cpu_node, 'vendorSystickConfig')
+        )
         return SVDDevice(
             vendor=_get_text(device_node, 'vendor'),
             vendor_id=_get_text(device_node, 'vendorID'),
             name=_get_text(device_node, 'name'),
             version=_get_text(device_node, 'version'),
             description=_get_text(device_node, 'description'),
-            cpu=None,  # TODO
+            cpu=cpu, 
             address_unit_bits=_get_int(device_node, 'addressUnitBits'),
             width=_get_int(device_node, 'width'),
             peripherals=peripherals,
@@ -206,24 +243,5 @@ def duplicate_array_of_registers(input):    #expects a SVDRegister which is an a
         )
     return output
         
-def duplicate_arrays_of_registers(input):   #expects a SVDDevice
-    for peripheral in input.peripherals:
-        for i in reversed(range(len(peripheral.registers))):    #reversed order allows us to insert without messing with the index
-            if peripheral.registers[i].dim is not None:
-                template = peripheral.registers[i]
-                del(peripheral.registers[i])
-                for reg in reversed(duplicate_array_of_registers(template)):
-                    peripheral.registers.insert(i,reg)
-    return input
-
         
-def remove_reserved(input):   #expects a SVDDevice
-    for peripheral in input.peripherals:
-        for i in reversed(range(len(peripheral.registers))):    #reversed order allows us to delete without messing with the index
-            if 'reserved' in peripheral.registers[i].name.lower():
-                del(peripheral.registers[i])
-            else:
-                for f in reversed(range(len(peripheral.registers[i].fields))): #reversed order allows us to delete without messing with the index
-                    if 'reserved' in peripheral.registers[i].fields[f].name.lower():
-                        del(peripheral.registers[i])
-    return input
+

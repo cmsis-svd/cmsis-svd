@@ -134,6 +134,20 @@ class SVDPeripheral(SVDElement):
         self.address_block = address_block
         self.interrupts = interrupts
         self.registers = registers
+        
+   
+class SVDCpu(SVDElement):
+
+    def __init__(self, name, revision, endian, mpu_present, fpu_present, vtor_present, nvic_prio_bits, vendor_systick_config):
+        SVDElement.__init__(self)
+        self.name = name
+        self.revision = revision
+        self.endian = endian
+        self.mpu_present = mpu_present
+        self.fpu_present = fpu_present
+        self.vtor_present = vtor_present
+        self.nvic_prio_bits = nvic_prio_bits
+        self.vendor_systick_config = vendor_systick_config
 
 
 class SVDDevice(SVDElement):
