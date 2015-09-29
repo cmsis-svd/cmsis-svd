@@ -87,7 +87,8 @@ class SVDParser(object):
         return SVDEnumeratedValue(
             name=_get_text(enumerated_value_node, 'name'),
             description=_get_text(enumerated_value_node, 'description'),
-            value=_get_int(enumerated_value_node, 'value')
+            value=_get_int(enumerated_value_node, 'value'),
+            is_default=_get_int(enumerated_value_node, 'isDefault')
         )
 
     def _parse_field(self, field_node):
@@ -225,7 +226,7 @@ class SVDParser(object):
         
 def duplicate_array_of_registers(input):    #expects a SVDRegister which is an array of registers    
     output = []
-    assert(input.dim is len(input.dim_index))
+    assert(input.dim == len(input.dim_index))
     for i in range(input.dim):
         output.append(SVDRegister(
                 name=input.name % input.dim_index[i],

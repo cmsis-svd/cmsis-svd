@@ -61,11 +61,12 @@ class SVDElement(object):
 
 class SVDEnumeratedValue(SVDElement):
 
-    def __init__(self, name, description, value):
+    def __init__(self, name, description, value, is_default):
         SVDElement.__init__(self)
         self.name = name
         self.description = description
         self.value = value
+        self.is_default = is_default
 
 
 class SVDField(SVDElement):
