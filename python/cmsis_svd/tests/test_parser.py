@@ -15,7 +15,6 @@
 #
 from cmsis_svd.parser import SVDParser
 from cmsis_svd.parser import duplicate_array_of_registers
-from cmsis_svd.parser import duplicate_arrays_of_registers
 import os
 import unittest
 
@@ -130,20 +129,7 @@ class TestParserFreescale(unittest.TestCase):
         ret = duplicate_array_of_registers(bdh)
         self.assertEqual(len(ret),4)
         self.assertEqual(ret[1].name,'CHCFG1')
-        
-    def test_register_dim_duplicate_all(self):
-        device = self.parser.get_device()
-        ret = duplicate_arrays_of_registers(device)
-        dmamux0 = [p for p in ret.peripherals if p.name == "DMAMUX0"][0]
-        pit = [p for p in ret.peripherals if p.name == "PIT"][0]
-        chc1 = [r for r in dmamux0.registers if r.name == "CHCFG1"][0]
-        chc2 = [r for r in dmamux0.registers if r.name == "CHCFG2"][0]
-        ldval1 = [r for r in pit.registers if r.name == "LDVAL1"][0]
-        self.assertEqual(chc1.address_offset,1)
-        self.assertEqual(chc2.address_offset,2)
-        self.assertEqual(ldval1.address_offset,0x110)
-        
- 
+
     def test_field_details(self):
         device = self.parser.get_device()
         uart0 = [p for p in device.peripherals if p.name == "UART0"][0]
