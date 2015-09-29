@@ -61,11 +61,12 @@ class SVDElement(object):
 
 class SVDEnumeratedValue(SVDElement):
 
-    def __init__(self, name, description, value):
+    def __init__(self, name, description, value, is_default):
         SVDElement.__init__(self)
         self.name = name
         self.description = description
         self.value = value
+        self.is_default = is_default
 
 
 class SVDField(SVDElement):
@@ -91,7 +92,7 @@ class SVDField(SVDElement):
 
 class SVDRegister(SVDElement):
 
-    def __init__(self, name, description, address_offset, size, access, reset_value, reset_mask, fields):
+    def __init__(self, name, description, address_offset, size, access, reset_value, reset_mask, fields, dim, dim_increment, dim_index):
         SVDElement.__init__(self)
         self.name = name
         self.description = description
@@ -101,6 +102,9 @@ class SVDRegister(SVDElement):
         self.reset_value = reset_value
         self.reset_mask = reset_mask
         self.fields = fields
+        self.dim = dim
+        self.dim_increment = dim_increment
+        self.dim_index = dim_index
 
 
 class SVDAddressBlock(SVDElement):
@@ -131,6 +135,20 @@ class SVDPeripheral(SVDElement):
         self.address_block = address_block
         self.interrupts = interrupts
         self.registers = registers
+        
+   
+class SVDCpu(SVDElement):
+
+    def __init__(self, name, revision, endian, mpu_present, fpu_present, vtor_present, nvic_prio_bits, vendor_systick_config):
+        SVDElement.__init__(self)
+        self.name = name
+        self.revision = revision
+        self.endian = endian
+        self.mpu_present = mpu_present
+        self.fpu_present = fpu_present
+        self.vtor_present = vtor_present
+        self.nvic_prio_bits = nvic_prio_bits
+        self.vendor_systick_config = vendor_systick_config
 
 
 class SVDDevice(SVDElement):

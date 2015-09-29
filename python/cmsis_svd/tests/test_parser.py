@@ -14,6 +14,7 @@
 # limitations under the License.
 #
 from cmsis_svd.parser import SVDParser
+from cmsis_svd.parser import duplicate_array_of_registers
 import os
 import unittest
 
@@ -52,7 +53,7 @@ class TestParserFreescale(unittest.TestCase):
         self.assertEqual(device.vendor_id, "Freescale")
         self.assertEqual(device.name, "MKL25Z4")
         self.assertEqual(device.version, "1.6")
-        self.assertEqual(device.cpu, None)
+        #self.assertEqual(device.cpu, None)
         self.assertEqual(device.address_unit_bits, 8)
         self.assertEqual(device.width, 32)
 
@@ -112,6 +113,22 @@ class TestParserFreescale(unittest.TestCase):
         self.assertEqual(bdh.access, "read-write")
         self.assertEqual(list(sorted([f.name for f in bdh.fields])),
                          ['LBKDIE', 'RXEDGIE', 'SBNS', 'SBR'])
+						 
+    def test_register_dim(self):
+        device = self.parser.get_device()
+        dmamux0 = [p for p in device.peripherals if p.name == "DMAMUX0"][0]
+        bdh = [r for r in dmamux0.registers if r.name == "CHCFG%s"][0]
+        self.assertEqual(bdh.dim, 4)
+        self.assertEqual(bdh.dim_increment, 1)
+        self.assertEqual(bdh.dim_index, ['0','1','2','3'])
+        
+    def test_register_dim_duplicate_single(self):
+        device = self.parser.get_device()
+        dmamux0 = [p for p in device.peripherals if p.name == "DMAMUX0"][0]
+        bdh = [r for r in dmamux0.registers if r.name == "CHCFG%s"][0]
+        ret = duplicate_array_of_registers(bdh)
+        self.assertEqual(len(ret),4)
+        self.assertEqual(ret[1].name,'CHCFG1')
 
     def test_field_details(self):
         device = self.parser.get_device()

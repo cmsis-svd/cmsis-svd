@@ -22,7 +22,9 @@ from cmsis_svd.model import SVDAddressBlock
 from cmsis_svd.model import SVDRegister
 from cmsis_svd.model import SVDField
 from cmsis_svd.model import SVDEnumeratedValue
+from cmsis_svd.model import SVDCpu
 import pkg_resources
+import re
 
 
 def _get_text(node, tag, default=None):
@@ -48,6 +50,10 @@ def _get_int(node, tag, default=None):
             # replace those bits with zeros.
             text_value = text_value.replace('x', '0')
             return int(text_value[1:], 2)  # binary
+        elif text_value.startswith('true'):
+            return 1
+        elif text_value.startswith('false'):
+            return 0
         else:
             return int(text_value)  # decimal
     return default
@@ -55,17 +61,22 @@ def _get_int(node, tag, default=None):
 
 class SVDParser(object):
     """THe SVDParser is responsible for mapping the SVD XML to Python Objects"""
+    
+    remove_reserved = 0
+    expand_arrays_of_registers = 0
 
     @classmethod
     def for_xml_file(cls, path):
         return cls(ET.parse(path))
 
     @classmethod
-    def for_packaged_svd(cls, vendor, filename):
+    def for_packaged_svd(cls, vendor, filename, remove_reserved = 0, expand_arrays_of_registers = 0):
         resource = "data/{vendor}/{filename}".format(
             vendor=vendor,
             filename=filename
         )
+        cls.remove_reserved = remove_reserved
+        cls.expand_arrays_of_registers = expand_arrays_of_registers
         return cls.for_xml_file(pkg_resources.resource_filename("cmsis_svd", resource))
 
     def __init__(self, tree):
@@ -76,19 +87,33 @@ class SVDParser(object):
         return SVDEnumeratedValue(
             name=_get_text(enumerated_value_node, 'name'),
             description=_get_text(enumerated_value_node, 'description'),
-            value=_get_int(enumerated_value_node, 'value')
+            value=_get_int(enumerated_value_node, 'value'),
+            is_default=_get_int(enumerated_value_node, 'isDefault')
         )
 
     def _parse_field(self, field_node):
         enumerated_values = []
         for enumerated_value_node in field_node.findall("./enumeratedValues/enumeratedValue"):
             enumerated_values.append(self._parse_enumerated_value(enumerated_value_node))
+			
+        bit_range=_get_text(field_node, 'bitRange')
+        bit_offset=_get_int(field_node, 'bitOffset')
+        bit_width=_get_int(field_node, 'bitWidth')
+        msb=_get_int(field_node, 'msb')
+        lsb=_get_int(field_node, 'lsb')
+        if bit_range is not None:
+            m=re.search('\[([0-9]+):([0-9]+)\]', bit_range)
+            bit_offset=int(m.group(2))
+            bit_width=1+(int(m.group(1))-int(m.group(2)))     
+        elif msb is not None:
+            bit_offset=lsb
+            bit_width=1+(msb-lsb)
 
         return SVDField(
             name=_get_text(field_node, 'name'),
             description=_get_text(field_node, 'description'),
-            bit_offset=_get_int(field_node, 'bitOffset'),
-            bit_width=_get_int(field_node, 'bitWidth'),
+            bit_offset=bit_offset,
+            bit_width=bit_width,
             access=_get_text(field_node, 'access'),
             enumerated_values=enumerated_values or None,
         )
@@ -96,7 +121,21 @@ class SVDParser(object):
     def _parse_register(self, register_node):
         fields = []
         for field_node in register_node.findall('.//field'):
-            fields.append(self._parse_field(field_node))
+            node = self._parse_field(field_node)
+            if self.remove_reserved is 0 or 'reserved' not in node.name.lower():
+                fields.append(node)
+        dim = _get_int(register_node, 'dim')
+        dim_index_text = _get_text(register_node, 'dimIndex')
+        if dim is not None:
+            if dim_index_text is None:
+                dim_index = range(0,dim)                        #some files omit dimIndex 
+            elif ',' in dim_index_text:
+                dim_index = dim_index_text.split(',')
+            elif '-' in dim_index_text:                              #some files use <dimIndex>0-3</dimIndex> as an inclusive inclusive range
+                m=re.search('([0-9]+)-([0-9]+)', dim_index_text)
+                dim_index = range(int(m.group(1)),int(m.group(2))+1)
+        else:
+            dim_index = None
         return SVDRegister(
             name=_get_text(register_node, 'name'),
             description=_get_text(register_node, 'description'),
@@ -106,6 +145,9 @@ class SVDParser(object):
             reset_value=_get_int(register_node, 'resetValue'),
             reset_mask=_get_int(register_node, 'resetMask'),
             fields=fields,
+            dim=dim, 
+            dim_increment=_get_int(register_node, 'dimIncrement'), 
+            dim_index=dim_index
         )
 
     def _parse_address_block(self, address_block_node):
@@ -124,7 +166,12 @@ class SVDParser(object):
     def _parse_peripheral(self, peripheral_node):
         registers = []
         for register_node in peripheral_node.findall('./registers/register'):
-            registers.append(self._parse_register(register_node))
+            reg = self._parse_register(register_node)
+            if reg.dim and self.expand_arrays_of_registers is 1:
+                for r in duplicate_array_of_registers(reg):
+                    registers.append(r)
+            elif self.remove_reserved is 0 or 'reserved' not in reg.name.lower() :
+                registers.append(reg)
 
         interrupts = []
         for interrupt_node in peripheral_node.findall('./interrupt'):
@@ -150,13 +197,24 @@ class SVDParser(object):
         peripherals = []
         for peripheral_node in device_node.findall('.//peripheral'):
             peripherals.append(self._parse_peripheral(peripheral_node))
+        cpu_node = device_node.find('./cpu')
+        cpu = SVDCpu(
+            name = _get_text(cpu_node, 'name'),
+            revision = _get_text(cpu_node, 'revision'),
+            endian = _get_text(cpu_node, 'endian'),
+            mpu_present = _get_int(cpu_node, 'mpuPresent'),
+            fpu_present = _get_int(cpu_node, 'fpuPresent'),
+            vtor_present = _get_int(cpu_node, 'vtorPresent'),
+            nvic_prio_bits = _get_int(cpu_node, 'nvicPrioBits'),
+            vendor_systick_config = _get_text(cpu_node, 'vendorSystickConfig')
+        )
         return SVDDevice(
             vendor=_get_text(device_node, 'vendor'),
             vendor_id=_get_text(device_node, 'vendorID'),
             name=_get_text(device_node, 'name'),
             version=_get_text(device_node, 'version'),
             description=_get_text(device_node, 'description'),
-            cpu=None,  # TODO
+            cpu=cpu, 
             address_unit_bits=_get_int(device_node, 'addressUnitBits'),
             width=_get_int(device_node, 'width'),
             peripherals=peripherals,
@@ -165,3 +223,26 @@ class SVDParser(object):
     def get_device(self):
         """Get the device described by this SVD"""
         return self._parse_device(self._root)
+        
+def duplicate_array_of_registers(input):    #expects a SVDRegister which is an array of registers    
+    output = []
+    assert(input.dim == len(input.dim_index))
+    for i in range(input.dim):
+        output.append(SVDRegister(
+                name=input.name % input.dim_index[i],
+                description=input.description,
+                address_offset=input.address_offset+input.dim_increment*i,
+                size=input.size,
+                access=input.access,
+                reset_value=input.reset_value,
+                reset_mask=input.reset_mask,
+                fields=input.fields,
+                dim=None, 
+                dim_increment=None, 
+                dim_index=None
+            )
+        )
+    return output
+        
+        
+
