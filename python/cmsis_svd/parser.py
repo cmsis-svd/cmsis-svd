@@ -66,7 +66,9 @@ class SVDParser(object):
     expand_arrays_of_registers = 0
 
     @classmethod
-    def for_xml_file(cls, path):
+    def for_xml_file(cls, path, remove_reserved = 0, expand_arrays_of_registers = 0):
+        cls.remove_reserved = remove_reserved
+        cls.expand_arrays_of_registers = expand_arrays_of_registers
         return cls(ET.parse(path))
 
     @classmethod
