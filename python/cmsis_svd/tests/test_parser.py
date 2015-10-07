@@ -13,23 +13,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+import unittest
+
 from cmsis_svd.parser import SVDParser
 from cmsis_svd.parser import duplicate_array_of_registers
 import os
-import unittest
 
 THIS_DIR = os.path.dirname(__file__)
 DATA_DIR = os.path.join(THIS_DIR, "..", "..", "..", "data")
+
 
 def make_svd_validator(svd_path):
     def verify_svd_validity():
         parser = SVDParser.for_xml_file(svd_path)
         device = parser.get_device()
         assert device is not None
+
     mcu = os.path.basename(svd_path).replace('.svd', '').replace('_svd', '').replace('.', '-').lower()
     vendor = os.path.split(os.path.dirname(svd_path))[-1].lower()
     verify_svd_validity.__name__ = "test_{vendor}_{mcu}".format(vendor=vendor, mcu=mcu)
     return verify_svd_validity
+
 
 #
 # Generate a test function for each SVD file that exists
@@ -42,7 +46,6 @@ for dirpath, _dirnames, filenames in os.walk(DATA_DIR):
 
 
 class TestParserFreescale(unittest.TestCase):
-
     def setUp(self):
         svd = os.path.join(DATA_DIR, "Freescale", "MKL25Z4.svd")
         self.parser = SVDParser.for_xml_file(svd)
@@ -53,7 +56,7 @@ class TestParserFreescale(unittest.TestCase):
         self.assertEqual(device.vendor_id, "Freescale")
         self.assertEqual(device.name, "MKL25Z4")
         self.assertEqual(device.version, "1.6")
-        #self.assertEqual(device.cpu, None)
+        # self.assertEqual(device.cpu, None)
         self.assertEqual(device.address_unit_bits, 8)
         self.assertEqual(device.width, 32)
 
@@ -98,7 +101,7 @@ class TestParserFreescale(unittest.TestCase):
                          [('DMA0', 0),
                           ('DMA1', 1),
                           ('DMA2', 2),
-                          ('DMA3', 3),])
+                          ('DMA3', 3), ])
 
     def test_register_details(self):
         device = self.parser.get_device()
@@ -113,22 +116,22 @@ class TestParserFreescale(unittest.TestCase):
         self.assertEqual(bdh.access, "read-write")
         self.assertEqual(list(sorted([f.name for f in bdh.fields])),
                          ['LBKDIE', 'RXEDGIE', 'SBNS', 'SBR'])
-						 
+
     def test_register_dim(self):
         device = self.parser.get_device()
         dmamux0 = [p for p in device.peripherals if p.name == "DMAMUX0"][0]
         bdh = [r for r in dmamux0.registers if r.name == "CHCFG%s"][0]
         self.assertEqual(bdh.dim, 4)
         self.assertEqual(bdh.dim_increment, 1)
-        self.assertEqual(bdh.dim_index, ['0','1','2','3'])
-        
+        self.assertEqual(bdh.dim_index, ['0', '1', '2', '3'])
+
     def test_register_dim_duplicate_single(self):
         device = self.parser.get_device()
         dmamux0 = [p for p in device.peripherals if p.name == "DMAMUX0"][0]
         bdh = [r for r in dmamux0.registers if r.name == "CHCFG%s"][0]
         ret = duplicate_array_of_registers(bdh)
-        self.assertEqual(len(ret),4)
-        self.assertEqual(ret[1].name,'CHCFG1')
+        self.assertEqual(len(ret), 4)
+        self.assertEqual(ret[1].name, 'CHCFG1')
 
     def test_field_details(self):
         device = self.parser.get_device()

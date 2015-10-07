@@ -14,6 +14,7 @@
 # limitations under the License.
 #
 import json
+
 import six
 
 
@@ -40,7 +41,6 @@ def _check_type(value, expected_type):
 
 
 class SVDJSONEncoder(json.JSONEncoder):
-
     def default(self, obj):
         if isinstance(obj, SVDElement):
             return obj.__dict__
@@ -60,7 +60,6 @@ class SVDElement(object):
 
 
 class SVDEnumeratedValue(SVDElement):
-
     def __init__(self, name, description, value, is_default):
         SVDElement.__init__(self)
         self.name = name
@@ -70,7 +69,6 @@ class SVDEnumeratedValue(SVDElement):
 
 
 class SVDField(SVDElement):
-
     def __init__(self, name, description, bit_offset, bit_width, access, enumerated_values):
         SVDElement.__init__(self)
         self.name = name
@@ -91,8 +89,8 @@ class SVDField(SVDElement):
 
 
 class SVDRegister(SVDElement):
-
-    def __init__(self, name, description, address_offset, size, access, reset_value, reset_mask, fields, dim, dim_increment, dim_index):
+    def __init__(self, name, description, address_offset, size, access, reset_value, reset_mask, fields, dim,
+                 dim_increment, dim_index):
         SVDElement.__init__(self)
         self.name = name
         self.description = description
@@ -108,7 +106,6 @@ class SVDRegister(SVDElement):
 
 
 class SVDAddressBlock(SVDElement):
-
     def __init__(self, offset, size, usage):
         SVDElement.__init__(self)
         self.offset = offset
@@ -117,7 +114,6 @@ class SVDAddressBlock(SVDElement):
 
 
 class SVDInterrupt(SVDElement):
-
     def __init__(self, name, value):
         SVDElement.__init__(self)
         self.name = name
@@ -125,7 +121,6 @@ class SVDInterrupt(SVDElement):
 
 
 class SVDPeripheral(SVDElement):
-
     def __init__(self, name, description, prepend_to_name, base_address, address_block, interrupts, registers):
         SVDElement.__init__(self)
         self.name = name
@@ -135,11 +130,11 @@ class SVDPeripheral(SVDElement):
         self.address_block = address_block
         self.interrupts = interrupts
         self.registers = registers
-        
-   
-class SVDCpu(SVDElement):
 
-    def __init__(self, name, revision, endian, mpu_present, fpu_present, vtor_present, nvic_prio_bits, vendor_systick_config):
+
+class SVDCpu(SVDElement):
+    def __init__(self, name, revision, endian, mpu_present, fpu_present, vtor_present, nvic_prio_bits,
+                 vendor_systick_config):
         SVDElement.__init__(self)
         self.name = name
         self.revision = revision
@@ -152,7 +147,6 @@ class SVDCpu(SVDElement):
 
 
 class SVDDevice(SVDElement):
-
     def __init__(self, vendor, vendor_id, name, version, description, cpu, address_unit_bits, width, peripherals):
         SVDElement.__init__(self)
         self.vendor = vendor
