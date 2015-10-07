@@ -1,4 +1,4 @@
-#
+﻿#
 # Copyright 2015 Paul Osborne <osbpau@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -204,9 +204,17 @@ class SVDParser(object):
             endian = _get_text(cpu_node, 'endian'),
             mpu_present = _get_int(cpu_node, 'mpuPresent'),
             fpu_present = _get_int(cpu_node, 'fpuPresent'),
+            fpu_dp = _get_int(cpu_node, 'fpuDP'),
+            icache_present = _get_int(cpu_node, 'icachePresent'),
+            dcache_present = _get_int(cpu_node, 'dcachePresent'),
+            itcm_present = _get_int(cpu_node, 'itcmPresent'),
+            dtcm_present = _get_int(cpu_node, 'dtcmPresent'),
             vtor_present = _get_int(cpu_node, 'vtorPresent'),
             nvic_prio_bits = _get_int(cpu_node, 'nvicPrioBits'),
-            vendor_systick_config = _get_text(cpu_node, 'vendorSystickConfig')
+            vendor_systick_config = _get_int(cpu_node, 'vendorSystickConfig'),
+            device_num_interrupts = _get_int(cpu_node, 'vendorSystickConfig'),
+            sau_num_regions = _get_int(cpu_node, 'vendorSystickConfig'),
+            sau_regions_config = _get_text(cpu_node, 'sauRegionsConfig')
         )
         return SVDDevice(
             vendor=_get_text(device_node, 'vendor'),
@@ -218,6 +226,11 @@ class SVDParser(object):
             address_unit_bits=_get_int(device_node, 'addressUnitBits'),
             width=_get_int(device_node, 'width'),
             peripherals=peripherals,
+            size = _get_int(device_node,"size"),                      
+            access = _get_text(device_node, 'access'),                    
+            protection = _get_text(device_node, 'protection'),            
+            reset_value = _get_int(device_node,"reset_value"),          
+            reset_mask = _get_int(device_node,"reset_mask")
         )
 
     def get_device(self):
