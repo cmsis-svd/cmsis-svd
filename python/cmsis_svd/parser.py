@@ -72,9 +72,7 @@ class SVDParser(object):
 
     @classmethod
     def for_xml_file(cls, path, remove_reserved = 0, expand_arrays_of_registers = 0):
-        cls.remove_reserved = remove_reserved
-        cls.expand_arrays_of_registers = expand_arrays_of_registers
-        return cls(ET.parse(path))
+        return cls(ET.parse(path),remove_reserved,expand_arrays_of_registers)
 
     @classmethod
     def for_packaged_svd(cls, vendor, filename, remove_reserved = 0, expand_arrays_of_registers = 0):
@@ -82,11 +80,11 @@ class SVDParser(object):
             vendor=vendor,
             filename=filename
         )
-        cls.remove_reserved = remove_reserved
-        cls.expand_arrays_of_registers = expand_arrays_of_registers
-        return cls.for_xml_file(pkg_resources.resource_filename("cmsis_svd", resource))
+        return cls.for_xml_file(pkg_resources.resource_filename("cmsis_svd", resource, remove_reserved, expand_arrays_of_registers))
 
-    def __init__(self, tree):
+    def __init__(self, tree, remove_reserved = 0, expand_arrays_of_registers = 0):
+        self.remove_reserved = remove_reserved
+        self.expand_arrays_of_registers = expand_arrays_of_registers
         self._tree = tree
         self._root = self._tree.getroot()
 
