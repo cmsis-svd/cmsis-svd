@@ -265,24 +265,27 @@ def duplicate_array_of_registers(input):    #expects a SVDRegister which is an a
         )
     return output
 
-def inherit_register_defaults(source,dest):
-    if source.size is not None:
-        if dest.size is None:
-            dest.size = source.size
-    if source.access is not None:
-        if dest.access is None:
-            dest.access = source.access
-    if source.protection is not None:
-        if dest.protection is None:
-            dest.protection = source.protection
-    if source.reset_value is not None:
-        if dest.reset_value is None:
-            dest.reset_value = source.reset_value
-    if source.reset_mask is not None:
-        if dest.reset_mask is None:
-            dest.reset_mask = source.reset_mask
+
 
 def propagate_defaults(device):
+    def inherit_register_defaults(source,dest):
+        if source.size is not None:
+            if dest.size is None:
+                dest.size = source.size
+        if source.access is not None:
+            if dest.access is None:
+                dest.access = source.access
+        if source.protection is not None:
+            if dest.protection is None:
+                dest.protection = source.protection
+        if source.reset_value is not None:
+            if dest.reset_value is None:
+                dest.reset_value = source.reset_value
+        if source.reset_mask is not None:
+            if dest.reset_mask is None:
+                dest.reset_mask = source.reset_mask
+
+
     if device.peripherals:
         for peripheral in device.peripherals:
             if peripheral.derived_from:
