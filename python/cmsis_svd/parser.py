@@ -163,7 +163,7 @@ class SVDParser(object):
             value=_get_int(interrupt_node, 'value')
         )
 
-    def _parse_peripheral(self, peripheral_node):
+    def _parse_peripheral(self, peripheral_node, device):
         registers = []
         for register_node in peripheral_node.findall('./registers/register'):
             reg = self._parse_register(register_node)
@@ -184,6 +184,7 @@ class SVDParser(object):
             address_block = None
 
         return SVDPeripheral(
+            device=device,
             name=_get_text(peripheral_node, 'name'),
             description=_get_text(peripheral_node, 'description'),
             prepend_to_name=_get_text(peripheral_node, 'prependToName'),
@@ -194,9 +195,6 @@ class SVDParser(object):
         )
 
     def _parse_device(self, device_node):
-        peripherals = []
-        for peripheral_node in device_node.findall('.//peripheral'):
-            peripherals.append(self._parse_peripheral(peripheral_node))
         cpu_node = device_node.find('./cpu')
         cpu = SVDCpu(
             name=_get_text(cpu_node, 'name'),
@@ -208,7 +206,7 @@ class SVDParser(object):
             nvic_prio_bits=_get_int(cpu_node, 'nvicPrioBits'),
             vendor_systick_config=_get_text(cpu_node, 'vendorSystickConfig')
         )
-        return SVDDevice(
+        device = SVDDevice(
             vendor=_get_text(device_node, 'vendor'),
             vendor_id=_get_text(device_node, 'vendorID'),
             name=_get_text(device_node, 'name'),
@@ -217,8 +215,14 @@ class SVDParser(object):
             cpu=cpu,
             address_unit_bits=_get_int(device_node, 'addressUnitBits'),
             width=_get_int(device_node, 'width'),
-            peripherals=peripherals,
+            peripherals=None,
         )
+
+        peripherals = []
+        for peripheral_node in device_node.findall('.//peripheral'):
+            peripherals.append(self._parse_peripheral(peripheral_node, device))
+        device.peripherals = peripherals
+        return device
 
     def get_device(self):
         """Get the device described by this SVD"""
