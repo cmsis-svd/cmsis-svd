@@ -126,9 +126,10 @@ class SVDInterrupt(SVDElement):
 
 class SVDPeripheral(SVDElement):
 
-    def __init__(self, name, description, prepend_to_name, base_address, address_block, interrupts, registers):
+    def __init__(self, name, derived_from, description, prepend_to_name, base_address, address_block, interrupts, registers):
         SVDElement.__init__(self)
         self.name = name
+        self.derived_from = derived_from
         self.description = description
         self.prepend_to_name = prepend_to_name
         self.base_address = base_address

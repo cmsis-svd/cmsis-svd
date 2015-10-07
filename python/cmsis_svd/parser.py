@@ -169,7 +169,9 @@ class SVDParser(object):
         )
 
     def _parse_peripheral(self, peripheral_node):
-        registers = []
+        registers = None
+        if peripheral_node.find('registers'):       #it may be importat to distinguish an empty array of registers from the registers tag missing completly 
+            registers = []
         for register_node in peripheral_node.findall('./registers/register'):
             reg = self._parse_register(register_node)
             if reg.dim and self.expand_arrays_of_registers is 1:
@@ -190,6 +192,7 @@ class SVDParser(object):
 
         return SVDPeripheral(
             name=_get_text(peripheral_node, 'name'),
+            derived_from = peripheral_node.get("derivedFrom"),
             description=_get_text(peripheral_node, 'description'),
             prepend_to_name=_get_text(peripheral_node, 'prependToName'),
             base_address=_get_int(peripheral_node, 'baseAddress'),
@@ -237,6 +240,29 @@ class SVDParser(object):
             reset_value = _get_int(device_node,"reset_value"),          
             reset_mask = _get_int(device_node,"reset_mask")
         )
+
+    def _propagate_defaults(self, device):
+        if device.peripherals:
+            for peripheral in peripherals:
+                if peripheral.derived_from:
+                    parent = (p for p in peripherals if parent.name == peripheral.derived_from).next()  #TODO support dot see http://www.keil.com/pack/doc/CMSIS/SVD/html/svd__outline_pg.html
+                    if peripheral.description is None:
+                        peripheral.description = parent.description
+                    if peripheral.prepend_ot_name is None:
+                        peripheral.prepend_to_name = parent.prepend_to_name
+                    if peripheral.address_block is None:
+                        perpheral.address_block = parent.address_block
+                    #if peripheral.interrupts is None:
+                    #    peripheral.interrupts = parent.interrupts
+                    if peripheral.registers is None:     
+                        peripheral.registers = parent.registers
+
+                if device.size:
+                    if peripheral.registers:
+                        for register in registers:
+                            if register.size is None:
+                                register.size = device.size
+
 
     def get_device(self):
         """Get the device described by this SVD"""
