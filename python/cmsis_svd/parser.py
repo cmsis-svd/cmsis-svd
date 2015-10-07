@@ -194,6 +194,11 @@ class SVDParser(object):
             address_block=address_block,
             interrupts=interrupts,
             registers=registers,
+            size = _get_int(peripheral_node,"size"),                      
+            access = _get_text(peripheral_node, 'access'),                    
+            protection = _get_text(peripheral_node, 'protection'),            
+            reset_value = _get_int(peripheral_node,"resetValue"),          
+            reset_mask = _get_int(peripheral_node,"resetMask")
         )
 
     def _parse_device(self, device_node):
@@ -232,32 +237,9 @@ class SVDParser(object):
             size = _get_int(device_node,"size"),                      
             access = _get_text(device_node, 'access'),                    
             protection = _get_text(device_node, 'protection'),            
-            reset_value = _get_int(device_node,"reset_value"),          
-            reset_mask = _get_int(device_node,"reset_mask")
+            reset_value = _get_int(device_node,"resetValue"),          
+            reset_mask = _get_int(device_node,"resetMask")
         )
-
-    def _propagate_defaults(self, device):
-        if device.peripherals:
-            for peripheral in peripherals:
-                if peripheral.derived_from:
-                    parent = (p for p in peripherals if parent.name == peripheral.derived_from).next()  #TODO support dot see http://www.keil.com/pack/doc/CMSIS/SVD/html/svd__outline_pg.html
-                    if peripheral.description is None:
-                        peripheral.description = parent.description
-                    if peripheral.prepend_ot_name is None:
-                        peripheral.prepend_to_name = parent.prepend_to_name
-                    if peripheral.address_block is None:
-                        perpheral.address_block = parent.address_block
-                    #if peripheral.interrupts is None:
-                    #    peripheral.interrupts = parent.interrupts
-                    if peripheral.registers is None:     
-                        peripheral.registers = parent.registers
-
-                if device.size:
-                    if peripheral.registers:
-                        for register in registers:
-                            if register.size is None:
-                                register.size = device.size
-
 
     def get_device(self):
         """Get the device described by this SVD"""
@@ -282,6 +264,51 @@ def duplicate_array_of_registers(input):    #expects a SVDRegister which is an a
             )
         )
     return output
+
+def inherit_register_defaults(source,dest):
+    if source.size is not None:
+        if dest.size is None:
+            dest.size = source.size
+    if source.access is not None:
+        if dest.access is None:
+            dest.access = source.access
+    if source.protection is not None:
+        if dest.protection is None:
+            dest.protection = source.protection
+    if source.reset_value is not None:
+        if dest.reset_value is None:
+            dest.reset_value = source.reset_value
+    if source.reset_mask is not None:
+        if dest.reset_mask is None:
+            dest.reset_mask = source.reset_mask
+
+def propagate_defaults(device):
+    if device.peripherals:
+        for peripheral in device.peripherals:
+            if peripheral.derived_from:
+                parent = None;
+                for p in device.peripherals:
+                    if p.name == peripheral.derived_from:
+                        parent = p      #TODO support dot see http://www.keil.com/pack/doc/CMSIS/SVD/html/svd__outline_pg.html
+                if peripheral.description is None:
+                    peripheral.description = parent.description
+                if peripheral.prepend_to_name is None:
+                    peripheral.prepend_to_name = parent.prepend_to_name
+                if peripheral.address_block is None:
+                    peripheral.address_block = parent.address_block
+                #if peripheral.interrupts is None:
+                #    peripheral.interrupts = parent.interrupts
+                if peripheral.registers is None:     
+                    peripheral.registers = parent.registers
+                inherit_register_defaults(parent,peripheral)
+
+            inherit_register_defaults(device,peripheral)
+
+            if peripheral.registers:
+                for register in peripheral.registers:
+                    inherit_register_defaults(peripheral,register)
+
+    return device
         
         
 

@@ -126,7 +126,7 @@ class SVDInterrupt(SVDElement):
 
 class SVDPeripheral(SVDElement):
 
-    def __init__(self, name, derived_from, description, prepend_to_name, base_address, address_block, interrupts, registers):
+    def __init__(self, name, derived_from, description, prepend_to_name, base_address, address_block, interrupts, registers, size, access, protection, reset_value, reset_mask):
         SVDElement.__init__(self)
         self.name = name
         self.derived_from = derived_from
@@ -136,6 +136,11 @@ class SVDPeripheral(SVDElement):
         self.address_block = address_block
         self.interrupts = interrupts
         self.registers = registers
+        self.size = size                        #Defines the default bit-width of any register contained in the device (implicit inheritance). 
+        self.access = access                    #Defines the default access rights for all registers. 
+        self.protection = protection            #Defines extended access protection for all registers. 
+        self.reset_value = reset_value          #Defines the default value for all registers at RESET. 
+        self.reset_mask = reset_mask            #Identifies which register bits have a defined reset value. 
         
    
 class SVDCpu(SVDElement):
