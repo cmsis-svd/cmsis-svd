@@ -62,22 +62,22 @@ def _get_int(node, tag, default=None):
 class SVDParser(object):
     """THe SVDParser is responsible for mapping the SVD XML to Python Objects"""
     
-    remove_reserved = 0
-    expand_arrays_of_registers = 0
+    remove_reserved=0
+    expand_arrays_of_registers=0
 
     @classmethod
-    def for_xml_file(cls, path, remove_reserved = 0, expand_arrays_of_registers = 0):
-        return cls(ET.parse(path),remove_reserved,expand_arrays_of_registers)
+    def for_xml_file(cls, path, remove_reserved=0, expand_arrays_of_registers=0):
+        return cls(ET.parse(path), remove_reserved, expand_arrays_of_registers)
 
     @classmethod
-    def for_packaged_svd(cls, vendor, filename, remove_reserved = 0, expand_arrays_of_registers = 0):
+    def for_packaged_svd(cls, vendor, filename, remove_reserved=0, expand_arrays_of_registers=0):
         resource = "data/{vendor}/{filename}".format(
             vendor=vendor,
             filename=filename
         )
         return cls.for_xml_file(pkg_resources.resource_filename("cmsis_svd", resource, remove_reserved, expand_arrays_of_registers))
 
-    def __init__(self, tree, remove_reserved = 0, expand_arrays_of_registers = 0):
+    def __init__(self, tree, remove_reserved=0, expand_arrays_of_registers=0):
         self.remove_reserved = remove_reserved
         self.expand_arrays_of_registers = expand_arrays_of_registers
         self._tree = tree
@@ -272,12 +272,8 @@ def propagate_defaults(device):
         if source.size is not None:
             if dest.size is None:
                 dest.size = source.size
-        if source.access is not None:
-            if dest.access is None:
-                dest.access = source.access
-        if source.protection is not None:
-            if dest.protection is None:
-                dest.protection = source.protection
+        dest.access = dest.access or source.access
+        dest.protection = dest.protection or source.protection
         if source.reset_value is not None:
             if dest.reset_value is None:
                 dest.reset_value = source.reset_value

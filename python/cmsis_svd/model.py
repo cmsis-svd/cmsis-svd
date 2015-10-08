@@ -92,7 +92,8 @@ class SVDField(SVDElement):
 
 class SVDRegister(SVDElement):
 
-    def __init__(self, name, description, address_offset, size, access, reset_value, reset_mask, fields, dim, dim_increment, dim_index):
+    def __init__(self, name, description, address_offset, size, access, reset_value, reset_mask, 
+                 fields, dim, dim_increment, dim_index):
         SVDElement.__init__(self)
         self.name = name
         self.description = description
@@ -126,7 +127,8 @@ class SVDInterrupt(SVDElement):
 
 class SVDPeripheral(SVDElement):
 
-    def __init__(self, name, derived_from, description, prepend_to_name, base_address, address_block, interrupts, registers, size, access, protection, reset_value, reset_mask):
+    def __init__(self, name, derived_from, description, prepend_to_name, base_address, address_block, 
+                 interrupts, registers, size, access, protection, reset_value, reset_mask):
         SVDElement.__init__(self)
         self.name = name
         self.derived_from = derived_from
@@ -145,7 +147,9 @@ class SVDPeripheral(SVDElement):
    
 class SVDCpu(SVDElement):
 
-    def __init__(self, name, revision, endian, mpu_present, fpu_present, fpu_dp, icache_present, dcache_present, itcm_present, dtcm_present, vtor_present, nvic_prio_bits, vendor_systick_config, device_num_interrupts, sau_num_regions, sau_regions_config):
+    def __init__(self, name, revision, endian, mpu_present, fpu_present, fpu_dp, icache_present, 
+                 dcache_present, itcm_present, dtcm_present, vtor_present, nvic_prio_bits, 
+                 vendor_systick_config, device_num_interrupts, sau_num_regions, sau_regions_config):
         SVDElement.__init__(self)
         self.name = name
         self.revision = revision
@@ -167,7 +171,8 @@ class SVDCpu(SVDElement):
 
 class SVDDevice(SVDElement):
 
-    def __init__(self, vendor, vendor_id, name, version, description, cpu, address_unit_bits, width, peripherals, size, access, protection, reset_value, reset_mask):
+    def __init__(self, vendor, vendor_id, name, version, description, cpu, address_unit_bits, width, 
+                 peripherals, size, access, protection, reset_value, reset_mask):
         SVDElement.__init__(self)
         self.vendor = vendor
         self.vendor_id = vendor_id
