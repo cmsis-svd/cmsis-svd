@@ -1,4 +1,4 @@
-#
+﻿#
 # Copyright 2015 Paul Osborne <osbpau@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -67,24 +67,24 @@ def _get_int(node, tag, default=None):
 class SVDParser(object):
     """THe SVDParser is responsible for mapping the SVD XML to Python Objects"""
     
-    remove_reserved = 0
-    expand_arrays_of_registers = 0
+    remove_reserved=0
+    expand_arrays_of_registers=0
 
     @classmethod
-    def for_xml_file(cls, path):
-        return cls(ET.parse(path))
+    def for_xml_file(cls, path, remove_reserved=0, expand_arrays_of_registers=0):
+        return cls(ET.parse(path), remove_reserved, expand_arrays_of_registers)
 
     @classmethod
-    def for_packaged_svd(cls, vendor, filename, remove_reserved = 0, expand_arrays_of_registers = 0):
+    def for_packaged_svd(cls, vendor, filename, remove_reserved=0, expand_arrays_of_registers=0):
         resource = "data/{vendor}/{filename}".format(
             vendor=vendor,
             filename=filename
         )
-        cls.remove_reserved = remove_reserved
-        cls.expand_arrays_of_registers = expand_arrays_of_registers
-        return cls.for_xml_file(pkg_resources.resource_filename("cmsis_svd", resource))
+        return cls.for_xml_file(pkg_resources.resource_filename("cmsis_svd", resource, remove_reserved, expand_arrays_of_registers))
 
-    def __init__(self, tree):
+    def __init__(self, tree, remove_reserved=0, expand_arrays_of_registers=0):
+        self.remove_reserved = remove_reserved
+        self.expand_arrays_of_registers = expand_arrays_of_registers
         self._tree = tree
         self._root = self._tree.getroot()
 
@@ -147,6 +147,7 @@ class SVDParser(object):
             address_offset=_get_int(register_node, 'addressOffset'),
             size=_get_int(register_node, 'size'),
             access=_get_text(register_node, 'access'),
+            protection=_get_text(register_node, 'protection'),
             reset_value=_get_int(register_node, 'resetValue'),
             reset_mask=_get_int(register_node, 'resetMask'),
             fields=fields,
@@ -169,7 +170,9 @@ class SVDParser(object):
         )
 
     def _parse_peripheral(self, peripheral_node):
-        registers = []
+        registers = None
+        if peripheral_node.find('registers'):       #it may be importat to distinguish an empty array of registers from the registers tag missing completly 
+            registers = []
         for register_node in peripheral_node.findall('./registers/register'):
             reg = self._parse_register(register_node)
             if reg.dim and self.expand_arrays_of_registers is 1:
@@ -190,12 +193,18 @@ class SVDParser(object):
 
         return SVDPeripheral(
             name=_get_text(peripheral_node, 'name'),
+            derived_from = peripheral_node.get("derivedFrom"),
             description=_get_text(peripheral_node, 'description'),
             prepend_to_name=_get_text(peripheral_node, 'prependToName'),
             base_address=_get_int(peripheral_node, 'baseAddress'),
             address_block=address_block,
             interrupts=interrupts,
             registers=registers,
+            size = _get_int(peripheral_node,"size"),                      
+            access = _get_text(peripheral_node, 'access'),                    
+            protection = _get_text(peripheral_node, 'protection'),            
+            reset_value = _get_int(peripheral_node,"resetValue"),          
+            reset_mask = _get_int(peripheral_node,"resetMask")
         )
 
     def _parse_device(self, device_node):
@@ -209,9 +218,17 @@ class SVDParser(object):
             endian = _get_text(cpu_node, 'endian'),
             mpu_present = _get_int(cpu_node, 'mpuPresent'),
             fpu_present = _get_int(cpu_node, 'fpuPresent'),
+            fpu_dp = _get_int(cpu_node, 'fpuDP'),
+            icache_present = _get_int(cpu_node, 'icachePresent'),
+            dcache_present = _get_int(cpu_node, 'dcachePresent'),
+            itcm_present = _get_int(cpu_node, 'itcmPresent'),
+            dtcm_present = _get_int(cpu_node, 'dtcmPresent'),
             vtor_present = _get_int(cpu_node, 'vtorPresent'),
             nvic_prio_bits = _get_int(cpu_node, 'nvicPrioBits'),
-            vendor_systick_config = _get_text(cpu_node, 'vendorSystickConfig')
+            vendor_systick_config = _get_int(cpu_node, 'vendorSystickConfig'),
+            device_num_interrupts = _get_int(cpu_node, 'vendorSystickConfig'),
+            sau_num_regions = _get_int(cpu_node, 'vendorSystickConfig'),
+            sau_regions_config = _get_text(cpu_node, 'sauRegionsConfig')
         )
         return SVDDevice(
             vendor=_get_text(device_node, 'vendor'),
@@ -223,6 +240,11 @@ class SVDParser(object):
             address_unit_bits=_get_int(device_node, 'addressUnitBits'),
             width=_get_int(device_node, 'width'),
             peripherals=peripherals,
+            size = _get_int(device_node,"size"),                      
+            access = _get_text(device_node, 'access'),                    
+            protection = _get_text(device_node, 'protection'),            
+            reset_value = _get_int(device_node,"resetValue"),          
+            reset_mask = _get_int(device_node,"resetMask")
         )
 
     def get_device(self):
@@ -239,6 +261,7 @@ def duplicate_array_of_registers(input):    #expects a SVDRegister which is an a
                 address_offset=input.address_offset+input.dim_increment*i,
                 size=input.size,
                 access=input.access,
+                protection=input.protection,
                 reset_value=input.reset_value,
                 reset_mask=input.reset_mask,
                 fields=input.fields,
@@ -248,6 +271,50 @@ def duplicate_array_of_registers(input):    #expects a SVDRegister which is an a
             )
         )
     return output
+
+
+
+def propagate_defaults(device):
+    def inherit_register_defaults(source,dest):
+        if source.size is not None:
+            if dest.size is None:
+                dest.size = source.size
+        dest.access = dest.access or source.access
+        dest.protection = dest.protection or source.protection
+        if source.reset_value is not None:
+            if dest.reset_value is None:
+                dest.reset_value = source.reset_value
+        if source.reset_mask is not None:
+            if dest.reset_mask is None:
+                dest.reset_mask = source.reset_mask
+
+
+    if device.peripherals:
+        for peripheral in device.peripherals:
+            if peripheral.derived_from:
+                parent = None;
+                for p in device.peripherals:
+                    if p.name == peripheral.derived_from:
+                        parent = p      #TODO support dot see http://www.keil.com/pack/doc/CMSIS/SVD/html/svd__outline_pg.html
+                if peripheral.description is None:
+                    peripheral.description = parent.description
+                if peripheral.prepend_to_name is None:
+                    peripheral.prepend_to_name = parent.prepend_to_name
+                if peripheral.address_block is None:
+                    peripheral.address_block = parent.address_block
+                #if peripheral.interrupts is None:
+                #    peripheral.interrupts = parent.interrupts
+                if peripheral.registers is None:     
+                    peripheral.registers = parent.registers
+                inherit_register_defaults(parent,peripheral)
+
+            inherit_register_defaults(device,peripheral)
+
+            if peripheral.registers:
+                for register in peripheral.registers:
+                    inherit_register_defaults(peripheral,register)
+
+    return device
         
         
 

@@ -1,4 +1,4 @@
-#
+﻿#
 # Copyright 2015 Paul Osborne <osbpau@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,6 +15,6 @@
 #
 from cmsis_svd.parser import SVDParser
 
-parser = SVDParser.for_packaged_svd('Freescale', 'MK20D7.xml')
+parser = SVDParser.for_packaged_svd('Freescale', 'MK20D7.swd')
 for peripheral in parser.get_device().peripherals:
     print("%s @ 0x%08x" % (peripheral.name, peripheral.base_address))

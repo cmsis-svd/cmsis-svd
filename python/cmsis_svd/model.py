@@ -1,4 +1,4 @@
-#
+﻿#
 # Copyright 2015 Paul Osborne <osbpau@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -92,13 +92,15 @@ class SVDField(SVDElement):
 
 class SVDRegister(SVDElement):
 
-    def __init__(self, name, description, address_offset, size, access, reset_value, reset_mask, fields, dim, dim_increment, dim_index):
+    def __init__(self, name, description, address_offset, size, access, protection, reset_value, reset_mask, 
+                 fields, dim, dim_increment, dim_index):
         SVDElement.__init__(self)
         self.name = name
         self.description = description
         self.address_offset = address_offset
         self.size = size
         self.access = access
+        self.protection = protection
         self.reset_value = reset_value
         self.reset_mask = reset_mask
         self.fields = fields
@@ -126,34 +128,52 @@ class SVDInterrupt(SVDElement):
 
 class SVDPeripheral(SVDElement):
 
-    def __init__(self, name, description, prepend_to_name, base_address, address_block, interrupts, registers):
+    def __init__(self, name, derived_from, description, prepend_to_name, base_address, address_block, 
+                 interrupts, registers, size, access, protection, reset_value, reset_mask):
         SVDElement.__init__(self)
         self.name = name
+        self.derived_from = derived_from
         self.description = description
         self.prepend_to_name = prepend_to_name
         self.base_address = base_address
         self.address_block = address_block
         self.interrupts = interrupts
         self.registers = registers
+        self.size = size                        #Defines the default bit-width of any register contained in the device (implicit inheritance). 
+        self.access = access                    #Defines the default access rights for all registers. 
+        self.protection = protection            #Defines extended access protection for all registers. 
+        self.reset_value = reset_value          #Defines the default value for all registers at RESET. 
+        self.reset_mask = reset_mask            #Identifies which register bits have a defined reset value. 
         
    
 class SVDCpu(SVDElement):
 
-    def __init__(self, name, revision, endian, mpu_present, fpu_present, vtor_present, nvic_prio_bits, vendor_systick_config):
+    def __init__(self, name, revision, endian, mpu_present, fpu_present, fpu_dp, icache_present, 
+                 dcache_present, itcm_present, dtcm_present, vtor_present, nvic_prio_bits, 
+                 vendor_systick_config, device_num_interrupts, sau_num_regions, sau_regions_config):
         SVDElement.__init__(self)
         self.name = name
         self.revision = revision
         self.endian = endian
         self.mpu_present = mpu_present
         self.fpu_present = fpu_present
+        self.fpu_dp = fpu_dp
+        self.icache_present = icache_present,
+        self.dcache_present = dcache_present,
+        self.itcm_present = itcm_present,
+        self.dtcm_present = dtcm_present,
         self.vtor_present = vtor_present
         self.nvic_prio_bits = nvic_prio_bits
         self.vendor_systick_config = vendor_systick_config
+        self.device_num_interrupts = device_num_interrupts
+        self.sau_num_regions = sau_num_regions
+        self.sau_regions_config = sau_regions_config
 
 
 class SVDDevice(SVDElement):
 
-    def __init__(self, vendor, vendor_id, name, version, description, cpu, address_unit_bits, width, peripherals):
+    def __init__(self, vendor, vendor_id, name, version, description, cpu, address_unit_bits, width, 
+                 peripherals, size, access, protection, reset_value, reset_mask):
         SVDElement.__init__(self)
         self.vendor = vendor
         self.vendor_id = vendor_id
@@ -164,3 +184,8 @@ class SVDDevice(SVDElement):
         self.address_unit_bits = _check_type(address_unit_bits, six.integer_types)
         self.width = _check_type(width, six.integer_types)
         self.peripherals = peripherals
+        self.size = size                        #Defines the default bit-width of any register contained in the device (implicit inheritance). 
+        self.access = access                    #Defines the default access rights for all registers. 
+        self.protection = protection            #Defines extended access protection for all registers. 
+        self.reset_value = reset_value          #Defines the default value for all registers at RESET. 
+        self.reset_mask = reset_mask            #Identifies which register bits have a defined reset value. 
