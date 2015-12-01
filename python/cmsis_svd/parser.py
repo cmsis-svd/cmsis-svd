@@ -37,25 +37,30 @@ def _get_text(node, tag, default=None):
 
 def _get_int(node, tag, default=None):
     text_value = _get_text(node, tag, default)
-    if text_value != default:
-        if text_value.lower().startswith('0x'):
-            return int(text_value[2:], 16)  # hexadecimal
-        elif text_value.startswith('#'):
-            # TODO(posborne): Deal with strange #1xx case better
-            #
-            # Freescale will sometimes provide values that look like this:
-            #   #1xx
-            # In this case, there are a number of values which all mean the
-            # same thing as the field is a "don't care".  For now, we just
-            # replace those bits with zeros.
-            text_value = text_value.replace('x', '0')
-            return int(text_value[1:], 2)  # binary
-        elif text_value.startswith('true'):
-            return 1
-        elif text_value.startswith('false'):
-            return 0
-        else:
-            return int(text_value)  # decimal
+    try:
+        if text_value != default:
+            text_value = text_value.strip().lower()
+            if text_value.startswith('0x'):
+                return int(text_value[2:], 16)  # hexadecimal
+            elif text_value.startswith('#'):
+                # TODO(posborne): Deal with strange #1xx case better
+                #
+                # Freescale will sometimes provide values that look like this:
+                #   #1xx
+                # In this case, there are a number of values which all mean the
+                # same thing as the field is a "don't care".  For now, we just
+                # replace those bits with zeros.
+                text_value = text_value.replace('x', '0')[1:]
+                is_bin = all(x in '01' for x in text_value)
+                return int(text_value, 2) if is_bin else int(text_value) # binary
+            elif text_value.startswith('true'):
+                return 1
+            elif text_value.startswith('false'):
+                return 0
+            else:
+                return int(text_value)  # decimal
+    except ValueError:
+        return default
     return default
 
 
