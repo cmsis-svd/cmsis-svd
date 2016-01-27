@@ -4,8 +4,9 @@ python:
   - "2.7"
   - "3.3"
   - "3.4"
+  - "3.5"
 before_install:
   - cd python
-  - sudo apt-get install pandoc
 install: "pip install -r dev-requirements.txt"
 script: nosetests
+sudo: false
