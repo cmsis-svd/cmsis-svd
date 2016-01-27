@@ -38,21 +38,6 @@ def read_version(filename):
     with open(filename, 'rb') as f:
         return str(ast.literal_eval(regex.search(
             f.read().decode('utf-8')).group(1)))
-def get_long_description():
-    long_description = open('README.md').read()
-    try:
-        import subprocess
-        import pypandoc
-        long_description = pypandoc.convert('README.md', 'rst')
-        open("README.rst", "w").write(long_description)
-    except:
-        if os.path.exists("README.rst"):
-            long_description = open("README.rst").read()
-        else:
-            print("Could not find pandoc or convert properly")
-            print("  make sure you have pandoc (system) and pyandoc (python module) installed")
-
-    return long_description
 
 
 setup(
@@ -60,7 +45,7 @@ setup(
     version=read_version(os.path.join('cmsis_svd/__init__.py')),
     url="https://github.com/posborne/cmsis-svd",
     description="CMSIS SVD data files and parser",
-    long_description=get_long_description(),
+    long_description_markdown_filename="README.md",
     author="Paul Osborne",
     author_email="osbpau@gmail.com",
     license="Apache 2.0",
@@ -78,7 +63,10 @@ setup(
         "Topic :: Text Processing :: Markup",
     ],
     install_requires=[
-        'six',
+        'six>=1.10',
+    ],
+    setup_requires=[
+        'setuptools-markdown>=0.1',
     ],
     packages=find_packages(),
     include_package_data=True,
