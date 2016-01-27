@@ -15,7 +15,9 @@
 # limitations under the License.
 #
 
+import ast
 import os
+import re
 import shutil
 from setuptools import setup, find_packages
 
@@ -31,6 +33,11 @@ if os.path.exists(DATA_SRC_DIR):
     shutil.copytree(DATA_SRC_DIR, DATA_DST_DIR)
 
 
+def read_version(filename):
+    regex = re.compile(r'__version__\s+=\s+(.*)')
+    with open(filename, 'rb') as f:
+        return str(ast.literal_eval(regex.search(
+            f.read().decode('utf-8')).group(1)))
 def get_long_description():
     long_description = open('README.md').read()
     try:
@@ -50,7 +57,7 @@ def get_long_description():
 
 setup(
     name="cmsis-svd",
-    version="0.1",
+    version=read_version(os.path.join('cmsis_svd/__init__.py')),
     url="https://github.com/posborne/cmsis-svd",
     description="CMSIS SVD data files and parser",
     long_description=get_long_description(),
