@@ -15,6 +15,6 @@
 #
 from cmsis_svd.parser import SVDParser
 
-parser = SVDParser.for_packaged_svd('Freescale', 'MK20D7.xml')
+parser = SVDParser.for_packaged_svd('Freescale', 'MK20D7.svd')
 for peripheral in parser.get_device().peripherals:
     print("%s @ 0x%08x" % (peripheral.name, peripheral.base_address))

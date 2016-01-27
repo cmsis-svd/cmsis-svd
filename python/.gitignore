@@ -1,6 +1,5 @@
 # Data files copied over for distribution
 README.rst
-cmsis_svd/data
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

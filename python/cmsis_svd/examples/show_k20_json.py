@@ -16,7 +16,7 @@
 import json
 from cmsis_svd.parser import SVDParser
 
-parser = SVDParser.for_packaged_svd('Freescale', 'MK20D7.xml')
+parser = SVDParser.for_packaged_svd('Freescale', 'MK20D7.svd')
 svd_dict = parser.get_device().to_dict()
 print(json.dumps(svd_dict, sort_keys=True,
                  indent=4, separators=(',', ': ')))
