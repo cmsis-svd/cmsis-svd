@@ -253,25 +253,26 @@ class SVDParser(object):
         return self._parse_device(self._root)
 
 
-def duplicate_array_of_registers(input):  # expects a SVDRegister which is an array of registers
+def duplicate_array_of_registers(svdreg):  # expects a SVDRegister which is an array of registers
     output = []
-    assert (input.dim == len(input.dim_index))
-    for i in range(input.dim):
-        output.append(SVDRegister(
-            name=input.name % input.dim_index[i],
-            description=input.description,
-            address_offset=input.address_offset + input.dim_increment * i,
-            size=input.size,
-            access=input.access,
-            protection=input.protection,
-            reset_value=input.reset_value,
-            reset_mask=input.reset_mask,
-            fields=input.fields,
+    assert (svdreg.dim == len(svdreg.dim_index))
+    for i in range(svdreg.dim):
+        reg = SVDRegister(
+            name=svdreg.name % svdreg.dim_index[i],
+            description=svdreg.description,
+            address_offset=svdreg.address_offset + svdreg.dim_increment * i,
+            size=svdreg.size,
+            access=svdreg.access,
+            protection=svdreg.protection,
+            reset_value=svdreg.reset_value,
+            reset_mask=svdreg.reset_mask,
+            fields=svdreg.fields,
             dim=None,
             dim_increment=None,
             dim_index=None
         )
-        )
+        output.append(reg)
+
     return output
 
 
