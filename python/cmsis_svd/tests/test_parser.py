@@ -22,15 +22,18 @@ import unittest
 THIS_DIR = os.path.dirname(__file__)
 DATA_DIR = os.path.join(THIS_DIR, "..", "..", "..", "data")
 
+
 def make_svd_validator(svd_path):
     def verify_svd_validity():
         parser = SVDParser.for_xml_file(svd_path)
         device = parser.get_device()
         assert device is not None
+
     mcu = os.path.basename(svd_path).replace('.svd', '').replace('_svd', '').replace('.', '-').lower()
     vendor = os.path.split(os.path.dirname(svd_path))[-1].lower()
     verify_svd_validity.__name__ = "test_{vendor}_{mcu}".format(vendor=vendor, mcu=mcu)
     return verify_svd_validity
+
 
 #
 # Generate a test function for each SVD file that exists
@@ -43,7 +46,6 @@ for dirpath, _dirnames, filenames in os.walk(DATA_DIR):
 
 
 class TestParserFreescale(unittest.TestCase):
-
     def setUp(self):
         svd = os.path.join(DATA_DIR, "Freescale", "MKL25Z4.svd")
         self.parser = SVDParser.for_xml_file(svd)
@@ -106,7 +108,7 @@ class TestParserFreescale(unittest.TestCase):
                          [('DMA0', 0),
                           ('DMA1', 1),
                           ('DMA2', 2),
-                          ('DMA3', 3),])
+                          ('DMA3', 3), ])
 
     def test_register_details(self):
         device = self.parser.get_device()
@@ -121,22 +123,22 @@ class TestParserFreescale(unittest.TestCase):
         self.assertEqual(bdh.access, "read-write")
         self.assertEqual(list(sorted([f.name for f in bdh.fields])),
                          ['LBKDIE', 'RXEDGIE', 'SBNS', 'SBR'])
-						 
+
     def test_register_dim(self):
         device = self.parser.get_device()
         dmamux0 = [p for p in device.peripherals if p.name == "DMAMUX0"][0]
         bdh = [r for r in dmamux0.registers if r.name == "CHCFG%s"][0]
         self.assertEqual(bdh.dim, 4)
         self.assertEqual(bdh.dim_increment, 1)
-        self.assertEqual(bdh.dim_index, ['0','1','2','3'])
-        
+        self.assertEqual(bdh.dim_index, ['0', '1', '2', '3'])
+
     def test_register_dim_duplicate_single(self):
         device = self.parser.get_device()
         dmamux0 = [p for p in device.peripherals if p.name == "DMAMUX0"][0]
         bdh = [r for r in dmamux0.registers if r.name == "CHCFG%s"][0]
         ret = duplicate_array_of_registers(bdh)
-        self.assertEqual(len(ret),4)
-        self.assertEqual(ret[1].name,'CHCFG1')
+        self.assertEqual(len(ret), 4)
+        self.assertEqual(ret[1].name, 'CHCFG1')
 
     def test_field_details(self):
         device = self.parser.get_device()
@@ -158,11 +160,9 @@ class TestParserFreescale(unittest.TestCase):
 
 
 class TestParserNordic(unittest.TestCase):
-
     def setUp(self):
         svd = os.path.join(DATA_DIR, "Nordic", "nrf51.svd")
         self.parser = SVDParser.for_xml_file(svd)
-
 
     def test_device_attributes(self):
         device = self.parser.get_device()
@@ -172,7 +172,7 @@ class TestParserNordic(unittest.TestCase):
         self.assertEqual(device.version, "522")
         self.assertEqual(device.address_unit_bits, 8)
         self.assertEqual(device.width, 32)
-        self.assertEqual(device.size,32)
+        self.assertEqual(device.size, 32)
         self.assertEqual(device.cpu.name, "CM0")
         self.assertEqual(device.cpu.revision, "r3p1")
         self.assertEqual(device.cpu.endian, "little")
@@ -185,9 +185,10 @@ class TestParserNordic(unittest.TestCase):
         # Ensure we got all of them
         device = self.parser.get_device()
         self.assertEqual(list(sorted([p.name for p in device.peripherals])),
-                         ['AAR', 'ADC', 'AMLI', 'CCM', 'CLOCK', 'ECB', 'FICR', 'GPIO', 'GPIOTE', 'LPCOMP', 'MPU', 
-                          'NVMC', 'POWER', 'PPI', 'QDEC', 'RADIO', 'RNG', 'RTC0', 'RTC1', 'SPI0', 'SPI1', 'SPIM1', 'SPIS1',
-                          'SWI', 'TEMP', 'TIMER0', 'TIMER1', 'TIMER2', 'TWI0',  'TWI1', 'UART0', 'UICR', 'WDT'                       
+                         ['AAR', 'ADC', 'AMLI', 'CCM', 'CLOCK', 'ECB', 'FICR', 'GPIO', 'GPIOTE', 'LPCOMP', 'MPU',
+                          'NVMC', 'POWER', 'PPI', 'QDEC', 'RADIO', 'RNG', 'RTC0', 'RTC1', 'SPI0', 'SPI1', 'SPIM1',
+                          'SPIS1',
+                          'SWI', 'TEMP', 'TIMER0', 'TIMER1', 'TIMER2', 'TWI0', 'TWI1', 'UART0', 'UICR', 'WDT'
                           ])
 
     def test_peripheral_details(self):
@@ -205,7 +206,7 @@ class TestParserNordic(unittest.TestCase):
         self.assertEqual(block.offset, 0)
 
         self.assertEqual(list(sorted([r.name for r in spi1.registers])),
-                         ['CONFIG', 'ENABLE', 'EVENTS_READY', 'FREQUENCY', 'INTENCLR', 'INTENSET', 
+                         ['CONFIG', 'ENABLE', 'EVENTS_READY', 'FREQUENCY', 'INTENCLR', 'INTENSET',
                           'POWER', 'PSELMISO', 'PSELMOSI', 'PSELSCK', 'RXD', 'TXD'
                           ])
         self.assertEqual([(i.name, i.value) for i in spi1.interrupts], [('SPI1_TWI1', 4)])
@@ -219,7 +220,7 @@ class TestParserNordic(unittest.TestCase):
                           ('SWI2', 22),
                           ('SWI3', 23),
                           ('SWI4', 24),
-                          ('SWI5', 25),])
+                          ('SWI5', 25), ])
 
     def test_register_details(self):
         device = self.parser.get_device()
@@ -235,4 +236,3 @@ class TestParserNordic(unittest.TestCase):
         self.assertEqual(intenset.access, "read-write")
         self.assertEqual(list(sorted([f.name for f in intenset.fields])),
                          ['READY'])
-						 

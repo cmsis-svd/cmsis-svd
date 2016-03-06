@@ -40,7 +40,6 @@ def _check_type(value, expected_type):
 
 
 class SVDJSONEncoder(json.JSONEncoder):
-
     def default(self, obj):
         if isinstance(obj, SVDElement):
             return obj.__dict__
@@ -60,7 +59,6 @@ class SVDElement(object):
 
 
 class SVDEnumeratedValue(SVDElement):
-
     def __init__(self, name, description, value, is_default):
         SVDElement.__init__(self)
         self.name = name
@@ -70,7 +68,6 @@ class SVDEnumeratedValue(SVDElement):
 
 
 class SVDField(SVDElement):
-
     def __init__(self, name, description, bit_offset, bit_width, access, enumerated_values):
         SVDElement.__init__(self)
         self.name = name
@@ -91,8 +88,7 @@ class SVDField(SVDElement):
 
 
 class SVDRegister(SVDElement):
-
-    def __init__(self, name, description, address_offset, size, access, protection, reset_value, reset_mask, 
+    def __init__(self, name, description, address_offset, size, access, protection, reset_value, reset_mask,
                  fields, dim, dim_increment, dim_index):
         SVDElement.__init__(self)
         self.name = name
@@ -110,7 +106,6 @@ class SVDRegister(SVDElement):
 
 
 class SVDAddressBlock(SVDElement):
-
     def __init__(self, offset, size, usage):
         SVDElement.__init__(self)
         self.offset = offset
@@ -119,7 +114,6 @@ class SVDAddressBlock(SVDElement):
 
 
 class SVDInterrupt(SVDElement):
-
     def __init__(self, name, value):
         SVDElement.__init__(self)
         self.name = name
@@ -127,8 +121,7 @@ class SVDInterrupt(SVDElement):
 
 
 class SVDPeripheral(SVDElement):
-
-    def __init__(self, name, derived_from, description, prepend_to_name, base_address, address_block, 
+    def __init__(self, name, derived_from, description, prepend_to_name, base_address, address_block,
                  interrupts, registers, size, access, protection, reset_value, reset_mask):
         SVDElement.__init__(self)
         self.name = name
@@ -139,17 +132,16 @@ class SVDPeripheral(SVDElement):
         self.address_block = address_block
         self.interrupts = interrupts
         self.registers = registers
-        self.size = size                        #Defines the default bit-width of any register contained in the device (implicit inheritance). 
-        self.access = access                    #Defines the default access rights for all registers. 
-        self.protection = protection            #Defines extended access protection for all registers. 
-        self.reset_value = reset_value          #Defines the default value for all registers at RESET. 
-        self.reset_mask = reset_mask            #Identifies which register bits have a defined reset value. 
-        
-   
-class SVDCpu(SVDElement):
+        self.size = size  # Defines the default bit-width of any register contained in the device (implicit inheritance).
+        self.access = access  # Defines the default access rights for all registers.
+        self.protection = protection  # Defines extended access protection for all registers.
+        self.reset_value = reset_value  # Defines the default value for all registers at RESET.
+        self.reset_mask = reset_mask  # Identifies which register bits have a defined reset value.
 
-    def __init__(self, name, revision, endian, mpu_present, fpu_present, fpu_dp, icache_present, 
-                 dcache_present, itcm_present, dtcm_present, vtor_present, nvic_prio_bits, 
+
+class SVDCpu(SVDElement):
+    def __init__(self, name, revision, endian, mpu_present, fpu_present, fpu_dp, icache_present,
+                 dcache_present, itcm_present, dtcm_present, vtor_present, nvic_prio_bits,
                  vendor_systick_config, device_num_interrupts, sau_num_regions, sau_regions_config):
         SVDElement.__init__(self)
         self.name = name
@@ -171,8 +163,7 @@ class SVDCpu(SVDElement):
 
 
 class SVDDevice(SVDElement):
-
-    def __init__(self, vendor, vendor_id, name, version, description, cpu, address_unit_bits, width, 
+    def __init__(self, vendor, vendor_id, name, version, description, cpu, address_unit_bits, width,
                  peripherals, size, access, protection, reset_value, reset_mask):
         SVDElement.__init__(self)
         self.vendor = vendor
@@ -184,8 +175,8 @@ class SVDDevice(SVDElement):
         self.address_unit_bits = _check_type(address_unit_bits, six.integer_types)
         self.width = _check_type(width, six.integer_types)
         self.peripherals = peripherals
-        self.size = size                        #Defines the default bit-width of any register contained in the device (implicit inheritance). 
-        self.access = access                    #Defines the default access rights for all registers. 
-        self.protection = protection            #Defines extended access protection for all registers. 
-        self.reset_value = reset_value          #Defines the default value for all registers at RESET. 
-        self.reset_mask = reset_mask            #Identifies which register bits have a defined reset value. 
+        self.size = size  # Defines the default bit-width of any register contained in the device (implicit inheritance).
+        self.access = access  # Defines the default access rights for all registers.
+        self.protection = protection  # Defines extended access protection for all registers.
+        self.reset_value = reset_value  # Defines the default value for all registers at RESET.
+        self.reset_mask = reset_mask  # Identifies which register bits have a defined reset value.
