@@ -35,9 +35,6 @@ def _check_type(value, expected_type):
         ))
     return value
 
-    def __repr__(self):
-        return repr(self.__dict__)
-
 
 class SVDJSONEncoder(json.JSONEncoder):
 
