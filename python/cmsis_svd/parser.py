@@ -64,17 +64,14 @@ def _get_int(node, tag, default=None):
 
 
 class SVDParser(object):
-    """THe SVDParser is responsible for mapping the SVD XML to Python Objects"""
-
-    remove_reserved = 0
-    expand_arrays_of_registers = 0
+    """The SVDParser is responsible for mapping the SVD XML to Python Objects"""
 
     @classmethod
-    def for_xml_file(cls, path, remove_reserved=0, expand_arrays_of_registers=0):
+    def for_xml_file(cls, path, remove_reserved=False, expand_arrays_of_registers=False):
         return cls(ET.parse(path), remove_reserved, expand_arrays_of_registers)
 
     @classmethod
-    def for_packaged_svd(cls, vendor, filename, remove_reserved=0, expand_arrays_of_registers=0):
+    def for_packaged_svd(cls, vendor, filename, remove_reserved=0, expand_arrays_of_registers=False):
         resource = "data/{vendor}/{filename}".format(
             vendor=vendor,
             filename=filename
@@ -82,7 +79,7 @@ class SVDParser(object):
         return cls.for_xml_file(
             pkg_resources.resource_filename("cmsis_svd", resource, remove_reserved, expand_arrays_of_registers))
 
-    def __init__(self, tree, remove_reserved=0, expand_arrays_of_registers=0):
+    def __init__(self, tree, remove_reserved=False, expand_arrays_of_registers=False):
         self.remove_reserved = remove_reserved
         self.expand_arrays_of_registers = expand_arrays_of_registers
         self._tree = tree
@@ -127,7 +124,7 @@ class SVDParser(object):
         fields = []
         for field_node in register_node.findall('.//field'):
             node = self._parse_field(field_node)
-            if self.remove_reserved is 0 or 'reserved' not in node.name.lower():
+            if self.remove_reserved or 'reserved' not in node.name.lower():
                 fields.append(node)
         dim = _get_int(register_node, 'dim')
         dim_index_text = _get_text(register_node, 'dimIndex')
@@ -176,10 +173,10 @@ class SVDParser(object):
             registers = []
         for register_node in peripheral_node.findall('./registers/register'):
             reg = self._parse_register(register_node)
-            if reg.dim and self.expand_arrays_of_registers is 1:
+            if reg.dim and self.expand_arrays_of_registers:
                 for r in duplicate_array_of_registers(reg):
                     registers.append(r)
-            elif self.remove_reserved is 0 or 'reserved' not in reg.name.lower():
+            elif self.remove_reserved == 0 or 'reserved' not in reg.name.lower():
                 registers.append(reg)
 
         interrupts = []
@@ -293,7 +290,7 @@ def propagate_defaults(device):
     if device.peripherals:
         for peripheral in device.peripherals:
             if peripheral.derived_from:
-                parent = None;
+                parent = None
                 for p in device.peripherals:
                     if p.name == peripheral.derived_from:
                         parent = p  # TODO support dot see http://www.keil.com/pack/doc/CMSIS/SVD/html/svd__outline_pg.html
