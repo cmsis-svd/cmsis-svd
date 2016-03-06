@@ -79,6 +79,7 @@ class TestParserFreescale(unittest.TestCase):
         self.assertEqual(uart0.description, "Universal Asynchronous Receiver/Transmitter")
         self.assertEqual(uart0.prepend_to_name, "UART0_")
         self.assertEqual(uart0.base_address, 0x4006A000)
+        self.assertEqual(uart0.derived_from, None)
 
         # address block verification
         block = uart0.address_block

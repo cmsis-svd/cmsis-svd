@@ -126,7 +126,7 @@ class SVDInterrupt(SVDElement):
 
 class SVDPeripheral(SVDElement):
 
-    def __init__(self, name, description, prepend_to_name, base_address, address_block, interrupts, registers):
+    def __init__(self, name, description, prepend_to_name, base_address, address_block, interrupts, registers, derived_from):
         SVDElement.__init__(self)
         self.name = name
         self.description = description
@@ -135,8 +135,9 @@ class SVDPeripheral(SVDElement):
         self.address_block = address_block
         self.interrupts = interrupts
         self.registers = registers
-        
-   
+        self.derived_from = derived_from
+
+
 class SVDCpu(SVDElement):
 
     def __init__(self, name, revision, endian, mpu_present, fpu_present, vtor_present, nvic_prio_bits, vendor_systick_config):

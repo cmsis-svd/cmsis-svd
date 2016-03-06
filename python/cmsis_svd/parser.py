@@ -196,6 +196,7 @@ class SVDParser(object):
             address_block=address_block,
             interrupts=interrupts,
             registers=registers,
+            derived_from=peripheral_node.get('derivedFrom'),
         )
 
     def _parse_device(self, device_node):
