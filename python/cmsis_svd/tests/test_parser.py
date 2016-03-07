@@ -14,8 +14,6 @@
 # limitations under the License.
 #
 from cmsis_svd.parser import SVDParser
-from cmsis_svd.parser import duplicate_array_of_registers
-from cmsis_svd.parser import propagate_defaults
 import os
 import unittest
 
@@ -124,19 +122,10 @@ class TestParserFreescale(unittest.TestCase):
         self.assertEqual(list(sorted([f.name for f in bdh.fields])),
                          ['LBKDIE', 'RXEDGIE', 'SBNS', 'SBR'])
 
-    def test_register_dim(self):
-        device = self.parser.get_device()
-        dmamux0 = [p for p in device.peripherals if p.name == "DMAMUX0"][0]
-        bdh = [r for r in dmamux0.registers if r.name == "CHCFG%s"][0]
-        self.assertEqual(bdh.dim, 4)
-        self.assertEqual(bdh.dim_increment, 1)
-        self.assertEqual(bdh.dim_index, ['0', '1', '2', '3'])
-
     def test_register_dim_duplicate_single(self):
         device = self.parser.get_device()
         dmamux0 = [p for p in device.peripherals if p.name == "DMAMUX0"][0]
-        bdh = [r for r in dmamux0.registers if r.name == "CHCFG%s"][0]
-        ret = duplicate_array_of_registers(bdh)
+        ret = [r for r in dmamux0.registers if r.name.startswith("CHCFG")]
         self.assertEqual(len(ret), 4)
         self.assertEqual(ret[1].name, 'CHCFG1')
 
@@ -193,7 +182,6 @@ class TestParserNordic(unittest.TestCase):
 
     def test_peripheral_details(self):
         device = self.parser.get_device()
-        device = propagate_defaults(device)
         spi1 = [p for p in device.peripherals if p.name == "SPI1"][0]
         self.assertEqual(spi1.name, "SPI1")
         self.assertEqual(spi1.description, "SPI master 1.")
@@ -224,7 +212,6 @@ class TestParserNordic(unittest.TestCase):
 
     def test_register_details(self):
         device = self.parser.get_device()
-        device = propagate_defaults(device)
         spi1 = [p for p in device.peripherals if p.name == "SPI1"][0]
         intenset = [r for r in spi1.registers if r.name == "INTENSET"][0]
         self.assertEqual(intenset.name, "INTENSET")

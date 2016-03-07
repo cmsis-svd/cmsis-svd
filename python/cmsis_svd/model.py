@@ -16,6 +16,10 @@
 import json
 import six
 
+# Sentinel value for lookup where None might be a valid value
+NOT_PRESENT = object()
+REGISTER_PROPERTY_KEYS = {"size", "access", "protection", "reset_value", "reset_mask"}
+
 
 def _check_type(value, expected_type):
     """Perform type checking on the provided value
@@ -35,8 +39,11 @@ def _check_type(value, expected_type):
         ))
     return value
 
-    def __repr__(self):
-        return repr(self.__dict__)
+
+def _none_as_empty(v):
+    if v is not None:
+        for e in v:
+            yield e
 
 
 class SVDJSONEncoder(json.JSONEncoder):
@@ -49,6 +56,28 @@ class SVDJSONEncoder(json.JSONEncoder):
 
 class SVDElement(object):
     """Base class for all SVD Elements"""
+
+    def __init__(self):
+        self.parent = None
+
+    def _lookup_possibly_derived_attribute(self, attr):
+        value_self = getattr(self, "_{}".format(attr), NOT_PRESENT)
+        derived_from = self.get_derived_from()
+        if value_self is NOT_PRESENT:
+            raise AttributeError("Requested missing key")
+        elif value_self is not None:
+            return value_self  # if there is a non-None/non-list value, use it
+        elif derived_from is not None:
+            derived_value = getattr(derived_from, attr, NOT_PRESENT)
+            if derived_value is not NOT_PRESENT:
+                return derived_value
+
+        # for some attributes, try to grab from parent
+        if attr in REGISTER_PROPERTY_KEYS:
+            return getattr(self.parent, attr, value_self)
+
+    def get_derived_from(self):
+        pass  # override in children
 
     def to_dict(self):
         # This is a little convoluted but it works and ensures a
@@ -68,14 +97,29 @@ class SVDEnumeratedValue(SVDElement):
 
 
 class SVDField(SVDElement):
-    def __init__(self, name, description, bit_offset, bit_width, access, enumerated_values):
+    def __init__(self, name, derived_from, description, bit_offset, bit_width, access, enumerated_values):
         SVDElement.__init__(self)
         self.name = name
+        self.derived_from = derived_from
         self.description = description
         self.bit_offset = bit_offset
         self.bit_width = bit_width
         self.access = access
         self.enumerated_values = enumerated_values
+
+    def __getattr__(self, attr):
+        return self._lookup_possibly_derived_attribute(attr)
+
+    def get_derived_from(self):
+        # TODO: add support for dot notation derivedFrom
+        if self.derived_from is None:
+            return None
+
+        for field in self.parent.fields:
+            if field.name == self.derived_from:
+                return field
+
+        raise KeyError("Unable to find derived_from: %r" % self.derived_from)
 
     @property
     def is_enumerated_type(self):
@@ -88,21 +132,48 @@ class SVDField(SVDElement):
 
 
 class SVDRegister(SVDElement):
-    def __init__(self, name, description, address_offset, size, access, protection, reset_value, reset_mask,
-                 fields, dim, dim_increment, dim_index):
+    def __init__(self, name, derived_from, description, address_offset, size, access, protection, reset_value, reset_mask,
+                 fields, display_name, alternate_group, modified_write_values, read_action):
         SVDElement.__init__(self)
+
+        # When deriving a register, it is mandatory to specify at least the name, the description,
+        # and the addressOffset
+        self.derived_from = derived_from
         self.name = name
         self.description = description
         self.address_offset = address_offset
-        self.size = size
-        self.access = access
-        self.protection = protection
-        self.reset_value = reset_value
-        self.reset_mask = reset_mask
-        self.fields = fields
-        self.dim = dim
-        self.dim_increment = dim_increment
-        self.dim_index = dim_index
+
+        self._read_action = read_action
+        self._modified_write_values = modified_write_values
+        self._display_name = display_name
+        self._alternate_group = alternate_group
+        self._size = size
+        self._access = access
+        self._protection = protection
+        self._reset_value = reset_value
+        self._reset_mask = reset_mask
+        self._fields = fields
+
+        # make parent association
+        for field in self._fields:
+            field.parent = self
+
+    def __getattr__(self, attr):
+        return self._lookup_possibly_derived_attribute(attr)
+
+    def get_derived_from(self):
+        # TODO: add support for dot notation derivedFrom
+        if self.derived_from is None:
+            return None
+
+        for register in self.parent.registers:
+            if register.name == self.derived_from:
+                return register
+
+        raise KeyError("Unable to find derived_from: %r" % self.derived_from)
+
+    def is_reserved(self):
+        return 'reserved' in self.name.lower()
 
 
 class SVDAddressBlock(SVDElement):
@@ -121,22 +192,48 @@ class SVDInterrupt(SVDElement):
 
 
 class SVDPeripheral(SVDElement):
-    def __init__(self, name, derived_from, description, prepend_to_name, base_address, address_block,
-                 interrupts, registers, size, access, protection, reset_value, reset_mask):
+    def __init__(self, name, version, derived_from, description, prepend_to_name, base_address, address_block,
+                 interrupts, registers, size, access, protection, reset_value, reset_mask, group_name,
+                 append_to_name, disable_condition):
         SVDElement.__init__(self)
+
+        # items with underscore are potentially derived
         self.name = name
-        self.derived_from = derived_from
-        self.description = description
-        self.prepend_to_name = prepend_to_name
-        self.base_address = base_address
-        self.address_block = address_block
-        self.interrupts = interrupts
-        self.registers = registers
-        self.size = size  # Defines the default bit-width of any register contained in the device (implicit inheritance).
-        self.access = access  # Defines the default access rights for all registers.
-        self.protection = protection  # Defines extended access protection for all registers.
-        self.reset_value = reset_value  # Defines the default value for all registers at RESET.
-        self.reset_mask = reset_mask  # Identifies which register bits have a defined reset value.
+        self._version = version
+        self._derived_from = derived_from
+        self._description = description
+        self._prepend_to_name = prepend_to_name
+        self._base_address = base_address
+        self._address_block = address_block
+        self._interrupts = interrupts
+        self._registers = registers
+        self._size = size  # Defines the default bit-width of any register contained in the device (implicit inheritance).
+        self._access = access  # Defines the default access rights for all registers.
+        self._protection = protection  # Defines extended access protection for all registers.
+        self._reset_value = reset_value  # Defines the default value for all registers at RESET.
+        self._reset_mask = reset_mask  # Identifies which register bits have a defined reset value.
+        self._group_name = group_name
+        self._append_to_name = append_to_name
+        self._disable_condition = disable_condition
+
+        # make parent association for complex node types
+        for i in _none_as_empty(self._interrupts):
+            i.parent = self
+        for r in _none_as_empty(self._registers):
+            r.parent = self
+
+    def __getattr__(self, attr):
+        return self._lookup_possibly_derived_attribute(attr)
+
+    def get_derived_from(self):
+        if self._derived_from is None:
+            return None
+
+        # find the peripheral with this name in the tree
+        try:
+            return [p for p in self.parent.peripherals if p.name == self._derived_from][0]
+        except IndexError:
+            return None
 
 
 class SVDCpu(SVDElement):
@@ -144,6 +241,7 @@ class SVDCpu(SVDElement):
                  dcache_present, itcm_present, dtcm_present, vtor_present, nvic_prio_bits,
                  vendor_systick_config, device_num_interrupts, sau_num_regions, sau_regions_config):
         SVDElement.__init__(self)
+
         self.name = name
         self.revision = revision
         self.endian = endian
@@ -166,6 +264,7 @@ class SVDDevice(SVDElement):
     def __init__(self, vendor, vendor_id, name, version, description, cpu, address_unit_bits, width,
                  peripherals, size, access, protection, reset_value, reset_mask):
         SVDElement.__init__(self)
+
         self.vendor = vendor
         self.vendor_id = vendor_id
         self.name = name
@@ -180,3 +279,10 @@ class SVDDevice(SVDElement):
         self.protection = protection  # Defines extended access protection for all registers.
         self.reset_value = reset_value  # Defines the default value for all registers at RESET.
         self.reset_mask = reset_mask  # Identifies which register bits have a defined reset value.
+
+        # set up parent relationship
+        if self.cpu:
+            self.cpu.parent = self
+
+        for p in _none_as_empty(self.peripherals):
+            p.parent = self
