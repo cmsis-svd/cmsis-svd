@@ -79,8 +79,9 @@ class SVDParser(object):
             vendor=vendor,
             filename=filename
         )
-        return cls.for_xml_file(
-            pkg_resources.resource_filename("cmsis_svd", resource, remove_reserved))
+
+        filename = pkg_resources.resource_filename("cmsis_svd", resource)
+        return cls.for_xml_file(filename, remove_reserved)
 
     def __init__(self, tree, remove_reserved=False):
         self.remove_reserved = remove_reserved
