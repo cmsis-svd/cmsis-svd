@@ -153,6 +153,10 @@ class TestParserNordic(unittest.TestCase):
         svd = os.path.join(DATA_DIR, "Nordic", "nrf51.svd")
         self.parser = SVDParser.for_xml_file(svd)
 
+    def test_missing_attribute(self):
+        device = self.parser.get_device()
+        self.assertRaises(AttributeError, lambda: device.dim)
+
     def test_device_attributes(self):
         device = self.parser.get_device()
         self.assertEqual(device.vendor, "Nordic Semiconductor")

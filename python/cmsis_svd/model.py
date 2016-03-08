@@ -61,7 +61,10 @@ class SVDElement(object):
         self.parent = None
 
     def _lookup_possibly_derived_attribute(self, attr):
-        value_self = getattr(self, "_{}".format(attr), NOT_PRESENT)
+        try:
+            value_self = object.__getattribute__(self, "_{}".format(attr))
+        except AttributeError:
+            value_self = NOT_PRESENT
         derived_from = self.get_derived_from()
         if value_self is NOT_PRESENT:
             raise AttributeError("Requested missing key")
