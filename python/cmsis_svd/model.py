@@ -19,6 +19,7 @@ import six
 # Sentinel value for lookup where None might be a valid value
 NOT_PRESENT = object()
 REGISTER_PROPERTY_KEYS = {"size", "access", "protection", "reset_value", "reset_mask"}
+LIST_TYPE_KEYS = {"registers", "fields", "peripherals", "interrupts"}
 
 
 def _check_type(value, expected_type):
@@ -70,15 +71,23 @@ class SVDElement(object):
         self.parent = None
 
     def _lookup_possibly_derived_attribute(self, attr):
+        derived_from = self.get_derived_from()
+
+        # see if there is an attribute with the same name and leading underscore
         try:
             value_self = object.__getattribute__(self, "_{}".format(attr))
         except AttributeError:
             value_self = NOT_PRESENT
-        derived_from = self.get_derived_from()
+
+        # if not, then this is an attribute error
         if value_self is NOT_PRESENT:
             raise AttributeError("Requested missing key")
+
+        # if there is a non-None value, that is what we want to use
         elif value_self is not None:
-            return value_self  # if there is a non-None/non-list value, use it
+            return value_self  # if there is a non-None value, use it
+
+        # if there is a derivedFrom, check there first
         elif derived_from is not None:
             derived_value = getattr(derived_from, attr, NOT_PRESENT)
             if derived_value is not NOT_PRESENT:
@@ -86,7 +95,15 @@ class SVDElement(object):
 
         # for some attributes, try to grab from parent
         if attr in REGISTER_PROPERTY_KEYS:
-            return getattr(self.parent, attr, value_self)
+            value = getattr(self.parent, attr, value_self)
+        else:
+            value = value_self
+
+        # if value is None and this is a list type, transform to empty list
+        if value is None and attr in LIST_TYPE_KEYS:
+            value = []
+
+        return value
 
     def get_derived_from(self):
         pass  # override in children

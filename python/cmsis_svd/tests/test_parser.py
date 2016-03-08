@@ -48,7 +48,7 @@ for dirpath, _dirnames, filenames in os.walk(DATA_DIR):
 class TestParserFreescale(unittest.TestCase):
     def setUp(self):
         self.svd_path = os.path.join(DATA_DIR, "Freescale", "MKL25Z4.svd")
-        self.json_path = os.path.join(os.path.dirname(__file__), "MKL25Z4.json")
+        self.json_path = os.path.join(THIS_DIR, "MKL25Z4.json")
         self.parser = SVDParser.for_xml_file(self.svd_path)
 
     def _regenerate_json(self, d):
@@ -63,8 +63,8 @@ class TestParserFreescale(unittest.TestCase):
     def test_to_dict(self):
         device = self.parser.get_device()
         d = device.to_dict()
-        # self._regenerate_json(d)
-        self.assertEqual(device.to_dict(), self._get_json())
+        # self._regenerate_json(d)  # uncomment to regenerate (temporarily)
+        self.assertDictEqual(device.to_dict(), self._get_json())
 
     def test_device_attributes(self):
         device = self.parser.get_device()
