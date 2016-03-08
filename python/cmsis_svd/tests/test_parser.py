@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+import json
+
 from cmsis_svd.parser import SVDParser
 import os
 import unittest
@@ -45,8 +47,24 @@ for dirpath, _dirnames, filenames in os.walk(DATA_DIR):
 
 class TestParserFreescale(unittest.TestCase):
     def setUp(self):
-        svd = os.path.join(DATA_DIR, "Freescale", "MKL25Z4.svd")
-        self.parser = SVDParser.for_xml_file(svd)
+        self.svd_path = os.path.join(DATA_DIR, "Freescale", "MKL25Z4.svd")
+        self.json_path = os.path.join(os.path.dirname(__file__), "MKL25Z4.json")
+        self.parser = SVDParser.for_xml_file(self.svd_path)
+
+    def _regenerate_json(self, d):
+        # Call this on some changes and inspect the JSON manually to verify (updating by hand too painful)
+        with open(self.json_path, "w") as f:
+            json.dump(d, f, sort_keys=True, indent=4, separators=(',', ': '))
+
+    def _get_json(self):
+        with open(self.json_path) as f:
+            return json.load(f)
+
+    def test_to_dict(self):
+        device = self.parser.get_device()
+        d = device.to_dict()
+        # self._regenerate_json(d)
+        self.assertEqual(device.to_dict(), self._get_json())
 
     def test_device_attributes(self):
         device = self.parser.get_device()

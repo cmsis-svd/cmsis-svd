@@ -49,7 +49,16 @@ def _none_as_empty(v):
 class SVDJSONEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, SVDElement):
-            return obj.__dict__
+            eldict = {}
+            for k, v in six.iteritems(obj.__dict__):
+                if k == 'parent':
+                    continue
+                if k.startswith("_"):
+                    pubkey = k[1:]
+                    eldict[pubkey] = getattr(obj, pubkey)
+                else:
+                    eldict[k] = v
+            return eldict
         else:
             return json.JSONEncoder.default(self, obj)
 
