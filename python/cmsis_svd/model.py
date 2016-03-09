@@ -18,6 +18,7 @@ import six
 
 # Sentinel value for lookup where None might be a valid value
 NOT_PRESENT = object()
+TO_DICT_SKIP_KEYS = {"_register_arrays", "parent"}
 REGISTER_PROPERTY_KEYS = {"size", "access", "protection", "reset_value", "reset_mask"}
 LIST_TYPE_KEYS = {"registers", "fields", "peripherals", "interrupts"}
 
@@ -52,7 +53,7 @@ class SVDJSONEncoder(json.JSONEncoder):
         if isinstance(obj, SVDElement):
             eldict = {}
             for k, v in six.iteritems(obj.__dict__):
-                if k == 'parent':
+                if k in TO_DICT_SKIP_KEYS:
                     continue
                 if k.startswith("_"):
                     pubkey = k[1:]
@@ -160,6 +161,80 @@ class SVDField(SVDElement):
         return self.name.lower() == "reserved"
 
 
+class SVDRegisterArray(SVDElement):
+    """Represent a register array in the tree"""
+
+    def __init__(self, name, derived_from, description, address_offset, size,
+                 access, protection, reset_value, reset_mask, fields,
+                 display_name, alternate_group, modified_write_values,
+                 read_action, dim, dim_indices, dim_increment):
+        SVDElement.__init__(self)
+
+        # When deriving a register, it is mandatory to specify at least the name, the description,
+        # and the addressOffset
+        self.derived_from = derived_from
+        self.name = name
+        self.description = description
+        self.address_offset = address_offset
+        self.dim = dim
+        self.dim_indices = dim_indices
+        self.dim_increment = dim_increment
+
+        self._read_action = read_action
+        self._modified_write_values = modified_write_values
+        self._display_name = display_name
+        self._alternate_group = alternate_group
+        self._size = size
+        self._access = access
+        self._protection = protection
+        self._reset_value = reset_value
+        self._reset_mask = reset_mask
+        self._fields = fields
+
+        # make parent association
+        for field in self._fields:
+            field.parent = self
+
+    def __getattr__(self, attr):
+        return self._lookup_possibly_derived_attribute(attr)
+
+    @property
+    def registers(self):
+        for i in six.moves.range(self.dim):
+            reg = SVDRegister(
+                name=self.name % self.dim_indices[i],
+                fields=self._fields,
+                derived_from=self.derived_from,
+                description=self.description,
+                address_offset=self.address_offset + self.dim_increment * i,
+                size=self._size,
+                access=self._access,
+                protection=self._protection,
+                reset_value=self._reset_value,
+                reset_mask=self._reset_mask,
+                display_name=self._display_name,
+                alternate_group=self._alternate_group,
+                modified_write_values=self._modified_write_values,
+                read_action=self._read_action,
+            )
+            reg.parent = self.parent
+            yield reg
+
+    def get_derived_from(self):
+        # TODO: add support for dot notation derivedFrom
+        if self.derived_from is None:
+            return None
+
+        for register in self.parent.registers:
+            if register.name == self.derived_from:
+                return register
+
+        raise KeyError("Unable to find derived_from: %r" % self.derived_from)
+
+    def is_reserved(self):
+        return 'reserved' in self.name.lower()
+
+
 class SVDRegister(SVDElement):
     def __init__(self, name, derived_from, description, address_offset, size, access, protection, reset_value, reset_mask,
                  fields, display_name, alternate_group, modified_write_values, read_action):
@@ -222,8 +297,8 @@ class SVDInterrupt(SVDElement):
 
 class SVDPeripheral(SVDElement):
     def __init__(self, name, version, derived_from, description, prepend_to_name, base_address, address_block,
-                 interrupts, registers, size, access, protection, reset_value, reset_mask, group_name,
-                 append_to_name, disable_condition):
+                 interrupts, registers, register_arrays, size, access, protection, reset_value, reset_mask,
+                 group_name, append_to_name, disable_condition):
         SVDElement.__init__(self)
 
         # items with underscore are potentially derived
@@ -236,6 +311,7 @@ class SVDPeripheral(SVDElement):
         self._address_block = address_block
         self._interrupts = interrupts
         self._registers = registers
+        self._register_arrays = register_arrays
         self._size = size  # Defines the default bit-width of any register contained in the device (implicit inheritance).
         self._access = access  # Defines the default access rights for all registers.
         self._protection = protection  # Defines extended access protection for all registers.
@@ -253,6 +329,15 @@ class SVDPeripheral(SVDElement):
 
     def __getattr__(self, attr):
         return self._lookup_possibly_derived_attribute(attr)
+
+    @property
+    def registers(self):
+        regs = []
+        for reg in self._lookup_possibly_derived_attribute('registers'):
+            regs.append(reg)
+        for arr in self._lookup_possibly_derived_attribute('register_arrays'):
+            regs.extend(arr.registers)
+        return regs
 
     def get_derived_from(self):
         if self._derived_from is None:

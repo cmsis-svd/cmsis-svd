@@ -17,7 +17,7 @@ from xml.etree import ElementTree as ET
 
 import six
 
-from cmsis_svd.model import SVDDevice
+from cmsis_svd.model import SVDDevice, SVDRegisterArray
 from cmsis_svd.model import SVDPeripheral
 from cmsis_svd.model import SVDInterrupt
 from cmsis_svd.model import SVDAddressBlock
@@ -149,7 +149,7 @@ class SVDParser(object):
         read_action = _get_text(register_node, 'readAction')
 
         if dim is None:
-            yield SVDRegister(
+            return SVDRegister(
                 name=name,
                 fields=fields,
                 derived_from=derived_from,
@@ -168,32 +168,35 @@ class SVDParser(object):
         else:
             # the node represents a register array
             if dim_index_text is None:
-                dim_index = range(0, dim)  # some files omit dimIndex
+                dim_indices = range(0, dim)  # some files omit dimIndex
             elif ',' in dim_index_text:
-                dim_index = dim_index_text.split(',')
+                dim_indices = dim_index_text.split(',')
             elif '-' in dim_index_text:  # some files use <dimIndex>0-3</dimIndex> as an inclusive inclusive range
                 m = re.search(r'([0-9]+)-([0-9]+)', dim_index_text)
-                dim_index = range(int(m.group(1)), int(m.group(2)) + 1)
+                dim_indices = range(int(m.group(1)), int(m.group(2)) + 1)
             else:
                 raise ValueError("Unexpected dim_index_text: %r" % dim_index_text)
 
-            for i in six.moves.range(dim):
-                yield SVDRegister(
-                    name=name % dim_index[i],
-                    fields=fields,
-                    derived_from=derived_from,
-                    description=description,
-                    address_offset=address_offset + dim_increment * i,
-                    size=size,
-                    access=access,
-                    protection=protection,
-                    reset_value=reset_value,
-                    reset_mask=reset_mask,
-                    display_name=display_name,
-                    alternate_group=alternate_group,
-                    modified_write_values=modified_write_values,
-                    read_action=read_action,
-                )
+            # yield `SVDRegisterArray` (caller will differentiate on type)
+            return SVDRegisterArray(
+                name=name,
+                fields=fields,
+                derived_from=derived_from,
+                description=description,
+                address_offset=address_offset,
+                size=size,
+                access=access,
+                protection=protection,
+                reset_value=reset_value,
+                reset_mask=reset_mask,
+                display_name=display_name,
+                alternate_group=alternate_group,
+                modified_write_values=modified_write_values,
+                read_action=read_action,
+                dim=dim,
+                dim_indices=dim_indices,
+                dim_increment=dim_increment,
+            )
 
     def _parse_address_block(self, address_block_node):
         return SVDAddressBlock(
@@ -211,8 +214,12 @@ class SVDParser(object):
     def _parse_peripheral(self, peripheral_node):
         # parse registers
         registers = None if peripheral_node.find('registers') is None else []
+        register_arrays = None if peripheral_node.find('registers') is None else []
         for register_node in peripheral_node.findall('./registers/register'):
-            for reg in self._parse_registers(register_node):
+            reg = self._parse_registers(register_node)
+            if isinstance(reg, SVDRegisterArray):
+                register_arrays.append(reg)
+            else:
                 registers.append(reg)
 
         # parse all interrupts for the peripheral
@@ -275,6 +282,7 @@ class SVDParser(object):
             # <registers>
             #     ...
             # </registers>
+            register_arrays=register_arrays,
             registers=registers,
 
             # (not mentioned in docs -- applies to all registers)

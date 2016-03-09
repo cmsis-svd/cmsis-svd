@@ -46,10 +46,13 @@ for dirpath, _dirnames, filenames in os.walk(DATA_DIR):
 
 
 class TestParserFreescale(unittest.TestCase):
-    def setUp(self):
-        self.svd_path = os.path.join(DATA_DIR, "Freescale", "MKL25Z4.svd")
-        self.json_path = os.path.join(THIS_DIR, "MKL25Z4.json")
-        self.parser = SVDParser.for_xml_file(self.svd_path)
+
+    @classmethod
+    def setUpClass(cls):
+        cls.svd_path = os.path.join(DATA_DIR, "Freescale", "MKL25Z4.svd")
+        cls.json_path = os.path.join(THIS_DIR, "MKL25Z4.json")
+        cls.parser = SVDParser.for_xml_file(cls.svd_path)
+        cls.device = cls.parser.get_device()
 
     def _regenerate_json(self, d):
         # Call this on some changes and inspect the JSON manually to verify (updating by hand too painful)
@@ -61,13 +64,13 @@ class TestParserFreescale(unittest.TestCase):
             return json.load(f)
 
     def test_to_dict(self):
-        device = self.parser.get_device()
+        device = self.device
         d = device.to_dict()
         # self._regenerate_json(d)  # uncomment to regenerate (temporarily)
-        self.assertDictEqual(device.to_dict(), self._get_json())
+        self.assertDictEqual(d, self._get_json())
 
     def test_device_attributes(self):
-        device = self.parser.get_device()
+        device = self.device
         self.assertEqual(device.vendor, "Freescale Semiconductor, Inc.")
         self.assertEqual(device.vendor_id, "Freescale")
         self.assertEqual(device.name, "MKL25Z4")
@@ -85,7 +88,7 @@ class TestParserFreescale(unittest.TestCase):
 
     def test_peripherals_high_level(self):
         # Ensure we got all of them
-        device = self.parser.get_device()
+        device = self.device
         self.assertEqual(list(sorted([p.name for p in device.peripherals])),
                          ['ADC0', 'CMP0', 'DAC0', 'DMA', 'DMAMUX0',
                           'FGPIOA', 'FGPIOB', 'FGPIOC', 'FGPIOD',
@@ -99,7 +102,7 @@ class TestParserFreescale(unittest.TestCase):
                           'UART0', 'UART1', 'UART2', 'USB0'])
 
     def test_peripheral_details(self):
-        device = self.parser.get_device()
+        device = self.device
         uart0 = [p for p in device.peripherals if p.name == "UART0"][0]
         self.assertEqual(uart0.name, "UART0")
         self.assertEqual(uart0.description, "Universal Asynchronous Receiver/Transmitter")
@@ -118,7 +121,7 @@ class TestParserFreescale(unittest.TestCase):
         self.assertEqual([(i.name, i.value) for i in uart0.interrupts], [('UART0', 12)])
 
     def test_peripheral_multiple_interrupts(self):
-        device = self.parser.get_device()
+        device = self.device
         dma = [p for p in device.peripherals if p.name == "DMA"][0]
         self.assertEqual([(i.name, i.value) for i in dma.interrupts],
                          [('DMA0', 0),
@@ -127,7 +130,7 @@ class TestParserFreescale(unittest.TestCase):
                           ('DMA3', 3), ])
 
     def test_register_details(self):
-        device = self.parser.get_device()
+        device = self.device
         uart0 = [p for p in device.peripherals if p.name == "UART0"][0]
         bdh = [r for r in uart0.registers if r.name == "BDH"][0]
         self.assertEqual(bdh.name, "BDH")
@@ -141,14 +144,14 @@ class TestParserFreescale(unittest.TestCase):
                          ['LBKDIE', 'RXEDGIE', 'SBNS', 'SBR'])
 
     def test_register_dim_duplicate_single(self):
-        device = self.parser.get_device()
+        device = self.device
         dmamux0 = [p for p in device.peripherals if p.name == "DMAMUX0"][0]
         ret = [r for r in dmamux0.registers if r.name.startswith("CHCFG")]
         self.assertEqual(len(ret), 4)
         self.assertEqual(ret[1].name, 'CHCFG1')
 
     def test_field_details(self):
-        device = self.parser.get_device()
+        device = self.device
         uart0 = [p for p in device.peripherals if p.name == "UART0"][0]
         bdh = [r for r in uart0.registers if r.name == "BDH"][0]
         lbkdie = [f for f in bdh.fields if f.name == "LBKDIE"][0]
@@ -167,16 +170,19 @@ class TestParserFreescale(unittest.TestCase):
 
 
 class TestParserNordic(unittest.TestCase):
-    def setUp(self):
+
+    @classmethod
+    def setUpClass(cls):
         svd = os.path.join(DATA_DIR, "Nordic", "nrf51.svd")
-        self.parser = SVDParser.for_xml_file(svd)
+        cls.parser = SVDParser.for_xml_file(svd)
+        cls.device = cls.parser.get_device()
 
     def test_missing_attribute(self):
-        device = self.parser.get_device()
+        device = self.device
         self.assertRaises(AttributeError, lambda: device.dim)
 
     def test_device_attributes(self):
-        device = self.parser.get_device()
+        device = self.device
         self.assertEqual(device.vendor, "Nordic Semiconductor")
         self.assertEqual(device.vendor_id, "Nordic")
         self.assertEqual(device.name, "nrf51")
@@ -194,7 +200,7 @@ class TestParserNordic(unittest.TestCase):
 
     def test_peripherals_high_level(self):
         # Ensure we got all of them
-        device = self.parser.get_device()
+        device = self.device
         self.assertEqual(list(sorted([p.name for p in device.peripherals])),
                          ['AAR', 'ADC', 'AMLI', 'CCM', 'CLOCK', 'ECB', 'FICR', 'GPIO', 'GPIOTE', 'LPCOMP', 'MPU',
                           'NVMC', 'POWER', 'PPI', 'QDEC', 'RADIO', 'RNG', 'RTC0', 'RTC1', 'SPI0', 'SPI1', 'SPIM1',
@@ -203,7 +209,7 @@ class TestParserNordic(unittest.TestCase):
                           ])
 
     def test_peripheral_details(self):
-        device = self.parser.get_device()
+        device = self.device
         spi1 = [p for p in device.peripherals if p.name == "SPI1"][0]
         self.assertEqual(spi1.name, "SPI1")
         self.assertEqual(spi1.description, "SPI master 1.")
@@ -222,7 +228,7 @@ class TestParserNordic(unittest.TestCase):
         self.assertEqual([(i.name, i.value) for i in spi1.interrupts], [('SPI1_TWI1', 4)])
 
     def test_peripheral_multiple_interrupts(self):
-        device = self.parser.get_device()
+        device = self.device
         swi = [p for p in device.peripherals if p.name == "SWI"][0]
         self.assertEqual([(i.name, i.value) for i in swi.interrupts],
                          [('SWI0', 20),
@@ -233,7 +239,7 @@ class TestParserNordic(unittest.TestCase):
                           ('SWI5', 25), ])
 
     def test_register_details(self):
-        device = self.parser.get_device()
+        device = self.device
         spi1 = [p for p in device.peripherals if p.name == "SPI1"][0]
         intenset = [r for r in spi1.registers if r.name == "INTENSET"][0]
         self.assertEqual(intenset.name, "INTENSET")
@@ -245,3 +251,10 @@ class TestParserNordic(unittest.TestCase):
         self.assertEqual(intenset.access, "read-write")
         self.assertEqual(list(sorted([f.name for f in intenset.fields])),
                          ['READY'])
+
+    def test_register_arrays(self):
+        radio = [p for p in self.device.peripherals if p.name == "RADIO"][0]
+        self.assertEqual([(r.name, r.dim, r.dim_indices, r.dim_increment)
+                          for r in radio.register_arrays],
+                         [('DAB[%s]', 8, [0, 1, 2, 3, 4, 5, 6, 7], 4),
+                          ('DAP[%s]', 8, [0, 1, 2, 3, 4, 5, 6, 7], 4)])
