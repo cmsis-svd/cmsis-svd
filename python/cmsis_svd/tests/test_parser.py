@@ -254,7 +254,7 @@ class TestParserNordic(unittest.TestCase):
 
     def test_register_arrays(self):
         radio = [p for p in self.device.peripherals if p.name == "RADIO"][0]
-        self.assertEqual([(r.name, r.dim, r.dim_indices, r.dim_increment)
+        self.assertEqual([(r.name, r.dim, list(r.dim_indices), r.dim_increment)
                           for r in radio.register_arrays],
                          [('DAB[%s]', 8, [0, 1, 2, 3, 4, 5, 6, 7], 4),
                           ('DAP[%s]', 8, [0, 1, 2, 3, 4, 5, 6, 7], 4)])
