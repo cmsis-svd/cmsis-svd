@@ -38,7 +38,7 @@ setup(
     author_email="osbpau@gmail.com",
     license="Apache 2.0",
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 4 - Beta",
         "License :: OSI Approved :: Apache Software License",
         "Programming Language :: Python",
         "Topic :: System :: Hardware",
