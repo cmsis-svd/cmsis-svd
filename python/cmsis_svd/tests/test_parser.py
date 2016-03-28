@@ -95,11 +95,10 @@ class TestParserFreescale(unittest.TestCase):
                           'FGPIOE', 'FTFA', 'FTFA_FlashConfig', 'GPIOA',
                           'GPIOB', 'GPIOC', 'GPIOD', 'GPIOE', 'I2C0',
                           'I2C1', 'LLWU', 'LPTMR0', 'MCG', 'MCM', 'MTB',
-                          'MTBDWT', 'NVIC', 'OSC0', 'PIT', 'PMC', 'PORTA',
-                          'PORTB', 'PORTC', 'PORTD', 'PORTE', 'RCM', 'ROM',
-                          'RTC', 'SIM', 'SMC', 'SPI0', 'SPI1', 'SysTick',
-                          'SystemControl', 'TPM0', 'TPM1', 'TPM2', 'TSI0',
-                          'UART0', 'UART1', 'UART2', 'USB0'])
+                          'MTBDWT', 'OSC0', 'PIT', 'PMC', 'PORTA', 'PORTB',
+                          'PORTC', 'PORTD', 'PORTE', 'RCM', 'ROM', 'RTC',
+                          'SIM', 'SMC', 'SPI0', 'SPI1','TPM0', 'TPM1',
+                          'TPM2', 'TSI0', 'UART0', 'UART1', 'UART2', 'USB0'])
 
     def test_peripheral_details(self):
         device = self.device

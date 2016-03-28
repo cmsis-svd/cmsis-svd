@@ -950,6 +950,25 @@
       </addressBlock>
       <registers>
         <register>
+          <name>DATALL</name>
+          <description>CRC_DATALL register.</description>
+          <alternateGroup>CRC</alternateGroup>
+          <addressOffset>0</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0xFF</resetValue>
+          <resetMask>0xFF</resetMask>
+          <fields>
+            <field>
+              <name>DATALL</name>
+              <description>CRCLL stores the first 8 bits of the 32 bit DATA</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
           <name>DATA</name>
           <description>CRC Data register</description>
           <alternateGroup>CRC</alternateGroup>
@@ -1009,25 +1028,6 @@
           </fields>
         </register>
         <register>
-          <name>DATALL</name>
-          <description>CRC_DATALL register.</description>
-          <alternateGroup>CRC</alternateGroup>
-          <addressOffset>0</addressOffset>
-          <size>8</size>
-          <access>read-write</access>
-          <resetValue>0xFF</resetValue>
-          <resetMask>0xFF</resetMask>
-          <fields>
-            <field>
-              <name>DATALL</name>
-              <description>CRCLL stores the first 8 bits of the 32 bit DATA</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
           <name>DATALU</name>
           <description>CRC_DATALU register.</description>
           <addressOffset>0x1</addressOffset>
@@ -1039,6 +1039,25 @@
             <field>
               <name>DATALU</name>
               <description>DATALL stores the second 8 bits of the 32 bit CRC</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DATAHL</name>
+          <description>CRC_DATAHL register.</description>
+          <alternateGroup>CRC</alternateGroup>
+          <addressOffset>0x2</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0xFF</resetValue>
+          <resetMask>0xFF</resetMask>
+          <fields>
+            <field>
+              <name>DATAHL</name>
+              <description>DATAHL stores the third 8 bits of the 32 bit CRC</description>
               <bitOffset>0</bitOffset>
               <bitWidth>8</bitWidth>
               <access>read-write</access>
@@ -1060,25 +1079,6 @@
               <description>DATAH stores the high 16 bits of the 16/32 bit CRC</description>
               <bitOffset>0</bitOffset>
               <bitWidth>16</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>DATAHL</name>
-          <description>CRC_DATAHL register.</description>
-          <alternateGroup>CRC</alternateGroup>
-          <addressOffset>0x2</addressOffset>
-          <size>8</size>
-          <access>read-write</access>
-          <resetValue>0xFF</resetValue>
-          <resetMask>0xFF</resetMask>
-          <fields>
-            <field>
-              <name>DATAHL</name>
-              <description>DATAHL stores the third 8 bits of the 32 bit CRC</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>8</bitWidth>
               <access>read-write</access>
             </field>
           </fields>
@@ -1128,25 +1128,6 @@
           </fields>
         </register>
         <register>
-          <name>GPOLYL</name>
-          <description>CRC_GPOLYL register.</description>
-          <alternateGroup>CRC</alternateGroup>
-          <addressOffset>0x4</addressOffset>
-          <size>16</size>
-          <access>read-write</access>
-          <resetValue>0xFFFF</resetValue>
-          <resetMask>0xFFFF</resetMask>
-          <fields>
-            <field>
-              <name>GPOLYL</name>
-              <description>POLYL stores the lower 16 bits of the 16/32 bit CRC polynomial value</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>16</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
           <name>GPOLYLL</name>
           <description>CRC_GPOLYLL register.</description>
           <alternateGroup>CRC</alternateGroup>
@@ -1161,6 +1142,25 @@
               <description>POLYLL stores the first 8 bits of the 32 bit CRC</description>
               <bitOffset>0</bitOffset>
               <bitWidth>8</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>GPOLYL</name>
+          <description>CRC_GPOLYL register.</description>
+          <alternateGroup>CRC</alternateGroup>
+          <addressOffset>0x4</addressOffset>
+          <size>16</size>
+          <access>read-write</access>
+          <resetValue>0xFFFF</resetValue>
+          <resetMask>0xFFFF</resetMask>
+          <fields>
+            <field>
+              <name>GPOLYL</name>
+              <description>POLYL stores the lower 16 bits of the 16/32 bit CRC polynomial value</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>16</bitWidth>
               <access>read-write</access>
             </field>
           </fields>
@@ -8811,7 +8811,7 @@
         <usage>registers</usage>
       </addressBlock>
       <interrupt>
-        <name>WDOG_EWM</name>
+        <name>Watchdog</name>
         <value>28</value>
       </interrupt>
       <registers>
@@ -9123,25 +9123,6 @@
           </fields>
         </register>
         <register>
-          <name>TOVAL</name>
-          <description>Watchdog Timeout Value Register.</description>
-          <alternateGroup>WDOG</alternateGroup>
-          <addressOffset>0x4</addressOffset>
-          <size>16</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFF</resetMask>
-          <fields>
-            <field>
-              <name>TOVAL</name>
-              <description>Watchdog Timeout Value</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>16</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
           <name>TOVALH</name>
           <description>Watchdog Timeout Value Register: High</description>
           <alternateGroup>WDOG</alternateGroup>
@@ -9156,6 +9137,25 @@
               <description>High byte of the timeout value</description>
               <bitOffset>0</bitOffset>
               <bitWidth>8</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TOVAL</name>
+          <description>Watchdog Timeout Value Register.</description>
+          <alternateGroup>WDOG</alternateGroup>
+          <addressOffset>0x4</addressOffset>
+          <size>16</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0xFFFF</resetMask>
+          <fields>
+            <field>
+              <name>TOVAL</name>
+              <description>Watchdog Timeout Value</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>16</bitWidth>
               <access>read-write</access>
             </field>
           </fields>
@@ -9179,25 +9179,6 @@
           </fields>
         </register>
         <register>
-          <name>WIN</name>
-          <description>Watchdog Window Register.</description>
-          <alternateGroup>WDOG</alternateGroup>
-          <addressOffset>0x6</addressOffset>
-          <size>16</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFF</resetMask>
-          <fields>
-            <field>
-              <name>WIN</name>
-              <description>Watchdog Window Value</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>16</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
           <name>WINH</name>
           <description>Watchdog Window Register: High</description>
           <alternateGroup>WDOG</alternateGroup>
@@ -9212,6 +9193,25 @@
               <description>High byte of Watchdog Window</description>
               <bitOffset>0</bitOffset>
               <bitWidth>8</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>WIN</name>
+          <description>Watchdog Window Register.</description>
+          <alternateGroup>WDOG</alternateGroup>
+          <addressOffset>0x6</addressOffset>
+          <size>16</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0xFFFF</resetMask>
+          <fields>
+            <field>
+              <name>WIN</name>
+              <description>Watchdog Window Value</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>16</bitWidth>
               <access>read-write</access>
             </field>
           </fields>
@@ -12518,7 +12518,7 @@
           <description>SPI Status Register</description>
           <addressOffset>0x3</addressOffset>
           <size>8</size>
-          <access>read-write</access>
+          <access>read-only</access>
           <resetValue>0x20</resetValue>
           <resetMask>0xFF</resetMask>
           <fields>
@@ -12565,7 +12565,7 @@
               <description>SPI Match Flag</description>
               <bitOffset>6</bitOffset>
               <bitWidth>1</bitWidth>
-              <access>read-write</access>
+              <access>read-only</access>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>0</name>
@@ -13370,1123 +13370,6 @@
                   <value>#1</value>
                 </enumeratedValue>
               </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-      </registers>
-    </peripheral>
-    <peripheral>
-      <name>SystemControl</name>
-      <description>System Control Registers</description>
-      <prependToName>SCB_</prependToName>
-      <baseAddress>0xE000E000</baseAddress>
-      <addressBlock>
-        <offset>0x8</offset>
-        <size>0xD2C</size>
-        <usage>registers</usage>
-      </addressBlock>
-      <registers>
-        <register>
-          <name>ACTLR</name>
-          <description>Auxiliary Control Register,</description>
-          <addressOffset>0x8</addressOffset>
-          <size>32</size>
-          <access>read-only</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-        </register>
-        <register>
-          <name>CPUID</name>
-          <description>CPUID Base Register</description>
-          <addressOffset>0xD00</addressOffset>
-          <size>32</size>
-          <access>read-only</access>
-          <resetValue>0x410CC600</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>REVISION</name>
-              <description>Indicates patch release: 0x0 = Patch 0</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>4</bitWidth>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>PARTNO</name>
-              <description>Indicates part number</description>
-              <bitOffset>4</bitOffset>
-              <bitWidth>12</bitWidth>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>VARIANT</name>
-              <description>Indicates processor revision: 0x2 = Revision 2</description>
-              <bitOffset>20</bitOffset>
-              <bitWidth>4</bitWidth>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>IMPLEMENTER</name>
-              <description>Implementer code</description>
-              <bitOffset>24</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-only</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>ICSR</name>
-          <description>Interrupt Control and State Register</description>
-          <addressOffset>0xD04</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>VECTACTIVE</name>
-              <description>Active exception number</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>6</bitWidth>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>VECTPENDING</name>
-              <description>Exception number of the highest priority pending enabled exception</description>
-              <bitOffset>12</bitOffset>
-              <bitWidth>6</bitWidth>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>ISRPENDING</name>
-              <description>no description available</description>
-              <bitOffset>22</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>PENDSTCLR</name>
-              <description>no description available</description>
-              <bitOffset>25</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>write-only</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>no effect</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>removes the pending state from the SysTick exception</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>PENDSTSET</name>
-              <description>no description available</description>
-              <bitOffset>26</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: SysTick exception is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes SysTick exception state to pending; read: SysTick exception is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>PENDSVCLR</name>
-              <description>no description available</description>
-              <bitOffset>27</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>write-only</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>no effect</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>removes the pending state from the PendSV exception</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>PENDSVSET</name>
-              <description>no description available</description>
-              <bitOffset>28</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: PendSV exception is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes PendSV exception state to pending; read: PendSV exception is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>NMIPENDSET</name>
-              <description>no description available</description>
-              <bitOffset>31</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: NMI exception is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes NMI exception state to pending; read: NMI exception is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>VTOR</name>
-          <description>Vector Table Offset Register</description>
-          <addressOffset>0xD08</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>TBLOFF</name>
-              <description>Vector table base offset</description>
-              <bitOffset>7</bitOffset>
-              <bitWidth>25</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>AIRCR</name>
-          <description>Application Interrupt and Reset Control Register</description>
-          <addressOffset>0xD0C</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>VECTCLRACTIVE</name>
-              <description>no description available</description>
-              <bitOffset>1</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>write-only</access>
-            </field>
-            <field>
-              <name>SYSRESETREQ</name>
-              <description>no description available</description>
-              <bitOffset>2</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>write-only</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>no system reset request</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>asserts a signal to the outer system that requests a reset</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>ENDIANNESS</name>
-              <description>no description available</description>
-              <bitOffset>15</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-only</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>Little-endian</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>Big-endian</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>VECTKEY</name>
-              <description>Register key</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>16</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SCR</name>
-          <description>System Control Register</description>
-          <addressOffset>0xD10</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>SLEEPONEXIT</name>
-              <description>no description available</description>
-              <bitOffset>1</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>o not sleep when returning to Thread mode</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>enter sleep, or deep sleep, on return from an ISR</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SLEEPDEEP</name>
-              <description>no description available</description>
-              <bitOffset>2</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>sleep</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>deep sleep</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SEVONPEND</name>
-              <description>no description available</description>
-              <bitOffset>4</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>only enabled interrupts or events can wakeup the processor, disabled interrupts are excluded</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>enabled events and all interrupts, including disabled interrupts, can wakeup the processor</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>CCR</name>
-          <description>Configuration and Control Register</description>
-          <addressOffset>0xD14</addressOffset>
-          <size>32</size>
-          <access>read-only</access>
-          <resetValue>0x208</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>UNALIGN_TRP</name>
-              <description>Always reads as one, indicates that all unaligned accesses generate a HardFault</description>
-              <bitOffset>3</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>STKALIGN</name>
-              <description>Indicates stack alignment on exception entry</description>
-              <bitOffset>9</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-only</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SHPR2</name>
-          <description>System Handler Priority Register 2</description>
-          <addressOffset>0xD1C</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>PRI_11</name>
-              <description>Priority of system handler 11, SVCall</description>
-              <bitOffset>24</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SHPR3</name>
-          <description>System Handler Priority Register 3</description>
-          <addressOffset>0xD20</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>PRI_14</name>
-              <description>Priority of system handler 14, PendSV</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_15</name>
-              <description>Priority of system handler 15, SysTick exception</description>
-              <bitOffset>24</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SHCSR</name>
-          <description>System Handler Control and State Register</description>
-          <addressOffset>0xD24</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>SVCALLPENDED</name>
-              <description>no description available</description>
-              <bitOffset>15</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>exception is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>exception is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>DFSR</name>
-          <description>Debug Fault Status Register</description>
-          <addressOffset>0xD30</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>HALTED</name>
-              <description>no description available</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>No active halt request debug event</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>Halt request debug event active</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>BKPT</name>
-              <description>no description available</description>
-              <bitOffset>1</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>No current breakpoint debug event</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>At least one current breakpoint debug event</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DWTTRAP</name>
-              <description>no description available</description>
-              <bitOffset>2</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>No current debug events generated by the DWT</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>At least one current debug event generated by the DWT</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>VCATCH</name>
-              <description>no description available</description>
-              <bitOffset>3</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>No Vector catch triggered</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>Vector catch triggered</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>EXTERNAL</name>
-              <description>no description available</description>
-              <bitOffset>4</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>No EDBGRQ debug event</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>EDBGRQ debug event</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-      </registers>
-    </peripheral>
-    <peripheral>
-      <name>SysTick</name>
-      <description>System timer</description>
-      <prependToName>SYST_</prependToName>
-      <baseAddress>0xE000E010</baseAddress>
-      <addressBlock>
-        <offset>0</offset>
-        <size>0x10</size>
-        <usage>registers</usage>
-      </addressBlock>
-      <registers>
-        <register>
-          <name>CSR</name>
-          <description>SysTick Control and Status Register</description>
-          <addressOffset>0</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>ENABLE</name>
-              <description>no description available</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>counter disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>counter enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>TICKINT</name>
-              <description>no description available</description>
-              <bitOffset>1</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>counting down to 0 does not assert the SysTick exception request</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>counting down to 0 asserts the SysTick exception request</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLKSOURCE</name>
-              <description>no description available</description>
-              <bitOffset>2</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>external clock</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>processor clock</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>COUNTFLAG</name>
-              <description>no description available</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>RVR</name>
-          <description>SysTick Reload Value Register</description>
-          <addressOffset>0x4</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>RELOAD</name>
-              <description>Value to load into the SysTick Current Value Register when the counter reaches 0</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>24</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>CVR</name>
-          <description>SysTick Current Value Register</description>
-          <addressOffset>0x8</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>CURRENT</name>
-              <description>Current value at the time the register is accessed</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>24</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>CALIB</name>
-          <description>SysTick Calibration Value Register</description>
-          <addressOffset>0xC</addressOffset>
-          <size>32</size>
-          <access>read-only</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>TENMS</name>
-              <description>Reload value to use for 10ms timing</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>24</bitWidth>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>SKEW</name>
-              <description>no description available</description>
-              <bitOffset>30</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-only</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>10ms calibration value is exact</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>10ms calibration value is inexact, because of the clock frequency</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>NOREF</name>
-              <description>no description available</description>
-              <bitOffset>31</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-only</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>The reference clock is provided</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>The reference clock is not provided</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-      </registers>
-    </peripheral>
-    <peripheral>
-      <name>NVIC</name>
-      <description>Nested Vectored Interrupt Controller</description>
-      <baseAddress>0xE000E100</baseAddress>
-      <addressBlock>
-        <offset>0</offset>
-        <size>0x320</size>
-        <usage>registers</usage>
-      </addressBlock>
-      <registers>
-        <register>
-          <name>NVIC_ISER</name>
-          <description>Interrupt Set Enable Register</description>
-          <addressOffset>0</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>SETENA</name>
-              <description>Interrupt set enable bits</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>32</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>NVIC_ICER</name>
-          <description>Interrupt Clear Enable Register</description>
-          <addressOffset>0x80</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>CLRENA</name>
-              <description>Interrupt clear-enable bits</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>32</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>NVIC_ISPR</name>
-          <description>Interrupt Set Pending Register</description>
-          <addressOffset>0x100</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>SETPEND</name>
-              <description>Interrupt set-pending bits</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>32</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>NVIC_ICPR</name>
-          <description>Interrupt Clear Pending Register</description>
-          <addressOffset>0x180</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>CLRPEND</name>
-              <description>Interrupt clear-pending bits</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>32</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>NVIC_IPR0</name>
-          <description>Interrupt Priority Register n</description>
-          <addressOffset>0x300</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>PRI_0</name>
-              <description>Priority of interrupt 0</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_1</name>
-              <description>Priority of interrupt 1</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_2</name>
-              <description>Priority of interrupt 2</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_3</name>
-              <description>Priority of interrupt 3</description>
-              <bitOffset>24</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>NVIC_IPR1</name>
-          <description>Interrupt Priority Register n</description>
-          <addressOffset>0x304</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>PRI_4</name>
-              <description>Priority of interrupt 4</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_5</name>
-              <description>Priority of interrupt 5</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_6</name>
-              <description>Priority of interrupt 6</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_7</name>
-              <description>Priority of interrupt 7</description>
-              <bitOffset>24</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>NVIC_IPR2</name>
-          <description>Interrupt Priority Register n</description>
-          <addressOffset>0x308</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>PRI_8</name>
-              <description>Priority of interrupt 8</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_9</name>
-              <description>Priority of interrupt 9</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_10</name>
-              <description>Priority of interrupt 10</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_11</name>
-              <description>Priority of interrupt 11</description>
-              <bitOffset>24</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>NVIC_IPR3</name>
-          <description>Interrupt Priority Register n</description>
-          <addressOffset>0x30C</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>PRI_12</name>
-              <description>Priority of interrupt 11</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_13</name>
-              <description>Priority of interrupt 12</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_14</name>
-              <description>Priority of interrupt 14</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_15</name>
-              <description>Priority of interrupt 15</description>
-              <bitOffset>24</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>NVIC_IPR4</name>
-          <description>Interrupt Priority Register n</description>
-          <addressOffset>0x310</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>PRI_16</name>
-              <description>Priority of interrupt 17</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_17</name>
-              <description>Priority of interrupt 18</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_18</name>
-              <description>Priority of interrupt 19</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_19</name>
-              <description>Priority of interrupt 20</description>
-              <bitOffset>24</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>NVIC_IPR5</name>
-          <description>Interrupt Priority Register n</description>
-          <addressOffset>0x314</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>PRI_20</name>
-              <description>Priority of interrupt 0</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_21</name>
-              <description>Priority of interrupt 21</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_22</name>
-              <description>Priority of interrupt 22</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_23</name>
-              <description>Priority of interrupt 23</description>
-              <bitOffset>24</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>NVIC_IPR6</name>
-          <description>Interrupt Priority Register n</description>
-          <addressOffset>0x318</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>PRI_24</name>
-              <description>Priority of interrupt 24</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_25</name>
-              <description>Priority of interrupt 25</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_26</name>
-              <description>Priority of interrupt 26</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_27</name>
-              <description>Priority of interrupt 27</description>
-              <bitOffset>24</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>NVIC_IPR7</name>
-          <description>Interrupt Priority Register n</description>
-          <addressOffset>0x31C</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>PRI_28</name>
-              <description>Priority of interrupt 28</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_29</name>
-              <description>Priority of interrupt 29</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_30</name>
-              <description>Priority of interrupt 30</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_31</name>
-              <description>Priority of interrupt 31</description>
-              <bitOffset>24</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-write</access>
             </field>
           </fields>
         </register>
