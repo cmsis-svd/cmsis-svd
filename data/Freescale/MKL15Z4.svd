@@ -354,12 +354,12 @@
                 <enumeratedValue>
                   <name>00</name>
                   <description>Core and system clock divider (OUTDIV1) is 0x7 (divide by 8) when LPBOOT1=0 or 0x1 (divide by 2) when LPBOOT1=1.</description>
-                  <value>#00</value>
+                  <value>#0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>01</name>
                   <description>Core and system clock divider (OUTDIV1) is 0x3 (divide by 4) when LPBOOT1=0 or 0x0 (divide by 1) when LPBOOT1=1.</description>
-                  <value>#01</value>
+                  <value>#1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
@@ -373,12 +373,12 @@
                 <enumeratedValue>
                   <name>00</name>
                   <description>NMI interrupts are always blocked</description>
-                  <value>#00</value>
+                  <value>#0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>01</name>
                   <description>NMI_b pin/interrupts reset default to enabled</description>
-                  <value>#01</value>
+                  <value>#1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
@@ -392,12 +392,12 @@
                 <enumeratedValue>
                   <name>00</name>
                   <description>RESET pin is disabled following a POR and cannot be enabled as reset function</description>
-                  <value>#00</value>
+                  <value>#0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>01</name>
                   <description>RESET_b pin is dedicated</description>
-                  <value>#01</value>
+                  <value>#1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
@@ -411,12 +411,12 @@
                 <enumeratedValue>
                   <name>00</name>
                   <description>Core and system clock divider (OUTDIV1) is 0x7 (divide by 8) when LPBOOT0=0 or 0x3 (divide by 4) when LPBOOT0=1.</description>
-                  <value>#00</value>
+                  <value>#0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>01</name>
                   <description>Core and system clock divider (OUTDIV1) is 0x1 (divide by 2) when LPBOOT0=0 or 0x0 (divide by 1) when LPBOOT0=1.</description>
-                  <value>#01</value>
+                  <value>#1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
@@ -430,12 +430,12 @@
                 <enumeratedValue>
                   <name>00</name>
                   <description>Slower initialization</description>
-                  <value>#00</value>
+                  <value>#0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>01</name>
                   <description>Fast Initialization</description>
-                  <value>#01</value>
+                  <value>#1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
@@ -481,7 +481,7 @@
           <fields>
             <field>
               <name>SAR</name>
-              <description>no description available</description>
+              <description>Each SAR contains the byte address used by the DMA controller to read data</description>
               <bitOffset>0</bitOffset>
               <bitWidth>32</bitWidth>
               <access>read-write</access>
@@ -499,7 +499,7 @@
           <fields>
             <field>
               <name>DAR</name>
-              <description>no description available</description>
+              <description>Each DAR contains the byte address used by the DMA controller to write data</description>
               <bitOffset>0</bitOffset>
               <bitWidth>32</bitWidth>
               <access>read-write</access>
@@ -517,7 +517,7 @@
           <fields>
             <field>
               <name>BCR</name>
-              <description>no description available</description>
+              <description>This field contains the number of bytes yet to be transferred for a given block</description>
               <bitOffset>0</bitOffset>
               <bitWidth>24</bitWidth>
               <access>read-write</access>
@@ -1163,7 +1163,7 @@
           <fields>
             <field>
               <name>SAR</name>
-              <description>no description available</description>
+              <description>Each SAR contains the byte address used by the DMA controller to read data</description>
               <bitOffset>0</bitOffset>
               <bitWidth>32</bitWidth>
               <access>read-write</access>
@@ -1181,7 +1181,7 @@
           <fields>
             <field>
               <name>DAR</name>
-              <description>no description available</description>
+              <description>Each DAR contains the byte address used by the DMA controller to write data</description>
               <bitOffset>0</bitOffset>
               <bitWidth>32</bitWidth>
               <access>read-write</access>
@@ -1199,7 +1199,7 @@
           <fields>
             <field>
               <name>BCR</name>
-              <description>no description available</description>
+              <description>This field contains the number of bytes yet to be transferred for a given block</description>
               <bitOffset>0</bitOffset>
               <bitWidth>24</bitWidth>
               <access>read-write</access>
@@ -1845,7 +1845,7 @@
           <fields>
             <field>
               <name>SAR</name>
-              <description>no description available</description>
+              <description>Each SAR contains the byte address used by the DMA controller to read data</description>
               <bitOffset>0</bitOffset>
               <bitWidth>32</bitWidth>
               <access>read-write</access>
@@ -1863,7 +1863,7 @@
           <fields>
             <field>
               <name>DAR</name>
-              <description>no description available</description>
+              <description>Each DAR contains the byte address used by the DMA controller to write data</description>
               <bitOffset>0</bitOffset>
               <bitWidth>32</bitWidth>
               <access>read-write</access>
@@ -1881,7 +1881,7 @@
           <fields>
             <field>
               <name>BCR</name>
-              <description>no description available</description>
+              <description>This field contains the number of bytes yet to be transferred for a given block</description>
               <bitOffset>0</bitOffset>
               <bitWidth>24</bitWidth>
               <access>read-write</access>
@@ -2527,7 +2527,7 @@
           <fields>
             <field>
               <name>SAR</name>
-              <description>no description available</description>
+              <description>Each SAR contains the byte address used by the DMA controller to read data</description>
               <bitOffset>0</bitOffset>
               <bitWidth>32</bitWidth>
               <access>read-write</access>
@@ -2545,7 +2545,7 @@
           <fields>
             <field>
               <name>DAR</name>
-              <description>no description available</description>
+              <description>Each DAR contains the byte address used by the DMA controller to write data</description>
               <bitOffset>0</bitOffset>
               <bitWidth>32</bitWidth>
               <access>read-write</access>
@@ -2563,7 +2563,7 @@
           <fields>
             <field>
               <name>BCR</name>
-              <description>no description available</description>
+              <description>This field contains the number of bytes yet to be transferred for a given block</description>
               <bitOffset>0</bitOffset>
               <bitWidth>24</bitWidth>
               <access>read-write</access>
@@ -3555,7 +3555,7 @@
           <fields>
             <field>
               <name>CCOBn</name>
-              <description>no description available</description>
+              <description>The FCCOB register provides a command code and relevant parameters to the memory controller</description>
               <bitOffset>0</bitOffset>
               <bitWidth>8</bitWidth>
               <access>read-write</access>
@@ -6575,7 +6575,7 @@
           <fields>
             <field>
               <name>CLPD</name>
-              <description>no description available</description>
+              <description>Calibration Value</description>
               <bitOffset>0</bitOffset>
               <bitWidth>6</bitWidth>
               <access>read-write</access>
@@ -6593,7 +6593,7 @@
           <fields>
             <field>
               <name>CLPS</name>
-              <description>no description available</description>
+              <description>Calibration Value</description>
               <bitOffset>0</bitOffset>
               <bitWidth>6</bitWidth>
               <access>read-write</access>
@@ -6611,7 +6611,7 @@
           <fields>
             <field>
               <name>CLP4</name>
-              <description>no description available</description>
+              <description>Calibration Value</description>
               <bitOffset>0</bitOffset>
               <bitWidth>10</bitWidth>
               <access>read-write</access>
@@ -6629,7 +6629,7 @@
           <fields>
             <field>
               <name>CLP3</name>
-              <description>no description available</description>
+              <description>Calibration Value</description>
               <bitOffset>0</bitOffset>
               <bitWidth>9</bitWidth>
               <access>read-write</access>
@@ -6647,7 +6647,7 @@
           <fields>
             <field>
               <name>CLP2</name>
-              <description>no description available</description>
+              <description>Calibration Value</description>
               <bitOffset>0</bitOffset>
               <bitWidth>8</bitWidth>
               <access>read-write</access>
@@ -6665,7 +6665,7 @@
           <fields>
             <field>
               <name>CLP1</name>
-              <description>no description available</description>
+              <description>Calibration Value</description>
               <bitOffset>0</bitOffset>
               <bitWidth>7</bitWidth>
               <access>read-write</access>
@@ -6683,7 +6683,7 @@
           <fields>
             <field>
               <name>CLP0</name>
-              <description>no description available</description>
+              <description>Calibration Value</description>
               <bitOffset>0</bitOffset>
               <bitWidth>6</bitWidth>
               <access>read-write</access>
@@ -6701,7 +6701,7 @@
           <fields>
             <field>
               <name>CLMD</name>
-              <description>no description available</description>
+              <description>Calibration Value</description>
               <bitOffset>0</bitOffset>
               <bitWidth>6</bitWidth>
               <access>read-write</access>
@@ -6719,7 +6719,7 @@
           <fields>
             <field>
               <name>CLMS</name>
-              <description>no description available</description>
+              <description>Calibration Value</description>
               <bitOffset>0</bitOffset>
               <bitWidth>6</bitWidth>
               <access>read-write</access>
@@ -6737,7 +6737,7 @@
           <fields>
             <field>
               <name>CLM4</name>
-              <description>no description available</description>
+              <description>Calibration Value</description>
               <bitOffset>0</bitOffset>
               <bitWidth>10</bitWidth>
               <access>read-write</access>
@@ -6755,7 +6755,7 @@
           <fields>
             <field>
               <name>CLM3</name>
-              <description>no description available</description>
+              <description>Calibration Value</description>
               <bitOffset>0</bitOffset>
               <bitWidth>9</bitWidth>
               <access>read-write</access>
@@ -6773,7 +6773,7 @@
           <fields>
             <field>
               <name>CLM2</name>
-              <description>no description available</description>
+              <description>Calibration Value</description>
               <bitOffset>0</bitOffset>
               <bitWidth>8</bitWidth>
               <access>read-write</access>
@@ -6791,7 +6791,7 @@
           <fields>
             <field>
               <name>CLM1</name>
-              <description>no description available</description>
+              <description>Calibration Value</description>
               <bitOffset>0</bitOffset>
               <bitWidth>7</bitWidth>
               <access>read-write</access>
@@ -6809,7 +6809,7 @@
           <fields>
             <field>
               <name>CLM0</name>
-              <description>no description available</description>
+              <description>Calibration Value</description>
               <bitOffset>0</bitOffset>
               <bitWidth>6</bitWidth>
               <access>read-write</access>
@@ -7469,7 +7469,7 @@
           <fields>
             <field>
               <name>DATA0</name>
-              <description>no description available</description>
+              <description>When the DAC buffer is not enabled, DATA[11:0] controls the output voltage based on the following formula: V out = V in * (1 + DACDAT0[11:0])/4096 When the DAC buffer is enabled, DATA is mapped to the 16-word buffer</description>
               <bitOffset>0</bitOffset>
               <bitWidth>8</bitWidth>
               <access>read-write</access>
@@ -7490,7 +7490,7 @@
           <fields>
             <field>
               <name>DATA1</name>
-              <description>no description available</description>
+              <description>When the DAC Buffer is not enabled, DATA[11:0] controls the output voltage based on the following formula</description>
               <bitOffset>0</bitOffset>
               <bitWidth>4</bitWidth>
               <access>read-write</access>
@@ -13399,7 +13399,7 @@
             </field>
             <field>
               <name>MULT</name>
-              <description>no description available</description>
+              <description>The MULT bits define the multiplier factor mul</description>
               <bitOffset>6</bitOffset>
               <bitWidth>2</bitWidth>
               <access>read-write</access>
@@ -13887,7 +13887,7 @@
                 <enumeratedValue>
                   <name>0</name>
                   <description>No filter/bypass</description>
-                  <value>#0</value>
+                  <value>#00000</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
@@ -14160,7 +14160,7 @@
           <fields>
             <field>
               <name>SSLT</name>
-              <description>no description available</description>
+              <description>Most significant byte of SCL low timeout value that determines the timeout period of SCL low.</description>
               <bitOffset>0</bitOffset>
               <bitWidth>8</bitWidth>
               <access>read-write</access>
@@ -14178,7 +14178,7 @@
           <fields>
             <field>
               <name>SSLT</name>
-              <description>no description available</description>
+              <description>Least significant byte of SCL low timeout value that determines the timeout period of SCL low.</description>
               <bitOffset>0</bitOffset>
               <bitWidth>8</bitWidth>
               <access>read-write</access>
@@ -14239,7 +14239,7 @@
             </field>
             <field>
               <name>MULT</name>
-              <description>no description available</description>
+              <description>The MULT bits define the multiplier factor mul</description>
               <bitOffset>6</bitOffset>
               <bitWidth>2</bitWidth>
               <access>read-write</access>
@@ -14727,7 +14727,7 @@
                 <enumeratedValue>
                   <name>0</name>
                   <description>No filter/bypass</description>
-                  <value>#0</value>
+                  <value>#00000</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
@@ -15000,7 +15000,7 @@
           <fields>
             <field>
               <name>SSLT</name>
-              <description>no description available</description>
+              <description>Most significant byte of SCL low timeout value that determines the timeout period of SCL low.</description>
               <bitOffset>0</bitOffset>
               <bitWidth>8</bitWidth>
               <access>read-write</access>
@@ -15018,7 +15018,7 @@
           <fields>
             <field>
               <name>SSLT</name>
-              <description>no description available</description>
+              <description>Least significant byte of SCL low timeout value that determines the timeout period of SCL low.</description>
               <bitOffset>0</bitOffset>
               <bitWidth>8</bitWidth>
               <access>read-write</access>
@@ -15937,56 +15937,56 @@
           <fields>
             <field>
               <name>R0T0</name>
-              <description>no description available</description>
+              <description>Read receive data buffer 0 or write transmit data buffer 0.</description>
               <bitOffset>0</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>R1T1</name>
-              <description>no description available</description>
+              <description>Read receive data buffer 1 or write transmit data buffer 1.</description>
               <bitOffset>1</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>R2T2</name>
-              <description>no description available</description>
+              <description>Read receive data buffer 2 or write transmit data buffer 2.</description>
               <bitOffset>2</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>R3T3</name>
-              <description>no description available</description>
+              <description>Read receive data buffer 3 or write transmit data buffer 3.</description>
               <bitOffset>3</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>R4T4</name>
-              <description>no description available</description>
+              <description>Read receive data buffer 4 or write transmit data buffer 4.</description>
               <bitOffset>4</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>R5T5</name>
-              <description>no description available</description>
+              <description>Read receive data buffer 5 or write transmit data buffer 5.</description>
               <bitOffset>5</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>R6T6</name>
-              <description>no description available</description>
+              <description>Read receive data buffer 6 or write transmit data buffer 6.</description>
               <bitOffset>6</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>R7T7</name>
-              <description>no description available</description>
+              <description>Read receive data buffer 7 or write transmit data buffer 7.</description>
               <bitOffset>7</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
@@ -17085,56 +17085,56 @@
           <fields>
             <field>
               <name>R0T0</name>
-              <description>no description available</description>
+              <description>Read receive data buffer 0 or write transmit data buffer 0.</description>
               <bitOffset>0</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>R1T1</name>
-              <description>no description available</description>
+              <description>Read receive data buffer 1 or write transmit data buffer 1.</description>
               <bitOffset>1</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>R2T2</name>
-              <description>no description available</description>
+              <description>Read receive data buffer 2 or write transmit data buffer 2.</description>
               <bitOffset>2</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>R3T3</name>
-              <description>no description available</description>
+              <description>Read receive data buffer 3 or write transmit data buffer 3.</description>
               <bitOffset>3</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>R4T4</name>
-              <description>no description available</description>
+              <description>Read receive data buffer 4 or write transmit data buffer 4.</description>
               <bitOffset>4</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>R5T5</name>
-              <description>no description available</description>
+              <description>Read receive data buffer 5 or write transmit data buffer 5.</description>
               <bitOffset>5</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>R6T6</name>
-              <description>no description available</description>
+              <description>Read receive data buffer 6 or write transmit data buffer 6.</description>
               <bitOffset>6</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>R7T7</name>
-              <description>no description available</description>
+              <description>Read receive data buffer 7 or write transmit data buffer 7.</description>
               <bitOffset>7</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
@@ -18084,56 +18084,56 @@
           <fields>
             <field>
               <name>R0T0</name>
-              <description>no description available</description>
+              <description>Read receive data buffer 0 or write transmit data buffer 0.</description>
               <bitOffset>0</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>R1T1</name>
-              <description>no description available</description>
+              <description>Read receive data buffer 1 or write transmit data buffer 1.</description>
               <bitOffset>1</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>R2T2</name>
-              <description>no description available</description>
+              <description>Read receive data buffer 2 or write transmit data buffer 2.</description>
               <bitOffset>2</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>R3T3</name>
-              <description>no description available</description>
+              <description>Read receive data buffer 3 or write transmit data buffer 3.</description>
               <bitOffset>3</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>R4T4</name>
-              <description>no description available</description>
+              <description>Read receive data buffer 4 or write transmit data buffer 4.</description>
               <bitOffset>4</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>R5T5</name>
-              <description>no description available</description>
+              <description>Read receive data buffer 5 or write transmit data buffer 5.</description>
               <bitOffset>5</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>R6T6</name>
-              <description>no description available</description>
+              <description>Read receive data buffer 6 or write transmit data buffer 6.</description>
               <bitOffset>6</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>R7T7</name>
-              <description>no description available</description>
+              <description>Read receive data buffer 7 or write transmit data buffer 7.</description>
               <bitOffset>7</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
@@ -19910,7 +19910,7 @@
         <usage>registers</usage>
       </addressBlock>
       <interrupt>
-        <name>LLW</name>
+        <name>LLWU</name>
         <value>7</value>
       </interrupt>
       <registers>
@@ -21747,7 +21747,7 @@
           <fields>
             <field>
               <name>PMSTAT</name>
-              <description>no description available</description>
+              <description>When debug is enabled, the PMSTAT will not update to STOP or VLPS</description>
               <bitOffset>0</bitOffset>
               <bitWidth>7</bitWidth>
               <access>read-only</access>
@@ -23213,3513 +23213,6 @@
       </registers>
     </peripheral>
     <peripheral>
-      <name>SystemControl</name>
-      <description>System Control Registers</description>
-      <prependToName>SCB_</prependToName>
-      <baseAddress>0xE000E000</baseAddress>
-      <addressBlock>
-        <offset>0x8</offset>
-        <size>0xD2C</size>
-        <usage>registers</usage>
-      </addressBlock>
-      <registers>
-        <register>
-          <name>ACTLR</name>
-          <description>Auxiliary Control Register,</description>
-          <addressOffset>0x8</addressOffset>
-          <size>32</size>
-          <access>read-only</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-        </register>
-        <register>
-          <name>CPUID</name>
-          <description>CPUID Base Register</description>
-          <addressOffset>0xD00</addressOffset>
-          <size>32</size>
-          <access>read-only</access>
-          <resetValue>0x410CC601</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>REVISION</name>
-              <description>Indicates patch release: 0x0 = Patch 0</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>4</bitWidth>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>PARTNO</name>
-              <description>Indicates part number</description>
-              <bitOffset>4</bitOffset>
-              <bitWidth>12</bitWidth>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>VARIANT</name>
-              <description>Indicates processor revision: 0x2 = Revision 2</description>
-              <bitOffset>20</bitOffset>
-              <bitWidth>4</bitWidth>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>IMPLEMENTER</name>
-              <description>Implementer code</description>
-              <bitOffset>24</bitOffset>
-              <bitWidth>8</bitWidth>
-              <access>read-only</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>ICSR</name>
-          <description>Interrupt Control and State Register</description>
-          <addressOffset>0xD04</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>VECTPENDING</name>
-              <description>Exception number of the highest priority pending enabled exception</description>
-              <bitOffset>12</bitOffset>
-              <bitWidth>6</bitWidth>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>PENDSTCLR</name>
-              <description>no description available</description>
-              <bitOffset>25</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>write-only</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>no effect</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>removes the pending state from the SysTick exception</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>PENDSTSET</name>
-              <description>no description available</description>
-              <bitOffset>26</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: SysTick exception is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes SysTick exception state to pending; read: SysTick exception is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>PENDSVCLR</name>
-              <description>no description available</description>
-              <bitOffset>27</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>write-only</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>no effect</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>removes the pending state from the PendSV exception</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>PENDSVSET</name>
-              <description>no description available</description>
-              <bitOffset>28</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: PendSV exception is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes PendSV exception state to pending; read: PendSV exception is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>NMIPENDSET</name>
-              <description>no description available</description>
-              <bitOffset>31</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: NMI exception is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes NMI exception state to pending; read: NMI exception is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>VTOR</name>
-          <description>Vector Table Offset Register</description>
-          <addressOffset>0xD08</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>TBLOFF</name>
-              <description>Vector table base offset</description>
-              <bitOffset>7</bitOffset>
-              <bitWidth>25</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>AIRCR</name>
-          <description>Application Interrupt and Reset Control Register</description>
-          <addressOffset>0xD0C</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>VECTCLRACTIVE</name>
-              <description>no description available</description>
-              <bitOffset>1</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>write-only</access>
-            </field>
-            <field>
-              <name>SYSRESETREQ</name>
-              <description>no description available</description>
-              <bitOffset>2</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>write-only</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>no system reset request</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>asserts a signal to the outer system that requests a reset</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>ENDIANNESS</name>
-              <description>no description available</description>
-              <bitOffset>15</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-only</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>Little-endian</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>Big-endian</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>VECTKEY</name>
-              <description>Register key</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>16</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SCR</name>
-          <description>System Control Register</description>
-          <addressOffset>0xD10</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>SLEEPONEXIT</name>
-              <description>no description available</description>
-              <bitOffset>1</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>do not sleep when returning to Thread mode</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>enter sleep, or deep sleep, on return from an ISR</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SLEEPDEEP</name>
-              <description>no description available</description>
-              <bitOffset>2</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>sleep</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>deep sleep</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SEVONPEND</name>
-              <description>no description available</description>
-              <bitOffset>4</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>only enabled interrupts or events can wakeup the processor, disabled interrupts are excluded</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>enabled events and all interrupts, including disabled interrupts, can wakeup the processor</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>CCR</name>
-          <description>Configuration and Control Register</description>
-          <addressOffset>0xD14</addressOffset>
-          <size>32</size>
-          <access>read-only</access>
-          <resetValue>0x208</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>UNALIGN_TRP</name>
-              <description>Always reads as one, indicates that all unaligned accesses generate a HardFault</description>
-              <bitOffset>3</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>STKALIGN</name>
-              <description>Indicates stack alignment on exception entry</description>
-              <bitOffset>9</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-only</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SHPR2</name>
-          <description>System Handler Priority Register 2</description>
-          <addressOffset>0xD1C</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>PRI_11</name>
-              <description>Priority of system handler 11, SVCall</description>
-              <bitOffset>30</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SHPR3</name>
-          <description>System Handler Priority Register 3</description>
-          <addressOffset>0xD20</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>PRI_14</name>
-              <description>Priority of system handler 14, PendSV</description>
-              <bitOffset>22</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_15</name>
-              <description>Priority of system handler 15, SysTick exception</description>
-              <bitOffset>30</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SHCSR</name>
-          <description>System Handler Control and State Register</description>
-          <addressOffset>0xD24</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>SVCALLPENDED</name>
-              <description>no description available</description>
-              <bitOffset>15</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>exception is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>exception is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>DFSR</name>
-          <description>Debug Fault Status Register</description>
-          <addressOffset>0xD30</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>HALTED</name>
-              <description>no description available</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>No active halt request debug event</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>Halt request debug event active</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>BKPT</name>
-              <description>no description available</description>
-              <bitOffset>1</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>No current breakpoint debug event</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>At least one current breakpoint debug event</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DWTTRAP</name>
-              <description>no description available</description>
-              <bitOffset>2</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>No current debug events generated by the DWT</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>At least one current debug event generated by the DWT</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>VCATCH</name>
-              <description>no description available</description>
-              <bitOffset>3</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>No Vector catch triggered</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>Vector catch triggered</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>EXTERNAL</name>
-              <description>no description available</description>
-              <bitOffset>4</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>No EDBGRQ debug event</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>EDBGRQ debug event</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-      </registers>
-    </peripheral>
-    <peripheral>
-      <name>SysTick</name>
-      <description>System timer</description>
-      <prependToName>SYST_</prependToName>
-      <baseAddress>0xE000E010</baseAddress>
-      <addressBlock>
-        <offset>0</offset>
-        <size>0x10</size>
-        <usage>registers</usage>
-      </addressBlock>
-      <registers>
-        <register>
-          <name>CSR</name>
-          <description>SysTick Control and Status Register</description>
-          <addressOffset>0</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>ENABLE</name>
-              <description>no description available</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>counter disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>counter enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>TICKINT</name>
-              <description>no description available</description>
-              <bitOffset>1</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>counting down to 0 does not assert the SysTick exception request</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>counting down to 0 asserts the SysTick exception request</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLKSOURCE</name>
-              <description>no description available</description>
-              <bitOffset>2</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>external clock</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>processor clock</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>COUNTFLAG</name>
-              <description>no description available</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>RVR</name>
-          <description>SysTick Reload Value Register</description>
-          <addressOffset>0x4</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>RELOAD</name>
-              <description>Value to load into the SysTick Current Value Register when the counter reaches 0</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>24</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>CVR</name>
-          <description>SysTick Current Value Register</description>
-          <addressOffset>0x8</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>CURRENT</name>
-              <description>Current value at the time the register is accessed</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>24</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>CALIB</name>
-          <description>SysTick Calibration Value Register</description>
-          <addressOffset>0xC</addressOffset>
-          <size>32</size>
-          <access>read-only</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>TENMS</name>
-              <description>Reload value to use for 10ms timing</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>24</bitWidth>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>SKEW</name>
-              <description>no description available</description>
-              <bitOffset>30</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-only</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>10ms calibration value is exact</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>10ms calibration value is inexact, because of the clock frequency</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>NOREF</name>
-              <description>no description available</description>
-              <bitOffset>31</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-only</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>The reference clock is provided</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>The reference clock is not provided</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-      </registers>
-    </peripheral>
-    <peripheral>
-      <name>NVIC</name>
-      <description>Nested Vectored Interrupt Controller</description>
-      <baseAddress>0xE000E100</baseAddress>
-      <addressBlock>
-        <offset>0</offset>
-        <size>0x320</size>
-        <usage>registers</usage>
-      </addressBlock>
-      <registers>
-        <register>
-          <name>NVIC_ISER</name>
-          <description>Interrupt Set Enable Register</description>
-          <addressOffset>0</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>SETENA0</name>
-              <description>no description available</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: DMA channel 0 transfer complete interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable DMA channel 0 transfer complete interrupt; read: DMA channel 0 transfer complete interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETENA1</name>
-              <description>no description available</description>
-              <bitOffset>1</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: DMA channel 1 transfer complete interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable DMA channel 1 transfer complete interrupt; read: DMA channel 1 transfer complete interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETENA2</name>
-              <description>no description available</description>
-              <bitOffset>2</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: DMA channel 2 transfer complete interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable DMA channel 2 transfer complete interrupt; read: DMA channel 2 transfer complete interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETENA3</name>
-              <description>no description available</description>
-              <bitOffset>3</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: DMA channel 3 transfer complete interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable DMA channel 3 transfer complete interrupt; read: DMA channel 3 transfer complete interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETENA4</name>
-              <description>no description available</description>
-              <bitOffset>4</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Reserved iv 20 interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable Reserved iv 20 interrupt; read: Reserved iv 20 interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETENA5</name>
-              <description>no description available</description>
-              <bitOffset>5</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Command complete and read collision interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable Command complete and read collision interrupt; read: Command complete and read collision interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETENA6</name>
-              <description>no description available</description>
-              <bitOffset>6</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Low-voltage detect, low-voltage warning interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable Low-voltage detect, low-voltage warning interrupt; read: Low-voltage detect, low-voltage warning interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETENA7</name>
-              <description>no description available</description>
-              <bitOffset>7</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Low Leakage Wakeup interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable Low Leakage Wakeup interrupt; read: Low Leakage Wakeup interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETENA8</name>
-              <description>no description available</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Inter-Integrated Circuit 0 interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable Inter-Integrated Circuit 0 interrupt; read: Inter-Integrated Circuit 0 interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETENA9</name>
-              <description>no description available</description>
-              <bitOffset>9</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Inter-Integrated Circuit 1 interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable Inter-Integrated Circuit 1 interrupt; read: Inter-Integrated Circuit 1 interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETENA10</name>
-              <description>no description available</description>
-              <bitOffset>10</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Serial Peripheral Interface 0 interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable Serial Peripheral Interface 0 interrupt; read: Serial Peripheral Interface 0 interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETENA11</name>
-              <description>no description available</description>
-              <bitOffset>11</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Serial Peripheral Interface 1 interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable Serial Peripheral Interface 1 interrupt; read: Serial Peripheral Interface 1 interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETENA12</name>
-              <description>no description available</description>
-              <bitOffset>12</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: UART0 status and error interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable UART0 status and error interrupt; read: UART0 status and error interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETENA13</name>
-              <description>no description available</description>
-              <bitOffset>13</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: UART1 status and error interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable UART1 status and error interrupt; read: UART1 status and error interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETENA14</name>
-              <description>no description available</description>
-              <bitOffset>14</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: UART2 status and error interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable UART2 status and error interrupt; read: UART2 status and error interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETENA15</name>
-              <description>no description available</description>
-              <bitOffset>15</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Analog-to-Digital Converter 0 interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable Analog-to-Digital Converter 0 interrupt; read: Analog-to-Digital Converter 0 interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETENA16</name>
-              <description>no description available</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Comparator 0 interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable Comparator 0 interrupt; read: Comparator 0 interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETENA17</name>
-              <description>no description available</description>
-              <bitOffset>17</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Timer/PWM module 0 interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable Timer/PWM module 0 interrupt; read: Timer/PWM module 0 interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETENA18</name>
-              <description>no description available</description>
-              <bitOffset>18</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Timer/PWM module 1 interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable Timer/PWM module 1 interrupt; read: Timer/PWM module 1 interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETENA19</name>
-              <description>no description available</description>
-              <bitOffset>19</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Timer/PWM module 2 interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable Timer/PWM module 2 interrupt; read: Timer/PWM module 2 interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETENA20</name>
-              <description>no description available</description>
-              <bitOffset>20</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Real-time counter interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable Real-time counter interrupt; read: Real-time counter interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETENA21</name>
-              <description>no description available</description>
-              <bitOffset>21</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: RTC seconds interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable RTC seconds interrupt; read: RTC seconds interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETENA22</name>
-              <description>no description available</description>
-              <bitOffset>22</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Periodic Interrupt Timer interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable Periodic Interrupt Timer interrupt; read: Periodic Interrupt Timer interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETENA23</name>
-              <description>no description available</description>
-              <bitOffset>23</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Reserved iv 39 interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable Reserved iv 39 interrupt; read: Reserved iv 39 interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETENA24</name>
-              <description>no description available</description>
-              <bitOffset>24</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Reserved iv 40 interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable Reserved iv 40 interrupt; read: Reserved iv 40 interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETENA25</name>
-              <description>no description available</description>
-              <bitOffset>25</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Digital to Analog Converter interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable Digital to Analog Converter interrupt; read: Digital to Analog Converter interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETENA26</name>
-              <description>no description available</description>
-              <bitOffset>26</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Touch Sensing Input interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable Touch Sensing Input interrupt; read: Touch Sensing Input interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETENA27</name>
-              <description>no description available</description>
-              <bitOffset>27</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Multipurpose Clock Generator interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable Multipurpose Clock Generator interrupt; read: Multipurpose Clock Generator interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETENA28</name>
-              <description>no description available</description>
-              <bitOffset>28</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Low-Power Timer interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable Low-Power Timer interrupt; read: Low-Power Timer interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETENA29</name>
-              <description>no description available</description>
-              <bitOffset>29</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Reserved iv 45 interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable Reserved iv 45 interrupt; read: Reserved iv 45 interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETENA30</name>
-              <description>no description available</description>
-              <bitOffset>30</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: PORTA Pin detect interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable PORTA Pin detect interrupt; read: PORTA Pin detect interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETENA31</name>
-              <description>no description available</description>
-              <bitOffset>31</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: PORTD Pin detect interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: enable PORTD Pin detect interrupt; read: PORTD Pin detect interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>NVIC_ICER</name>
-          <description>Interrupt Clear Enable Register</description>
-          <addressOffset>0x80</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>CLRENA0</name>
-              <description>no description available</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: DMA channel 0 transfer complete interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable DMA channel 0 transfer complete interrupt; read: DMA channel 0 transfer complete interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRENA1</name>
-              <description>no description available</description>
-              <bitOffset>1</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: DMA channel 1 transfer complete interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable DMA channel 1 transfer complete interrupt; read: DMA channel 1 transfer complete interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRENA2</name>
-              <description>no description available</description>
-              <bitOffset>2</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: DMA channel 2 transfer complete interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable DMA channel 2 transfer complete interrupt; read: DMA channel 2 transfer complete interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRENA3</name>
-              <description>no description available</description>
-              <bitOffset>3</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: DMA channel 3 transfer complete interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable DMA channel 3 transfer complete interrupt; read: DMA channel 3 transfer complete interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRENA4</name>
-              <description>no description available</description>
-              <bitOffset>4</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Reserved iv 20 interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable Reserved iv 20 interrupt; read: Reserved iv 20 interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRENA5</name>
-              <description>no description available</description>
-              <bitOffset>5</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Command complete and read collision interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable Command complete and read collision interrupt; read: Command complete and read collision interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRENA6</name>
-              <description>no description available</description>
-              <bitOffset>6</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Low-voltage detect, low-voltage warning interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable Low-voltage detect, low-voltage warning interrupt; read: Low-voltage detect, low-voltage warning interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRENA7</name>
-              <description>no description available</description>
-              <bitOffset>7</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Low Leakage Wakeup interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable Low Leakage Wakeup interrupt; read: Low Leakage Wakeup interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRENA8</name>
-              <description>no description available</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Inter-Integrated Circuit 0 interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable Inter-Integrated Circuit 0 interrupt; read: Inter-Integrated Circuit 0 interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRENA9</name>
-              <description>no description available</description>
-              <bitOffset>9</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Inter-Integrated Circuit 1 interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable Inter-Integrated Circuit 1 interrupt; read: Inter-Integrated Circuit 1 interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRENA10</name>
-              <description>no description available</description>
-              <bitOffset>10</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Serial Peripheral Interface 0 interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable Serial Peripheral Interface 0 interrupt; read: Serial Peripheral Interface 0 interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRENA11</name>
-              <description>no description available</description>
-              <bitOffset>11</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Serial Peripheral Interface 1 interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable Serial Peripheral Interface 1 interrupt; read: Serial Peripheral Interface 1 interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRENA12</name>
-              <description>no description available</description>
-              <bitOffset>12</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: UART0 status and error interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable UART0 status and error interrupt; read: UART0 status and error interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRENA13</name>
-              <description>no description available</description>
-              <bitOffset>13</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: UART1 status and error interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable UART1 status and error interrupt; read: UART1 status and error interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRENA14</name>
-              <description>no description available</description>
-              <bitOffset>14</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: UART2 status and error interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable UART2 status and error interrupt; read: UART2 status and error interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRENA15</name>
-              <description>no description available</description>
-              <bitOffset>15</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Analog-to-Digital Converter 0 interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable Analog-to-Digital Converter 0 interrupt; read: Analog-to-Digital Converter 0 interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRENA16</name>
-              <description>no description available</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Comparator 0 interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable Comparator 0 interrupt; read: Comparator 0 interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRENA17</name>
-              <description>no description available</description>
-              <bitOffset>17</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Timer/PWM module 0 interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable Timer/PWM module 0 interrupt; read: Timer/PWM module 0 interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRENA18</name>
-              <description>no description available</description>
-              <bitOffset>18</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Timer/PWM module 1 interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable Timer/PWM module 1 interrupt; read: Timer/PWM module 1 interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRENA19</name>
-              <description>no description available</description>
-              <bitOffset>19</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Timer/PWM module 2 interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable Timer/PWM module 2 interrupt; read: Timer/PWM module 2 interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRENA20</name>
-              <description>no description available</description>
-              <bitOffset>20</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Real-time counter interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable Real-time counter interrupt; read: Real-time counter interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRENA21</name>
-              <description>no description available</description>
-              <bitOffset>21</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: RTC seconds interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable RTC seconds interrupt; read: RTC seconds interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRENA22</name>
-              <description>no description available</description>
-              <bitOffset>22</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Periodic Interrupt Timer interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable Periodic Interrupt Timer interrupt; read: Periodic Interrupt Timer interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRENA23</name>
-              <description>no description available</description>
-              <bitOffset>23</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Reserved iv 39 interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable Reserved iv 39 interrupt; read: Reserved iv 39 interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRENA24</name>
-              <description>no description available</description>
-              <bitOffset>24</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Reserved iv 40 interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable Reserved iv 40 interrupt; read: Reserved iv 40 interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRENA25</name>
-              <description>no description available</description>
-              <bitOffset>25</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Digital to Analog Converter interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable Digital to Analog Converter interrupt; read: Digital to Analog Converter interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRENA26</name>
-              <description>no description available</description>
-              <bitOffset>26</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Touch Sensing Input interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable Touch Sensing Input interrupt; read: Touch Sensing Input interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRENA27</name>
-              <description>no description available</description>
-              <bitOffset>27</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Multipurpose Clock Generator interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable Multipurpose Clock Generator interrupt; read: Multipurpose Clock Generator interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRENA28</name>
-              <description>no description available</description>
-              <bitOffset>28</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Low-Power Timer interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable Low-Power Timer interrupt; read: Low-Power Timer interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRENA29</name>
-              <description>no description available</description>
-              <bitOffset>29</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Reserved iv 45 interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable Reserved iv 45 interrupt; read: Reserved iv 45 interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRENA30</name>
-              <description>no description available</description>
-              <bitOffset>30</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: PORTA Pin detect interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable PORTA Pin detect interrupt; read: PORTA Pin detect interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRENA31</name>
-              <description>no description available</description>
-              <bitOffset>31</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: PORTD Pin detect interrupt disabled</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: disable PORTD Pin detect interrupt; read: PORTD Pin detect interrupt enabled</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>NVIC_ISPR</name>
-          <description>Interrupt Set Pending Register</description>
-          <addressOffset>0x100</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>SETPEND0</name>
-              <description>no description available</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: DMA channel 0 transfer complete interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the DMA channel 0 transfer complete interrupt state to pending; read: DMA channel 0 transfer complete interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETPEND1</name>
-              <description>no description available</description>
-              <bitOffset>1</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: DMA channel 1 transfer complete interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the DMA channel 1 transfer complete interrupt state to pending; read: DMA channel 1 transfer complete interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETPEND2</name>
-              <description>no description available</description>
-              <bitOffset>2</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: DMA channel 2 transfer complete interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the DMA channel 2 transfer complete interrupt state to pending; read: DMA channel 2 transfer complete interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETPEND3</name>
-              <description>no description available</description>
-              <bitOffset>3</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: DMA channel 3 transfer complete interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the DMA channel 3 transfer complete interrupt state to pending; read: DMA channel 3 transfer complete interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETPEND4</name>
-              <description>no description available</description>
-              <bitOffset>4</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Reserved iv 20 interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the Reserved iv 20 interrupt state to pending; read: Reserved iv 20 interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETPEND5</name>
-              <description>no description available</description>
-              <bitOffset>5</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Command complete and read collision interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the Command complete and read collision interrupt state to pending; read: Command complete and read collision interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETPEND6</name>
-              <description>no description available</description>
-              <bitOffset>6</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Low-voltage detect, low-voltage warning interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the Low-voltage detect, low-voltage warning interrupt state to pending; read: Low-voltage detect, low-voltage warning interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETPEND7</name>
-              <description>no description available</description>
-              <bitOffset>7</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Low Leakage Wakeup interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the Low Leakage Wakeup interrupt state to pending; read: Low Leakage Wakeup interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETPEND8</name>
-              <description>no description available</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Inter-Integrated Circuit 0 interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the Inter-Integrated Circuit 0 interrupt state to pending; read: Inter-Integrated Circuit 0 interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETPEND9</name>
-              <description>no description available</description>
-              <bitOffset>9</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Inter-Integrated Circuit 1 interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the Inter-Integrated Circuit 1 interrupt state to pending; read: Inter-Integrated Circuit 1 interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETPEND10</name>
-              <description>no description available</description>
-              <bitOffset>10</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Serial Peripheral Interface 0 interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the Serial Peripheral Interface 0 interrupt state to pending; read: Serial Peripheral Interface 0 interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETPEND11</name>
-              <description>no description available</description>
-              <bitOffset>11</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Serial Peripheral Interface 1 interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the Serial Peripheral Interface 1 interrupt state to pending; read: Serial Peripheral Interface 1 interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETPEND12</name>
-              <description>no description available</description>
-              <bitOffset>12</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: UART0 status and error interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the UART0 status and error interrupt state to pending; read: UART0 status and error interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETPEND13</name>
-              <description>no description available</description>
-              <bitOffset>13</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: UART1 status and error interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the UART1 status and error interrupt state to pending; read: UART1 status and error interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETPEND14</name>
-              <description>no description available</description>
-              <bitOffset>14</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: UART2 status and error interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the UART2 status and error interrupt state to pending; read: UART2 status and error interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETPEND15</name>
-              <description>no description available</description>
-              <bitOffset>15</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Analog-to-Digital Converter 0 interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the Analog-to-Digital Converter 0 interrupt state to pending; read: Analog-to-Digital Converter 0 interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETPEND16</name>
-              <description>no description available</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Comparator 0 interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the Comparator 0 interrupt state to pending; read: Comparator 0 interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETPEND17</name>
-              <description>no description available</description>
-              <bitOffset>17</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Timer/PWM module 0 interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the Timer/PWM module 0 interrupt state to pending; read: Timer/PWM module 0 interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETPEND18</name>
-              <description>no description available</description>
-              <bitOffset>18</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Timer/PWM module 1 interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the Timer/PWM module 1 interrupt state to pending; read: Timer/PWM module 1 interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETPEND19</name>
-              <description>no description available</description>
-              <bitOffset>19</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Timer/PWM module 2 interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the Timer/PWM module 2 interrupt state to pending; read: Timer/PWM module 2 interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETPEND20</name>
-              <description>no description available</description>
-              <bitOffset>20</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Real-time counter interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the Real-time counter interrupt state to pending; read: Real-time counter interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETPEND21</name>
-              <description>no description available</description>
-              <bitOffset>21</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: RTC seconds interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the RTC seconds interrupt state to pending; read: RTC seconds interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETPEND22</name>
-              <description>no description available</description>
-              <bitOffset>22</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Periodic Interrupt Timer interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the Periodic Interrupt Timer interrupt state to pending; read: Periodic Interrupt Timer interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETPEND23</name>
-              <description>no description available</description>
-              <bitOffset>23</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Reserved iv 39 interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the Reserved iv 39 interrupt state to pending; read: Reserved iv 39 interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETPEND24</name>
-              <description>no description available</description>
-              <bitOffset>24</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Reserved iv 40 interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the Reserved iv 40 interrupt state to pending; read: Reserved iv 40 interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETPEND25</name>
-              <description>no description available</description>
-              <bitOffset>25</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Digital to Analog Converter interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the Digital to Analog Converter interrupt state to pending; read: Digital to Analog Converter interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETPEND26</name>
-              <description>no description available</description>
-              <bitOffset>26</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Touch Sensing Input interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the Touch Sensing Input interrupt state to pending; read: Touch Sensing Input interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETPEND27</name>
-              <description>no description available</description>
-              <bitOffset>27</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Multipurpose Clock Generator interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the Multipurpose Clock Generator interrupt state to pending; read: Multipurpose Clock Generator interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETPEND28</name>
-              <description>no description available</description>
-              <bitOffset>28</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Low-Power Timer interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the Low-Power Timer interrupt state to pending; read: Low-Power Timer interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETPEND29</name>
-              <description>no description available</description>
-              <bitOffset>29</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Reserved iv 45 interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the Reserved iv 45 interrupt state to pending; read: Reserved iv 45 interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETPEND30</name>
-              <description>no description available</description>
-              <bitOffset>30</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: PORTA Pin detect interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the PORTA Pin detect interrupt state to pending; read: PORTA Pin detect interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SETPEND31</name>
-              <description>no description available</description>
-              <bitOffset>31</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: PORTD Pin detect interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: changes the PORTD Pin detect interrupt state to pending; read: PORTD Pin detect interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>NVIC_ICPR</name>
-          <description>Interrupt Clear Pending Register</description>
-          <addressOffset>0x180</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>CLRPEND0</name>
-              <description>no description available</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: DMA channel 0 transfer complete interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the DMA channel 0 transfer complete interrupt; read: DMA channel 0 transfer complete interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRPEND1</name>
-              <description>no description available</description>
-              <bitOffset>1</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: DMA channel 1 transfer complete interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the DMA channel 1 transfer complete interrupt; read: DMA channel 1 transfer complete interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRPEND2</name>
-              <description>no description available</description>
-              <bitOffset>2</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: DMA channel 2 transfer complete interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the DMA channel 2 transfer complete interrupt; read: DMA channel 2 transfer complete interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRPEND3</name>
-              <description>no description available</description>
-              <bitOffset>3</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: DMA channel 3 transfer complete interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the DMA channel 3 transfer complete interrupt; read: DMA channel 3 transfer complete interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRPEND4</name>
-              <description>no description available</description>
-              <bitOffset>4</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Reserved iv 20 interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the Reserved iv 20 interrupt; read: Reserved iv 20 interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRPEND5</name>
-              <description>no description available</description>
-              <bitOffset>5</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Command complete and read collision interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the Command complete and read collision interrupt; read: Command complete and read collision interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRPEND6</name>
-              <description>no description available</description>
-              <bitOffset>6</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Low-voltage detect, low-voltage warning interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the Low-voltage detect, low-voltage warning interrupt; read: Low-voltage detect, low-voltage warning interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRPEND7</name>
-              <description>no description available</description>
-              <bitOffset>7</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Low Leakage Wakeup interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the Low Leakage Wakeup interrupt; read: Low Leakage Wakeup interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRPEND8</name>
-              <description>no description available</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Inter-Integrated Circuit 0 interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the Inter-Integrated Circuit 0 interrupt; read: Inter-Integrated Circuit 0 interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRPEND9</name>
-              <description>no description available</description>
-              <bitOffset>9</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Inter-Integrated Circuit 1 interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the Inter-Integrated Circuit 1 interrupt; read: Inter-Integrated Circuit 1 interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRPEND10</name>
-              <description>no description available</description>
-              <bitOffset>10</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Serial Peripheral Interface 0 interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the Serial Peripheral Interface 0 interrupt; read: Serial Peripheral Interface 0 interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRPEND11</name>
-              <description>no description available</description>
-              <bitOffset>11</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Serial Peripheral Interface 1 interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the Serial Peripheral Interface 1 interrupt; read: Serial Peripheral Interface 1 interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRPEND12</name>
-              <description>no description available</description>
-              <bitOffset>12</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: UART0 status and error interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the UART0 status and error interrupt; read: UART0 status and error interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRPEND13</name>
-              <description>no description available</description>
-              <bitOffset>13</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: UART1 status and error interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the UART1 status and error interrupt; read: UART1 status and error interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRPEND14</name>
-              <description>no description available</description>
-              <bitOffset>14</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: UART2 status and error interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the UART2 status and error interrupt; read: UART2 status and error interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRPEND15</name>
-              <description>no description available</description>
-              <bitOffset>15</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Analog-to-Digital Converter 0 interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the Analog-to-Digital Converter 0 interrupt; read: Analog-to-Digital Converter 0 interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRPEND16</name>
-              <description>no description available</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Comparator 0 interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the Comparator 0 interrupt; read: Comparator 0 interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRPEND17</name>
-              <description>no description available</description>
-              <bitOffset>17</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Timer/PWM module 0 interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the Timer/PWM module 0 interrupt; read: Timer/PWM module 0 interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRPEND18</name>
-              <description>no description available</description>
-              <bitOffset>18</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Timer/PWM module 1 interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the Timer/PWM module 1 interrupt; read: Timer/PWM module 1 interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRPEND19</name>
-              <description>no description available</description>
-              <bitOffset>19</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Timer/PWM module 2 interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the Timer/PWM module 2 interrupt; read: Timer/PWM module 2 interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRPEND20</name>
-              <description>no description available</description>
-              <bitOffset>20</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Real-time counter interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the Real-time counter interrupt; read: Real-time counter interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRPEND21</name>
-              <description>no description available</description>
-              <bitOffset>21</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: RTC seconds interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the RTC seconds interrupt; read: RTC seconds interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRPEND22</name>
-              <description>no description available</description>
-              <bitOffset>22</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Periodic Interrupt Timer interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the Periodic Interrupt Timer interrupt; read: Periodic Interrupt Timer interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRPEND23</name>
-              <description>no description available</description>
-              <bitOffset>23</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Reserved iv 39 interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the Reserved iv 39 interrupt; read: Reserved iv 39 interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRPEND24</name>
-              <description>no description available</description>
-              <bitOffset>24</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Reserved iv 40 interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the Reserved iv 40 interrupt; read: Reserved iv 40 interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRPEND25</name>
-              <description>no description available</description>
-              <bitOffset>25</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Digital to Analog Converter interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the Digital to Analog Converter interrupt; read: Digital to Analog Converter interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRPEND26</name>
-              <description>no description available</description>
-              <bitOffset>26</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Touch Sensing Input interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the Touch Sensing Input interrupt; read: Touch Sensing Input interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRPEND27</name>
-              <description>no description available</description>
-              <bitOffset>27</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Multipurpose Clock Generator interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the Multipurpose Clock Generator interrupt; read: Multipurpose Clock Generator interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRPEND28</name>
-              <description>no description available</description>
-              <bitOffset>28</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Low-Power Timer interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the Low-Power Timer interrupt; read: Low-Power Timer interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRPEND29</name>
-              <description>no description available</description>
-              <bitOffset>29</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: Reserved iv 45 interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the Reserved iv 45 interrupt; read: Reserved iv 45 interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRPEND30</name>
-              <description>no description available</description>
-              <bitOffset>30</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: PORTA Pin detect interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the PORTA Pin detect interrupt; read: PORTA Pin detect interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CLRPEND31</name>
-              <description>no description available</description>
-              <bitOffset>31</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>0</name>
-                  <description>write: no effect; read: PORTD Pin detect interrupt is not pending</description>
-                  <value>#0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1</name>
-                  <description>write: removes pending state from the PORTD Pin detect interrupt; read: PORTD Pin detect interrupt is pending</description>
-                  <value>#1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>NVIC_IPR0</name>
-          <description>Interrupt Priority Register 0</description>
-          <addressOffset>0x300</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>PRI_0</name>
-              <description>Priority of the DMA channel 0 transfer complete interrupt</description>
-              <bitOffset>6</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_1</name>
-              <description>Priority of the DMA channel 1 transfer complete interrupt</description>
-              <bitOffset>14</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_2</name>
-              <description>Priority of the DMA channel 2 transfer complete interrupt</description>
-              <bitOffset>22</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_3</name>
-              <description>Priority of the DMA channel 3 transfer complete interrupt</description>
-              <bitOffset>30</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>NVIC_IPR1</name>
-          <description>Interrupt Priority Register 1</description>
-          <addressOffset>0x304</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>PRI_4</name>
-              <description>Priority of the Reserved iv 20 interrupt</description>
-              <bitOffset>6</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_5</name>
-              <description>Priority of the Command complete and read collision interrupt</description>
-              <bitOffset>14</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_6</name>
-              <description>Priority of the Low-voltage detect, low-voltage warning interrupt</description>
-              <bitOffset>22</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_7</name>
-              <description>Priority of the Low Leakage Wakeup interrupt</description>
-              <bitOffset>30</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>NVIC_IPR2</name>
-          <description>Interrupt Priority Register 2</description>
-          <addressOffset>0x308</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>PRI_8</name>
-              <description>Priority of the Inter-Integrated Circuit 0 interrupt</description>
-              <bitOffset>6</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_9</name>
-              <description>Priority of the Inter-Integrated Circuit 1 interrupt</description>
-              <bitOffset>14</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_10</name>
-              <description>Priority of the Serial Peripheral Interface 0 interrupt</description>
-              <bitOffset>22</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_11</name>
-              <description>Priority of the Serial Peripheral Interface 1 interrupt</description>
-              <bitOffset>30</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>NVIC_IPR3</name>
-          <description>Interrupt Priority Register 3</description>
-          <addressOffset>0x30C</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>PRI_12</name>
-              <description>Priority of the UART0 status and error interrupt</description>
-              <bitOffset>6</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_13</name>
-              <description>Priority of the UART1 status and error interrupt</description>
-              <bitOffset>14</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_14</name>
-              <description>Priority of the UART2 status and error interrupt</description>
-              <bitOffset>22</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_15</name>
-              <description>Priority of the Analog-to-Digital Converter 0 interrupt</description>
-              <bitOffset>30</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>NVIC_IPR4</name>
-          <description>Interrupt Priority Register 4</description>
-          <addressOffset>0x310</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>PRI_16</name>
-              <description>Priority of the Comparator 0 interrupt</description>
-              <bitOffset>6</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_17</name>
-              <description>Priority of the Timer/PWM module 0 interrupt</description>
-              <bitOffset>14</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_18</name>
-              <description>Priority of the Timer/PWM module 1 interrupt</description>
-              <bitOffset>22</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_19</name>
-              <description>Priority of the Timer/PWM module 2 interrupt</description>
-              <bitOffset>30</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>NVIC_IPR5</name>
-          <description>Interrupt Priority Register 5</description>
-          <addressOffset>0x314</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>PRI_20</name>
-              <description>Priority of the Real-time counter interrupt</description>
-              <bitOffset>6</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_21</name>
-              <description>Priority of the RTC seconds interrupt</description>
-              <bitOffset>14</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_22</name>
-              <description>Priority of the Periodic Interrupt Timer interrupt</description>
-              <bitOffset>22</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_23</name>
-              <description>Priority of the Reserved iv 39 interrupt</description>
-              <bitOffset>30</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>NVIC_IPR6</name>
-          <description>Interrupt Priority Register 6</description>
-          <addressOffset>0x318</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>PRI_24</name>
-              <description>Priority of the Reserved iv 40 interrupt</description>
-              <bitOffset>6</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_25</name>
-              <description>Priority of the Digital to Analog Converter interrupt</description>
-              <bitOffset>14</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_26</name>
-              <description>Priority of the Touch Sensing Input interrupt</description>
-              <bitOffset>22</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_27</name>
-              <description>Priority of the Multipurpose Clock Generator interrupt</description>
-              <bitOffset>30</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>NVIC_IPR7</name>
-          <description>Interrupt Priority Register 7</description>
-          <addressOffset>0x31C</addressOffset>
-          <size>32</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0xFFFFFFFF</resetMask>
-          <fields>
-            <field>
-              <name>PRI_28</name>
-              <description>Priority of the Low-Power Timer interrupt</description>
-              <bitOffset>6</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_29</name>
-              <description>Priority of the Reserved iv 45 interrupt</description>
-              <bitOffset>14</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_30</name>
-              <description>Priority of the PORTA Pin detect interrupt</description>
-              <bitOffset>22</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PRI_31</name>
-              <description>Priority of the PORTD Pin detect interrupt</description>
-              <bitOffset>30</bitOffset>
-              <bitWidth>2</bitWidth>
-              <access>read-write</access>
-            </field>
-          </fields>
-        </register>
-      </registers>
-    </peripheral>
-    <peripheral>
       <name>MTB</name>
       <description>Micro Trace Buffer</description>
       <prependToName>MTB_</prependToName>
@@ -26741,7 +23234,7 @@
           <fields>
             <field>
               <name>WRAP</name>
-              <description>no description available</description>
+              <description>This bit is set to 1 automatically when the POINTER value wraps as determined by the MTB_MASTER[MASK] bit in the MASTER Trace Control Register</description>
               <bitOffset>2</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
@@ -26826,14 +23319,14 @@
           <fields>
             <field>
               <name>AUTOSTOP</name>
-              <description>no description available</description>
+              <description>If this bit is 1 and WATERMARK is equal to MTB_POSITION[POINTER], then the MTB_MASTER[EN] bit is automatically set to 0</description>
               <bitOffset>0</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>AUTOHALT</name>
-              <description>no description available</description>
+              <description>If this bit is 1 and WATERMARK is equal to MTB_POSITION[POINTER], then the MTB_MASTER[HALTREQ] bit is automatically set to 1</description>
               <bitOffset>1</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
@@ -26858,7 +23351,7 @@
           <fields>
             <field>
               <name>BASEADDR</name>
-              <description>no description available</description>
+              <description>This value is defined with a hardwired signal and the expression: 0x2000_0000 - (RAM_Size/4)</description>
               <bitOffset>0</bitOffset>
               <bitWidth>32</bitWidth>
               <access>read-only</access>
@@ -26876,7 +23369,7 @@
           <fields>
             <field>
               <name>MODECTRL</name>
-              <description>no description available</description>
+              <description>Hardwired to 0x0000_0000</description>
               <bitOffset>0</bitOffset>
               <bitWidth>32</bitWidth>
               <access>read-only</access>
@@ -26894,7 +23387,7 @@
           <fields>
             <field>
               <name>TAGSET</name>
-              <description>no description available</description>
+              <description>Hardwired to 0x0000_0000</description>
               <bitOffset>0</bitOffset>
               <bitWidth>32</bitWidth>
               <access>read-only</access>
@@ -26912,7 +23405,7 @@
           <fields>
             <field>
               <name>TAGCLEAR</name>
-              <description>no description available</description>
+              <description>Hardwired to 0x0000_0000</description>
               <bitOffset>0</bitOffset>
               <bitWidth>32</bitWidth>
               <access>read-only</access>
@@ -26930,7 +23423,7 @@
           <fields>
             <field>
               <name>LOCKACCESS</name>
-              <description>no description available</description>
+              <description>Hardwired to 0x0000_0000</description>
               <bitOffset>0</bitOffset>
               <bitWidth>32</bitWidth>
               <access>read-only</access>
@@ -26948,7 +23441,7 @@
           <fields>
             <field>
               <name>LOCKSTAT</name>
-              <description>no description available</description>
+              <description>Hardwired to 0x0000_0000</description>
               <bitOffset>0</bitOffset>
               <bitWidth>32</bitWidth>
               <access>read-only</access>
@@ -26966,28 +23459,28 @@
           <fields>
             <field>
               <name>BIT0</name>
-              <description>no description available</description>
+              <description>Connected to DBGEN.</description>
               <bitOffset>0</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
             </field>
             <field>
               <name>BIT1</name>
-              <description>no description available</description>
+              <description>Hardwired to 1.</description>
               <bitOffset>1</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
             </field>
             <field>
               <name>BIT2</name>
-              <description>no description available</description>
+              <description>Connected to NIDEN or DBGEN signal.</description>
               <bitOffset>2</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
             </field>
             <field>
               <name>BIT3</name>
-              <description>no description available</description>
+              <description>Hardwired to 1.</description>
               <bitOffset>3</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
@@ -27005,7 +23498,7 @@
           <fields>
             <field>
               <name>DEVICEARCH</name>
-              <description>no description available</description>
+              <description>Hardwired to 0x4770_0A31.</description>
               <bitOffset>0</bitOffset>
               <bitWidth>32</bitWidth>
               <access>read-only</access>
@@ -27023,7 +23516,7 @@
           <fields>
             <field>
               <name>DEVICECFG</name>
-              <description>no description available</description>
+              <description>Hardwired to 0x0000_0000.</description>
               <bitOffset>0</bitOffset>
               <bitWidth>32</bitWidth>
               <access>read-only</access>
@@ -27041,7 +23534,7 @@
           <fields>
             <field>
               <name>DEVICETYPID</name>
-              <description>no description available</description>
+              <description>Hardwired to 0x0000_0031.</description>
               <bitOffset>0</bitOffset>
               <bitWidth>32</bitWidth>
               <access>read-only</access>
@@ -27062,7 +23555,7 @@
           <fields>
             <field>
               <name>PERIPHID</name>
-              <description>no description available</description>
+              <description>Peripheral ID4 is hardwired to 0x0000_0004; ID0 to 0x0000_0032; ID1 to 0x0000_00B9; ID2 to 0x0000_000B; and all the others to 0x0000_0000</description>
               <bitOffset>0</bitOffset>
               <bitWidth>32</bitWidth>
               <access>read-only</access>
@@ -27420,7 +23913,7 @@
           <fields>
             <field>
               <name>DEVICECFG</name>
-              <description>no description available</description>
+              <description>Hardwired to 0x0000_0000.</description>
               <bitOffset>0</bitOffset>
               <bitWidth>32</bitWidth>
               <access>read-only</access>
@@ -27438,7 +23931,7 @@
           <fields>
             <field>
               <name>DEVICETYPID</name>
-              <description>no description available</description>
+              <description>Hardwired to 0x0000_0004.</description>
               <bitOffset>0</bitOffset>
               <bitWidth>32</bitWidth>
               <access>read-only</access>
@@ -27459,7 +23952,7 @@
           <fields>
             <field>
               <name>PERIPHID</name>
-              <description>no description available</description>
+              <description>Peripheral ID1 is hardwired to 0x0000_00E0; ID2 to 0x0000_0008; and all the others to 0x0000_0000.</description>
               <bitOffset>0</bitOffset>
               <bitWidth>32</bitWidth>
               <access>read-only</access>
@@ -27532,7 +24025,7 @@
           <fields>
             <field>
               <name>MARK</name>
-              <description>no description available</description>
+              <description>Hardwired to 0x0000_0000</description>
               <bitOffset>0</bitOffset>
               <bitWidth>32</bitWidth>
               <access>read-only</access>
@@ -27550,7 +24043,7 @@
           <fields>
             <field>
               <name>SYSACCESS</name>
-              <description>no description available</description>
+              <description>Hardwired to 0x0000_0001</description>
               <bitOffset>0</bitOffset>
               <bitWidth>32</bitWidth>
               <access>read-only</access>
@@ -27571,7 +24064,7 @@
           <fields>
             <field>
               <name>PERIPHID</name>
-              <description>no description available</description>
+              <description>Peripheral ID1 is hardwired to 0x0000_00E0; ID2 to 0x0000_0008; and all the others to 0x0000_0000.</description>
               <bitOffset>0</bitOffset>
               <bitWidth>32</bitWidth>
               <access>read-only</access>
