@@ -127,7 +127,7 @@ class SVDEnumeratedValue(SVDElement):
 
 
 class SVDField(SVDElement):
-    def __init__(self, name, derived_from, description, bit_offset, bit_width, access, enumerated_values, modified_write_values, read_action):
+    def __init__(self, name, derived_from, description, bit_offset, bit_width, access, enumerated_values):
         SVDElement.__init__(self)
         self.name = name
         self.derived_from = derived_from
@@ -136,8 +136,6 @@ class SVDField(SVDElement):
         self.bit_width = bit_width
         self.access = access
         self.enumerated_values = enumerated_values
-        self.modified_write_values = modified_write_values
-        self.read_action = read_action
 
     def __getattr__(self, attr):
         return self._lookup_possibly_derived_attribute(attr)
