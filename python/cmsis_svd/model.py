@@ -20,7 +20,7 @@ import six
 NOT_PRESENT = object()
 TO_DICT_SKIP_KEYS = {"_register_arrays", "parent"}
 REGISTER_PROPERTY_KEYS = {"size", "access", "protection", "reset_value", "reset_mask"}
-LIST_TYPE_KEYS = {"registers", "fields", "peripherals", "interrupts"}
+LIST_TYPE_KEYS = {"register_arrays", "registers", "fields", "peripherals", "interrupts"}
 
 
 def _check_type(value, expected_type):
