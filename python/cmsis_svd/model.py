@@ -337,8 +337,9 @@ class SVDPeripheral(SVDElement):
         regs = []
         for reg in self._lookup_possibly_derived_attribute('registers'):
             regs.append(reg)
-        for arr in self._lookup_possibly_derived_attribute('register_arrays'):
-            regs.extend(arr.registers)
+        if self._lookup_possibly_derived_attribute('register_arrays'):
+            for arr in self._lookup_possibly_derived_attribute('register_arrays'):
+                regs.extend(arr.registers)
         return regs
 
     def get_derived_from(self):
