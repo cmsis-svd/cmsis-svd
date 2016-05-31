@@ -20,7 +20,7 @@ import six
 NOT_PRESENT = object()
 TO_DICT_SKIP_KEYS = {"_register_arrays", "parent"}
 REGISTER_PROPERTY_KEYS = {"size", "access", "protection", "reset_value", "reset_mask"}
-LIST_TYPE_KEYS = {"registers", "fields", "peripherals", "interrupts"}
+LIST_TYPE_KEYS = {"register_arrays", "registers", "fields", "peripherals", "interrupts"}
 
 
 def _check_type(value, expected_type):
@@ -337,9 +337,8 @@ class SVDPeripheral(SVDElement):
         regs = []
         for reg in self._lookup_possibly_derived_attribute('registers'):
             regs.append(reg)
-        if self._lookup_possibly_derived_attribute('register_arrays'):
-            for arr in self._lookup_possibly_derived_attribute('register_arrays'):
-                regs.extend(arr.registers)
+        for arr in self._lookup_possibly_derived_attribute('register_arrays'):
+            regs.extend(arr.registers)
         return regs
 
     def get_derived_from(self):
