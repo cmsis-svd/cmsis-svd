@@ -101,6 +101,8 @@ class SVDParser(object):
         for enumerated_value_node in field_node.findall("./enumeratedValues/enumeratedValue"):
             enumerated_values.append(self._parse_enumerated_value(enumerated_value_node))
 
+        modified_write_values=_get_text(field_node, 'modifiedWriteValues')
+        read_action=_get_text(field_node, 'readAction')
         bit_range = _get_text(field_node, 'bitRange')
         bit_offset = _get_int(field_node, 'bitOffset')
         bit_width = _get_int(field_node, 'bitWidth')
@@ -122,6 +124,8 @@ class SVDParser(object):
             bit_width=bit_width,
             access=_get_text(field_node, 'access'),
             enumerated_values=enumerated_values or None,
+            modified_write_values=modified_write_values,
+            read_action=read_action
         )
 
     def _parse_registers(self, register_node):
