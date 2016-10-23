@@ -257,3 +257,15 @@ class TestParserNordic(unittest.TestCase):
                           for r in radio.register_arrays],
                          [('DAB[%s]', 8, [0, 1, 2, 3, 4, 5, 6, 7], 4),
                           ('DAP[%s]', 8, [0, 1, 2, 3, 4, 5, 6, 7], 4)])
+
+
+class TestParserPackagedData(unittest.TestCase):
+    def test_packaged_xml(self):
+        parser = SVDParser.for_packaged_svd('Freescale', 'MK20D7.svd')
+        device = parser.get_device()
+        self.assertTrue(len(device.peripherals) > 0)
+
+    def test_packaged_xml_for_mcu(self):
+        parser = SVDParser.for_mcu('STM32F103C8T6')
+        device = parser.get_device()
+        self.assertTrue(len(device.peripherals) > 0)
