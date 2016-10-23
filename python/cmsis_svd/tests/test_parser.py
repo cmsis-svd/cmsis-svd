@@ -267,5 +267,6 @@ class TestParserPackagedData(unittest.TestCase):
 
     def test_packaged_xml_for_mcu(self):
         parser = SVDParser.for_mcu('STM32F103C8T6')
+        self.assertTrue(parser is not None)
         device = parser.get_device()
         self.assertTrue(len(device.peripherals) > 0)
