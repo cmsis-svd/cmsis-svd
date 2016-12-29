@@ -34,7 +34,7 @@ K20 SVD is packaged with the library, I can do the following:
 ```python
 from cmsis_svd.parser import SVDParser
 
-parser = SVDParser.for_packaged_svd('Freescale', 'MK20D7.xml')
+parser = SVDParser.for_packaged_svd('Freescale', 'MK20D7.svd')
 for peripheral in parser.get_device().peripherals:
     print("%s @ 0x%08x" % (peripheral.name, peripheral.base_address))
 ```
@@ -68,7 +68,7 @@ it you can do something like the following:
 ```python
 from cmsis_svd.parser import SVDParser
 
-parser = SVDParser.for_packaged_svd('Freescale', 'MK20D7.xml')
+parser = SVDParser.for_packaged_svd('Freescale', 'MK20D7.svd')
 svd_dict = parser.get_device().to_dict()
 print(json.dumps(svd_dict, sort_key=True,
                  indent=4, separators=(',', ': ')))
