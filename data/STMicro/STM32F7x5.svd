@@ -2,9 +2,9 @@
 <device schemaVersion="1.1"
 xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
 xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
-  <name>STM32F7x5</name>
+  <name>STM32F7x5_v1r1</name>
   <version>1.0</version>
-  <description>STM32F7x5</description>
+  <description>STM32F7x5_v1r1</description>
   <!--Bus Interface Properties-->
   <!--Cortex-M3 is byte addressable-->
   <addressUnitBits>8</addressUnitBits>
@@ -40539,49 +40539,32 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <description>Flash access control register</description>
           <addressOffset>0x0</addressOffset>
           <size>0x20</size>
+          <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
               <name>LATENCY</name>
               <description>Latency</description>
               <bitOffset>0</bitOffset>
-              <bitWidth>3</bitWidth>
-              <access>read-write</access>
+              <bitWidth>4</bitWidth>
             </field>
             <field>
               <name>PRFTEN</name>
               <description>Prefetch enable</description>
               <bitOffset>8</bitOffset>
               <bitWidth>1</bitWidth>
-              <access>read-write</access>
             </field>
             <field>
-              <name>ICEN</name>
-              <description>Instruction cache enable</description>
+              <name>ARTEN</name>
+              <description>ART Accelerator Enable</description>
               <bitOffset>9</bitOffset>
               <bitWidth>1</bitWidth>
-              <access>read-write</access>
             </field>
             <field>
-              <name>DCEN</name>
-              <description>Data cache enable</description>
-              <bitOffset>10</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>ICRST</name>
-              <description>Instruction cache reset</description>
+              <name>ARTRST</name>
+              <description>ART Accelerator reset</description>
               <bitOffset>11</bitOffset>
               <bitWidth>1</bitWidth>
-              <access>write-only</access>
-            </field>
-            <field>
-              <name>DCRST</name>
-              <description>Data cache reset</description>
-              <bitOffset>12</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
             </field>
           </fields>
         </register>
@@ -40665,8 +40648,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <access>read-write</access>
             </field>
             <field>
-              <name>PGSERR</name>
-              <description>Programming sequence error</description>
+              <name>ERSERR</name>
+              <description>Erase Sequence Error</description>
               <bitOffset>7</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
@@ -40782,22 +40765,26 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitWidth>2</bitWidth>
             </field>
             <field>
-              <name>WDG_SW</name>
-              <description>WDG_SW User option bytes</description>
+              <name>WWDG_SW</name>
+              <description>User option bytes</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IWDG_SW</name>
+              <description>User option bytes</description>
               <bitOffset>5</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>nRST_STOP</name>
-              <description>nRST_STOP User option
-              bytes</description>
+              <description>User option bytes</description>
               <bitOffset>6</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>nRST_STDBY</name>
-              <description>nRST_STDBY User option
-              bytes</description>
+              <description>User option bytes</description>
               <bitOffset>7</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
@@ -40813,6 +40800,33 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitOffset>16</bitOffset>
               <bitWidth>12</bitWidth>
             </field>
+            <field>
+              <name>nDBOOT</name>
+              <description>Dual Boot mode (valid only when
+              nDBANK=0)</description>
+              <bitOffset>28</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>nDBANK</name>
+              <description>Not dual bank mode</description>
+              <bitOffset>29</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IWDG_STDBY</name>
+              <description>Independent watchdog counter freeze in
+              standby mode</description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>IWDG_STOP</name>
+              <description>Independent watchdog counter freeze in
+              Stop mode</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
           </fields>
         </register>
         <register>
@@ -40826,10 +40840,18 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <resetValue>0x0FFF0000</resetValue>
           <fields>
             <field>
-              <name>nWRP</name>
-              <description>Not write protect</description>
+              <name>BOOT_ADD0</name>
+              <description>Boot base address when Boot pin
+              =0</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>16</bitWidth>
+            </field>
+            <field>
+              <name>BOOT_ADD1</name>
+              <description>Boot base address when Boot pin
+              =1</description>
               <bitOffset>16</bitOffset>
-              <bitWidth>12</bitWidth>
+              <bitWidth>16</bitWidth>
             </field>
           </fields>
         </register>
@@ -50840,7 +50862,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <displayName>OTG_FS_GRXSTSR_Host</displayName>
           <description>OTG_FS Receive status debug read(Host
           mode)</description>
-          <alternateRegister>OTG_FS_GRXSTSR_Device</alternateRegister>
+          <alternateRegister>
+          OTG_FS_GRXSTSR_Device</alternateRegister>
           <addressOffset>0x1C</addressOffset>
           <size>0x20</size>
           <access>read-only</access>
@@ -50920,7 +50943,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <displayName>OTG_FS_HNPTXFSIZ_Host</displayName>
           <description>OTG_FS Host non-periodic transmit FIFO size
           register</description>
-          <alternateRegister>OTG_FS_DIEPTXF0_Device</alternateRegister>
+          <alternateRegister>
+          OTG_FS_DIEPTXF0_Device</alternateRegister>
           <addressOffset>0x28</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
@@ -51218,7 +51242,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <displayName>OTG_FS_GRXSTSP_Host</displayName>
           <description>OTG status read and pop register (Host
           mode)</description>
-          <alternateRegister>OTG_FS_GRXSTSP_Device</alternateRegister>
+          <alternateRegister>
+          OTG_FS_GRXSTSP_Device</alternateRegister>
           <addressOffset>0x20</addressOffset>
           <size>0x20</size>
           <access>read-only</access>
@@ -58421,7 +58446,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <displayName>OTG_HS_DIEPTXF0_Device</displayName>
           <description>Endpoint 0 transmit FIFO size (peripheral
           mode)</description>
-          <alternateRegister>OTG_HS_HNPTXFSIZ_Host</alternateRegister>
+          <alternateRegister>
+          OTG_HS_HNPTXFSIZ_Host</alternateRegister>
           <addressOffset>0x28</addressOffset>
           <size>32</size>
           <access>read-write</access>
@@ -58777,7 +58803,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <displayName>OTG_HS_GRXSTSR_Device</displayName>
           <description>OTG_HS Receive status debug read register
           (peripheral mode mode)</description>
-          <alternateRegister>OTG_HS_GRXSTSR_Host</alternateRegister>
+          <alternateRegister>
+          OTG_HS_GRXSTSR_Host</alternateRegister>
           <addressOffset>0x1C</addressOffset>
           <size>32</size>
           <access>read-only</access>
@@ -58820,7 +58847,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <displayName>OTG_HS_GRXSTSP_Device</displayName>
           <description>OTG_HS status read and pop register
           (peripheral mode)</description>
-          <alternateRegister>OTG_HS_GRXSTSP_Host</alternateRegister>
+          <alternateRegister>
+          OTG_HS_GRXSTSP_Host</alternateRegister>
           <addressOffset>0x20</addressOffset>
           <size>32</size>
           <access>read-only</access>
