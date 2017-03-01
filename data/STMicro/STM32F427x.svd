@@ -3,7 +3,7 @@
 xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
 xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
   <name>STM32F427x</name>
-  <version>1.0</version>
+  <version>1.1</version>
   <description>STM32F427x</description>
   <!--Bus Interface Properties-->
   <!--Cortex-M4 is byte addressable-->
@@ -25,6 +25,11 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
+      <interrupt>
+        <name>FPU</name>
+        <description>FPU interrupt</description>
+        <value>81</value>
+      </interrupt>
       <registers>
         <register>
           <name>CR</name>
@@ -5451,6 +5456,82 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               VCO</description>
               <bitOffset>6</bitOffset>
               <bitWidth>9</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PLLSAICFGR</name>
+          <displayName>PLLSAICFGR</displayName>
+          <description>PLLSAICFGR</description>
+          <addressOffset>0x88</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x24003000</resetValue>
+          <fields>
+            <field>
+              <name>PLLSAIN</name>
+              <description>PLLSAIN</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>9</bitWidth>
+            </field>
+            <field>
+              <name>PLLSAIQ</name>
+              <description>PLLSAIN</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>PLLSAIR</name>
+              <description>PLLSAIN</description>
+              <bitOffset>28</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DCKCFGR</name>
+          <displayName>DCKCFGR</displayName>
+          <description>DCKCFGR</description>
+          <addressOffset>0x8C</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>PLLI2SDIVQ</name>
+              <description>PLLI2SDIVQ</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+            <field>
+              <name>PLLSAIDIVQ</name>
+              <description>PLLSAIDIVQ</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+            <field>
+              <name>PLLSAIDIVR</name>
+              <description>PLLSAIDIVR</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>SAI1ASRC</name>
+              <description>SAI1ASRC</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>SAI1BSRC</name>
+              <description>SAI1BSRC</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>TIMPRE</name>
+              <description>TIMPRE</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>1</bitWidth>
             </field>
           </fields>
         </register>
@@ -12397,6 +12478,752 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
       </registers>
+    </peripheral>
+    <peripheral>
+      <name>PWR</name>
+      <description>Power control</description>
+      <groupName>PWR</groupName>
+      <baseAddress>0x40007000</baseAddress>
+      <addressBlock>
+        <offset>0x0</offset>
+        <size>0x400</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <interrupt>
+        <name>PVD</name>
+        <description>PVD through EXTI line detection
+        interrupt</description>
+        <value>1</value>
+      </interrupt>
+      <registers>
+        <register>
+          <name>CR</name>
+          <displayName>CR</displayName>
+          <description>power control register</description>
+          <addressOffset>0x0</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x0000C000</resetValue>
+          <fields>
+            <field>
+              <name>LPDS</name>
+              <description>Low-power deep sleep</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>PDDS</name>
+              <description>Power down deepsleep</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CWUF</name>
+              <description>Clear wakeup flag</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CSBF</name>
+              <description>Clear standby flag</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>PVDE</name>
+              <description>Power voltage detector
+              enable</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>PLS</name>
+              <description>PVD level selection</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>DBP</name>
+              <description>Disable backup domain write
+              protection</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>FPDS</name>
+              <description>Flash power down in Stop
+              mode</description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>LPUDS</name>
+              <description>Low-Power Regulator Low Voltage in
+              deepsleep</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MRUDS</name>
+              <description>Main regulator low voltage in deepsleep
+              mode</description>
+              <bitOffset>11</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>VOS</name>
+              <description>Regulator voltage scaling output
+              selection</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>ODEN</name>
+              <description>Over-drive enable</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ODSWEN</name>
+              <description>Over-drive switching
+              enabled</description>
+              <bitOffset>17</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>UDEN</name>
+              <description>Under-drive enable in stop
+              mode</description>
+              <bitOffset>18</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CSR</name>
+          <displayName>CSR</displayName>
+          <description>power control/status register</description>
+          <addressOffset>0x4</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>WUF</name>
+              <description>Wakeup flag</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>SBF</name>
+              <description>Standby flag</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>PVDO</name>
+              <description>PVD output</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>BRR</name>
+              <description>Backup regulator ready</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>EWUP</name>
+              <description>Enable WKUP pin</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>BRE</name>
+              <description>Backup regulator enable</description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>VOSRDY</name>
+              <description>
+                Regulator voltage scaling output
+                selection ready bit
+              </description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>ODRDY</name>
+              <description>Over-drive mode ready</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>ODSWRDY</name>
+              <description>Over-drive mode switching
+              ready</description>
+              <bitOffset>17</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>UDRDY</name>
+              <description>Under-drive ready flag</description>
+              <bitOffset>18</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    <peripheral>
+      <name>I2C3</name>
+      <description>Inter-integrated circuit</description>
+      <groupName>I2C</groupName>
+      <baseAddress>0x40005C00</baseAddress>
+      <addressBlock>
+        <offset>0x0</offset>
+        <size>0x400</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <interrupt>
+        <name>I2C3_EV</name>
+        <description>I2C3 event interrupt</description>
+        <value>72</value>
+      </interrupt>
+      <interrupt>
+        <name>I2C3_ER</name>
+        <description>I2C3 error interrupt</description>
+        <value>73</value>
+      </interrupt>
+      <registers>
+        <register>
+          <name>CR1</name>
+          <displayName>CR1</displayName>
+          <description>Control register 1</description>
+          <addressOffset>0x0</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x0000</resetValue>
+          <fields>
+            <field>
+              <name>SWRST</name>
+              <description>Software reset</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ALERT</name>
+              <description>SMBus alert</description>
+              <bitOffset>13</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>PEC</name>
+              <description>Packet error checking</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>POS</name>
+              <description>Acknowledge/PEC Position (for data
+              reception)</description>
+              <bitOffset>11</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ACK</name>
+              <description>Acknowledge enable</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>STOP</name>
+              <description>Stop generation</description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>START</name>
+              <description>Start generation</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>NOSTRETCH</name>
+              <description>Clock stretching disable (Slave
+              mode)</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ENGC</name>
+              <description>General call enable</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ENPEC</name>
+              <description>PEC enable</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ENARP</name>
+              <description>ARP enable</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SMBTYPE</name>
+              <description>SMBus type</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SMBUS</name>
+              <description>SMBus mode</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>PE</name>
+              <description>Peripheral enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CR2</name>
+          <displayName>CR2</displayName>
+          <description>Control register 2</description>
+          <addressOffset>0x4</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x0000</resetValue>
+          <fields>
+            <field>
+              <name>LAST</name>
+              <description>DMA last transfer</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DMAEN</name>
+              <description>DMA requests enable</description>
+              <bitOffset>11</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ITBUFEN</name>
+              <description>Buffer interrupt enable</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ITEVTEN</name>
+              <description>Event interrupt enable</description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ITERREN</name>
+              <description>Error interrupt enable</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>FREQ</name>
+              <description>Peripheral clock frequency</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>6</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>OAR1</name>
+          <displayName>OAR1</displayName>
+          <description>Own address register 1</description>
+          <addressOffset>0x8</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x0000</resetValue>
+          <fields>
+            <field>
+              <name>ADDMODE</name>
+              <description>Addressing mode (slave
+              mode)</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ADD10</name>
+              <description>Interface address</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>ADD7</name>
+              <description>Interface address</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>7</bitWidth>
+            </field>
+            <field>
+              <name>ADD0</name>
+              <description>Interface address</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>OAR2</name>
+          <displayName>OAR2</displayName>
+          <description>Own address register 2</description>
+          <addressOffset>0xC</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x0000</resetValue>
+          <fields>
+            <field>
+              <name>ADD2</name>
+              <description>Interface address</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>7</bitWidth>
+            </field>
+            <field>
+              <name>ENDUAL</name>
+              <description>Dual addressing mode
+              enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DR</name>
+          <displayName>DR</displayName>
+          <description>Data register</description>
+          <addressOffset>0x10</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x0000</resetValue>
+          <fields>
+            <field>
+              <name>DR</name>
+              <description>8-bit data register</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SR1</name>
+          <displayName>SR1</displayName>
+          <description>Status register 1</description>
+          <addressOffset>0x14</addressOffset>
+          <size>0x20</size>
+          <resetValue>0x0000</resetValue>
+          <fields>
+            <field>
+              <name>SMBALERT</name>
+              <description>SMBus alert</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>TIMEOUT</name>
+              <description>Timeout or Tlow error</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>PECERR</name>
+              <description>PEC Error in reception</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>OVR</name>
+              <description>Overrun/Underrun</description>
+              <bitOffset>11</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>AF</name>
+              <description>Acknowledge failure</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>ARLO</name>
+              <description>Arbitration lost (master
+              mode)</description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>BERR</name>
+              <description>Bus error</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>TxE</name>
+              <description>Data register empty
+              (transmitters)</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>RxNE</name>
+              <description>Data register not empty
+              (receivers)</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>STOPF</name>
+              <description>Stop detection (slave
+              mode)</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>ADD10</name>
+              <description>10-bit header sent (Master
+              mode)</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>BTF</name>
+              <description>Byte transfer finished</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>ADDR</name>
+              <description>Address sent (master mode)/matched
+              (slave mode)</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>SB</name>
+              <description>Start bit (Master mode)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SR2</name>
+          <displayName>SR2</displayName>
+          <description>Status register 2</description>
+          <addressOffset>0x18</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <resetValue>0x0000</resetValue>
+          <fields>
+            <field>
+              <name>PEC</name>
+              <description>acket error checking
+              register</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+            <field>
+              <name>DUALF</name>
+              <description>Dual flag (Slave mode)</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SMBHOST</name>
+              <description>SMBus host header (Slave
+              mode)</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SMBDEFAULT</name>
+              <description>SMBus device default address (Slave
+              mode)</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>GENCALL</name>
+              <description>General call address (Slave
+              mode)</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TRA</name>
+              <description>Transmitter/receiver</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>BUSY</name>
+              <description>Bus busy</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MSL</name>
+              <description>Master/slave</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CCR</name>
+          <displayName>CCR</displayName>
+          <description>Clock control register</description>
+          <addressOffset>0x1C</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x0000</resetValue>
+          <fields>
+            <field>
+              <name>F_S</name>
+              <description>I2C master mode selection</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DUTY</name>
+              <description>Fast mode duty cycle</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CCR</name>
+              <description>Clock control register in Fast/Standard
+              mode (Master mode)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>12</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TRISE</name>
+          <displayName>TRISE</displayName>
+          <description>TRISE register</description>
+          <addressOffset>0x20</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x0002</resetValue>
+          <fields>
+            <field>
+              <name>TRISE</name>
+              <description>Maximum rise time in Fast/Standard mode
+              (Master mode)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>6</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>FLTR</name>
+          <displayName>FLTR</displayName>
+          <description>I2C FLTR register</description>
+          <addressOffset>0x24</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x0000</resetValue>
+          <fields>
+            <field>
+              <name>DNF</name>
+              <description>Digital noise filter</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>ANOFF</name>
+              <description>Analog noise filter OFF</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    <peripheral derivedFrom="I2C3">
+      <name>I2C2</name>
+      <baseAddress>0x40005800</baseAddress>
+      <interrupt>
+        <name>I2C2_EV</name>
+        <description>I2C2 event interrupt</description>
+        <value>33</value>
+      </interrupt>
+      <interrupt>
+        <name>I2C2_EV</name>
+        <description>I2C2 event interrupt</description>
+        <value>33</value>
+      </interrupt>
+      <interrupt>
+        <name>I2C2_ER</name>
+        <description>I2C2 error interrupt</description>
+        <value>34</value>
+      </interrupt>
+      <interrupt>
+        <name>I2C2_ER</name>
+        <description>I2C2 error interrupt</description>
+        <value>34</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="I2C3">
+      <name>I2C1</name>
+      <baseAddress>0x40005400</baseAddress>
+      <interrupt>
+        <name>I2C1_EV</name>
+        <description>I2C1 event interrupt</description>
+        <value>31</value>
+      </interrupt>
+      <interrupt>
+        <name>I2C1_EV</name>
+        <description>I2C1 event interrupt</description>
+        <value>31</value>
+      </interrupt>
+      <interrupt>
+        <name>I2C1_ER</name>
+        <description>I2C1 error interrupt</description>
+        <value>32</value>
+      </interrupt>
+      <interrupt>
+        <name>I2C1_ER</name>
+        <description>I2C1 error interrupt</description>
+        <value>32</value>
+      </interrupt>
     </peripheral>
     <peripheral>
       <name>IWDG</name>
@@ -54038,780 +54865,846 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
       </registers>
     </peripheral>
     <peripheral>
-      <name>I2C3</name>
-      <description>Inter-integrated circuit</description>
-      <groupName>I2C</groupName>
-      <baseAddress>0x40005C00</baseAddress>
+      <name>SAI</name>
+      <description>Serial audio interface</description>
+      <groupName>SAI</groupName>
+      <baseAddress>0x40015800</baseAddress>
       <addressBlock>
         <offset>0x0</offset>
         <size>0x400</size>
         <usage>registers</usage>
       </addressBlock>
       <interrupt>
-        <name>I2C3_EV</name>
-        <description>I2C3 event interrupt</description>
-        <value>72</value>
-      </interrupt>
-      <interrupt>
-        <name>I2C3_ER</name>
-        <description>I2C3 error interrupt</description>
-        <value>73</value>
+        <name>SAI1</name>
+        <description>SAI1 global interrupt</description>
+        <value>87</value>
       </interrupt>
       <registers>
         <register>
-          <name>CR1</name>
-          <displayName>CR1</displayName>
-          <description>Control register 1</description>
-          <addressOffset>0x0</addressOffset>
+          <name>BCR1</name>
+          <displayName>BCR1</displayName>
+          <description>BConfiguration register 1</description>
+          <addressOffset>0x24</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
-          <resetValue>0x0000</resetValue>
+          <resetValue>0x00000040</resetValue>
           <fields>
             <field>
-              <name>SWRST</name>
-              <description>Software reset</description>
-              <bitOffset>15</bitOffset>
-              <bitWidth>1</bitWidth>
+              <name>MCJDIV</name>
+              <description>Master clock divider</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>4</bitWidth>
             </field>
             <field>
-              <name>ALERT</name>
-              <description>SMBus alert</description>
-              <bitOffset>13</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>PEC</name>
-              <description>Packet error checking</description>
-              <bitOffset>12</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>POS</name>
-              <description>Acknowledge/PEC Position (for data
-              reception)</description>
-              <bitOffset>11</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>ACK</name>
-              <description>Acknowledge enable</description>
-              <bitOffset>10</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>STOP</name>
-              <description>Stop generation</description>
-              <bitOffset>9</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>START</name>
-              <description>Start generation</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>NOSTRETCH</name>
-              <description>Clock stretching disable (Slave
-              mode)</description>
-              <bitOffset>7</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>ENGC</name>
-              <description>General call enable</description>
-              <bitOffset>6</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>ENPEC</name>
-              <description>PEC enable</description>
-              <bitOffset>5</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>ENARP</name>
-              <description>ARP enable</description>
-              <bitOffset>4</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>SMBTYPE</name>
-              <description>SMBus type</description>
-              <bitOffset>3</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>SMBUS</name>
-              <description>SMBus mode</description>
-              <bitOffset>1</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>PE</name>
-              <description>Peripheral enable</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>CR2</name>
-          <displayName>CR2</displayName>
-          <description>Control register 2</description>
-          <addressOffset>0x4</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x0000</resetValue>
-          <fields>
-            <field>
-              <name>LAST</name>
-              <description>DMA last transfer</description>
-              <bitOffset>12</bitOffset>
+              <name>NODIV</name>
+              <description>No divider</description>
+              <bitOffset>19</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>DMAEN</name>
-              <description>DMA requests enable</description>
-              <bitOffset>11</bitOffset>
+              <description>DMA enable</description>
+              <bitOffset>17</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
-              <name>ITBUFEN</name>
-              <description>Buffer interrupt enable</description>
+              <name>SAIBEN</name>
+              <description>Audio block B enable</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>OutDri</name>
+              <description>Output drive</description>
+              <bitOffset>13</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MONO</name>
+              <description>Mono mode</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SYNCEN</name>
+              <description>Synchronization enable</description>
               <bitOffset>10</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>ITEVTEN</name>
-              <description>Event interrupt enable</description>
-              <bitOffset>9</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>ITERREN</name>
-              <description>Error interrupt enable</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>FREQ</name>
-              <description>Peripheral clock frequency</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>6</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>OAR1</name>
-          <displayName>OAR1</displayName>
-          <description>Own address register 1</description>
-          <addressOffset>0x8</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x0000</resetValue>
-          <fields>
-            <field>
-              <name>ADDMODE</name>
-              <description>Addressing mode (slave
-              mode)</description>
-              <bitOffset>15</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>ADD10</name>
-              <description>Interface address</description>
-              <bitOffset>8</bitOffset>
               <bitWidth>2</bitWidth>
             </field>
             <field>
-              <name>ADD7</name>
-              <description>Interface address</description>
-              <bitOffset>1</bitOffset>
-              <bitWidth>7</bitWidth>
-            </field>
-            <field>
-              <name>ADD0</name>
-              <description>Interface address</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>OAR2</name>
-          <displayName>OAR2</displayName>
-          <description>Own address register 2</description>
-          <addressOffset>0xC</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x0000</resetValue>
-          <fields>
-            <field>
-              <name>ADD2</name>
-              <description>Interface address</description>
-              <bitOffset>1</bitOffset>
-              <bitWidth>7</bitWidth>
-            </field>
-            <field>
-              <name>ENDUAL</name>
-              <description>Dual addressing mode
-              enable</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>DR</name>
-          <displayName>DR</displayName>
-          <description>Data register</description>
-          <addressOffset>0x10</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x0000</resetValue>
-          <fields>
-            <field>
-              <name>DR</name>
-              <description>8-bit data register</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SR1</name>
-          <displayName>SR1</displayName>
-          <description>Status register 1</description>
-          <addressOffset>0x14</addressOffset>
-          <size>0x20</size>
-          <resetValue>0x0000</resetValue>
-          <fields>
-            <field>
-              <name>SMBALERT</name>
-              <description>SMBus alert</description>
-              <bitOffset>15</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>TIMEOUT</name>
-              <description>Timeout or Tlow error</description>
-              <bitOffset>14</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>PECERR</name>
-              <description>PEC Error in reception</description>
-              <bitOffset>12</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>OVR</name>
-              <description>Overrun/Underrun</description>
-              <bitOffset>11</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>AF</name>
-              <description>Acknowledge failure</description>
-              <bitOffset>10</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>ARLO</name>
-              <description>Arbitration lost (master
-              mode)</description>
+              <name>CKSTR</name>
+              <description>Clock strobing edge</description>
               <bitOffset>9</bitOffset>
               <bitWidth>1</bitWidth>
-              <access>read-write</access>
             </field>
             <field>
-              <name>BERR</name>
-              <description>Bus error</description>
+              <name>LSBFIRST</name>
+              <description>Least significant bit
+              first</description>
               <bitOffset>8</bitOffset>
               <bitWidth>1</bitWidth>
-              <access>read-write</access>
             </field>
             <field>
-              <name>TxE</name>
-              <description>Data register empty
-              (transmitters)</description>
-              <bitOffset>7</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>RxNE</name>
-              <description>Data register not empty
-              (receivers)</description>
-              <bitOffset>6</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>STOPF</name>
-              <description>Stop detection (slave
-              mode)</description>
-              <bitOffset>4</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>ADD10</name>
-              <description>10-bit header sent (Master
-              mode)</description>
-              <bitOffset>3</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>BTF</name>
-              <description>Byte transfer finished</description>
-              <bitOffset>2</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>ADDR</name>
-              <description>Address sent (master mode)/matched
-              (slave mode)</description>
-              <bitOffset>1</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>SB</name>
-              <description>Start bit (Master mode)</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-only</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SR2</name>
-          <displayName>SR2</displayName>
-          <description>Status register 2</description>
-          <addressOffset>0x18</addressOffset>
-          <size>0x20</size>
-          <access>read-only</access>
-          <resetValue>0x0000</resetValue>
-          <fields>
-            <field>
-              <name>PEC</name>
-              <description>acket error checking
-              register</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>8</bitWidth>
-            </field>
-            <field>
-              <name>DUALF</name>
-              <description>Dual flag (Slave mode)</description>
-              <bitOffset>7</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>SMBHOST</name>
-              <description>SMBus host header (Slave
-              mode)</description>
-              <bitOffset>6</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>SMBDEFAULT</name>
-              <description>SMBus device default address (Slave
-              mode)</description>
-              <bitOffset>5</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>GENCALL</name>
-              <description>General call address (Slave
-              mode)</description>
-              <bitOffset>4</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>TRA</name>
-              <description>Transmitter/receiver</description>
-              <bitOffset>2</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>BUSY</name>
-              <description>Bus busy</description>
-              <bitOffset>1</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>MSL</name>
-              <description>Master/slave</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>CCR</name>
-          <displayName>CCR</displayName>
-          <description>Clock control register</description>
-          <addressOffset>0x1C</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x0000</resetValue>
-          <fields>
-            <field>
-              <name>F_S</name>
-              <description>I2C master mode selection</description>
-              <bitOffset>15</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>DUTY</name>
-              <description>Fast mode duty cycle</description>
-              <bitOffset>14</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>CCR</name>
-              <description>Clock control register in Fast/Standard
-              mode (Master mode)</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>12</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TRISE</name>
-          <displayName>TRISE</displayName>
-          <description>TRISE register</description>
-          <addressOffset>0x20</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x0002</resetValue>
-          <fields>
-            <field>
-              <name>TRISE</name>
-              <description>Maximum rise time in Fast/Standard mode
-              (Master mode)</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>6</bitWidth>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>FLTR</name>
-          <displayName>FLTR</displayName>
-          <description>I2C FLTR register</description>
-          <addressOffset>0x24</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x0000</resetValue>
-          <fields>
-            <field>
-              <name>DNF</name>
-              <description>Digital noise filter</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>4</bitWidth>
-            </field>
-            <field>
-              <name>ANOFF</name>
-              <description>Analog noise filter OFF</description>
-              <bitOffset>4</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-          </fields>
-        </register>
-      </registers>
-    </peripheral>
-    <peripheral derivedFrom="I2C3">
-      <name>I2C2</name>
-      <baseAddress>0x40005800</baseAddress>
-      <interrupt>
-        <name>I2C2_EV</name>
-        <description>I2C2 event interrupt</description>
-        <value>33</value>
-      </interrupt>
-      <interrupt>
-        <name>I2C2_EV</name>
-        <description>I2C2 event interrupt</description>
-        <value>33</value>
-      </interrupt>
-      <interrupt>
-        <name>I2C2_ER</name>
-        <description>I2C2 error interrupt</description>
-        <value>34</value>
-      </interrupt>
-      <interrupt>
-        <name>I2C2_ER</name>
-        <description>I2C2 error interrupt</description>
-        <value>34</value>
-      </interrupt>
-    </peripheral>
-    <peripheral derivedFrom="I2C3">
-      <name>I2C1</name>
-      <baseAddress>0x40005400</baseAddress>
-      <interrupt>
-        <name>I2C1_EV</name>
-        <description>I2C1 event interrupt</description>
-        <value>31</value>
-      </interrupt>
-      <interrupt>
-        <name>I2C1_EV</name>
-        <description>I2C1 event interrupt</description>
-        <value>31</value>
-      </interrupt>
-      <interrupt>
-        <name>I2C1_ER</name>
-        <description>I2C1 error interrupt</description>
-        <value>32</value>
-      </interrupt>
-      <interrupt>
-        <name>I2C1_ER</name>
-        <description>I2C1 error interrupt</description>
-        <value>32</value>
-      </interrupt>
-    </peripheral>
-    <peripheral>
-      <name>PWR</name>
-      <description>Power control</description>
-      <groupName>PWR</groupName>
-      <baseAddress>0x40007000</baseAddress>
-      <addressBlock>
-        <offset>0x0</offset>
-        <size>0x400</size>
-        <usage>registers</usage>
-      </addressBlock>
-      <interrupt>
-        <name>PVD</name>
-        <description>PVD through EXTI line detection
-        interrupt</description>
-        <value>1</value>
-      </interrupt>
-      <interrupt>
-        <name>PVD</name>
-        <description>PVD through EXTI line detection
-        interrupt</description>
-        <value>1</value>
-      </interrupt>
-      <interrupt>
-        <name>PVD</name>
-        <description>PVD through EXTI line detection
-        interrupt</description>
-        <value>1</value>
-      </interrupt>
-      <interrupt>
-        <name>PVD</name>
-        <description>PVD through EXTI line detection
-        interrupt</description>
-        <value>1</value>
-      </interrupt>
-      <interrupt>
-        <name>PVD</name>
-        <description>PVD through EXTI line detection
-        interrupt</description>
-        <value>1</value>
-      </interrupt>
-      <interrupt>
-        <name>PVD</name>
-        <description>PVD through EXTI line detection
-        interrupt</description>
-        <value>1</value>
-      </interrupt>
-      <interrupt>
-        <name>PVD</name>
-        <description>PVD through EXTI line detection
-        interrupt</description>
-        <value>1</value>
-      </interrupt>
-      <registers>
-        <register>
-          <name>CR</name>
-          <displayName>CR</displayName>
-          <description>power control register</description>
-          <addressOffset>0x0</addressOffset>
-          <size>0x20</size>
-          <access>read-write</access>
-          <resetValue>0x0000C000</resetValue>
-          <fields>
-            <field>
-              <name>LPDS</name>
-              <description>Low-power deep sleep</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>PDDS</name>
-              <description>Power down deepsleep</description>
-              <bitOffset>1</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>CWUF</name>
-              <description>Clear wakeup flag</description>
-              <bitOffset>2</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>CSBF</name>
-              <description>Clear standby flag</description>
-              <bitOffset>3</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>PVDE</name>
-              <description>Power voltage detector
-              enable</description>
-              <bitOffset>4</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>PLS</name>
-              <description>PVD level selection</description>
+              <name>DS</name>
+              <description>Data size</description>
               <bitOffset>5</bitOffset>
               <bitWidth>3</bitWidth>
             </field>
             <field>
-              <name>DBP</name>
-              <description>Disable backup domain write
-              protection</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>FPDS</name>
-              <description>Flash power down in Stop
-              mode</description>
-              <bitOffset>9</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>LPLVDS</name>
-              <description>Low-Power Regulator Low Voltage in
-              deepsleep</description>
-              <bitOffset>10</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>MRLVDS</name>
-              <description>Main regulator low voltage in deepsleep
-              mode</description>
-              <bitOffset>11</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>VOS</name>
-              <description>Regulator voltage scaling output
-              selection</description>
-              <bitOffset>14</bitOffset>
+              <name>PRTCFG</name>
+              <description>Protocol configuration</description>
+              <bitOffset>2</bitOffset>
               <bitWidth>2</bitWidth>
             </field>
             <field>
-              <name>ODEN</name>
-              <description>Over-drive enable</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>ODSWEN</name>
-              <description>Over-drive switching
-              enabled</description>
-              <bitOffset>17</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>UDEN</name>
-              <description>Under-drive enable in stop
-              mode</description>
-              <bitOffset>18</bitOffset>
+              <name>MODE</name>
+              <description>Audio block mode</description>
+              <bitOffset>0</bitOffset>
               <bitWidth>2</bitWidth>
             </field>
           </fields>
         </register>
         <register>
-          <name>CSR</name>
-          <displayName>CSR</displayName>
-          <description>power control/status register</description>
-          <addressOffset>0x4</addressOffset>
+          <name>BCR2</name>
+          <displayName>BCR2</displayName>
+          <description>BConfiguration register 2</description>
+          <addressOffset>0x28</addressOffset>
           <size>0x20</size>
+          <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>WUF</name>
-              <description>Wakeup flag</description>
-              <bitOffset>0</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-only</access>
+              <name>COMP</name>
+              <description>Companding mode</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>2</bitWidth>
             </field>
             <field>
-              <name>SBF</name>
-              <description>Standby flag</description>
-              <bitOffset>1</bitOffset>
+              <name>CPL</name>
+              <description>Complement bit</description>
+              <bitOffset>13</bitOffset>
               <bitWidth>1</bitWidth>
-              <access>read-only</access>
             </field>
             <field>
-              <name>PVDO</name>
-              <description>PVD output</description>
-              <bitOffset>2</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-only</access>
+              <name>MUTECN</name>
+              <description>Mute counter</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>6</bitWidth>
             </field>
             <field>
-              <name>BRR</name>
-              <description>Backup regulator ready</description>
+              <name>MUTEVAL</name>
+              <description>Mute value</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MUTE</name>
+              <description>Mute</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TRIS</name>
+              <description>Tristate management on data
+              line</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>FFLUS</name>
+              <description>FIFO flush</description>
               <bitOffset>3</bitOffset>
               <bitWidth>1</bitWidth>
-              <access>read-only</access>
             </field>
             <field>
-              <name>EWUP</name>
-              <description>Enable WKUP pin</description>
-              <bitOffset>8</bitOffset>
+              <name>FTH</name>
+              <description>FIFO threshold</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>BFRCR</name>
+          <displayName>BFRCR</displayName>
+          <description>BFRCR</description>
+          <addressOffset>0x2C</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000007</resetValue>
+          <fields>
+            <field>
+              <name>FSOFF</name>
+              <description>Frame synchronization
+              offset</description>
+              <bitOffset>18</bitOffset>
               <bitWidth>1</bitWidth>
-              <access>read-write</access>
             </field>
             <field>
-              <name>BRE</name>
-              <description>Backup regulator enable</description>
-              <bitOffset>9</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>VOSRDY</name>
-              <description>Regulator voltage scaling output
-              selection ready bit</description>
-              <bitOffset>14</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>ODRDY</name>
-              <description>Over-drive mode ready</description>
-              <bitOffset>16</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>ODSWRDY</name>
-              <description>Over-drive mode switching
-              ready</description>
+              <name>FSPOL</name>
+              <description>Frame synchronization
+              polarity</description>
               <bitOffset>17</bitOffset>
               <bitWidth>1</bitWidth>
-              <access>read-only</access>
             </field>
             <field>
-              <name>UDRDY</name>
-              <description>Under-drive ready flag</description>
-              <bitOffset>18</bitOffset>
+              <name>FSDEF</name>
+              <description>Frame synchronization
+              definition</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>FSALL</name>
+              <description>Frame synchronization active level
+              length</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>7</bitWidth>
+            </field>
+            <field>
+              <name>FRL</name>
+              <description>Frame length</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>BSLOTR</name>
+          <displayName>BSLOTR</displayName>
+          <description>BSlot register</description>
+          <addressOffset>0x30</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SLOTEN</name>
+              <description>Slot enable</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>16</bitWidth>
+            </field>
+            <field>
+              <name>NBSLOT</name>
+              <description>Number of slots in an audio
+              frame</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>SLOTSZ</name>
+              <description>Slot size</description>
+              <bitOffset>6</bitOffset>
               <bitWidth>2</bitWidth>
-              <access>read-write</access>
+            </field>
+            <field>
+              <name>FBOFF</name>
+              <description>First bit offset</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>BIM</name>
+          <displayName>BIM</displayName>
+          <description>BInterrupt mask register2</description>
+          <addressOffset>0x34</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>LFSDETIE</name>
+              <description>Late frame synchronization detection
+              interrupt enable</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>AFSDETIE</name>
+              <description>Anticipated frame synchronization
+              detection interrupt enable</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CNRDYIE</name>
+              <description>Codec not ready interrupt
+              enable</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>FREQIE</name>
+              <description>FIFO request interrupt
+              enable</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>WCKCFG</name>
+              <description>Wrong clock configuration interrupt
+              enable</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MUTEDET</name>
+              <description>Mute detection interrupt
+              enable</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>OVRUDRIE</name>
+              <description>Overrun/underrun interrupt
+              enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>BSR</name>
+          <displayName>BSR</displayName>
+          <description>BStatus register</description>
+          <addressOffset>0x38</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>FLVL</name>
+              <description>FIFO level threshold</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>LFSDET</name>
+              <description>Late frame synchronization
+              detection</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>AFSDET</name>
+              <description>Anticipated frame synchronization
+              detection</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CNRDY</name>
+              <description>Codec not ready</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>FREQ</name>
+              <description>FIFO request</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>WCKCFG</name>
+              <description>Wrong clock configuration
+              flag</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MUTEDET</name>
+              <description>Mute detection</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>OVRUDR</name>
+              <description>Overrun / underrun</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>BCLRFR</name>
+          <displayName>BCLRFR</displayName>
+          <description>BClear flag register</description>
+          <addressOffset>0x3C</addressOffset>
+          <size>0x20</size>
+          <access>write-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>LFSDET</name>
+              <description>Clear late frame synchronization
+              detection flag</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CAFSDET</name>
+              <description>Clear anticipated frame synchronization
+              detection flag</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CNRDY</name>
+              <description>Clear codec not ready flag</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>WCKCFG</name>
+              <description>Clear wrong clock configuration
+              flag</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MUTEDET</name>
+              <description>Mute detection flag</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>OVRUDR</name>
+              <description>Clear overrun / underrun</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>BDR</name>
+          <displayName>BDR</displayName>
+          <description>BData register</description>
+          <addressOffset>0x40</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DATA</name>
+              <description>Data</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ACR1</name>
+          <displayName>ACR1</displayName>
+          <description>AConfiguration register 1</description>
+          <addressOffset>0x4</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000040</resetValue>
+          <fields>
+            <field>
+              <name>MCJDIV</name>
+              <description>Master clock divider</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>NODIV</name>
+              <description>No divider</description>
+              <bitOffset>19</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DMAEN</name>
+              <description>DMA enable</description>
+              <bitOffset>17</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SAIAEN</name>
+              <description>Audio block A enable</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>OutDri</name>
+              <description>Output drive</description>
+              <bitOffset>13</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MONO</name>
+              <description>Mono mode</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SYNCEN</name>
+              <description>Synchronization enable</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>CKSTR</name>
+              <description>Clock strobing edge</description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>LSBFIRST</name>
+              <description>Least significant bit
+              first</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DS</name>
+              <description>Data size</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>PRTCFG</name>
+              <description>Protocol configuration</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>MODE</name>
+              <description>Audio block mode</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ACR2</name>
+          <displayName>ACR2</displayName>
+          <description>AConfiguration register 2</description>
+          <addressOffset>0x8</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>COMP</name>
+              <description>Companding mode</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>CPL</name>
+              <description>Complement bit</description>
+              <bitOffset>13</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MUTECN</name>
+              <description>Mute counter</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>6</bitWidth>
+            </field>
+            <field>
+              <name>MUTEVAL</name>
+              <description>Mute value</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MUTE</name>
+              <description>Mute</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TRIS</name>
+              <description>Tristate management on data
+              line</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>FFLUS</name>
+              <description>FIFO flush</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>FTH</name>
+              <description>FIFO threshold</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>AFRCR</name>
+          <displayName>AFRCR</displayName>
+          <description>AFRCR</description>
+          <addressOffset>0xC</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000007</resetValue>
+          <fields>
+            <field>
+              <name>FSOFF</name>
+              <description>Frame synchronization
+              offset</description>
+              <bitOffset>18</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>FSPOL</name>
+              <description>Frame synchronization
+              polarity</description>
+              <bitOffset>17</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>FSDEF</name>
+              <description>Frame synchronization
+              definition</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>FSALL</name>
+              <description>Frame synchronization active level
+              length</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>7</bitWidth>
+            </field>
+            <field>
+              <name>FRL</name>
+              <description>Frame length</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ASLOTR</name>
+          <displayName>ASLOTR</displayName>
+          <description>ASlot register</description>
+          <addressOffset>0x10</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SLOTEN</name>
+              <description>Slot enable</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>16</bitWidth>
+            </field>
+            <field>
+              <name>NBSLOT</name>
+              <description>Number of slots in an audio
+              frame</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>SLOTSZ</name>
+              <description>Slot size</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>FBOFF</name>
+              <description>First bit offset</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>AIM</name>
+          <displayName>AIM</displayName>
+          <description>AInterrupt mask register2</description>
+          <addressOffset>0x14</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>LFSDET</name>
+              <description>Late frame synchronization detection
+              interrupt enable</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>AFSDETIE</name>
+              <description>Anticipated frame synchronization
+              detection interrupt enable</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CNRDYIE</name>
+              <description>Codec not ready interrupt
+              enable</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>FREQIE</name>
+              <description>FIFO request interrupt
+              enable</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>WCKCFG</name>
+              <description>Wrong clock configuration interrupt
+              enable</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MUTEDET</name>
+              <description>Mute detection interrupt
+              enable</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>OVRUDRIE</name>
+              <description>Overrun/underrun interrupt
+              enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ASR</name>
+          <displayName>ASR</displayName>
+          <description>AStatus register</description>
+          <addressOffset>0x18</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>FLVL</name>
+              <description>FIFO level threshold</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>LFSDET</name>
+              <description>Late frame synchronization
+              detection</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>AFSDET</name>
+              <description>Anticipated frame synchronization
+              detection</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CNRDY</name>
+              <description>Codec not ready</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>FREQ</name>
+              <description>FIFO request</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>WCKCFG</name>
+              <description>Wrong clock configuration flag. This bit
+              is read only.</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MUTEDET</name>
+              <description>Mute detection</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>OVRUDR</name>
+              <description>Overrun / underrun</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ACLRFR</name>
+          <displayName>ACLRFR</displayName>
+          <description>AClear flag register</description>
+          <addressOffset>0x1C</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>LFSDET</name>
+              <description>Clear late frame synchronization
+              detection flag</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CAFSDET</name>
+              <description>Clear anticipated frame synchronization
+              detection flag.</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CNRDY</name>
+              <description>Clear codec not ready flag</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>WCKCFG</name>
+              <description>Clear wrong clock configuration
+              flag</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>MUTEDET</name>
+              <description>Mute detection flag</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>OVRUDR</name>
+              <description>Clear overrun / underrun</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ADR</name>
+          <displayName>ADR</displayName>
+          <description>AData register</description>
+          <addressOffset>0x20</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DATA</name>
+              <description>Data</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
             </field>
           </fields>
         </register>
