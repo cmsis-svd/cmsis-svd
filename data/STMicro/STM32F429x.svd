@@ -26,6 +26,11 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <usage>registers</usage>
       </addressBlock>
       <interrupt>
+        <name>FPU</name>
+        <description>FPU interrupt</description>
+        <value>81</value>
+      </interrupt>
+      <interrupt>
         <name>RNG</name>
         <description>Rng global interrupt</description>
         <value>80</value>
@@ -7625,7 +7630,84 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
             </field>
           </fields>
         </register>
-      </registers>
+        <register>
+          <name>PLLSAICFGR</name>
+          <displayName>PLLSAICFGR</displayName>
+          <description>PLLSAICFGR</description>
+          <addressOffset>0x88</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x24003000</resetValue>
+          <fields>
+            <field>
+              <name>PLLSAIN</name>
+              <description>PLLSAIN</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>9</bitWidth>
+            </field>
+            <field>
+              <name>PLLSAIQ</name>
+              <description>PLLSAIN</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>4</bitWidth>
+            </field>
+            <field>
+              <name>PLLSAIR</name>
+              <description>PLLSAIN</description>
+              <bitOffset>28</bitOffset>
+              <bitWidth>3</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DCKCFGR</name>
+          <displayName>DCKCFGR</displayName>
+          <description>DCKCFGR</description>
+          <addressOffset>0x8C</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>PLLI2SDIVQ</name>
+              <description>PLLI2SDIVQ</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+            <field>
+              <name>PLLSAIDIVQ</name>
+              <description>PLLSAIDIVQ</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+            <field>
+              <name>PLLSAIDIVR</name>
+              <description>PLLSAIDIVR</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>SAI1ASRC</name>
+              <description>SAI1ASRC</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>SAI1BSRC</name>
+              <description>SAI1BSRC</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>TIMPRE</name>
+              <description>TIMPRE</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+    </registers>
     </peripheral>
     <peripheral>
       <name>GPIOK</name>
@@ -54748,7 +54830,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <description>Horizontal Synchronization Width (in
               units of pixel clock period)</description>
               <bitOffset>16</bitOffset>
-              <bitWidth>10</bitWidth>
+              <bitWidth>12</bitWidth>
             </field>
             <field>
               <name>VSH</name>
@@ -54774,7 +54856,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <description>Accumulated Horizontal back porch (in
               units of pixel clock period)</description>
               <bitOffset>16</bitOffset>
-              <bitWidth>10</bitWidth>
+              <bitWidth>12</bitWidth>
             </field>
             <field>
               <name>AVBP</name>
@@ -54796,10 +54878,10 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>AAV</name>
-              <description>AAV</description>
+              <name>AAW</name>
+              <description>Accumulated Active Width (in units of pixel clock period)</description>
               <bitOffset>16</bitOffset>
-              <bitWidth>10</bitWidth>
+              <bitWidth>12</bitWidth>
             </field>
             <field>
               <name>AAH</name>
@@ -54825,7 +54907,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <description>Total Width (in units of pixel clock
               period)</description>
               <bitOffset>16</bitOffset>
-              <bitWidth>10</bitWidth>
+              <bitWidth>12</bitWidth>
             </field>
             <field>
               <name>TOTALH</name>
@@ -57306,48 +57388,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         interrupt</description>
         <value>1</value>
       </interrupt>
-      <interrupt>
-        <name>PVD</name>
-        <description>PVD through EXTI line detection
-        interrupt</description>
-        <value>1</value>
-      </interrupt>
-      <interrupt>
-        <name>PVD</name>
-        <description>PVD through EXTI line detection
-        interrupt</description>
-        <value>1</value>
-      </interrupt>
-      <interrupt>
-        <name>PVD</name>
-        <description>PVD through EXTI line detection
-        interrupt</description>
-        <value>1</value>
-      </interrupt>
-      <interrupt>
-        <name>PVD</name>
-        <description>PVD through EXTI line detection
-        interrupt</description>
-        <value>1</value>
-      </interrupt>
-      <interrupt>
-        <name>PVD</name>
-        <description>PVD through EXTI line detection
-        interrupt</description>
-        <value>1</value>
-      </interrupt>
-      <interrupt>
-        <name>PVD</name>
-        <description>PVD through EXTI line detection
-        interrupt</description>
-        <value>1</value>
-      </interrupt>
-      <interrupt>
-        <name>PVD</name>
-        <description>PVD through EXTI line detection
-        interrupt</description>
-        <value>1</value>
-      </interrupt>
       <registers>
         <register>
           <name>CR</name>
@@ -57410,17 +57450,23 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitWidth>1</bitWidth>
             </field>
             <field>
-              <name>LPLVDS</name>
+              <name>LPUDS</name>
               <description>Low-Power Regulator Low Voltage in
               deepsleep</description>
               <bitOffset>10</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
-              <name>MRLVDS</name>
+              <name>MRUDS</name>
               <description>Main regulator low voltage in deepsleep
               mode</description>
               <bitOffset>11</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ADCDC1</name>
+              <description>ADCDC1</description>
+              <bitOffset>13</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
