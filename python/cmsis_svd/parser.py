@@ -15,59 +15,71 @@
 #
 from xml.etree import ElementTree as ET
 
-import six
-
-from cmsis_svd.model import SVDDevice, SVDRegisterArray
-from cmsis_svd.model import SVDPeripheral
-from cmsis_svd.model import SVDInterrupt
-from cmsis_svd.model import SVDAddressBlock
-from cmsis_svd.model import SVDRegister
-from cmsis_svd.model import SVDField
-from cmsis_svd.model import SVDEnumeratedValue
-from cmsis_svd.model import SVDCpu
+from cmsis_svd.model import *
 import pkg_resources
 import re
+from contextlib import contextmanager
 
+def camelize(s):
+    first, *rest = s.split('_')
+    return ''.join([first, *(e.title() for e in rest)])
 
-def _get_text(node, tag, default=None):
+def _get_text(node, tag, de=None):
     """Get the text for the provided tag from the provided node"""
-    try:
-        return node.find(tag).text
-    except AttributeError:
-        return default
+    elem = node.find(tag) 
+    if elem is None and de is not None:
+        elem = de.find(tag)
+    if elem is None:
+        return None
+    return re.sub('\s+', ' ', elem.text).strip()
+
+def _get_int(node, tag, de=None):
+    text_value = _get_text(node, tag, de)
+    if text_value is None:
+        return None
+    text_value = text_value.strip().lower()
+    if text_value.startswith('0x'):
+        return int(text_value[2:], 16)  # hexadecimal
+    elif text_value.startswith('#'):
+        # TODO(posborne): Deal with strange #1xx case better
+        #
+        # Freescale will sometimes provide values that look like this:
+        #   #1xx
+        # In this case, there are a number of values which all mean the
+        # same thing as the field is a "don't care".  For now, we just
+        # replace those bits with zeros.
+        text_value = text_value.replace('x', '0')[1:]
+        is_bin = all(x in '01' for x in text_value)
+        return int(text_value, 2) if is_bin else int(text_value)  # binary
+    elif text_value.lower() == 'true':
+        return 1
+    elif text_value.lower() == 'false':
+        return 0
+    else:
+        return int(text_value) # decimal
+
+def _get_flag(node, tag, de=None):
+    val = _get_int(node, tag, de)
+    return None if val is None else bool(val)
+
+@contextmanager
+def _node_access(node, parent):
+    dv = parent._elements.get(_get_text(node, 'derivedFrom')) if parent else None
+    de = None if dv is None else dv.node
+    d = {}
+    def register(accessor):
+        def call(tag, default=None):
+            val = accessor(node, camelize(tag), de)
+            if val is None:
+                val = default
+            v = d[tag] = val
+            return v
+        return call
+    yield register(_get_text), register(_get_int), register(_get_flag), d
 
 
-def _get_int(node, tag, default=None):
-    text_value = _get_text(node, tag, default)
-    try:
-        if text_value != default:
-            text_value = text_value.strip().lower()
-            if text_value.startswith('0x'):
-                return int(text_value[2:], 16)  # hexadecimal
-            elif text_value.startswith('#'):
-                # TODO(posborne): Deal with strange #1xx case better
-                #
-                # Freescale will sometimes provide values that look like this:
-                #   #1xx
-                # In this case, there are a number of values which all mean the
-                # same thing as the field is a "don't care".  For now, we just
-                # replace those bits with zeros.
-                text_value = text_value.replace('x', '0')[1:]
-                is_bin = all(x in '01' for x in text_value)
-                return int(text_value, 2) if is_bin else int(text_value)  # binary
-            elif text_value.startswith('true'):
-                return 1
-            elif text_value.startswith('false'):
-                return 0
-            else:
-                return int(text_value)  # decimal
-    except ValueError:
-        return default
-    return default
-
-
-class SVDParser(object):
-    """The SVDParser is responsible for mapping the SVD XML to Python Objects"""
+class Parser(object):
+    """The Parser is responsible for mapping the SVD XML to Python Objects"""
 
     @classmethod
     def for_xml_file(cls, path, remove_reserved=False):
@@ -110,259 +122,211 @@ class SVDParser(object):
         self._tree = tree
         self._root = self._tree.getroot()
 
-    def _parse_enumerated_value(self, enumerated_value_node):
-        return SVDEnumeratedValue(
-            name=_get_text(enumerated_value_node, 'name'),
-            description=_get_text(enumerated_value_node, 'description'),
-            value=_get_int(enumerated_value_node, 'value'),
-            is_default=_get_int(enumerated_value_node, 'isDefault')
-        )
+    def _parse_enumerated_value(self, node, parent, path):
+        with _node_access(node, parent) as (text, num, flag, vals):
+            text('name', path)
+            text('description')
+            text('value')
+            flag('is_default')
+            return EnumeratedValue(node=node, parent=parent, **vals)
 
-    def _parse_field(self, field_node):
-        enumerated_values = []
-        for enumerated_value_node in field_node.findall("./enumeratedValues/enumeratedValue"):
-            enumerated_values.append(self._parse_enumerated_value(enumerated_value_node))
+    def _parse_field(self, node, parent, path):
+        with _node_access(node, parent) as (text, num, flag, vals):
+            name = text('name', path)
+            if self.remove_reserved and 'reserved' in name:
+                return
 
-        modified_write_values=_get_text(field_node, 'modifiedWriteValues')
-        read_action=_get_text(field_node, 'readAction')
-        bit_range = _get_text(field_node, 'bitRange')
-        bit_offset = _get_int(field_node, 'bitOffset')
-        bit_width = _get_int(field_node, 'bitWidth')
-        msb = _get_int(field_node, 'msb')
-        lsb = _get_int(field_node, 'lsb')
-        if bit_range is not None:
-            m = re.search('\[([0-9]+):([0-9]+)\]', bit_range)
-            bit_offset = int(m.group(2))
-            bit_width = 1 + (int(m.group(1)) - int(m.group(2)))
-        elif msb is not None:
-            bit_offset = lsb
-            bit_width = 1 + (msb - lsb)
+            bit_range = text('bit_range')
+            bit_offset = num('bit_offset')
+            bit_width = num('bit_width')
+            msb = num('msb')
+            lsb = num('lsb')
+            if bit_range is not None:
+                m = re.search('\[([0-9]+):([0-9]+)\]', bit_range)
+                vals['bit_offset'] = int(m.group(2))
+                vals['bit_width'] = 1 + (int(m.group(1)) - int(m.group(2)))
+            elif msb is not None:
+                vals['bit_offset'] = lsb
+                vals['bit_width'] = 1 + (msb - lsb)
 
-        return SVDField(
-            name=_get_text(field_node, 'name'),
-            derived_from=_get_text(field_node, 'derivedFrom'),
-            description=_get_text(field_node, 'description'),
-            bit_offset=bit_offset,
-            bit_width=bit_width,
-            access=_get_text(field_node, 'access'),
-            enumerated_values=enumerated_values or None,
-            modified_write_values=modified_write_values,
-            read_action=read_action,
-        )
+            text('description')
+            text('access'),
+            text('modified_write_values'),
+            text('read_action')
+            field = Field(node=node, parent=parent, **vals)
 
-    def _parse_registers(self, register_node):
-        fields = []
-        for field_node in register_node.findall('.//field'):
-            node = self._parse_field(field_node)
-            if self.remove_reserved or 'reserved' not in node.name.lower():
-                fields.append(node)
+            for i, vnode in enumerate(node.findall("./enumeratedValues/enumeratedValue")):
+                self._parse_enumerated_value(vnode, field, '{}.value{}'.format(name, i))
 
-        dim = _get_int(register_node, 'dim')
-        name = _get_text(register_node, 'name')
-        derived_from = _get_text(register_node, 'derivedFrom')
-        description = _get_text(register_node, 'description')
-        address_offset = _get_int(register_node, 'addressOffset')
-        size = _get_int(register_node, 'size')
-        access = _get_text(register_node, 'access')
-        protection = _get_text(register_node, 'protection')
-        reset_value = _get_int(register_node, 'resetValue')
-        reset_mask = _get_int(register_node, 'resetMask')
-        dim_increment = _get_int(register_node, 'dimIncrement')
-        dim_index_text = _get_text(register_node, 'dimIndex')
-        display_name = _get_text(register_node, 'displayName')
-        alternate_group = _get_text(register_node, 'alternateGroup')
-        modified_write_values = _get_text(register_node, 'modifiedWriteValues')
-        read_action = _get_text(register_node, 'readAction')
+            return field
 
-        if dim is None:
-            return SVDRegister(
-                name=name,
-                fields=fields,
-                derived_from=derived_from,
-                description=description,
-                address_offset=address_offset,
-                size=size,
-                access=access,
-                protection=protection,
-                reset_value=reset_value,
-                reset_mask=reset_mask,
-                display_name=display_name,
-                alternate_group=alternate_group,
-                modified_write_values=modified_write_values,
-                read_action=read_action,
-            )
-        else:
-            # the node represents a register array
-            if dim_index_text is None:
-                dim_indices = range(0, dim)  # some files omit dimIndex
-            elif ',' in dim_index_text:
-                dim_indices = dim_index_text.split(',')
-            elif '-' in dim_index_text:  # some files use <dimIndex>0-3</dimIndex> as an inclusive inclusive range
-                m = re.search(r'([0-9]+)-([0-9]+)', dim_index_text)
-                dim_indices = range(int(m.group(1)), int(m.group(2)) + 1)
+    def _parse_registers(self, node, parent, path):
+        with _node_access(node, parent) as (text, num, flag, vals):
+            dim = num('dim')
+            name = text('name', path)
+            text('description')
+            num('address_offset')
+            num('size', parent.size)
+            text('access', parent.access)
+            text('protection', parent.protection)
+            num('reset_value', parent.reset_value)
+            num('reset_mask', parent.reset_mask)
+            num('dim_increment')
+            dim_index_text = text('dim_index')
+            text('display_name')
+            text('alternate_group')
+            text('modified_write_values')
+            text('read_action')
+
+            if dim is None:
+                element = Register(node=node, parent=parent, **vals)
             else:
-                raise ValueError("Unexpected dim_index_text: %r" % dim_index_text)
+                # the node represents a register array
+                if dim_index_text is None:
+                    dim_indices = range(0, dim)  # some files omit dimIndex
+                elif ',' in dim_index_text:
+                    dim_indices = dim_index_text.split(',')
+                elif '-' in dim_index_text:  # some files use <dimIndex>0-3</dimIndex> as an inclusive inclusive range
+                    l, r = re.search(r'([0-9]+)-([0-9]+)', dim_index_text).groups()
+                    dim_indices = range(int(l), int(r)+1)
+                else:
+                    raise ValueError('Cannot parse dim_index_text "{}"'.format(dim_index_text))
 
-            # yield `SVDRegisterArray` (caller will differentiate on type)
-            return SVDRegisterArray(
-                name=name,
-                fields=fields,
-                derived_from=derived_from,
-                description=description,
-                address_offset=address_offset,
-                size=size,
-                access=access,
-                protection=protection,
-                reset_value=reset_value,
-                reset_mask=reset_mask,
-                display_name=display_name,
-                alternate_group=alternate_group,
-                modified_write_values=modified_write_values,
-                read_action=read_action,
-                dim=dim,
-                dim_indices=dim_indices,
-                dim_increment=dim_increment,
-            )
+                # return RegisterArray (caller will differentiate on type)
+                element = RegisterArray(node=node, parent=parent, dim_indices=list(dim_indices), **vals)
 
-    def _parse_address_block(self, address_block_node):
-        return SVDAddressBlock(
-            _get_int(address_block_node, 'offset'),
-            _get_int(address_block_node, 'size'),
-            _get_text(address_block_node, 'usage')
-        )
+            for i, field_node in enumerate(node.findall('.//field')):
+                node = self._parse_field(field_node, element, '{}.field{}'.format(name, i))
 
-    def _parse_interrupt(self, interrupt_node):
-        return SVDInterrupt(
-            name=_get_text(interrupt_node, 'name'),
-            value=_get_int(interrupt_node, 'value')
-        )
+            return element
 
-    def _parse_peripheral(self, peripheral_node):
-        # parse registers
-        registers = None if peripheral_node.find('registers') is None else []
-        register_arrays = None if peripheral_node.find('registers') is None else []
-        for register_node in peripheral_node.findall('./registers/register'):
-            reg = self._parse_registers(register_node)
-            if isinstance(reg, SVDRegisterArray):
-                register_arrays.append(reg)
-            else:
-                registers.append(reg)
+    def _parse_address_block(self, node, parent, path):
+        with _node_access(node, parent) as (text, num, flag, vals):
+            text('name', path)
+            num('offset')
+            num('size', parent.size)
+            text('usage')
+            return AddressBlock(node=node, parent=parent, **vals)
 
-        # parse all interrupts for the peripheral
-        interrupts = []
-        for interrupt_node in peripheral_node.findall('./interrupt'):
-            interrupts.append(self._parse_interrupt(interrupt_node))
-        interrupts = interrupts if interrupts else None
+    def _parse_interrupt(self, node, parent, path):
+        with _node_access(node, parent) as (text, num, flag, vals):
+            text('name', path)
+            num('value')
+            return Interrupt(node=node, parent=parent, **vals)
 
-        # parse address block if any
-        address_block_nodes = peripheral_node.findall('./addressBlock')
-        if address_block_nodes:
-            address_block = self._parse_address_block(address_block_nodes[0])
-        else:
-            address_block = None
-
-        return SVDPeripheral(
+    def _parse_peripheral(self, node, parent, path):
+        with _node_access(node, parent) as (text, num, flag, vals):
             # <name>identifierType</name>
             # <version>xs:string</version>
             # <description>xs:string</description>
-            name=_get_text(peripheral_node, 'name'),
-            version=_get_text(peripheral_node, 'version'),
-            derived_from=peripheral_node.get('derivedFrom'),
-            description=_get_text(peripheral_node, 'description'),
+            name = text('name', path)
+            text('version')
+            text('description')
 
             # <groupName>identifierType</groupName>
             # <prependToName>identifierType</prependToName>
             # <appendToName>identifierType</appendToName>
             # <disableCondition>xs:string</disableCondition>
             # <baseAddress>scaledNonNegativeInteger</baseAddress>
-            group_name=_get_text(peripheral_node, 'groupName'),
-            prepend_to_name=_get_text(peripheral_node, 'prependToName'),
-            append_to_name=_get_text(peripheral_node, 'appendToName'),
-            disable_condition=_get_text(peripheral_node, 'disableCondition'),
-            base_address=_get_int(peripheral_node, 'baseAddress'),
+            text('group_name')
+            text('prepend_to_name')
+            text('append_to_name')
+            text('disable_condition')
+            num('base_address')
 
             # <!-- registerPropertiesGroup -->
             # <size>scaledNonNegativeInteger</size>
             # <access>accessType</access>
             # <resetValue>scaledNonNegativeInteger</resetValue>
             # <resetMask>scaledNonNegativeInteger</resetMask>
-            size=_get_int(peripheral_node, "size"),
-            access=_get_text(peripheral_node, 'access'),
-            reset_value=_get_int(peripheral_node, "resetValue"),
-            reset_mask=_get_int(peripheral_node, "resetMask"),
+            num('size', parent.size)
+            text('access')
+            num('reset_value')
+            num('reset_mask')
 
+            # (not mentioned in docs -- applies to all registers)
+            text('protection')
+
+            peripheral = Peripheral(node=node, parent=parent, **vals)
+
+            # parse registers
+            # <registers>
+            #     ...
+            # </registers>
+            for i, rnode in enumerate(node.findall('./registers/register')):
+                reg = self._parse_registers(rnode, peripheral, '{}.reg{}'.format(name, i))
+
+            # parse all interrupts for the peripheral
+            # <interrupt>
+            #     <name>identifierType</name>
+            #     <value>scaledNonNegativeInteger</value>
+            # </interrupt>
+            for i, inode in enumerate(node.findall('./interrupt')):
+                self._parse_interrupt(inode, peripheral, '{}.int{}'.format(name, i))
+
+            # parse address block if any
             # <addressBlock>
             #     <offset>scaledNonNegativeInteger</offset>
             #     <size>scaledNonNegativeInteger</size>
             #     <usage>usageType</usage>
             #     <protection>protectionStringType</protection>
             # </addressBlock>
-            address_block=address_block,
+            bnodes = node.findall('./addressBlock')
+            if bnodes:
+                self._parse_address_block(bnodes[0], peripheral, '{}.address_block'.format(name))
 
-            # <interrupt>
-            #     <name>identifierType</name>
-            #     <value>scaledNonNegativeInteger</value>
-            # </interrupt>
-            interrupts=interrupts,
+            return peripheral
 
-            # <registers>
-            #     ...
-            # </registers>
-            register_arrays=register_arrays,
-            registers=registers,
+    def _parse_cpu(self, node, parent, path):
+        with _node_access(node, parent) as (text, num, flag, vals):
+            text('name', path)
+            text('revision')
+            text('endian')
+            flag('mpu_present')
+            flag('fpu_present')
+            num('fpu_dp')
+            flag('icache_present')
+            flag('dcache_present')
+            flag('itcm_present')
+            flag('dtcm_present')
+            flag('vtor_present')
+            num('nvic_prio_bits')
+            num('vendor_systick_config')
+            num('device_num_interrupts')
+            num('sau_num_regions')
+            text('sau_regions_config')
+            cpu = Cpu(node=node, parent=parent, **vals)
 
-            # (not mentioned in docs -- applies to all registers)
-            protection=_get_text(peripheral_node, 'protection'),
-        )
+    def _parse_device(self, node):
+        with _node_access(node, None) as (text, num, flag, vals):
+            text('vendor')
+            text('vendor_id')
+            name = text('name', 'device')
+            text('version')
+            text('description')
+            num('address_unit_bits')
+            num('width')
+            num('size', 32)
+            text('access')
+            text('protection')
+            num('reset_value')
+            num('reset_mask')
+            device = Device(node=node, parent=None, **vals)
 
-    def _parse_device(self, device_node):
-        peripherals = []
-        for peripheral_node in device_node.findall('.//peripheral'):
-            peripherals.append(self._parse_peripheral(peripheral_node))
-        cpu_node = device_node.find('./cpu')
-        cpu = SVDCpu(
-            name=_get_text(cpu_node, 'name'),
-            revision=_get_text(cpu_node, 'revision'),
-            endian=_get_text(cpu_node, 'endian'),
-            mpu_present=_get_int(cpu_node, 'mpuPresent'),
-            fpu_present=_get_int(cpu_node, 'fpuPresent'),
-            fpu_dp=_get_int(cpu_node, 'fpuDP'),
-            icache_present=_get_int(cpu_node, 'icachePresent'),
-            dcache_present=_get_int(cpu_node, 'dcachePresent'),
-            itcm_present=_get_int(cpu_node, 'itcmPresent'),
-            dtcm_present=_get_int(cpu_node, 'dtcmPresent'),
-            vtor_present=_get_int(cpu_node, 'vtorPresent'),
-            nvic_prio_bits=_get_int(cpu_node, 'nvicPrioBits'),
-            vendor_systick_config=_get_int(cpu_node, 'vendorSystickConfig'),
-            device_num_interrupts=_get_int(cpu_node, 'vendorSystickConfig'),
-            sau_num_regions=_get_int(cpu_node, 'vendorSystickConfig'),
-            sau_regions_config=_get_text(cpu_node, 'sauRegionsConfig')
-        )
+        cpu_node = node.find('./cpu')
+        if cpu_node:
+            self._parse_cpu(cpu_node, device, '{}.cpu'.format(name))
 
-        return SVDDevice(
-            vendor=_get_text(device_node, 'vendor'),
-            vendor_id=_get_text(device_node, 'vendorID'),
-            name=_get_text(device_node, 'name'),
-            version=_get_text(device_node, 'version'),
-            description=_get_text(device_node, 'description'),
-            cpu=cpu,
-            address_unit_bits=_get_int(device_node, 'addressUnitBits'),
-            width=_get_int(device_node, 'width'),
-            peripherals=peripherals,
-            size=_get_int(device_node, "size"),
-            access=_get_text(device_node, 'access'),
-            protection=_get_text(device_node, 'protection'),
-            reset_value=_get_int(device_node, "resetValue"),
-            reset_mask=_get_int(device_node, "resetMask")
-        )
+        for i, peripheral_node in enumerate(node.findall('.//peripheral')):
+            self._parse_peripheral(peripheral_node, device, '{}.per{}'.format(name, i))
 
-    def get_device(self):
+        return device
+
+    def parse(self):
         """Get the device described by this SVD"""
         return self._parse_device(self._root)
 
 
 def duplicate_array_of_registers(svdreg):  # expects a SVDRegister which is an array of registers
     assert (svdreg.dim == len(svdreg.dim_index))
-
-
 
