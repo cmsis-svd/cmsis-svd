@@ -237,6 +237,70 @@ class SVDRegisterArray(SVDElement):
         return 'reserved' in self.name.lower()
 
 
+class SVDRegisterCluster(SVDElement):
+    """Represent a register cluster in the tree"""
+
+    def __init__(self, name, derived_from, description, address_offset, size,
+                 alternate_cluster, header_struct_name,
+                 access, protection, reset_value, reset_mask, register,
+                 cluster):
+        SVDElement.__init__(self)
+
+        # When deriving a register, it is mandatory to specify at least the name, the description,
+        # and the addressOffset
+        self.derived_from = derived_from
+        self.name = name
+        self.description = description
+        self.address_offset = address_offset
+
+        self._alternate_cluster = alternate_cluster
+        self._header_struct_name = header_struct_name
+        self._size = size
+        self._access = access
+        self._protection = protection
+        self._reset_value = reset_value
+        self._reset_mask = reset_mask
+        self._register = register
+        self._cluster = cluster
+
+        # make parent association
+        for register in self._register:
+            register.parent = self
+        for cluster in self._cluster:
+            cluster.parent = self
+
+    def __getattr__(self, attr):
+        return self._lookup_possibly_derived_attribute(attr)
+
+    def update_register(self, reg, clu):
+        reg.name = "{}_{}".format(clu.name, reg.name)
+        reg.address_offset = clu.address_offset + reg.address_offset
+
+    @property
+    def registers(self):
+        for reg in self._register:
+            self.update_register(reg, self)
+            yield reg
+        for cluster in self._cluster:
+            for reg in cluster.register:
+                self.update_register(reg, cluster)
+                yield reg
+
+    def get_derived_from(self):
+        # TODO: add support for dot notation derivedFrom
+        if self.derived_from is None:
+            return None
+
+        for register in self.parent.registers:
+            if register.name == self.derived_from:
+                return register
+
+        raise KeyError("Unable to find derived_from: %r" % self.derived_from)
+
+    def is_reserved(self):
+        return 'reserved' in self.name.lower()
+
+
 class SVDRegister(SVDElement):
     def __init__(self, name, derived_from, description, address_offset, size, access, protection, reset_value, reset_mask,
                  fields, display_name, alternate_group, modified_write_values, read_action):
@@ -298,9 +362,12 @@ class SVDInterrupt(SVDElement):
 
 
 class SVDPeripheral(SVDElement):
-    def __init__(self, name, version, derived_from, description, prepend_to_name, base_address, address_block,
-                 interrupts, registers, register_arrays, size, access, protection, reset_value, reset_mask,
-                 group_name, append_to_name, disable_condition):
+    def __init__(self, name, version, derived_from, description,
+                 prepend_to_name, base_address, address_block,
+                 interrupts, registers, register_arrays, size, access,
+                 protection, reset_value, reset_mask,
+                 group_name, append_to_name, disable_condition,
+                 cluster):
         SVDElement.__init__(self)
 
         # items with underscore are potentially derived
@@ -322,6 +389,7 @@ class SVDPeripheral(SVDElement):
         self._group_name = group_name
         self._append_to_name = append_to_name
         self._disable_condition = disable_condition
+        self._cluster = cluster
 
         # make parent association for complex node types
         for i in _none_as_empty(self._interrupts):
@@ -339,6 +407,8 @@ class SVDPeripheral(SVDElement):
             regs.append(reg)
         for arr in self._lookup_possibly_derived_attribute('register_arrays'):
             regs.extend(arr.registers)
+        for cluster in self._lookup_possibly_derived_attribute('cluster'):
+            regs.extend(cluster.registers)
         return regs
 
     def get_derived_from(self):
