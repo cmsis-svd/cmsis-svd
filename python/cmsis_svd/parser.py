@@ -17,11 +17,12 @@ from xml.etree import ElementTree as ET
 
 import six
 
-from cmsis_svd.model import SVDDevice, SVDRegisterArray
+from cmsis_svd.model import SVDDevice
 from cmsis_svd.model import SVDPeripheral
 from cmsis_svd.model import SVDInterrupt
 from cmsis_svd.model import SVDAddressBlock
-from cmsis_svd.model import SVDRegister
+from cmsis_svd.model import SVDRegister, SVDRegisterArray
+from cmsis_svd.model import SVDRegisterCluster, SVDRegisterClusterArray
 from cmsis_svd.model import SVDField
 from cmsis_svd.model import SVDEnumeratedValue
 from cmsis_svd.model import SVDCpu
@@ -224,6 +225,76 @@ class SVDParser(object):
                 dim_increment=dim_increment,
             )
 
+    def _parse_cluster(self, cluster_node):
+        dim = _get_int(cluster_node, 'dim')
+        name = _get_text(cluster_node, 'name')
+        derived_from = _get_text(cluster_node, 'derivedFrom')
+        description = _get_text(cluster_node, 'description')
+        address_offset = _get_int(cluster_node, 'addressOffset')
+        size = _get_int(cluster_node, 'size')
+        access = _get_text(cluster_node, 'access')
+        protection = _get_text(cluster_node, 'protection')
+        reset_value = _get_int(cluster_node, 'resetValue')
+        reset_mask = _get_int(cluster_node, 'resetMask')
+        dim_increment = _get_int(cluster_node, 'dimIncrement')
+        dim_index_text = _get_text(cluster_node, 'dimIndex')
+        alternate_cluster = _get_text(cluster_node, 'alternateGluster')
+        header_struct_name = _get_text(cluster_node, 'headerStructName')
+        cluster = []
+        for sub_cluster_node in cluster_node.findall("./cluster"):
+            cluster.append(self._parse_cluster(sub_cluster_node))
+        register = []
+        for reg_node in cluster_node.findall("./register"):
+            register.append(self._parse_registers(reg_node))
+
+        if dim is None:
+            return SVDRegisterCluster(
+                name=name,
+                derived_from=derived_from,
+                description=description,
+                address_offset=address_offset,
+                size=size,
+                access=access,
+                protection=protection,
+                reset_value=reset_value,
+                reset_mask=reset_mask,
+                alternate_cluster=alternate_cluster,
+                header_struct_name=header_struct_name,
+                register=register,
+                cluster=cluster,
+            )
+        else:
+            # the node represents a register array
+            if dim_index_text is None:
+                dim_indices = range(0, dim)  # some files omit dimIndex
+            elif ',' in dim_index_text:
+                dim_indices = dim_index_text.split(',')
+            elif '-' in dim_index_text:  # some files use <dimIndex>0-3</dimIndex> as an inclusive inclusive range
+                m = re.search(r'([0-9]+)-([0-9]+)', dim_index_text)
+                dim_indices = range(int(m.group(1)), int(m.group(2)) + 1)
+            else:
+                raise ValueError("Unexpected dim_index_text: %r" % dim_index_text)
+
+            # yield `SVDRegisterArray` (caller will differentiate on type)
+            return SVDRegisterClusterArray(
+                name=name,
+                derived_from=derived_from,
+                description=description,
+                address_offset=address_offset,
+                size=size,
+                access=access,
+                protection=protection,
+                reset_value=reset_value,
+                reset_mask=reset_mask,
+                alternate_cluster=alternate_cluster,
+                header_struct_name=header_struct_name,
+                register=register,
+                cluster=cluster,
+                dim=dim,
+                dim_increment=dim_increment,
+                dim_indices=dim_indices,
+            )
+
     def _parse_address_block(self, address_block_node):
         return SVDAddressBlock(
             _get_int(address_block_node, 'offset'),
@@ -247,6 +318,11 @@ class SVDParser(object):
                 register_arrays.append(reg)
             else:
                 registers.append(reg)
+
+        clusters = []
+        for cluster_node in peripheral_node.findall('./registers/cluster'):
+            reg = self._parse_cluster(cluster_node)
+            clusters.append(reg)
 
         # parse all interrupts for the peripheral
         interrupts = []
@@ -310,6 +386,11 @@ class SVDParser(object):
             # </registers>
             register_arrays=register_arrays,
             registers=registers,
+
+            # <cluster>
+            #    ...
+            # </cluster>
+            clusters=clusters,
 
             # (not mentioned in docs -- applies to all registers)
             protection=_get_text(peripheral_node, 'protection'),

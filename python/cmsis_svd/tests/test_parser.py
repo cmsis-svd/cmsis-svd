@@ -258,6 +258,30 @@ class TestParserNordic(unittest.TestCase):
                          [('DAB[%s]', 8, [0, 1, 2, 3, 4, 5, 6, 7], 4),
                           ('DAP[%s]', 8, [0, 1, 2, 3, 4, 5, 6, 7], 4)])
 
+    def test_register_cluster(self):
+        amli = [p for p in self.device.peripherals if p.name == "AMLI"][0]
+        regs = list(amli.registers)
+        register_names = [r.name for r in regs]
+        self.assertIn("RAMPRI_CPU0", register_names)
+        self.assertIn("RAMPRI_SPIS1", register_names)
+        self.assertIn("RAMPRI_RADIO", register_names)
+        self.assertIn("RAMPRI_ECB", register_names)
+        self.assertIn("RAMPRI_CCM", register_names)
+        self.assertIn("RAMPRI_AAR", register_names)
+        aar = [r for r in regs if r.name == "RAMPRI_AAR"][0]
+        self.assertEqual(aar.address_offset, 0xE14)
+
+    def test_register_cluster_array(self):
+        ppi = [p for p in self.device.peripherals if p.name == "PPI"][0]
+        regs = list(ppi.registers)
+        register_names = [r.name for r in regs]
+        self.assertIn("CH[0]_EEP", register_names)
+        self.assertIn("CH[0]_TEP", register_names)
+        self.assertIn("CH[15]_EEP", register_names)
+        self.assertIn("CH[15]_TEP", register_names)
+        reg = [r for r in regs if r.name == "CH[15]_TEP"][0]
+        self.assertEqual(reg.address_offset, 0x58C)
+
 
 class TestParserPackagedData(unittest.TestCase):
     def test_packaged_xml(self):
