@@ -70,7 +70,7 @@ from cmsis_svd.parser import SVDParser
 
 parser = SVDParser.for_packaged_svd('Freescale', 'MK20D7.svd')
 svd_dict = parser.get_device().to_dict()
-print(json.dumps(svd_dict, sort_key=True,
+print(json.dumps(svd_dict, sort_keys=True,
                  indent=4, separators=(',', ': ')))
 ```
 
@@ -96,7 +96,7 @@ There are quite a few SVD files, so the tests take a bit.  If you have
 some extra CPUs to throw at the problem, you can do the following:
 
 ```sh
-nosetes --process=8 .
+nosetests --processes=8 .
 ```
 
 Where `8` can be replaced with as many processes as you see fit.
