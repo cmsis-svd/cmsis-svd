@@ -450,10 +450,11 @@ class SVDAddressBlock(SVDElement):
 
 
 class SVDInterrupt(SVDElement):
-    def __init__(self, name, value):
+    def __init__(self, name, value, description):
         SVDElement.__init__(self)
         self.name = name
         self.value = _check_type(value, six.integer_types)
+        self.description = description
 
 
 class SVDPeripheral(SVDElement):

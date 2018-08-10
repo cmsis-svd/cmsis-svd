@@ -305,7 +305,8 @@ class SVDParser(object):
     def _parse_interrupt(self, interrupt_node):
         return SVDInterrupt(
             name=_get_text(interrupt_node, 'name'),
-            value=_get_int(interrupt_node, 'value')
+            value=_get_int(interrupt_node, 'value'),
+            description=_get_text(interrupt_node, 'description')
         )
 
     def _parse_peripheral(self, peripheral_node):
@@ -378,6 +379,7 @@ class SVDParser(object):
             # <interrupt>
             #     <name>identifierType</name>
             #     <value>scaledNonNegativeInteger</value>
+            #     <description>xs:string</description>
             # </interrupt>
             interrupts=interrupts,
 
