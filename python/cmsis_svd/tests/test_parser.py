@@ -283,6 +283,14 @@ class TestParserNordic(unittest.TestCase):
         self.assertEqual(reg.address_offset, 0x58C)
 
 
+class TestParserExample(unittest.TestCase):
+    def test_derived_from_registers(self):
+        parser = SVDParser.for_packaged_svd('ARM_SAMPLE', 'ARM_Sample.svd')
+        regs = {p.name: p.registers for p in parser.get_device().peripherals}
+        self.assertEqual(len(regs["TIMER0"]), len(regs["TIMER1"]))
+        self.assertEqual(len(regs["TIMER0"]), len(regs["TIMER2"]))
+        self.assertEqual(len(regs["TIMER1"]), len(regs["TIMER2"]))
+
 class TestParserPackagedData(unittest.TestCase):
     def test_packaged_xml(self):
         parser = SVDParser.for_packaged_svd('Freescale', 'MK20D7.svd')
