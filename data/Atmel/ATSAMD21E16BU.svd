@@ -2,10 +2,10 @@
 <device schemaVersion="1.2" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="CMSIS-SVD.xsd">
   <vendor>Microchip Technology Inc.</vendor>
   <vendorID>MICROCHIP</vendorID>
-  <name>ATSAMD21J17A</name>
+  <name>ATSAMD21E16BU</name>
   <series>SAMD21</series>
   <version>D</version>
-  <description>Microchip ATSAMD21J17A device: Cortex-M0+ Microcontroller with 128KB Flash, 16KB SRAM, 64-pin package</description>
+  <description>Microchip ATSAMD21E16BU device: Cortex-M0+ Microcontroller with 64KB Flash, 8KB SRAM, 35-pin package</description>
   <licenseText>
   Copyright (c) 2018 Microchip Technology Inc.\n
 \n
@@ -32,7 +32,7 @@
     <vtorPresent>true</vtorPresent>
     <nvicPrioBits>2</nvicPrioBits>
     <vendorSystickConfig>false</vendorSystickConfig>
-    <deviceNumInterrupts>28</deviceNumInterrupts>
+    <deviceNumInterrupts>29</deviceNumInterrupts>
   </cpu>
   <headerSystemFilename>system_samd21</headerSystemFilename>
   <addressUnitBits>8</addressUnitBits>
@@ -44,7 +44,7 @@
   <peripherals>
     <peripheral>
       <name>AC</name>
-      <version>1.1.1</version>
+      <version>1.1.2</version>
       <description>Analog Comparators</description>
       <groupName>AC</groupName>
       <prependToName>AC_</prependToName>
@@ -1727,7 +1727,7 @@
     </peripheral>
     <peripheral>
       <name>DMAC</name>
-      <version>1.0.0</version>
+      <version>1.1.0</version>
       <description>Direct Memory Access Controller</description>
       <groupName>DMAC</groupName>
       <prependToName>DMAC_</prependToName>
@@ -1807,17 +1807,17 @@
                 <name>CRCBEATSIZESelect</name>
                 <enumeratedValue>
                   <name>BYTE</name>
-                  <description>8-bit bus transfer</description>
+                  <description>Byte bus access</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>HWORD</name>
-                  <description>16-bit bus transfer</description>
+                  <description>Half-word bus access</description>
                   <value>0x1</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>WORD</name>
-                  <description>32-bit bus transfer</description>
+                  <description>Word bus access</description>
                   <value>0x2</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -2702,7 +2702,7 @@
             </field>
             <field>
               <name>TRIGSRC</name>
-              <description>Trigger Source</description>
+              <description>Peripheral Trigger Source</description>
               <bitOffset>8</bitOffset>
               <bitWidth>6</bitWidth>
               <enumeratedValues>
@@ -2772,13 +2772,13 @@
           <fields>
             <field>
               <name>TERR</name>
-              <description>Channel Transfer Error Interrupt Enable</description>
+              <description>Transfer Error Interrupt Enable</description>
               <bitOffset>0</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>TCMPL</name>
-              <description>Channel Transfer Complete Interrupt Enable</description>
+              <description>Transfer Complete Interrupt Enable</description>
               <bitOffset>1</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
@@ -2798,13 +2798,13 @@
           <fields>
             <field>
               <name>TERR</name>
-              <description>Channel Transfer Error Interrupt Enable</description>
+              <description>Transfer Error Interrupt Enable</description>
               <bitOffset>0</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>TCMPL</name>
-              <description>Channel Transfer Complete Interrupt Enable</description>
+              <description>Transfer Complete Interrupt Enable</description>
               <bitOffset>1</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
@@ -2824,13 +2824,13 @@
           <fields>
             <field>
               <name>TERR</name>
-              <description>Channel Transfer Error</description>
+              <description>Transfer Error</description>
               <bitOffset>0</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>TCMPL</name>
-              <description>Channel Transfer Complete</description>
+              <description>Transfer Complete</description>
               <bitOffset>1</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
@@ -2865,7 +2865,7 @@
             </field>
             <field>
               <name>FERR</name>
-              <description>Channel Fetch Error</description>
+              <description>Fetch Error</description>
               <bitOffset>2</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
@@ -2876,7 +2876,7 @@
     </peripheral>
     <peripheral>
       <name>DSU</name>
-      <version>2.0.0</version>
+      <version>2.0.3</version>
       <description>Device Service Unit</description>
       <groupName>DSU</groupName>
       <prependToName>DSU_</prependToName>
@@ -3066,7 +3066,7 @@
           <addressOffset>0x0018</addressOffset>
           <size>32</size>
           <access>read-only</access>
-          <resetValue>0x10010301</resetValue>
+          <resetValue>0x10011455</resetValue>
           <fields>
             <field>
               <name>DEVSEL</name>
@@ -3113,12 +3113,12 @@
           </fields>
         </register>
         <register>
-          <name>ENTRY</name>
+          <name>ENTRY0</name>
           <description>CoreSight ROM Table Entry 0</description>
           <addressOffset>0x1000</addressOffset>
           <size>32</size>
           <access>read-only</access>
-          <resetValue>0x9F9FC002</resetValue>
+          <resetValue>0x9F0FC002</resetValue>
           <fields>
             <field>
               <name>EPRES</name>
@@ -5644,7 +5644,7 @@
     </peripheral>
     <peripheral>
       <name>I2S</name>
-      <version>1.0.2</version>
+      <version>1.1.0</version>
       <description>Inter-IC Sound Interface</description>
       <groupName>I2S</groupName>
       <prependToName>I2S_</prependToName>
@@ -6724,7 +6724,7 @@
     </peripheral>
     <peripheral>
       <name>NVMCTRL</name>
-      <version>1.0.6</version>
+      <version>2.0.2</version>
       <description>Non-Volatile Memory Controller</description>
       <groupName>NVMCTRL</groupName>
       <prependToName>NVMCTRL_</prependToName>
@@ -6783,6 +6783,16 @@
                   <value>0xf</value>
                 </enumeratedValue>
                 <enumeratedValue>
+                  <name>RWWEEER</name>
+                  <description>RWW EEPROM area Erase Row - Erases the row addressed by the ADDR register.</description>
+                  <value>0x1a</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>RWWEEWP</name>
+                  <description>RWW EEPROM Write Page - Writes the contents of the page buffer to the page addressed by the ADDR register.</description>
+                  <value>0x1c</value>
+                </enumeratedValue>
+                <enumeratedValue>
                   <name>LR</name>
                   <description>Lock Region - Locks the region containing the address location in the ADDR register.</description>
                   <value>0x40</value>
@@ -6814,7 +6824,7 @@
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>INVALL</name>
-                  <description>Invalidates all cache lines.</description>
+                  <description>Invalidate all cache lines.</description>
                   <value>0x46</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -6990,6 +7000,13 @@
                 </enumeratedValue>
               </enumeratedValues>
             </field>
+            <field>
+              <name>RWWEEP</name>
+              <description>RWW EEPROM Pages</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>12</bitWidth>
+              <access>read-only</access>
+            </field>
           </fields>
         </register>
         <register>
@@ -7043,7 +7060,6 @@
               <description>NVM Ready</description>
               <bitOffset>0</bitOffset>
               <bitWidth>1</bitWidth>
-              <access>read-only</access>
             </field>
             <field>
               <name>ERROR</name>
@@ -7185,7 +7201,7 @@
     </peripheral>
     <peripheral>
       <name>PM</name>
-      <version>2.0.1</version>
+      <version>2.1.2</version>
       <description>Power Manager</description>
       <groupName>PM</groupName>
       <prependToName>PM_</prependToName>
@@ -7235,6 +7251,20 @@
                   <value>0x2</value>
                 </enumeratedValue>
               </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>EXTCTRL</name>
+          <description>External Reset Controller</description>
+          <addressOffset>0x02</addressOffset>
+          <size>8</size>
+          <fields>
+            <field>
+              <name>SETDIS</name>
+              <description>External Reset Disable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
             </field>
           </fields>
         </register>
@@ -7663,18 +7693,6 @@
               <bitWidth>1</bitWidth>
             </field>
             <field>
-              <name>SERCOM4_</name>
-              <description>SERCOM4 APB Clock Enable</description>
-              <bitOffset>6</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>SERCOM5_</name>
-              <description>SERCOM5 APB Clock Enable</description>
-              <bitOffset>7</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
               <name>TCC0_</name>
               <description>TCC0 APB Clock Enable</description>
               <bitOffset>8</bitOffset>
@@ -7708,18 +7726,6 @@
               <name>TC5_</name>
               <description>TC5 APB Clock Enable</description>
               <bitOffset>13</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>TC6_</name>
-              <description>TC6 APB Clock Enable</description>
-              <bitOffset>14</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>TC7_</name>
-              <description>TC7 APB Clock Enable</description>
-              <bitOffset>15</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
@@ -7858,7 +7864,7 @@
       </addressBlock>
       <registers>
         <register>
-          <dim>2</dim>
+          <dim>1</dim>
           <dimIncrement>0x80</dimIncrement>
           <name>DIR%s</name>
           <description>Data Direction</description>
@@ -7874,7 +7880,7 @@
           </fields>
         </register>
         <register>
-          <dim>2</dim>
+          <dim>1</dim>
           <dimIncrement>0x80</dimIncrement>
           <name>DIRCLR%s</name>
           <description>Data Direction Clear</description>
@@ -7890,7 +7896,7 @@
           </fields>
         </register>
         <register>
-          <dim>2</dim>
+          <dim>1</dim>
           <dimIncrement>0x80</dimIncrement>
           <name>DIRSET%s</name>
           <description>Data Direction Set</description>
@@ -7906,7 +7912,7 @@
           </fields>
         </register>
         <register>
-          <dim>2</dim>
+          <dim>1</dim>
           <dimIncrement>0x80</dimIncrement>
           <name>DIRTGL%s</name>
           <description>Data Direction Toggle</description>
@@ -7922,7 +7928,7 @@
           </fields>
         </register>
         <register>
-          <dim>2</dim>
+          <dim>1</dim>
           <dimIncrement>0x80</dimIncrement>
           <name>OUT%s</name>
           <description>Data Output Value</description>
@@ -7938,7 +7944,7 @@
           </fields>
         </register>
         <register>
-          <dim>2</dim>
+          <dim>1</dim>
           <dimIncrement>0x80</dimIncrement>
           <name>OUTCLR%s</name>
           <description>Data Output Value Clear</description>
@@ -7954,7 +7960,7 @@
           </fields>
         </register>
         <register>
-          <dim>2</dim>
+          <dim>1</dim>
           <dimIncrement>0x80</dimIncrement>
           <name>OUTSET%s</name>
           <description>Data Output Value Set</description>
@@ -7970,7 +7976,7 @@
           </fields>
         </register>
         <register>
-          <dim>2</dim>
+          <dim>1</dim>
           <dimIncrement>0x80</dimIncrement>
           <name>OUTTGL%s</name>
           <description>Data Output Value Toggle</description>
@@ -7986,7 +7992,7 @@
           </fields>
         </register>
         <register>
-          <dim>2</dim>
+          <dim>1</dim>
           <dimIncrement>0x80</dimIncrement>
           <name>IN%s</name>
           <description>Data Input Value</description>
@@ -8003,7 +8009,7 @@
           </fields>
         </register>
         <register>
-          <dim>2</dim>
+          <dim>1</dim>
           <dimIncrement>0x80</dimIncrement>
           <name>CTRL%s</name>
           <description>Control</description>
@@ -8020,7 +8026,7 @@
           </fields>
         </register>
         <register>
-          <dim>2</dim>
+          <dim>1</dim>
           <dimIncrement>0x80</dimIncrement>
           <name>WRCONFIG%s</name>
           <description>Write Configuration</description>
@@ -8192,13 +8198,6 @@
             </field>
           </fields>
         </register>
-        <register derivedFrom="PMUX0_%s">
-          <dim>16</dim>
-          <dimIncrement>0x1</dimIncrement>
-          <name>PMUX1_%s</name>
-          <description>Peripheral Multiplexing n - Group 1</description>
-          <addressOffset>0xb0</addressOffset>
-        </register>
         <register>
           <dim>32</dim>
           <dimIncrement>0x1</dimIncrement>
@@ -8233,13 +8232,6 @@
               <access>write-only</access>
             </field>
           </fields>
-        </register>
-        <register derivedFrom="PINCFG0_%s">
-          <dim>32</dim>
-          <dimIncrement>0x1</dimIncrement>
-          <name>PINCFG1_%s</name>
-          <description>Pin Configuration n - Group 1</description>
-          <addressOffset>0xc0</addressOffset>
         </register>
       </registers>
     </peripheral>
@@ -9576,7 +9568,7 @@
     </peripheral>
     <peripheral>
       <name>SERCOM0</name>
-      <version>2.0.0</version>
+      <version>2.2.0</version>
       <description>Serial Communication Interface 0</description>
       <groupName>SERCOM</groupName>
       <prependToName>SERCOM_</prependToName>
@@ -9918,7 +9910,7 @@
         </register>
         <register>
           <name>SYNCBUSY</name>
-          <description>I2CM Syncbusy</description>
+          <description>I2CM Synchronization Busy</description>
           <addressOffset>0x1C</addressOffset>
           <size>32</size>
           <access>read-only</access>
@@ -10329,7 +10321,7 @@
         </register>
         <register>
           <name>SYNCBUSY</name>
-          <description>I2CS Syncbusy</description>
+          <description>I2CS Synchronization Busy</description>
           <addressOffset>0x1C</addressOffset>
           <size>32</size>
           <access>read-only</access>
@@ -10700,7 +10692,7 @@
         </register>
         <register>
           <name>SYNCBUSY</name>
-          <description>SPI Syncbusy</description>
+          <description>SPI Synchronization Busy</description>
           <addressOffset>0x1C</addressOffset>
           <size>32</size>
           <access>read-only</access>
@@ -11243,7 +11235,7 @@
         </register>
         <register>
           <name>SYNCBUSY</name>
-          <description>USART Syncbusy</description>
+          <description>USART Synchronization Busy</description>
           <addressOffset>0x1C</addressOffset>
           <size>32</size>
           <access>read-only</access>
@@ -11327,24 +11319,6 @@
       <interrupt>
         <name>SERCOM3</name>
         <value>12</value>
-      </interrupt>
-    </peripheral>
-    <peripheral derivedFrom="SERCOM0">
-      <name>SERCOM4</name>
-      <description>Serial Communication Interface 4</description>
-      <baseAddress>0x42001800</baseAddress>
-      <interrupt>
-        <name>SERCOM4</name>
-        <value>13</value>
-      </interrupt>
-    </peripheral>
-    <peripheral derivedFrom="SERCOM0">
-      <name>SERCOM5</name>
-      <description>Serial Communication Interface 5</description>
-      <baseAddress>0x42001C00</baseAddress>
-      <interrupt>
-        <name>SERCOM5</name>
-        <value>14</value>
       </interrupt>
     </peripheral>
     <peripheral>
@@ -12636,7 +12610,7 @@
     </peripheral>
     <peripheral>
       <name>TC3</name>
-      <version>1.2.1</version>
+      <version>1.3.1</version>
       <description>Basic Timer Counter 3</description>
       <groupName>TC</groupName>
       <prependToName>TC_</prependToName>
@@ -14392,27 +14366,9 @@
         <value>20</value>
       </interrupt>
     </peripheral>
-    <peripheral derivedFrom="TC3">
-      <name>TC6</name>
-      <description>Basic Timer Counter 6</description>
-      <baseAddress>0x42003800</baseAddress>
-      <interrupt>
-        <name>TC6</name>
-        <value>21</value>
-      </interrupt>
-    </peripheral>
-    <peripheral derivedFrom="TC3">
-      <name>TC7</name>
-      <description>Basic Timer Counter 7</description>
-      <baseAddress>0x42003C00</baseAddress>
-      <interrupt>
-        <name>TC7</name>
-        <value>22</value>
-      </interrupt>
-    </peripheral>
     <peripheral>
       <name>TCC0</name>
-      <version>1.0.1</version>
+      <version>1.2.2</version>
       <description>Timer Counter Control 0</description>
       <groupName>TCC</groupName>
       <prependToName>TCC_</prependToName>
@@ -17081,7 +17037,7 @@
     </peripheral>
     <peripheral>
       <name>USB</name>
-      <version>1.0.1</version>
+      <version>1.0.3</version>
       <description>Universal Serial Bus</description>
       <groupName>USB</groupName>
       <prependToName>USB_</prependToName>
@@ -18352,12 +18308,12 @@
                 <name>SPDCONFSelect</name>
                 <enumeratedValue>
                   <name>NORMAL</name>
-                  <description>Normal mode:the host starts in full-speed mode and performs a high-speed reset to switch to the high speed mode if the downstream peripheral is high-speed capable.</description>
+                  <description>Normal mode: the host starts in full-speed mode and performs a high-speed reset to switch to the high speed mode if the downstream peripheral is high-speed capable.</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>FS</name>
-                  <description>Full-speed:the host remains in full-speed mode whatever is the peripheral speed capability. Relevant in UTMI mode only.</description>
+                  <description>Full-speed: the host remains in full-speed mode whatever is the peripheral speed capability. Relevant in UTMI mode only.</description>
                   <value>0x3</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -19073,7 +19029,7 @@
             </field>
             <field>
               <name>STALL</name>
-              <description>Stall Inetrrupt Disable</description>
+              <description>Stall Interrupt Disable</description>
               <bitOffset>5</bitOffset>
               <bitWidth>1</bitWidth>
             </field>

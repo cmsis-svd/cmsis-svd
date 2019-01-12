@@ -2,10 +2,10 @@
 <device schemaVersion="1.2" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="CMSIS-SVD.xsd">
   <vendor>Microchip Technology Inc.</vendor>
   <vendorID>MICROCHIP</vendorID>
-  <name>ATSAMD21J17A</name>
+  <name>ATSAMD21J15A</name>
   <series>SAMD21</series>
   <version>D</version>
-  <description>Microchip ATSAMD21J17A device: Cortex-M0+ Microcontroller with 128KB Flash, 16KB SRAM, 64-pin package</description>
+  <description>Microchip ATSAMD21J15A device: Cortex-M0+ Microcontroller with 32KB Flash, 4KB SRAM, 64-pin package</description>
   <licenseText>
   Copyright (c) 2018 Microchip Technology Inc.\n
 \n
@@ -3066,7 +3066,7 @@
           <addressOffset>0x0018</addressOffset>
           <size>32</size>
           <access>read-only</access>
-          <resetValue>0x10010301</resetValue>
+          <resetValue>0x10010303</resetValue>
           <fields>
             <field>
               <name>DEVSEL</name>
