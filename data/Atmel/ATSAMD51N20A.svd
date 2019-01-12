@@ -2,10 +2,10 @@
 <device schemaVersion="1.2" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="CMSIS-SVD.xsd">
   <vendor>Microchip Technology Inc.</vendor>
   <vendorID>MICROCHIP</vendorID>
-  <name>ATSAMD51J19A</name>
+  <name>ATSAMD51N20A</name>
   <series>SAMD51</series>
   <version>A</version>
-  <description>Microchip ATSAMD51J19A device: Cortex-M4 Microcontroller with 512KB Flash, 192KB SRAM, 64-pin package</description>
+  <description>Microchip ATSAMD51N20A device: Cortex-M4 Microcontroller with 1MB Flash, 256KB SRAM, 100-pin package</description>
   <licenseText>
   Copyright (c) 2018 Microchip Technology Inc.\n
 \n
@@ -5738,7 +5738,7 @@
           <addressOffset>0x0018</addressOffset>
           <size>32</size>
           <access>read-only</access>
-          <resetValue>0x60060305</resetValue>
+          <resetValue>0x60060302</resetValue>
           <fields>
             <field>
               <name>DEVSEL</name>
@@ -10736,6 +10736,12 @@
               <bitWidth>1</bitWidth>
             </field>
             <field>
+              <name>SDHC1_</name>
+              <description>SDHC1 AHB Clock Mask</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
               <name>ICM_</name>
               <description>ICM AHB Clock Mask</description>
               <bitOffset>19</bitOffset>
@@ -11053,9 +11059,33 @@
               <bitWidth>1</bitWidth>
             </field>
             <field>
+              <name>SERCOM6_</name>
+              <description>SERCOM6 APB Clock Enable</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SERCOM7_</name>
+              <description>SERCOM7 APB Clock Enable</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
               <name>TCC4_</name>
               <description>TCC4 APB Clock Enable</description>
               <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TC6_</name>
+              <description>TC6 APB Clock Enable</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TC7_</name>
+              <description>TC7 APB Clock Enable</description>
+              <bitOffset>6</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
@@ -13429,6 +13459,12 @@
               <bitWidth>1</bitWidth>
             </field>
             <field>
+              <name>SDHC1_</name>
+              <description>SDHC1</description>
+              <bitOffset>13</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
               <name>QSPI_</name>
               <description>QSPI</description>
               <bitOffset>14</bitOffset>
@@ -13743,9 +13779,33 @@
               <bitWidth>1</bitWidth>
             </field>
             <field>
+              <name>SERCOM6_</name>
+              <description>SERCOM6</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SERCOM7_</name>
+              <description>SERCOM7</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
               <name>TCC4_</name>
               <description>TCC4</description>
               <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TC6_</name>
+              <description>TC6</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TC7_</name>
+              <description>TC7</description>
+              <bitOffset>6</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
@@ -14087,9 +14147,33 @@
               <bitWidth>1</bitWidth>
             </field>
             <field>
+              <name>SERCOM6_</name>
+              <description>SERCOM6 APB Protect Enable</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SERCOM7_</name>
+              <description>SERCOM7 APB Protect Enable</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
               <name>TCC4_</name>
               <description>TCC4 APB Protect Enable</description>
               <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TC6_</name>
+              <description>TC6 APB Protect Enable</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TC7_</name>
+              <description>TC7 APB Protect Enable</description>
+              <bitOffset>6</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
@@ -15448,7 +15532,7 @@
       </addressBlock>
       <registers>
         <register>
-          <dim>2</dim>
+          <dim>3</dim>
           <dimIncrement>0x80</dimIncrement>
           <name>DIR%s</name>
           <description>Data Direction</description>
@@ -15464,7 +15548,7 @@
           </fields>
         </register>
         <register>
-          <dim>2</dim>
+          <dim>3</dim>
           <dimIncrement>0x80</dimIncrement>
           <name>DIRCLR%s</name>
           <description>Data Direction Clear</description>
@@ -15480,7 +15564,7 @@
           </fields>
         </register>
         <register>
-          <dim>2</dim>
+          <dim>3</dim>
           <dimIncrement>0x80</dimIncrement>
           <name>DIRSET%s</name>
           <description>Data Direction Set</description>
@@ -15496,7 +15580,7 @@
           </fields>
         </register>
         <register>
-          <dim>2</dim>
+          <dim>3</dim>
           <dimIncrement>0x80</dimIncrement>
           <name>DIRTGL%s</name>
           <description>Data Direction Toggle</description>
@@ -15512,7 +15596,7 @@
           </fields>
         </register>
         <register>
-          <dim>2</dim>
+          <dim>3</dim>
           <dimIncrement>0x80</dimIncrement>
           <name>OUT%s</name>
           <description>Data Output Value</description>
@@ -15528,7 +15612,7 @@
           </fields>
         </register>
         <register>
-          <dim>2</dim>
+          <dim>3</dim>
           <dimIncrement>0x80</dimIncrement>
           <name>OUTCLR%s</name>
           <description>Data Output Value Clear</description>
@@ -15544,7 +15628,7 @@
           </fields>
         </register>
         <register>
-          <dim>2</dim>
+          <dim>3</dim>
           <dimIncrement>0x80</dimIncrement>
           <name>OUTSET%s</name>
           <description>Data Output Value Set</description>
@@ -15560,7 +15644,7 @@
           </fields>
         </register>
         <register>
-          <dim>2</dim>
+          <dim>3</dim>
           <dimIncrement>0x80</dimIncrement>
           <name>OUTTGL%s</name>
           <description>Data Output Value Toggle</description>
@@ -15576,7 +15660,7 @@
           </fields>
         </register>
         <register>
-          <dim>2</dim>
+          <dim>3</dim>
           <dimIncrement>0x80</dimIncrement>
           <name>IN%s</name>
           <description>Data Input Value</description>
@@ -15594,7 +15678,7 @@
           </fields>
         </register>
         <register>
-          <dim>2</dim>
+          <dim>3</dim>
           <dimIncrement>0x80</dimIncrement>
           <name>CTRL%s</name>
           <description>Control</description>
@@ -15611,7 +15695,7 @@
           </fields>
         </register>
         <register>
-          <dim>2</dim>
+          <dim>3</dim>
           <dimIncrement>0x80</dimIncrement>
           <name>WRCONFIG%s</name>
           <description>Write Configuration</description>
@@ -15685,7 +15769,7 @@
           </fields>
         </register>
         <register>
-          <dim>2</dim>
+          <dim>3</dim>
           <dimIncrement>0x80</dimIncrement>
           <name>EVCTRL%s</name>
           <description>Event Input Control</description>
@@ -15818,6 +15902,13 @@
           <description>Peripheral Multiplexing - Group 1</description>
           <addressOffset>0xb0</addressOffset>
         </register>
+        <register derivedFrom="PMUX0_%s">
+          <dim>16</dim>
+          <dimIncrement>0x1</dimIncrement>
+          <name>PMUX2_%s</name>
+          <description>Peripheral Multiplexing - Group 2</description>
+          <addressOffset>0x130</addressOffset>
+        </register>
         <register>
           <dim>32</dim>
           <dimIncrement>0x1</dimIncrement>
@@ -15858,6 +15949,13 @@
           <name>PINCFG1_%s</name>
           <description>Pin Configuration - Group 1</description>
           <addressOffset>0xc0</addressOffset>
+        </register>
+        <register derivedFrom="PINCFG0_%s">
+          <dim>32</dim>
+          <dimIncrement>0x1</dimIncrement>
+          <name>PINCFG2_%s</name>
+          <description>Pin Configuration - Group 2</description>
+          <addressOffset>0x140</addressOffset>
         </register>
       </registers>
     </peripheral>
@@ -20255,7 +20353,7 @@
     <peripheral>
       <name>SDHC0</name>
       <version>1.8.3</version>
-      <description>SD/MMC Host Controller</description>
+      <description>SD/MMC Host Controller 0</description>
       <groupName>SDHC</groupName>
       <prependToName>SDHC_</prependToName>
       <baseAddress>0x45000000</baseAddress>
@@ -25457,6 +25555,15 @@
         </register>
       </registers>
     </peripheral>
+    <peripheral derivedFrom="SDHC0">
+      <name>SDHC1</name>
+      <description>SD/MMC Host Controller 1</description>
+      <baseAddress>0x46000000</baseAddress>
+      <interrupt>
+        <name>SDHC1</name>
+        <value>136</value>
+      </interrupt>
+    </peripheral>
     <peripheral>
       <name>SERCOM0</name>
       <version>5.0.0</version>
@@ -27418,6 +27525,48 @@
       <interrupt>
         <name>SERCOM5_OTHER</name>
         <value>69</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="SERCOM0">
+      <name>SERCOM6</name>
+      <description>Serial Communication Interface 6</description>
+      <baseAddress>0x43000800</baseAddress>
+      <interrupt>
+        <name>SERCOM6_0</name>
+        <value>70</value>
+      </interrupt>
+      <interrupt>
+        <name>SERCOM6_1</name>
+        <value>71</value>
+      </interrupt>
+      <interrupt>
+        <name>SERCOM6_2</name>
+        <value>72</value>
+      </interrupt>
+      <interrupt>
+        <name>SERCOM6_OTHER</name>
+        <value>73</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="SERCOM0">
+      <name>SERCOM7</name>
+      <description>Serial Communication Interface 7</description>
+      <baseAddress>0x43000C00</baseAddress>
+      <interrupt>
+        <name>SERCOM7_0</name>
+        <value>74</value>
+      </interrupt>
+      <interrupt>
+        <name>SERCOM7_1</name>
+        <value>75</value>
+      </interrupt>
+      <interrupt>
+        <name>SERCOM7_2</name>
+        <value>76</value>
+      </interrupt>
+      <interrupt>
+        <name>SERCOM7_OTHER</name>
+        <value>77</value>
       </interrupt>
     </peripheral>
     <peripheral>
@@ -30509,6 +30658,24 @@
       <interrupt>
         <name>TC5</name>
         <value>112</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="TC0">
+      <name>TC6</name>
+      <description>Basic Timer Counter 6</description>
+      <baseAddress>0x43001400</baseAddress>
+      <interrupt>
+        <name>TC6</name>
+        <value>113</value>
+      </interrupt>
+    </peripheral>
+    <peripheral derivedFrom="TC0">
+      <name>TC7</name>
+      <description>Basic Timer Counter 7</description>
+      <baseAddress>0x43001800</baseAddress>
+      <interrupt>
+        <name>TC7</name>
+        <value>114</value>
       </interrupt>
     </peripheral>
     <peripheral>

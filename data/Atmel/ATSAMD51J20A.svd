@@ -2,10 +2,10 @@
 <device schemaVersion="1.2" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="CMSIS-SVD.xsd">
   <vendor>Microchip Technology Inc.</vendor>
   <vendorID>MICROCHIP</vendorID>
-  <name>ATSAMD51J19A</name>
+  <name>ATSAMD51J20A</name>
   <series>SAMD51</series>
   <version>A</version>
-  <description>Microchip ATSAMD51J19A device: Cortex-M4 Microcontroller with 512KB Flash, 192KB SRAM, 64-pin package</description>
+  <description>Microchip ATSAMD51J20A device: Cortex-M4 Microcontroller with 1MB Flash, 256KB SRAM, 64-pin package</description>
   <licenseText>
   Copyright (c) 2018 Microchip Technology Inc.\n
 \n
@@ -5738,7 +5738,7 @@
           <addressOffset>0x0018</addressOffset>
           <size>32</size>
           <access>read-only</access>
-          <resetValue>0x60060305</resetValue>
+          <resetValue>0x60060304</resetValue>
           <fields>
             <field>
               <name>DEVSEL</name>
