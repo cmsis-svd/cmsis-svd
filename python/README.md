@@ -21,7 +21,7 @@ you may need to update the version of pip you are using.
 
 ```sh
 pip install -U -e 'git+https://github.com/posborne/cmsis-svd.git#egg=cmsis-svd&subdirectory=python'
-````
+```
 
 Example
 -------
