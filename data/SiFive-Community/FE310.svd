@@ -1,0 +1,1348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<device schemaVersion="1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_0.xsd" >
+  <vendor>SiFive</vendor>
+  <vendorID>SiFive</vendorID>
+  <name>FE310</name>
+  <series>Freedom Everywhere</series>
+  <version></version>
+  <description>E31 CPU Coreplex, high-performance, 32-bit RV32IMAC core
+  </description>
+
+  <addressUnitBits>8</addressUnitBits>
+  <width>32</width>
+  <size>32</size>
+  <resetValue>0x00000000</resetValue>
+  <resetMask>0xFFFFFFFF</resetMask>
+
+  <cpu>
+    <name>E31</name>
+    <endian>little</endian>
+  </cpu>
+
+  <peripherals>
+
+    <peripheral>
+      <name>OTP_Mem</name>
+      <description>One-Time Programmable Memory.</description>
+      <baseAddress>0x00020000</baseAddress>
+      <groupName>OTP_Mem</groupName>
+      <size>32</size>
+      <access>read-write</access>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x2000</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <registers>
+
+        <register>
+          <name>BOOT</name>
+          <description>Code to jump to LAST FENCE.</description>
+          <addressOffset>0x0000</addressOffset>
+        </register>
+
+        <register>
+          <name>LIFECYCLE</name>
+          <description>OTP Lifecycle Counter.</description>
+          <addressOffset>0x1FF0</addressOffset>
+        </register>
+
+        <register>
+          <name>HFROSC_TRIM</name>
+          <description>HFROSC Trim Setting for 72MHz.</description>
+          <addressOffset>0x1FEC</addressOffset>
+          <fields>
+            <field><name>VALUE</name><lsb>0</lsb><msb>4</msb></field>
+          </fields>
+        </register>
+
+        <register>
+          <name>STAMP</name>
+          <description>Board Identifier.</description>
+          <addressOffset>0x1FE4</addressOffset>
+        </register>
+
+        <register>
+          <name>LFROSC_TRIM</name>
+          <description>LFROSC Trim Setting, left unburned on HiFive1.</description>
+          <addressOffset>0x1FE8</addressOffset>
+          <fields>
+            <field><name>VALUE</name><lsb>0</lsb><msb>4</msb></field>
+          </fields>
+        </register>
+
+        <register>
+          <dim>3</dim>
+          <dimIncrement>4</dimIncrement>
+          <name>LAST_FENCE[%s]</name>
+          <description>Code to jump to SPI-FLASH.</description>
+          <addressOffset>0x1FF4</addressOffset>
+        </register>
+
+      </registers>
+
+    </peripheral> <!-- OTP_mem -->
+
+    <peripheral>
+      <name>PRIC</name>
+      <description>Power, Reset, Clock, Interrupt.</description>
+      <baseAddress>0x10008000</baseAddress>
+      <groupName>PRIC</groupName>
+      <size>32</size>
+      <access>read-write</access>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x10</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <registers>
+
+        <register>
+          <name>HFROSCCFG</name>
+          <description>HF Ring Oscillator Configuration Register.</description>
+          <addressOffset>0x0</addressOffset>
+          <fields>
+            <field><name>DIV</name><lsb>0</lsb><msb>5</msb></field>
+            <field><name>TRIM</name><lsb>16</lsb><msb>20</msb></field>
+            <field><name>ENABLE</name><lsb>30</lsb><msb>30</msb></field>
+            <field><name>READY</name><lsb>31</lsb><msb>31</msb></field>
+          </fields>
+        </register>
+
+        <register>
+          <name>HFXOSCCFG</name>
+          <description>HF Crystal Oscillator Configuration Register.</description>
+          <addressOffset>0x4</addressOffset>
+          <fields>
+            <field><name>ENABLE</name><lsb>30</lsb><msb>30</msb></field>
+            <field><name>READY</name><lsb>31</lsb><msb>31</msb></field>
+          </fields>
+        </register>
+
+        <register>
+          <name>PLLCFG</name>
+          <description>PLL Configuration Register.</description>
+          <addressOffset>0x8</addressOffset>
+          <fields>
+            <field><name>R</name><lsb>0</lsb><msb>2</msb></field>
+            <field><name>F</name><lsb>4</lsb><msb>9</msb></field>
+            <field><name>Q</name><lsb>10</lsb><msb>11</msb></field>
+            <field>
+              <name>SEL</name><lsb>16</lsb><msb>16</msb>
+              <enumeratedValues>               
+                <enumeratedValue>
+                  <name>Internal</name>
+                  <description>The HFROSCCLK directly drives HFCLK.</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PLL</name>
+                  <description>Drive the final HFCLK with PLL output, bypassed or otherwise.</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>REFSEL</name><lsb>17</lsb><msb>17</msb>
+              <enumeratedValues>               
+                <enumeratedValue>
+                  <name>Crystal</name>
+                  <description>Crystal OScillator.</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Internal</name>
+                  <description>Internal Oscillator.</description>
+                  <value>0</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field><name>BYPASS</name><lsb>18</lsb><msb>18</msb></field>
+            <field><name>LOCK</name><lsb>31</lsb><msb>31</msb></field>
+          </fields>
+        </register>
+
+        <register>
+          <name>PLLOUTDIV</name>
+          <description>PLL Output Divider Register.</description>
+          <addressOffset>0xC</addressOffset>
+          <fields>
+            <field><name>DIV</name><lsb>0</lsb><msb>5</msb></field>
+            <field><name>DIV_BY_1</name><lsb>8</lsb><msb>8</msb></field>
+          </fields>
+        </register>
+
+      </registers>
+    </peripheral> <!-- PRIC -->
+
+    <peripheral>
+      <name>PLIC</name>
+      <description>Platform-Level Interrupt Controller.</description>
+      <baseAddress>0x0C000000</baseAddress>
+      <groupName>PLIC</groupName>
+      <size>32</size>
+      <access>read-write</access>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x200008</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <registers>
+
+        <register>
+          <dim>52</dim> <!-- 52 interrupt sources on the FE310 -->
+          <dimIncrement>4</dimIncrement>
+          <name>PRIORITY[%s]</name>
+          <description>PLIC Interrupt Priority Register.</description>
+          <addressOffset>0x000000</addressOffset>
+          <fields>
+            <field><name>PRIORITY</name><lsb>0</lsb><msb>2</msb></field>
+          </fields>
+        </register>
+
+        <register>
+          <dim>2</dim> <!-- 2x32 to cover the 52 interrupt sources on the FE310 -->
+          <dimIncrement>4</dimIncrement>
+          <name>PENDING[%s]</name>
+          <description>PLIC Interrupt Pending Register.</description>
+          <addressOffset>0x001000</addressOffset>
+          <fields>
+            <field><name>INT0</name><lsb>0</lsb><msb>0</msb></field>
+            <field><name>INT1</name><lsb>1</lsb><msb>1</msb></field>
+            <field><name>INT2</name><lsb>2</lsb><msb>2</msb></field>
+            <field><name>INT3</name><lsb>3</lsb><msb>3</msb></field>
+            <field><name>INT4</name><lsb>4</lsb><msb>4</msb></field>
+            <field><name>INT5</name><lsb>5</lsb><msb>5</msb></field>
+            <field><name>INT6</name><lsb>6</lsb><msb>6</msb></field>
+            <field><name>INT7</name><lsb>7</lsb><msb>7</msb></field>
+            <field><name>INT8</name><lsb>8</lsb><msb>8</msb></field>
+            <field><name>INT9</name><lsb>9</lsb><msb>9</msb></field>
+            <field><name>INT10</name><lsb>10</lsb><msb>10</msb></field>
+            <field><name>INT11</name><lsb>11</lsb><msb>11</msb></field>
+            <field><name>INT12</name><lsb>12</lsb><msb>12</msb></field>
+            <field><name>INT13</name><lsb>13</lsb><msb>13</msb></field>
+            <field><name>INT14</name><lsb>14</lsb><msb>14</msb></field>
+            <field><name>INT15</name><lsb>15</lsb><msb>15</msb></field>
+            <field><name>INT16</name><lsb>16</lsb><msb>16</msb></field>
+            <field><name>INT17</name><lsb>17</lsb><msb>17</msb></field>
+            <field><name>INT18</name><lsb>18</lsb><msb>18</msb></field>
+            <field><name>INT19</name><lsb>19</lsb><msb>19</msb></field>
+            <field><name>INT20</name><lsb>20</lsb><msb>20</msb></field>
+            <field><name>INT21</name><lsb>21</lsb><msb>21</msb></field>
+            <field><name>INT22</name><lsb>22</lsb><msb>22</msb></field>
+            <field><name>INT23</name><lsb>23</lsb><msb>23</msb></field>
+            <field><name>INT24</name><lsb>24</lsb><msb>24</msb></field>
+            <field><name>INT25</name><lsb>25</lsb><msb>25</msb></field>
+            <field><name>INT26</name><lsb>26</lsb><msb>26</msb></field>
+            <field><name>INT27</name><lsb>27</lsb><msb>27</msb></field>
+            <field><name>INT28</name><lsb>28</lsb><msb>28</msb></field>
+            <field><name>INT29</name><lsb>29</lsb><msb>29</msb></field>
+            <field><name>INT30</name><lsb>30</lsb><msb>30</msb></field>
+            <field><name>INT31</name><lsb>31</lsb><msb>31</msb></field>
+          </fields>
+        </register>
+
+        <cluster>
+          <dim>1</dim> <!-- Only one core on the FE310 -->
+          <name>TARGET_ENABLE</name>
+          <addressOffset>0x002000</addressOffset>
+          <register>
+            <dim>2</dim> <!-- 2x32 to cover the 52 interrupt sources on the FE310 -->
+            <dimIncrement>4</dimIncrement>
+            <name>ENABLE[%s]</name>
+            <description>PLIC Interrupt Enable Register.</description>
+            <addressOffset>0x0</addressOffset>
+            <fields>
+              <field><name>INT0</name><lsb>0</lsb><msb>0</msb></field>
+              <field><name>INT1</name><lsb>1</lsb><msb>1</msb></field>
+              <field><name>INT2</name><lsb>2</lsb><msb>2</msb></field>
+              <field><name>INT3</name><lsb>3</lsb><msb>3</msb></field>
+              <field><name>INT4</name><lsb>4</lsb><msb>4</msb></field>
+              <field><name>INT5</name><lsb>5</lsb><msb>5</msb></field>
+              <field><name>INT6</name><lsb>6</lsb><msb>6</msb></field>
+              <field><name>INT7</name><lsb>7</lsb><msb>7</msb></field>
+              <field><name>INT8</name><lsb>8</lsb><msb>8</msb></field>
+              <field><name>INT9</name><lsb>9</lsb><msb>9</msb></field>
+              <field><name>INT10</name><lsb>10</lsb><msb>10</msb></field>
+              <field><name>INT11</name><lsb>11</lsb><msb>11</msb></field>
+              <field><name>INT12</name><lsb>12</lsb><msb>12</msb></field>
+              <field><name>INT13</name><lsb>13</lsb><msb>13</msb></field>
+              <field><name>INT14</name><lsb>14</lsb><msb>14</msb></field>
+              <field><name>INT15</name><lsb>15</lsb><msb>15</msb></field>
+              <field><name>INT16</name><lsb>16</lsb><msb>16</msb></field>
+              <field><name>INT17</name><lsb>17</lsb><msb>17</msb></field>
+              <field><name>INT18</name><lsb>18</lsb><msb>18</msb></field>
+              <field><name>INT19</name><lsb>19</lsb><msb>19</msb></field>
+              <field><name>INT20</name><lsb>20</lsb><msb>20</msb></field>
+              <field><name>INT21</name><lsb>21</lsb><msb>21</msb></field>
+              <field><name>INT22</name><lsb>22</lsb><msb>22</msb></field>
+              <field><name>INT23</name><lsb>23</lsb><msb>23</msb></field>
+              <field><name>INT24</name><lsb>24</lsb><msb>24</msb></field>
+              <field><name>INT25</name><lsb>25</lsb><msb>25</msb></field>
+              <field><name>INT26</name><lsb>26</lsb><msb>26</msb></field>
+              <field><name>INT27</name><lsb>27</lsb><msb>27</msb></field>
+              <field><name>INT28</name><lsb>28</lsb><msb>28</msb></field>
+              <field><name>INT29</name><lsb>29</lsb><msb>29</msb></field>
+              <field><name>INT30</name><lsb>30</lsb><msb>30</msb></field>
+              <field><name>INT31</name><lsb>31</lsb><msb>31</msb></field>
+            </fields>
+          </register>
+        </cluster>
+
+        <cluster>
+          <dim>1</dim> <!-- Only one core on the FE310 -->
+          <dimIncrement>8</dimIncrement>
+          <name>TARGET</name>
+          <addressOffset>0x200000</addressOffset>
+
+          <register>
+            <name>THRESHOLD</name>
+            <description>PLIC Interrupt Priority Threshold Register.</description>
+            <addressOffset>0x0</addressOffset>
+            <fields>
+              <field><name>THRESHOLD</name><lsb>0</lsb><msb>2</msb></field>
+            </fields>
+          </register>
+
+          <register>
+            <name>CLAIM</name>
+            <access>read-only</access>
+            <description>PLIC Claim Register.</description>
+            <addressOffset>0x4</addressOffset>
+          </register>
+
+          <register>
+            <name>COMPLETE</name>
+            <access>write-only</access>
+            <description>PLIC Complete Register.</description>
+            <addressOffset>0x4</addressOffset>
+          </register>
+        </cluster>
+
+      </registers>
+    </peripheral> <!-- PLIC -->
+
+    <peripheral>
+      <name>CLINT</name>
+      <description>Core Local Interruptor.</description>
+      <baseAddress>0x02000000</baseAddress>
+      <groupName>CLINT</groupName>
+      <size>32</size>
+      <access>read-write</access>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x10000</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <registers>
+
+        <register>
+          <name>MSIP</name>
+          <description>Machine Software Interrupt Pending Register.</description>
+          <addressOffset>0x0000</addressOffset>
+        </register>
+
+        <register>
+          <name>MTIMECMP_LO</name>
+          <description>Machine Timer Compare Register Low.</description>
+          <addressOffset>0x4000</addressOffset>
+        </register>
+
+        <register>
+          <name>MTIMECMP_HI</name>
+          <description>Machine Timer Compare Register High.</description>
+          <addressOffset>0x4004</addressOffset>
+        </register>
+
+        <register>
+          <name>MTIME_LO</name>
+          <description>Machine Timer Register Low.</description>
+          <addressOffset>0xBFF8</addressOffset>
+        </register>
+
+        <register>
+          <name>MTIME_HI</name>
+          <description>Machine Timer Register High.</description>
+          <addressOffset>0xBFFC</addressOffset>
+        </register>
+
+      </registers>
+    </peripheral> <!-- CLINT -->
+
+    <peripheral>
+      <name>GPIO0</name>
+      <description>General purpose input/output controller.</description>
+      <baseAddress>0x10012000</baseAddress>
+      <groupName>GPIO</groupName>
+      <size>32</size>
+      <access>read-write</access>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x1000</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <interrupt><name>GPIO_0_IRQ</name><value>8</value></interrupt>
+      <interrupt><name>GPIO_1_IRQ</name><value>9</value></interrupt>
+      <interrupt><name>GPIO_2_IRQ</name><value>10</value></interrupt>
+      <interrupt><name>GPIO_3_IRQ</name><value>11</value></interrupt>
+      <interrupt><name>GPIO_4_IRQ</name><value>12</value></interrupt>
+      <interrupt><name>GPIO_5_IRQ</name><value>13</value></interrupt>
+      <interrupt><name>GPIO_6_IRQ</name><value>14</value></interrupt>
+      <interrupt><name>GPIO_7_IRQ</name><value>15</value></interrupt>
+      <interrupt><name>GPIO_8_IRQ</name><value>16</value></interrupt>
+      <interrupt><name>GPIO_9_IRQ</name><value>17</value></interrupt>
+      <interrupt><name>GPIO_10_IRQ</name><value>18</value></interrupt>
+      <interrupt><name>GPIO_11_IRQ</name><value>19</value></interrupt>
+      <interrupt><name>GPIO_12_IRQ</name><value>20</value></interrupt>
+      <interrupt><name>GPIO_13_IRQ</name><value>21</value></interrupt>
+      <interrupt><name>GPIO_14_IRQ</name><value>22</value></interrupt>
+      <interrupt><name>GPIO_15_IRQ</name><value>23</value></interrupt>
+      <interrupt><name>GPIO_16_IRQ</name><value>24</value></interrupt>
+      <interrupt><name>GPIO_17_IRQ</name><value>25</value></interrupt>
+      <interrupt><name>GPIO_18_IRQ</name><value>26</value></interrupt>
+      <interrupt><name>GPIO_19_IRQ</name><value>27</value></interrupt>
+      <interrupt><name>GPIO_20_IRQ</name><value>28</value></interrupt>
+      <interrupt><name>GPIO_21_IRQ</name><value>29</value></interrupt>
+      <interrupt><name>GPIO_22_IRQ</name><value>30</value></interrupt>
+      <interrupt><name>GPIO_23_IRQ</name><value>31</value></interrupt>
+      <interrupt><name>GPIO_24_IRQ</name><value>32</value></interrupt>
+      <interrupt><name>GPIO_25_IRQ</name><value>33</value></interrupt>
+      <interrupt><name>GPIO_26_IRQ</name><value>34</value></interrupt>
+      <interrupt><name>GPIO_27_IRQ</name><value>35</value></interrupt>
+      <interrupt><name>GPIO_28_IRQ</name><value>36</value></interrupt>
+      <interrupt><name>GPIO_29_IRQ</name><value>37</value></interrupt>
+      <interrupt><name>GPIO_30_IRQ</name><value>38</value></interrupt>
+      <interrupt><name>GPIO_31_IRQ</name><value>39</value></interrupt>
+      
+      <registers>
+        <register>
+          <name>VALUE</name>
+          <description>Pin value.</description>
+          <addressOffset>0x000</addressOffset>
+          <fields>
+            <field><name>PIN0</name><lsb>0</lsb><msb>0</msb></field>
+            <field><name>PIN1</name><lsb>1</lsb><msb>1</msb></field>
+            <field><name>PIN2</name><lsb>2</lsb><msb>2</msb></field>
+            <field><name>PIN3</name><lsb>3</lsb><msb>3</msb></field>
+            <field><name>PIN4</name><lsb>4</lsb><msb>4</msb></field>
+            <field><name>PIN5</name><lsb>5</lsb><msb>5</msb></field>
+            <field><name>PIN6</name><lsb>6</lsb><msb>6</msb></field>
+            <field><name>PIN7</name><lsb>7</lsb><msb>7</msb></field>
+            <field><name>PIN8</name><lsb>8</lsb><msb>8</msb></field>
+            <field><name>PIN9</name><lsb>9</lsb><msb>9</msb></field>
+            <field><name>PIN10</name><lsb>10</lsb><msb>10</msb></field>
+            <field><name>PIN11</name><lsb>11</lsb><msb>11</msb></field>
+            <field><name>PIN12</name><lsb>12</lsb><msb>12</msb></field>
+            <field><name>PIN13</name><lsb>13</lsb><msb>13</msb></field>
+            <field><name>PIN14</name><lsb>14</lsb><msb>14</msb></field>
+            <field><name>PIN15</name><lsb>15</lsb><msb>15</msb></field>
+            <field><name>PIN16</name><lsb>16</lsb><msb>16</msb></field>
+            <field><name>PIN17</name><lsb>17</lsb><msb>17</msb></field>
+            <field><name>PIN18</name><lsb>18</lsb><msb>18</msb></field>
+            <field><name>PIN19</name><lsb>19</lsb><msb>19</msb></field>
+            <field><name>PIN20</name><lsb>20</lsb><msb>20</msb></field>
+            <field><name>PIN21</name><lsb>21</lsb><msb>21</msb></field>
+            <field><name>PIN22</name><lsb>22</lsb><msb>22</msb></field>
+            <field><name>PIN23</name><lsb>23</lsb><msb>23</msb></field>
+            <field><name>PIN24</name><lsb>24</lsb><msb>24</msb></field>
+            <field><name>PIN25</name><lsb>25</lsb><msb>25</msb></field>
+            <field><name>PIN26</name><lsb>26</lsb><msb>26</msb></field>
+            <field><name>PIN27</name><lsb>27</lsb><msb>27</msb></field>
+            <field><name>PIN28</name><lsb>28</lsb><msb>28</msb></field>
+            <field><name>PIN29</name><lsb>29</lsb><msb>29</msb></field>
+            <field><name>PIN30</name><lsb>30</lsb><msb>30</msb></field>
+            <field><name>PIN31</name><lsb>31</lsb><msb>31</msb></field>
+          </fields>
+        </register>
+        <register derivedFrom="VALUE">
+          <name>INPUT_EN</name>
+          <description>Pin input enable.</description>
+          <addressOffset>0x004</addressOffset>
+        </register>
+        <register derivedFrom="VALUE">
+          <name>OUTPUT_EN</name>
+          <description>Pin output enable.</description>
+          <addressOffset>0x008</addressOffset>
+        </register>
+        <register derivedFrom="VALUE">
+          <name>PORT</name>
+          <description>Output port value.</description>
+          <addressOffset>0x00C</addressOffset>
+        </register>
+        <register derivedFrom="VALUE">
+          <name>PULLUP</name>
+          <description>Internal Pull-Up enable.</description>
+          <addressOffset>0x010</addressOffset>
+        </register>
+        <register derivedFrom="VALUE">
+          <name>DRIVE</name>
+          <description>Drive Strength.</description>
+          <addressOffset>0x014</addressOffset>
+        </register>
+        <register derivedFrom="VALUE">
+          <name>RISE_INT_EN</name>
+          <description>Rise interrupt enable.</description>
+          <addressOffset>0x018</addressOffset>
+        </register>
+        <register derivedFrom="VALUE">
+          <name>RISE_INT_PEND</name>
+          <description>Rise interrupt pending.</description>
+          <addressOffset>0x01C</addressOffset>
+        </register>
+        <register derivedFrom="VALUE">
+          <name>FALL_INT_EN</name>
+          <description>Fall interrupt enable.</description>
+          <addressOffset>0x020</addressOffset>
+        </register>
+        <register derivedFrom="VALUE">
+          <name>FALL_INT_PEND</name>
+          <description>Fall interrupt pending.</description>
+          <addressOffset>0x024</addressOffset>
+        </register>
+        <register derivedFrom="VALUE">
+          <name>HIGH_INT_EN</name>
+          <description>High interrupt enable.</description>
+          <addressOffset>0x028</addressOffset>
+        </register>
+        <register derivedFrom="VALUE">
+          <name>HIGH_INT_PEND</name>
+          <description>High interrupt pending.</description>
+          <addressOffset>0x02C</addressOffset>
+        </register>
+        <register derivedFrom="VALUE">
+          <name>LOW_INT_EN</name>
+          <description>Low interrupt enable.</description>
+          <addressOffset>0x030</addressOffset>
+        </register>
+        <register derivedFrom="VALUE">
+          <name>LOW_INT_PEND</name>
+          <description>Low interrupt pending.</description>
+          <addressOffset>0x034</addressOffset>
+        </register>
+        <register derivedFrom="VALUE">
+          <name>IO_FUNC_EN</name>
+          <description>HW I/O function enable.</description>
+          <addressOffset>0x038</addressOffset>
+        </register>
+        <register derivedFrom="VALUE">
+          <name>IO_FUNC_SEL</name>
+          <description>HW I/O function select.</description>
+          <addressOffset>0x03C</addressOffset>
+        </register>
+        <register derivedFrom="VALUE">
+          <name>OUT_XOR</name>
+          <description>Output XOR (invert).</description>
+          <addressOffset>0x040</addressOffset>
+        </register>
+      </registers>
+    </peripheral> <!-- GPIO -->
+
+    <peripheral>
+      <name>QSPI0</name>
+      <description>Serial Peripheral Interface.</description>
+      <baseAddress>0x10014000</baseAddress>
+      <groupName>SPI</groupName>
+      <size>32</size>
+      <access>read-write</access>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x1000</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <interrupt><name>QSPI0_IRQ</name><value>5</value></interrupt>
+
+      <registers>
+
+        <register>
+          <name>SCKDIV</name>
+          <description>Serial Clock Divisor Register.</description>
+          <addressOffset>0x000</addressOffset>
+          <fields>
+            <field><name>SCALE</name><lsb>0</lsb><msb>11</msb></field>
+          </fields>
+        </register>
+
+        <register>
+          <name>SCKMODE</name>
+          <description>Serial Clock Mode Register.</description>
+          <addressOffset>0x004</addressOffset>
+          <fields>
+            <field>
+              <name>PHA</name><lsb>0</lsb><msb>0</msb>
+              <description>Serial Clock Phase</description>
+              <enumeratedValues>
+                <name>CPHA</name>                
+                <enumeratedValue>
+                  <name>0</name>
+                  <description>
+                  Data is sampled on the leading edge of SCK and shifted on the trailing edge of SCK.
+                  </description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>1</name>
+                  <description>
+                  Data is shifted on the leading edge of SCK and sampled on the trailing edge of SCK.
+                  </description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>POL</name><lsb>1</lsb><msb>1</msb>
+              <description>Serial Clock Polarity</description>
+              <enumeratedValues>
+                <name>CPOL</name>                
+                <enumeratedValue>
+                  <name>0</name>
+                  <description>Inactive state of SCK is logical 0.</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>1</name>
+                  <description>Inactive state of SCK is logical 1.</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+
+        <register>
+          <name>CSID</name>
+          <description>Chip Select ID Register.</description>
+          <addressOffset>0x010</addressOffset>
+        </register>
+
+        <register>
+          <name>CSDEF</name>
+          <description>Chip Select Default Register.</description>
+          <addressOffset>0x014</addressOffset>
+        </register>
+
+        <register>
+          <name>CSMODE</name>
+          <description>Chip Select Mode Register.</description>
+          <addressOffset>0x018</addressOffset>
+          <fields>
+            <field>
+              <name>MODE</name><lsb>0</lsb><msb>1</msb>
+              <enumeratedValues>
+                <name>Chip_Select_Modes</name>
+                <enumeratedValue>
+                  <name>AUTO</name>
+                  <description>Assert/de-assert CS at the beginning/end of each frame.</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>HOLD</name>
+                  <description>Keep CS continuously asserted after the initial frame.</description>
+                  <value>2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>OFF</name>
+                  <description>Disable hardware control of the CS pin.</description>
+                  <value>3</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+
+        <register>
+          <name>DELAY0</name>
+          <description>Delay Control Register 0.</description>
+          <addressOffset>0x028</addressOffset>
+          <fields>
+            <field><name>CSSCK</name><lsb>0</lsb><msb>7</msb></field>
+            <field><name>SCKCS</name><lsb>16</lsb><msb>23</msb></field>
+          </fields>
+        </register>
+
+        <register>
+          <name>DELAY1</name>
+          <description>Delay Control Register 1.</description>
+          <addressOffset>0x02C</addressOffset>
+          <fields>
+            <field><name>INTERCS</name><lsb>0</lsb><msb>7</msb></field>
+            <field><name>INTERXFR</name><lsb>16</lsb><msb>23</msb></field>
+          </fields>
+        </register>
+
+        <register>
+          <name>FMT</name>
+          <description>Frame Format Register.</description>
+          <addressOffset>0x040</addressOffset>
+          <fields>
+            <field>
+              <name>PROTO</name><lsb>0</lsb><msb>1</msb>
+              <enumeratedValues>
+                <name>SPI_Protocol</name>
+                <enumeratedValue>
+                  <name>Single</name>
+                  <description>Data Pins: DQ0 (MOSI), DQ1 (MISO).</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Dual</name>
+                  <description>Data Pins: DQ0, DQ1.</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Quad</name>
+                  <description>Data Pins: DQ0, DQ1, DQ2, DQ3.</description>
+                  <value>2</value>
+                </enumeratedValue>
+              </enumeratedValues>              
+            </field>
+            <field>
+              <name>ENDIAN</name><lsb>2</lsb><msb>2</msb>
+              <enumeratedValues>
+                <name>SPI_Endianness</name>
+                <enumeratedValue>
+                  <name>MSB_First</name>
+                  <description>Tansmit most-significant bit first.</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>LSB_First</name>
+                  <description>Transmit least-significant bit first.</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues> 
+            </field>
+            <field>
+              <name>DIR</name><lsb>3</lsb><msb>3</msb>
+              <enumeratedValues>
+                <name>SPI_IO_Direction</name>
+                <enumeratedValue>
+                  <name>RX</name>
+                  <description>
+                  For dual and quad protocols, the DQ pins are tri-stated. 
+                  For the single protocol, the DQ0 pin is driven with the transmit data as normal.
+                  </description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>TX</name>
+                  <description>The receive FIFO is not populated.</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues> 
+            </field>
+            <field>
+              <name>LEN</name><lsb>16</lsb><msb>19</msb>
+            </field>
+          </fields>
+        </register>
+
+        <register>
+          <name>TXDATA</name>
+          <description>Transmit Data Register.</description>
+          <addressOffset>0x048</addressOffset>
+          <fields>
+            <field><name>DATA</name><lsb>0</lsb><msb>7</msb></field>
+            <field><name>FULL</name><lsb>31</lsb><msb>31</msb></field>
+          </fields>
+        </register>
+
+        <register>
+          <name>RXDATA</name>
+          <description>Receive Data Register.</description>
+          <addressOffset>0x04C</addressOffset>
+          <fields>
+            <field><name>DATA</name><lsb>0</lsb><msb>7</msb></field>
+            <field><name>EMPTY</name><lsb>31</lsb><msb>31</msb></field>
+          </fields>
+        </register>
+
+        <register>
+          <name>TXMARK</name>
+          <description>Transmit Watermark Register.</description>
+          <addressOffset>0x050</addressOffset>
+          <fields>
+            <field><name>TXMARK</name><lsb>0</lsb><msb>2</msb></field>
+          </fields>
+        </register>
+
+        <register>
+          <name>RXMARK</name>
+          <description>Receive Watermark Register.</description>
+          <addressOffset>0x054</addressOffset>
+          <fields>
+            <field><name>RXMARK</name><lsb>0</lsb><msb>2</msb></field>
+          </fields>
+        </register>
+
+        <register>
+          <name>IE</name>
+          <description>SPI Interrupt Enable Register.</description>
+          <addressOffset>0x070</addressOffset>
+          <fields>
+            <field><name>TXWM</name><lsb>0</lsb><msb>0</msb></field>
+            <field><name>RXWM</name><lsb>1</lsb><msb>1</msb></field>
+          </fields>
+        </register>
+
+        <register>
+          <name>IP</name>
+          <description>SPI Interrupt Pending Register.</description>
+          <addressOffset>0x074</addressOffset>
+          <fields>
+            <field><name>TXWM</name><lsb>0</lsb><msb>0</msb></field>
+            <field><name>RXWM</name><lsb>1</lsb><msb>1</msb></field>
+          </fields>
+        </register>
+
+        <register>
+          <name>FCTRL</name>
+          <description>SPI Flash Interface Control Register.</description>
+          <addressOffset>0x060</addressOffset>
+          <fields>
+            <field><name>ENABLE</name><lsb>0</lsb><msb>0</msb></field>
+          </fields>
+        </register>
+
+        <register>
+          <name>FFMT</name>
+          <description>SPI Flash Instruction Format Register.</description>
+          <addressOffset>0x064</addressOffset>
+          <fields>
+            <field><name>CMD_EN</name><lsb>0</lsb><msb>0</msb></field>
+            <field><name>ADDR_LEN</name><lsb>1</lsb><msb>3</msb></field>
+            <field><name>PAD_CNT</name><lsb>4</lsb><msb>7</msb></field>
+            <field><name>CMD_PROTO</name><lsb>8</lsb><msb>9</msb></field>
+            <field><name>ADDR_PROTO</name><lsb>10</lsb><msb>11</msb></field>
+            <field><name>DATA_PROTO</name><lsb>12</lsb><msb>13</msb></field>
+            <field><name>CMD_CODE</name><lsb>16</lsb><msb>23</msb></field>
+            <field><name>PAD_CODE</name><lsb>24</lsb><msb>31</msb></field>
+          </fields>
+        </register>
+
+      </registers>
+
+    </peripheral> <!-- QSPI0 -->
+
+    <peripheral derivedFrom="QSPI0">
+      <name>QSPI1</name>
+      <description>Serial Peripheral Interface.</description>
+      <baseAddress>0x10024000</baseAddress>
+      <groupName>SPI</groupName>
+      <interrupt><name>QSPI1_IRQ</name><value>6</value></interrupt>
+    </peripheral> <!-- QSPI1 -->
+
+    <peripheral derivedFrom="QSPI0">
+      <name>QSPI2</name>
+      <description>Serial Peripheral Interface.</description>
+      <baseAddress>0x10034000</baseAddress>
+      <groupName>SPI</groupName>
+      <interrupt><name>QSPI2_IRQ</name><value>7</value></interrupt>
+    </peripheral> <!-- QSPI2 -->
+
+    <peripheral>
+      <name>UART0</name>
+      <description>Universal Asynchronous Receiver/Transmitter.</description>
+      <baseAddress>0x10013000</baseAddress>
+      <groupName>UART</groupName>
+      <size>32</size>
+      <access>read-write</access>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x1000</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <interrupt><name>UART0_IRQ</name><value>3</value></interrupt>
+
+      <registers>
+        <register>
+          <name>TXDATA</name>
+          <description>Transmit Data Register.</description>
+          <addressOffset>0x000</addressOffset>
+          <fields>
+            <field><name>DATA</name><lsb>0</lsb><msb>7</msb></field>
+            <field><name>FULL</name><lsb>31</lsb><msb>31</msb></field>
+          </fields>
+        </register>
+        <register>
+          <name>RXDATA</name>
+          <description>Receive Data Register.</description>
+          <addressOffset>0x004</addressOffset>
+          <fields>
+            <field><name>DATA</name><lsb>0</lsb><msb>7</msb></field>
+            <field><name>EMPTY</name><lsb>31</lsb><msb>31</msb></field>
+          </fields>
+        </register>
+        <register>
+          <name>TXCTRL</name>
+          <description>Transmit Control Register.</description>
+          <addressOffset>0x008</addressOffset>
+          <fields>
+            <field><name>ENABLE</name><lsb>0</lsb><msb>0</msb></field>
+            <field><name>NSTOP</name><lsb>1</lsb><msb>1</msb></field>
+            <field><name>TXCNT</name><lsb>16</lsb><msb>18</msb></field>
+          </fields>
+        </register>
+        <register>
+          <name>RXCTRL</name>
+          <description>Receive Control Register.</description>
+          <addressOffset>0x00C</addressOffset>
+          <fields>
+            <field><name>ENABLE</name><lsb>0</lsb><msb>0</msb></field>
+            <field><name>RXCNT</name><lsb>16</lsb><msb>18</msb></field>
+          </fields>
+        </register>
+        <register>
+          <name>IP</name>
+          <description>Interrupt Pending Register.</description>
+          <addressOffset>0x0010</addressOffset>
+          <fields>
+            <field><name>TXWM</name><lsb>0</lsb><msb>0</msb></field>
+            <field><name>RXWM</name><lsb>1</lsb><msb>1</msb></field>
+          </fields>
+        </register>
+        <register derivedFrom="IP">
+          <name>IE</name>
+          <description>Interrupt Enable Register.</description>
+          <addressOffset>0x0014</addressOffset>
+        </register>
+        <register>
+          <name>DIV</name>
+          <description>Baud Rate Divisor Register (BAUD = Fin / (DIV + 1)).
+          </description>
+          <addressOffset>0x0018</addressOffset>
+          <fields>
+            <field><name>DIV</name><lsb>0</lsb><msb>15</msb></field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral> <!-- UART0 -->
+    <peripheral derivedFrom="UART0">
+      <name>UART1</name>
+      <description>Universal Asynchronous Receiver/Transmitter.</description>
+      <baseAddress>0x10023000</baseAddress>
+      <groupName>UART</groupName>
+      <interrupt><name>UART1_IRQ</name><value>4</value></interrupt>
+    </peripheral> <!-- UART1 -->
+
+    <peripheral>
+      <name>PWM0</name>
+      <description>Pulse-Width Modulation.</description>
+      <baseAddress>0x10015000</baseAddress>
+      <groupName>PWM</groupName>
+      <size>32</size>
+      <access>read-write</access>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x1000</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <interrupt><name>PWMO_CMP0_IRQ</name><value>40</value></interrupt>
+      <interrupt><name>PWMO_CMP1_IRQ</name><value>41</value></interrupt>
+      <interrupt><name>PWMO_CMP2_IRQ</name><value>42</value></interrupt>
+      <interrupt><name>PWMO_CMP3_IRQ</name><value>43</value></interrupt>
+
+      <registers>
+        <register>
+          <name>CONFIG</name>
+          <description>PWM Configuration Register.</description>
+          <addressOffset>0x000</addressOffset>
+          <fields>
+            <field><name>SCALE</name><lsb>0</lsb><msb>3</msb></field>
+            <field><name>STICKY</name><lsb>8</lsb><msb>8</msb></field>
+            <field><name>ZEROCMP</name><lsb>9</lsb><msb>9</msb></field>
+            <field><name>DEGLITCH</name><lsb>10</lsb><msb>10</msb></field>
+            <field><name>ENALWAYS</name><lsb>12</lsb><msb>12</msb></field>
+            <field><name>ENONESHOT</name><lsb>13</lsb><msb>13</msb></field>
+
+            <field><name>CMP_CENTER0</name><lsb>16</lsb><msb>16</msb></field>
+            <field><name>CMP_CENTER1</name><lsb>17</lsb><msb>17</msb></field>
+            <field><name>CMP_CENTER2</name><lsb>18</lsb><msb>18</msb></field>
+            <field><name>CMP_CENTER3</name><lsb>19</lsb><msb>19</msb></field>
+
+            <field><name>CMP_GANG0</name><lsb>24</lsb><msb>24</msb></field>
+            <field><name>CMP_GANG1</name><lsb>25</lsb><msb>25</msb></field>
+            <field><name>CMP_GANG2</name><lsb>26</lsb><msb>26</msb></field>
+            <field><name>CMP_GANG3</name><lsb>27</lsb><msb>27</msb></field>
+
+            <field><name>CMP_IP0</name><lsb>28</lsb><msb>28</msb></field>
+            <field><name>CMP_IP1</name><lsb>29</lsb><msb>29</msb></field>
+            <field><name>CMP_IP2</name><lsb>30</lsb><msb>30</msb></field>
+            <field><name>CMP_IP3</name><lsb>31</lsb><msb>31</msb></field>
+
+          </fields>
+        </register>
+        <register>
+          <name>COUNT</name>
+          <description>PWM Count Register.</description>
+          <addressOffset>0x008</addressOffset>
+          <fields>
+            <field><name>CNT</name><lsb>0</lsb><msb>30</msb></field>
+          </fields>
+        </register>
+
+        <register>
+          <name>SCALE_COUNT</name>
+          <description>PWM Scaled Counter Register.</description>
+          <addressOffset>0x010</addressOffset>
+          <fields>
+            <field><name>CNT</name><lsb>0</lsb><msb>15</msb></field>
+          </fields>
+        </register>
+
+        <register>
+          <name>COMPARE0</name>
+          <description>PWM Compare Register.</description>
+          <addressOffset>0x020</addressOffset>
+          <fields>
+            <field><name>COMPARE</name><lsb>0</lsb><msb>15</msb></field>
+          </fields>
+        </register>
+        <register derivedFrom="COMPARE0">
+          <name>COMPARE1</name>
+          <addressOffset>0x024</addressOffset>
+        </register>
+        <register derivedFrom="COMPARE0">
+          <name>COMPARE2</name>
+          <addressOffset>0x028</addressOffset>
+        </register>
+        <register derivedFrom="COMPARE0">
+          <name>COMPARE3</name>
+          <addressOffset>0x02C</addressOffset>
+        </register>
+
+      </registers>
+    </peripheral> <!-- PWM0 -->
+    <peripheral derivedFrom="PWM0">
+      <name>PWM1</name>
+      <baseAddress>0x10025000</baseAddress>
+      <groupName>PWM</groupName>
+      <interrupt><name>PWM1_CMP0_IRQ</name><value>44</value></interrupt>
+      <interrupt><name>PWM1_CMP1_IRQ</name><value>45</value></interrupt>
+      <interrupt><name>PWM1_CMP2_IRQ</name><value>46</value></interrupt>
+      <interrupt><name>PWM1_CMP3_IRQ</name><value>47</value></interrupt>
+    </peripheral> <!-- PWM1 -->
+    <peripheral derivedFrom="PWM0">
+      <name>PWM2</name>
+      <baseAddress>0x10035000</baseAddress>
+      <groupName>PWM</groupName>
+      <interrupt><name>PWM2_CMP0_IRQ</name><value>48</value></interrupt>
+      <interrupt><name>PWM2_CMP1_IRQ</name><value>49</value></interrupt>
+      <interrupt><name>PWM2_CMP2_IRQ</name><value>50</value></interrupt>
+      <interrupt><name>PWM2_CMP3_IRQ</name><value>51</value></interrupt>
+    </peripheral> <!-- PWM2 -->
+
+    <peripheral>
+      <name>WDT</name>
+      <description>Watchdog Timer.</description>
+      <baseAddress>0x10000000</baseAddress>
+      <groupName>WDT</groupName>
+      <size>32</size>
+      <access>read-write</access>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x40</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <interrupt><name>Watchdog_IRQ</name><value>1</value></interrupt>
+
+      <registers>
+
+        <register>
+          <name>COUNT</name>
+          <description>Watchdog Count Register.</description>
+          <addressOffset>0x08</addressOffset>
+          <fields>
+            <field><name>CNT</name><lsb>0</lsb><msb>30</msb></field>
+          </fields>
+        </register>
+
+        <register>
+          <name>CONFIG</name>
+          <description>Watchdog Configuration Register.</description>
+          <addressOffset>0x00</addressOffset>
+          <fields>
+            <field><name>SCALE</name><lsb>0</lsb><msb>3</msb></field>
+            <field><name>RSTEN</name><lsb>8</lsb><msb>8</msb></field>
+            <field><name>ZEROCMP</name><lsb>9</lsb><msb>9</msb></field>
+            <field><name>ENALWAYS</name><lsb>12</lsb><msb>12</msb></field>
+            <field><name>ENCOREAWAKE</name><lsb>13</lsb><msb>13</msb></field>
+            <field><name>CMP_IP</name><lsb>28</lsb><msb>28</msb></field>
+          </fields>
+        </register>
+
+        <register>
+          <name>SCALE_COUNT</name>
+          <description>Watchdog Scaled Counter Register.</description>
+          <addressOffset>0x10</addressOffset>
+          <fields>
+            <field><name>CNT</name><lsb>0</lsb><msb>15</msb></field>
+          </fields>
+        </register>
+
+        <register>
+          <name>COMPARE</name>
+          <description>Watchdog Compare Register.</description>
+          <addressOffset>0x20</addressOffset>
+          <fields>
+            <field><name>CMP</name><lsb>0</lsb><msb>15</msb></field>
+          </fields>
+        </register>
+
+        <register>
+          <name>KEY</name>
+          <description>Watchdog Key Register.</description>
+          <addressOffset>0x1C</addressOffset>
+        </register>
+
+        <register>
+          <name>FEED</name>
+          <description>Watchdog Feed Address.</description>
+          <addressOffset>0x18</addressOffset>
+        </register>
+
+      </registers>
+    </peripheral> <!-- WDT -->
+
+    <peripheral>
+      <name>RTC</name>
+      <description>Real-Time Clock.</description>
+      <baseAddress>0x10000040</baseAddress>
+      <groupName>RTC</groupName>
+      <size>32</size>
+      <access>read-write</access>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x30</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <interrupt><name>RTC_IRQ</name><value>2</value></interrupt>
+
+      <registers>
+
+        <register>
+          <name>HI</name>
+          <description>RTC Count Register High.</description>
+          <addressOffset>0x0C</addressOffset>
+          <fields>
+            <field><name>CNT</name><lsb>0</lsb><msb>15</msb></field>
+          </fields>
+        </register>
+
+        <register>
+          <name>LO</name>
+          <description>RTC Count Register Low.</description>
+          <addressOffset>0x08</addressOffset>
+        </register>
+
+        <register>
+          <name>CONFIG</name>
+          <description>RTC Configuration Register.</description>
+          <addressOffset>0x00</addressOffset>
+          <fields>
+            <field><name>SCALE</name><lsb>0</lsb><msb>3</msb></field>
+            <field><name>ENALWAYS</name><lsb>12</lsb><msb>12</msb></field>
+            <field><name>CMP_IP</name><lsb>28</lsb><msb>28</msb></field>
+          </fields>
+        </register>
+
+        <register>
+          <name>SCALE_COUNT</name>
+          <description>RTC Scaled Counter Register.</description>
+          <addressOffset>0x10</addressOffset>
+        </register>
+
+        <register>
+          <name>COMPARE</name>
+          <description>RTC Compare Register.</description>
+          <addressOffset>0x20</addressOffset>
+        </register>
+
+      </registers>
+    </peripheral> <!-- RTC -->
+
+    <peripheral>
+      <name>AON</name>
+      <description>AON Clock Configuration.</description>
+      <baseAddress>0x10000070</baseAddress>
+      <groupName>AON</groupName>
+      <size>32</size>
+      <access>read-write</access>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x10</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <registers>
+
+        <register>
+          <name>LFROSCCFG</name>
+          <description>LF Ring Oscillator Configuration Register.</description>
+          <addressOffset>0x0</addressOffset>
+          <fields>
+            <field><name>DIV</name><lsb>0</lsb><msb>5</msb></field>
+            <field><name>TRIM</name><lsb>16</lsb><msb>20</msb></field>
+            <field><name>ENABLE</name><lsb>30</lsb><msb>30</msb></field>
+            <field><name>READY</name><lsb>31</lsb><msb>31</msb></field>
+          </fields>
+        </register>
+
+      </registers>
+    </peripheral> <!-- AON -->
+
+    <peripheral>
+      <name>BACKUP</name>
+      <description>Backup Registers.</description>
+      <baseAddress>0x10000080</baseAddress>
+      <groupName>BACKUP</groupName>
+      <size>32</size>
+      <access>read-write</access>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x80</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <registers>
+
+        <register>
+          <dim>32</dim>
+          <dimIncrement>4</dimIncrement>
+          <name>Backup[%s]</name>
+          <addressOffset>0x00</addressOffset>
+        </register>
+
+      </registers>
+    </peripheral> <!-- BACKUP -->
+
+    <peripheral>
+      <name>PMU</name>
+      <description>Power Management Unit.</description>
+      <baseAddress>0x10000100</baseAddress>
+      <groupName>PMU</groupName>
+      <size>32</size>
+      <access>read-write</access>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x50</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <registers>
+
+        <register>
+          <dim>8</dim>
+          <dimIncrement>4</dimIncrement>
+          <name>WAKEUPI[%s]</name>
+          <description>Wakeup program instructions.</description>
+          <addressOffset>0x00</addressOffset>
+          <fields>
+            <field><name>DELAY</name><lsb>0</lsb><msb>3</msb></field>
+            <field><name>PMU_OUT_0</name><lsb>4</lsb><msb>4</msb></field>
+            <field><name>PMU_OUT_1</name><lsb>5</lsb><msb>5</msb></field>
+            <field><name>CORERST</name><lsb>7</lsb><msb>7</msb></field>
+            <field><name>HFCLKRST</name><lsb>8</lsb><msb>8</msb></field>
+          </fields>
+        </register>
+
+        <register derivedFrom="WAKEUPI[%s]">
+          <name>SLEEPI[%s]</name>
+          <description>Sleep program instructions.</description>
+          <addressOffset>0x20</addressOffset>
+        </register>
+
+        <register>
+          <name>IE</name>
+          <description>PMU interrupt enables.</description>
+          <addressOffset>0x40</addressOffset>
+          <fields>
+            <field><name>RTC</name><lsb>1</lsb><msb>1</msb></field>
+            <field><name>DWAKEUP</name><lsb>2</lsb><msb>2</msb></field>
+          </fields>
+        </register>
+
+        <register>
+          <name>CAUSE</name>
+          <description>PMU wakeup cause.</description>
+          <addressOffset>0x44</addressOffset>
+          <fields>
+            <field>
+              <name>WAKEUP_CAUSE</name><lsb>0</lsb><msb>1</msb>
+              <enumeratedValues>
+                <name>Wakeup_Cause_Values</name>
+                <enumeratedValue>
+                  <name>Reset</name>
+                  <description>Reset.</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>RTC</name>
+                  <description>RTC Wakeup.</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>DWakeup</name>
+                  <description>Digital input wakeup.</description>
+                  <value>2</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RESET_CAUSE</name><lsb>8</lsb><msb>9</msb>
+              <enumeratedValues>
+                <name>Reset_Cause_Values</name>
+                <enumeratedValue>
+                  <name>External</name>
+                  <description>External reset.</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Watchdog</name>
+                  <description>Watchdog timer reset.</description>
+                  <value>2</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+
+        <register>
+          <name>SLEEP</name>
+          <description>Initiate sleep sequence.</description>
+          <addressOffset>0x48</addressOffset>
+        </register>
+
+        <register>
+          <name>KEY</name>
+          <description>PMU key register.</description>
+          <addressOffset>0x4C</addressOffset>
+        </register>
+
+      </registers>
+    </peripheral> <!-- PMU -->
+
+  </peripherals>
+</device>
