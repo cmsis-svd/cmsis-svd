@@ -2,10 +2,10 @@
 <device schemaVersion="1.2" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="CMSIS-SVD.xsd">
   <vendor>Atmel Corporation</vendor>
   <vendorID>ATMEL</vendorID>
-  <name>ATSAMR21E17A</name>
+  <name>ATSAMR21E19A</name>
   <series>SAMR21</series>
   <version>D</version>
-  <description>Atmel ATSAMR21E17A device: Cortex-M0+ Microcontroller with 128KB Flash, 32KB SRAM, 233-pin package (refer to http://www.atmel.com/devices/SAMR21E17A.aspx for more)</description>
+  <description>Atmel ATSAMR21E19A device: Cortex-M0+ Microcontroller with 256KB Flash, 32KB SRAM, SIP48_RF233_FL512KB-pin package (refer to http://www.atmel.com/devices/SAMR21E19A.aspx for more)</description>
   <licenseText>
   ============================================================================\n
                    Atmel Microcontroller Software Support\n
@@ -3068,7 +3068,7 @@
           <addressOffset>0x0018</addressOffset>
           <size>32</size>
           <access>read-only</access>
-          <resetValue>0x1001031D</resetValue>
+          <resetValue>0x10010318</resetValue>
           <fields>
             <field>
               <name>DEVSEL</name>
