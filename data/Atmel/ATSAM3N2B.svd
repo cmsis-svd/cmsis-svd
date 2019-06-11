@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!-- ============================================================================ -->
 <!--                  Atmel Microcontroller Software Support                      -->
 <!--                       SAM Software Package License                           -->
 <!-- ============================================================================ -->
-<!-- Copyright (c) 2013, Atmel Corporation                                        -->
+<!-- Copyright (c) %copyright_year%, Atmel Corporation                                        -->
 <!--                                                                              -->
 <!-- All rights reserved.                                                         -->
 <!--                                                                              -->
@@ -27,12 +28,13 @@
 <!-- NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, -->
 <!-- EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                           -->
 <!-- ============================================================================ -->
+
 <device xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="1.1" xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
   <vendor>Atmel</vendor>
   <name>ATSAM3N2B</name>
   <series>SAM3N</series>
-  <version>20130131</version>
-  <description>Atmel ATSAM3N2B device: Cortex-M3 Microcontroller with 128KB Flash, 64 Pins (refer to http://www.atmel.com/devices/SAM3N2B.aspx for more)</description>
+  <version>0</version>
+  <description>Atmel ATSAM3N2B Microcontroller</description>
   <cpu>
     <name>CM3</name>
     <revision>r2p0</revision>
@@ -824,7 +826,7 @@
     </peripheral>
     <peripheral>
       <name>TC0</name>
-      <version>6082Q</version>
+      <version>6082ZF</version>
       <description>Timer Counter 0</description>
       <groupName>TC</groupName>
       <prependToName>TC0_</prependToName>
@@ -894,27 +896,27 @@
               <enumeratedValues>
                 <enumeratedValue>
                   <name>TIMER_CLOCK1</name>
-                  <description>Clock selected: TCLK1</description>
+                  <description>Clock selected: internal MCK/2 clock signal (from PMC)</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>TIMER_CLOCK2</name>
-                  <description>Clock selected: TCLK2</description>
+                  <description>Clock selected: internal MCK/8 clock signal (from PMC)</description>
                   <value>0x1</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>TIMER_CLOCK3</name>
-                  <description>Clock selected: TCLK3</description>
+                  <description>Clock selected: internal MCK/32 clock signal (from PMC)</description>
                   <value>0x2</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>TIMER_CLOCK4</name>
-                  <description>Clock selected: TCLK4</description>
+                  <description>Clock selected: internal MCK/128 clock signal (from PMC)</description>
                   <value>0x3</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>TIMER_CLOCK5</name>
-                  <description>Clock selected: TCLK5</description>
+                  <description>Clock selected: internal SLCK clock signal (from PMC)</description>
                   <value>0x4</value>
                 </enumeratedValue>
                 <enumeratedValue>
@@ -1095,9 +1097,9 @@
           </fields>
         </register>
         <register>
-          <name>CMR0_WAVE_EQ_1</name>
+          <name>CMR0_WAVEFORM_MODE</name>
           <description>Channel Mode Register (channel = 0)</description>
-          <alternateGroup>WAVE_EQ_1</alternateGroup>
+          <alternateGroup>WAVEFORM_MODE</alternateGroup>
           <addressOffset>0x00000004</addressOffset>
           <size>32</size>
           <access>read-write</access>
@@ -1112,27 +1114,27 @@
               <enumeratedValues>
                 <enumeratedValue>
                   <name>TIMER_CLOCK1</name>
-                  <description>Clock selected: TCLK1</description>
+                  <description>Clock selected: internal MCK/2 clock signal (from PMC)</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>TIMER_CLOCK2</name>
-                  <description>Clock selected: TCLK2</description>
+                  <description>Clock selected: internal MCK/8 clock signal (from PMC)</description>
                   <value>0x1</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>TIMER_CLOCK3</name>
-                  <description>Clock selected: TCLK3</description>
+                  <description>Clock selected: internal MCK/32 clock signal (from PMC)</description>
                   <value>0x2</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>TIMER_CLOCK4</name>
-                  <description>Clock selected: TCLK4</description>
+                  <description>Clock selected: internal MCK/128 clock signal (from PMC)</description>
                   <value>0x3</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>TIMER_CLOCK5</name>
-                  <description>Clock selected: TCLK5</description>
+                  <description>Clock selected: internal SLCK clock signal (from PMC)</description>
                   <value>0x4</value>
                 </enumeratedValue>
                 <enumeratedValue>
@@ -1554,7 +1556,7 @@
             </field>
             <field>
               <name>DOWN</name>
-              <description>DOWN Count</description>
+              <description>Down Count</description>
               <bitOffset>1</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
@@ -1639,56 +1641,56 @@
           <fields>
             <field>
               <name>COVFS</name>
-              <description>Counter Overflow Status</description>
+              <description>Counter Overflow Status (cleared on read)</description>
               <bitOffset>0</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
             </field>
             <field>
               <name>LOVRS</name>
-              <description>Load Overrun Status</description>
+              <description>Load Overrun Status (cleared on read)</description>
               <bitOffset>1</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
             </field>
             <field>
               <name>CPAS</name>
-              <description>RA Compare Status</description>
+              <description>RA Compare Status (cleared on read)</description>
               <bitOffset>2</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
             </field>
             <field>
               <name>CPBS</name>
-              <description>RB Compare Status</description>
+              <description>RB Compare Status (cleared on read)</description>
               <bitOffset>3</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
             </field>
             <field>
               <name>CPCS</name>
-              <description>RC Compare Status</description>
+              <description>RC Compare Status (cleared on read)</description>
               <bitOffset>4</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
             </field>
             <field>
               <name>LDRAS</name>
-              <description>RA Loading Status</description>
+              <description>RA Loading Status (cleared on read)</description>
               <bitOffset>5</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
             </field>
             <field>
               <name>LDRBS</name>
-              <description>RB Loading Status</description>
+              <description>RB Loading Status (cleared on read)</description>
               <bitOffset>6</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
             </field>
             <field>
               <name>ETRGS</name>
-              <description>External Trigger Status</description>
+              <description>External Trigger Status (cleared on read)</description>
               <bitOffset>7</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
@@ -1959,27 +1961,27 @@
               <enumeratedValues>
                 <enumeratedValue>
                   <name>TIMER_CLOCK1</name>
-                  <description>Clock selected: TCLK1</description>
+                  <description>Clock selected: internal MCK/2 clock signal (from PMC)</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>TIMER_CLOCK2</name>
-                  <description>Clock selected: TCLK2</description>
+                  <description>Clock selected: internal MCK/8 clock signal (from PMC)</description>
                   <value>0x1</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>TIMER_CLOCK3</name>
-                  <description>Clock selected: TCLK3</description>
+                  <description>Clock selected: internal MCK/32 clock signal (from PMC)</description>
                   <value>0x2</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>TIMER_CLOCK4</name>
-                  <description>Clock selected: TCLK4</description>
+                  <description>Clock selected: internal MCK/128 clock signal (from PMC)</description>
                   <value>0x3</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>TIMER_CLOCK5</name>
-                  <description>Clock selected: TCLK5</description>
+                  <description>Clock selected: internal SLCK clock signal (from PMC)</description>
                   <value>0x4</value>
                 </enumeratedValue>
                 <enumeratedValue>
@@ -2160,9 +2162,9 @@
           </fields>
         </register>
         <register>
-          <name>CMR1_WAVE_EQ_1</name>
+          <name>CMR1_WAVEFORM_MODE</name>
           <description>Channel Mode Register (channel = 1)</description>
-          <alternateGroup>WAVE_EQ_1</alternateGroup>
+          <alternateGroup>WAVEFORM_MODE</alternateGroup>
           <addressOffset>0x00000044</addressOffset>
           <size>32</size>
           <access>read-write</access>
@@ -2177,27 +2179,27 @@
               <enumeratedValues>
                 <enumeratedValue>
                   <name>TIMER_CLOCK1</name>
-                  <description>Clock selected: TCLK1</description>
+                  <description>Clock selected: internal MCK/2 clock signal (from PMC)</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>TIMER_CLOCK2</name>
-                  <description>Clock selected: TCLK2</description>
+                  <description>Clock selected: internal MCK/8 clock signal (from PMC)</description>
                   <value>0x1</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>TIMER_CLOCK3</name>
-                  <description>Clock selected: TCLK3</description>
+                  <description>Clock selected: internal MCK/32 clock signal (from PMC)</description>
                   <value>0x2</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>TIMER_CLOCK4</name>
-                  <description>Clock selected: TCLK4</description>
+                  <description>Clock selected: internal MCK/128 clock signal (from PMC)</description>
                   <value>0x3</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>TIMER_CLOCK5</name>
-                  <description>Clock selected: TCLK5</description>
+                  <description>Clock selected: internal SLCK clock signal (from PMC)</description>
                   <value>0x4</value>
                 </enumeratedValue>
                 <enumeratedValue>
@@ -2619,7 +2621,7 @@
             </field>
             <field>
               <name>DOWN</name>
-              <description>DOWN Count</description>
+              <description>Down Count</description>
               <bitOffset>1</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
@@ -2704,56 +2706,56 @@
           <fields>
             <field>
               <name>COVFS</name>
-              <description>Counter Overflow Status</description>
+              <description>Counter Overflow Status (cleared on read)</description>
               <bitOffset>0</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
             </field>
             <field>
               <name>LOVRS</name>
-              <description>Load Overrun Status</description>
+              <description>Load Overrun Status (cleared on read)</description>
               <bitOffset>1</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
             </field>
             <field>
               <name>CPAS</name>
-              <description>RA Compare Status</description>
+              <description>RA Compare Status (cleared on read)</description>
               <bitOffset>2</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
             </field>
             <field>
               <name>CPBS</name>
-              <description>RB Compare Status</description>
+              <description>RB Compare Status (cleared on read)</description>
               <bitOffset>3</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
             </field>
             <field>
               <name>CPCS</name>
-              <description>RC Compare Status</description>
+              <description>RC Compare Status (cleared on read)</description>
               <bitOffset>4</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
             </field>
             <field>
               <name>LDRAS</name>
-              <description>RA Loading Status</description>
+              <description>RA Loading Status (cleared on read)</description>
               <bitOffset>5</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
             </field>
             <field>
               <name>LDRBS</name>
-              <description>RB Loading Status</description>
+              <description>RB Loading Status (cleared on read)</description>
               <bitOffset>6</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
             </field>
             <field>
               <name>ETRGS</name>
-              <description>External Trigger Status</description>
+              <description>External Trigger Status (cleared on read)</description>
               <bitOffset>7</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
@@ -3024,27 +3026,27 @@
               <enumeratedValues>
                 <enumeratedValue>
                   <name>TIMER_CLOCK1</name>
-                  <description>Clock selected: TCLK1</description>
+                  <description>Clock selected: internal MCK/2 clock signal (from PMC)</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>TIMER_CLOCK2</name>
-                  <description>Clock selected: TCLK2</description>
+                  <description>Clock selected: internal MCK/8 clock signal (from PMC)</description>
                   <value>0x1</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>TIMER_CLOCK3</name>
-                  <description>Clock selected: TCLK3</description>
+                  <description>Clock selected: internal MCK/32 clock signal (from PMC)</description>
                   <value>0x2</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>TIMER_CLOCK4</name>
-                  <description>Clock selected: TCLK4</description>
+                  <description>Clock selected: internal MCK/128 clock signal (from PMC)</description>
                   <value>0x3</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>TIMER_CLOCK5</name>
-                  <description>Clock selected: TCLK5</description>
+                  <description>Clock selected: internal SLCK clock signal (from PMC)</description>
                   <value>0x4</value>
                 </enumeratedValue>
                 <enumeratedValue>
@@ -3225,9 +3227,9 @@
           </fields>
         </register>
         <register>
-          <name>CMR2_WAVE_EQ_1</name>
+          <name>CMR2_WAVEFORM_MODE</name>
           <description>Channel Mode Register (channel = 2)</description>
-          <alternateGroup>WAVE_EQ_1</alternateGroup>
+          <alternateGroup>WAVEFORM_MODE</alternateGroup>
           <addressOffset>0x00000084</addressOffset>
           <size>32</size>
           <access>read-write</access>
@@ -3242,27 +3244,27 @@
               <enumeratedValues>
                 <enumeratedValue>
                   <name>TIMER_CLOCK1</name>
-                  <description>Clock selected: TCLK1</description>
+                  <description>Clock selected: internal MCK/2 clock signal (from PMC)</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>TIMER_CLOCK2</name>
-                  <description>Clock selected: TCLK2</description>
+                  <description>Clock selected: internal MCK/8 clock signal (from PMC)</description>
                   <value>0x1</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>TIMER_CLOCK3</name>
-                  <description>Clock selected: TCLK3</description>
+                  <description>Clock selected: internal MCK/32 clock signal (from PMC)</description>
                   <value>0x2</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>TIMER_CLOCK4</name>
-                  <description>Clock selected: TCLK4</description>
+                  <description>Clock selected: internal MCK/128 clock signal (from PMC)</description>
                   <value>0x3</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>TIMER_CLOCK5</name>
-                  <description>Clock selected: TCLK5</description>
+                  <description>Clock selected: internal SLCK clock signal (from PMC)</description>
                   <value>0x4</value>
                 </enumeratedValue>
                 <enumeratedValue>
@@ -3684,7 +3686,7 @@
             </field>
             <field>
               <name>DOWN</name>
-              <description>DOWN Count</description>
+              <description>Down Count</description>
               <bitOffset>1</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
@@ -3769,56 +3771,56 @@
           <fields>
             <field>
               <name>COVFS</name>
-              <description>Counter Overflow Status</description>
+              <description>Counter Overflow Status (cleared on read)</description>
               <bitOffset>0</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
             </field>
             <field>
               <name>LOVRS</name>
-              <description>Load Overrun Status</description>
+              <description>Load Overrun Status (cleared on read)</description>
               <bitOffset>1</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
             </field>
             <field>
               <name>CPAS</name>
-              <description>RA Compare Status</description>
+              <description>RA Compare Status (cleared on read)</description>
               <bitOffset>2</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
             </field>
             <field>
               <name>CPBS</name>
-              <description>RB Compare Status</description>
+              <description>RB Compare Status (cleared on read)</description>
               <bitOffset>3</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
             </field>
             <field>
               <name>CPCS</name>
-              <description>RC Compare Status</description>
+              <description>RC Compare Status (cleared on read)</description>
               <bitOffset>4</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
             </field>
             <field>
               <name>LDRAS</name>
-              <description>RA Loading Status</description>
+              <description>RA Loading Status (cleared on read)</description>
               <bitOffset>5</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
             </field>
             <field>
               <name>LDRBS</name>
-              <description>RB Loading Status</description>
+              <description>RB Loading Status (cleared on read)</description>
               <bitOffset>6</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
             </field>
             <field>
               <name>ETRGS</name>
-              <description>External Trigger Status</description>
+              <description>External Trigger Status (cleared on read)</description>
               <bitOffset>7</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
@@ -4127,96 +4129,90 @@
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>TIOA1</name>
-                  <description>Signal connected to XC2: TIOA1</description>
+                  <name>TIOA0</name>
+                  <description>Signal connected to XC2: TIOA0</description>
                   <value>0x2</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>TIOA2</name>
-                  <description>Signal connected to XC2: TIOA2</description>
+                  <name>TIOA1</name>
+                  <description>Signal connected to XC2: TIOA1</description>
                   <value>0x3</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>QDEN</name>
-              <description>Quadrature Decoder ENabled</description>
+              <description>Quadrature Decoder Enabled</description>
               <bitOffset>8</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>POSEN</name>
-              <description>POSition ENabled</description>
+              <description>Position Enabled</description>
               <bitOffset>9</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>SPEEDEN</name>
-              <description>SPEED ENabled</description>
+              <description>Speed Enabled</description>
               <bitOffset>10</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>QDTRANS</name>
-              <description>Quadrature Decoding TRANSparent</description>
+              <description>Quadrature Decoding Transparent</description>
               <bitOffset>11</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>EDGPHA</name>
-              <description>EDGe on PHA count mode</description>
+              <description>Edge on PHA Count Mode</description>
               <bitOffset>12</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>INVA</name>
-              <description>INVerted phA</description>
+              <description>Inverted PHA</description>
               <bitOffset>13</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>INVB</name>
-              <description>INVerted phB</description>
+              <description>Inverted PHB</description>
               <bitOffset>14</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>INVIDX</name>
-              <description>INVerted InDeX</description>
+              <description>Inverted Index</description>
               <bitOffset>15</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>SWAP</name>
-              <description>SWAP PHA and PHB</description>
+              <description>Swap PHA and PHB</description>
               <bitOffset>16</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>IDXPHB</name>
-              <description>InDeX pin is PHB pin</description>
+              <description>Index Pin is PHB Pin</description>
               <bitOffset>17</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
-              <name>FILTER</name>
-              <bitOffset>19</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
               <name>MAXFILT</name>
-              <description>MAXimum FILTer</description>
+              <description>Maximum Filter</description>
               <bitOffset>20</bitOffset>
               <bitWidth>6</bitWidth>
               <access>read-write</access>
@@ -4232,21 +4228,21 @@
           <fields>
             <field>
               <name>IDX</name>
-              <description>InDeX</description>
+              <description>Index</description>
               <bitOffset>0</bitOffset>
               <bitWidth>1</bitWidth>
               <access>write-only</access>
             </field>
             <field>
               <name>DIRCHG</name>
-              <description>DIRection CHanGe</description>
+              <description>Direction Change</description>
               <bitOffset>1</bitOffset>
               <bitWidth>1</bitWidth>
               <access>write-only</access>
             </field>
             <field>
               <name>QERR</name>
-              <description>Quadrature ERRor</description>
+              <description>Quadrature Error</description>
               <bitOffset>2</bitOffset>
               <bitWidth>1</bitWidth>
               <access>write-only</access>
@@ -4262,21 +4258,21 @@
           <fields>
             <field>
               <name>IDX</name>
-              <description>InDeX</description>
+              <description>Index</description>
               <bitOffset>0</bitOffset>
               <bitWidth>1</bitWidth>
               <access>write-only</access>
             </field>
             <field>
               <name>DIRCHG</name>
-              <description>DIRection CHanGe</description>
+              <description>Direction Change</description>
               <bitOffset>1</bitOffset>
               <bitWidth>1</bitWidth>
               <access>write-only</access>
             </field>
             <field>
               <name>QERR</name>
-              <description>Quadrature ERRor</description>
+              <description>Quadrature Error</description>
               <bitOffset>2</bitOffset>
               <bitWidth>1</bitWidth>
               <access>write-only</access>
@@ -4293,21 +4289,21 @@
           <fields>
             <field>
               <name>IDX</name>
-              <description>InDeX</description>
+              <description>Index</description>
               <bitOffset>0</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
             </field>
             <field>
               <name>DIRCHG</name>
-              <description>DIRection CHanGe</description>
+              <description>Direction Change</description>
               <bitOffset>1</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
             </field>
             <field>
               <name>QERR</name>
-              <description>Quadrature ERRor</description>
+              <description>Quadrature Error</description>
               <bitOffset>2</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
@@ -4324,28 +4320,28 @@
           <fields>
             <field>
               <name>IDX</name>
-              <description>InDeX</description>
+              <description>Index</description>
               <bitOffset>0</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
             </field>
             <field>
               <name>DIRCHG</name>
-              <description>DIRection CHanGe</description>
+              <description>Direction Change</description>
               <bitOffset>1</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
             </field>
             <field>
               <name>QERR</name>
-              <description>Quadrature ERRor</description>
+              <description>Quadrature Error</description>
               <bitOffset>2</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
             </field>
             <field>
               <name>DIR</name>
-              <description>DIRection</description>
+              <description>Direction</description>
               <bitOffset>8</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-only</access>
@@ -4354,7 +4350,7 @@
         </register>
         <register>
           <name>WPMR</name>
-          <description>Write Protect Mode Register</description>
+          <description>Write Protection Mode Register</description>
           <addressOffset>0x000000E4</addressOffset>
           <size>32</size>
           <access>read-write</access>
@@ -4362,17 +4358,24 @@
           <fields>
             <field>
               <name>WPEN</name>
-              <description>Write Protect Enable</description>
+              <description>Write Protection Enable</description>
               <bitOffset>0</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>WPKEY</name>
-              <description>Write Protect KEY</description>
+              <description>Write Protection Key</description>
               <bitOffset>8</bitOffset>
               <bitWidth>24</bitWidth>
               <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>PASSWD</name>
+                  <description>Writing any other value in this field aborts the write operation of the WPEN bit.Always reads as 0.</description>
+                  <value>0x54494D</value>
+                </enumeratedValue>
+              </enumeratedValues>
             </field>
           </fields>
         </register>
@@ -12692,7 +12695,7 @@
     </peripheral>
     <peripheral>
       <name>PMC</name>
-      <version>11116C</version>
+      <version>11116G</version>
       <description>Power Management Controller</description>
       <baseAddress>0x400E0400</baseAddress>
       <addressBlock>
@@ -12803,55 +12806,6 @@
           <size>32</size>
           <access>write-only</access>
           <fields>
-            <field>
-              <name>PID2</name>
-              <description>Peripheral Clock 2 Enable</description>
-              <bitOffset>2</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>write-only</access>
-            </field>
-            <field>
-              <name>PID3</name>
-              <description>Peripheral Clock 3 Enable</description>
-              <bitOffset>3</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>write-only</access>
-            </field>
-            <field>
-              <name>PID4</name>
-              <description>Peripheral Clock 4 Enable</description>
-              <bitOffset>4</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>write-only</access>
-            </field>
-            <field>
-              <name>PID5</name>
-              <description>Peripheral Clock 5 Enable</description>
-              <bitOffset>5</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>write-only</access>
-            </field>
-            <field>
-              <name>PID6</name>
-              <description>Peripheral Clock 6 Enable</description>
-              <bitOffset>6</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>write-only</access>
-            </field>
-            <field>
-              <name>PID7</name>
-              <description>Peripheral Clock 7 Enable</description>
-              <bitOffset>7</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>write-only</access>
-            </field>
-            <field>
-              <name>PID8</name>
-              <description>Peripheral Clock 8 Enable</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>write-only</access>
-            </field>
             <field>
               <name>PID9</name>
               <description>Peripheral Clock 9 Enable</description>
@@ -12994,55 +12948,6 @@
           <size>32</size>
           <access>write-only</access>
           <fields>
-            <field>
-              <name>PID2</name>
-              <description>Peripheral Clock 2 Disable</description>
-              <bitOffset>2</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>write-only</access>
-            </field>
-            <field>
-              <name>PID3</name>
-              <description>Peripheral Clock 3 Disable</description>
-              <bitOffset>3</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>write-only</access>
-            </field>
-            <field>
-              <name>PID4</name>
-              <description>Peripheral Clock 4 Disable</description>
-              <bitOffset>4</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>write-only</access>
-            </field>
-            <field>
-              <name>PID5</name>
-              <description>Peripheral Clock 5 Disable</description>
-              <bitOffset>5</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>write-only</access>
-            </field>
-            <field>
-              <name>PID6</name>
-              <description>Peripheral Clock 6 Disable</description>
-              <bitOffset>6</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>write-only</access>
-            </field>
-            <field>
-              <name>PID7</name>
-              <description>Peripheral Clock 7 Disable</description>
-              <bitOffset>7</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>write-only</access>
-            </field>
-            <field>
-              <name>PID8</name>
-              <description>Peripheral Clock 8 Disable</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>write-only</access>
-            </field>
             <field>
               <name>PID9</name>
               <description>Peripheral Clock 9 Disable</description>
@@ -13187,55 +13092,6 @@
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>PID2</name>
-              <description>Peripheral Clock 2 Status</description>
-              <bitOffset>2</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>PID3</name>
-              <description>Peripheral Clock 3 Status</description>
-              <bitOffset>3</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>PID4</name>
-              <description>Peripheral Clock 4 Status</description>
-              <bitOffset>4</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>PID5</name>
-              <description>Peripheral Clock 5 Status</description>
-              <bitOffset>5</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>PID6</name>
-              <description>Peripheral Clock 6 Status</description>
-              <bitOffset>6</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>PID7</name>
-              <description>Peripheral Clock 7 Status</description>
-              <bitOffset>7</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>PID8</name>
-              <description>Peripheral Clock 8 Status</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-only</access>
-            </field>
-            <field>
               <name>PID9</name>
               <description>Peripheral Clock 9 Status</description>
               <bitOffset>9</bitOffset>
@@ -13376,7 +13232,7 @@
           <addressOffset>0x00000020</addressOffset>
           <size>32</size>
           <access>read-write</access>
-          <resetValue>0x00000001</resetValue>
+          <resetValue>0x00000008</resetValue>
           <fields>
             <field>
               <name>MOSCXTEN</name>
@@ -14003,7 +13859,7 @@
         </register>
         <register>
           <name>PMC_FSMR</name>
-          <description>Fast Startup Mode Register</description>
+          <description>Fast Start-up Mode Register</description>
           <addressOffset>0x00000070</addressOffset>
           <size>32</size>
           <access>read-write</access>
@@ -14011,112 +13867,112 @@
           <fields>
             <field>
               <name>FSTT0</name>
-              <description>Fast Startup Input Enable 0</description>
+              <description>Fast Start-up Input Enable 0</description>
               <bitOffset>0</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>FSTT1</name>
-              <description>Fast Startup Input Enable 1</description>
+              <description>Fast Start-up Input Enable 1</description>
               <bitOffset>1</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>FSTT2</name>
-              <description>Fast Startup Input Enable 2</description>
+              <description>Fast Start-up Input Enable 2</description>
               <bitOffset>2</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>FSTT3</name>
-              <description>Fast Startup Input Enable 3</description>
+              <description>Fast Start-up Input Enable 3</description>
               <bitOffset>3</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>FSTT4</name>
-              <description>Fast Startup Input Enable 4</description>
+              <description>Fast Start-up Input Enable 4</description>
               <bitOffset>4</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>FSTT5</name>
-              <description>Fast Startup Input Enable 5</description>
+              <description>Fast Start-up Input Enable 5</description>
               <bitOffset>5</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>FSTT6</name>
-              <description>Fast Startup Input Enable 6</description>
+              <description>Fast Start-up Input Enable 6</description>
               <bitOffset>6</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>FSTT7</name>
-              <description>Fast Startup Input Enable 7</description>
+              <description>Fast Start-up Input Enable 7</description>
               <bitOffset>7</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>FSTT8</name>
-              <description>Fast Startup Input Enable 8</description>
+              <description>Fast Start-up Input Enable 8</description>
               <bitOffset>8</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>FSTT9</name>
-              <description>Fast Startup Input Enable 9</description>
+              <description>Fast Start-up Input Enable 9</description>
               <bitOffset>9</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>FSTT10</name>
-              <description>Fast Startup Input Enable 10</description>
+              <description>Fast Start-up Input Enable 10</description>
               <bitOffset>10</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>FSTT11</name>
-              <description>Fast Startup Input Enable 11</description>
+              <description>Fast Start-up Input Enable 11</description>
               <bitOffset>11</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>FSTT12</name>
-              <description>Fast Startup Input Enable 12</description>
+              <description>Fast Start-up Input Enable 12</description>
               <bitOffset>12</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>FSTT13</name>
-              <description>Fast Startup Input Enable 13</description>
+              <description>Fast Start-up Input Enable 13</description>
               <bitOffset>13</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>FSTT14</name>
-              <description>Fast Startup Input Enable 14</description>
+              <description>Fast Start-up Input Enable 14</description>
               <bitOffset>14</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>FSTT15</name>
-              <description>Fast Startup Input Enable 15</description>
+              <description>Fast Start-up Input Enable 15</description>
               <bitOffset>15</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
@@ -14146,7 +14002,7 @@
         </register>
         <register>
           <name>PMC_FSPR</name>
-          <description>Fast Startup Polarity Register</description>
+          <description>Fast Start-up Polarity Register</description>
           <addressOffset>0x00000074</addressOffset>
           <size>32</size>
           <access>read-write</access>
@@ -14154,112 +14010,112 @@
           <fields>
             <field>
               <name>FSTP0</name>
-              <description>Fast Startup Input Polarityx</description>
+              <description>Fast Start-up Input Polarityx</description>
               <bitOffset>0</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>FSTP1</name>
-              <description>Fast Startup Input Polarityx</description>
+              <description>Fast Start-up Input Polarityx</description>
               <bitOffset>1</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>FSTP2</name>
-              <description>Fast Startup Input Polarityx</description>
+              <description>Fast Start-up Input Polarityx</description>
               <bitOffset>2</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>FSTP3</name>
-              <description>Fast Startup Input Polarityx</description>
+              <description>Fast Start-up Input Polarityx</description>
               <bitOffset>3</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>FSTP4</name>
-              <description>Fast Startup Input Polarityx</description>
+              <description>Fast Start-up Input Polarityx</description>
               <bitOffset>4</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>FSTP5</name>
-              <description>Fast Startup Input Polarityx</description>
+              <description>Fast Start-up Input Polarityx</description>
               <bitOffset>5</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>FSTP6</name>
-              <description>Fast Startup Input Polarityx</description>
+              <description>Fast Start-up Input Polarityx</description>
               <bitOffset>6</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>FSTP7</name>
-              <description>Fast Startup Input Polarityx</description>
+              <description>Fast Start-up Input Polarityx</description>
               <bitOffset>7</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>FSTP8</name>
-              <description>Fast Startup Input Polarityx</description>
+              <description>Fast Start-up Input Polarityx</description>
               <bitOffset>8</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>FSTP9</name>
-              <description>Fast Startup Input Polarityx</description>
+              <description>Fast Start-up Input Polarityx</description>
               <bitOffset>9</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>FSTP10</name>
-              <description>Fast Startup Input Polarityx</description>
+              <description>Fast Start-up Input Polarityx</description>
               <bitOffset>10</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>FSTP11</name>
-              <description>Fast Startup Input Polarityx</description>
+              <description>Fast Start-up Input Polarityx</description>
               <bitOffset>11</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>FSTP12</name>
-              <description>Fast Startup Input Polarityx</description>
+              <description>Fast Start-up Input Polarityx</description>
               <bitOffset>12</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>FSTP13</name>
-              <description>Fast Startup Input Polarityx</description>
+              <description>Fast Start-up Input Polarityx</description>
               <bitOffset>13</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>FSTP14</name>
-              <description>Fast Startup Input Polarityx</description>
+              <description>Fast Start-up Input Polarityx</description>
               <bitOffset>14</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
             </field>
             <field>
               <name>FSTP15</name>
-              <description>Fast Startup Input Polarityx</description>
+              <description>Fast Start-up Input Polarityx</description>
               <bitOffset>15</bitOffset>
               <bitWidth>1</bitWidth>
               <access>read-write</access>
@@ -16123,7 +15979,7 @@
     </peripheral>
     <peripheral>
       <name>EFC</name>
-      <version>6450G</version>
+      <version>6450H</version>
       <description>Embedded Flash Controller</description>
       <prependToName>EFC_</prependToName>
       <baseAddress>0x400E0A00</baseAddress>
@@ -39421,7 +39277,7 @@
     <peripheral>
       <name>GPBR</name>
       <version>6378C</version>
-      <description>General Purpose Backup Register</description>
+      <description>General Purpose Backup Registers</description>
       <groupName>SYSC</groupName>
       <prependToName>GPBR_</prependToName>
       <baseAddress>0x400E1490</baseAddress>
@@ -39454,6 +39310,3 @@
     </peripheral>
   </peripherals>
 </device>
-<!-- Generated by        : SOCK v3.88.0_08                          -->
-<!-- Source SCM revision : 3402                                     -->
-<!-- Source SHA sum      : 3be7df0e3cf66a23b7a209c933fee8a8ddf87649 -->
