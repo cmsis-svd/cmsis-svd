@@ -31,10 +31,10 @@
 
 <device xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="1.1" xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
   <vendor>Atmel</vendor>
-  <name>ATSAM4S16C</name>
+  <name>ATSAM4SD16C</name>
   <series>SAM4S</series>
   <version>0</version>
-  <description>Atmel ATSAM4S16C Microcontroller</description>
+  <description>Atmel ATSAM4SD16C Microcontroller</description>
   <cpu>
     <name>CM4</name>
     <revision>r0p1</revision>
@@ -26749,6 +26749,353 @@
       </registers>
     </peripheral>
     <peripheral>
+      <name>CMCC</name>
+      <version>11108F</version>
+      <description>Cortex-M Cache Controller</description>
+      <prependToName>CMCC_</prependToName>
+      <baseAddress>0x4007C000</baseAddress>
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x4000</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <register>
+          <name>TYPE</name>
+          <description>Cache Controller Type Register</description>
+          <addressOffset>0x00000000</addressOffset>
+          <size>32</size>
+          <access>read-only</access>
+          <fields>
+            <field>
+              <name>AP</name>
+              <description>Access Port Access Allowed</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>GCLK</name>
+              <description>Dynamic Clock Gating Supported</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>RANDP</name>
+              <description>Random Selection Policy Supported</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>LRUP</name>
+              <description>Least Recently Used Policy Supported</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>RRP</name>
+              <description>Random Selection Policy Supported</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>WAYNUM</name>
+              <description>Number of Ways</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-only</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>DMAPPED</name>
+                  <description>Direct Mapped Cache</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>ARCH2WAY</name>
+                  <description>2-way set associative</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>ARCH4WAY</name>
+                  <description>4-way set associative</description>
+                  <value>0x2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>ARCH8WAY</name>
+                  <description>8-way set associative</description>
+                  <value>0x3</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>LCKDOWN</name>
+              <description>Lockdown Supported</description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>CSIZE</name>
+              <description>Data Cache Size</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>3</bitWidth>
+              <access>read-only</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>CSIZE_1KB</name>
+                  <description>Data cache size is 1 Kbyte</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>CSIZE_2KB</name>
+                  <description>Data cache size is 2 Kbytes</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>CSIZE_4KB</name>
+                  <description>Data cache size is 4 Kbytes</description>
+                  <value>0x2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>CSIZE_8KB</name>
+                  <description>Data cache size is 8 Kbytes</description>
+                  <value>0x3</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CLSIZE</name>
+              <description>Cache LIne Size</description>
+              <bitOffset>11</bitOffset>
+              <bitWidth>3</bitWidth>
+              <access>read-only</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>CLSIZE_1KB</name>
+                  <description>Cache line size is 4 bytes</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>CLSIZE_2KB</name>
+                  <description>Cache line size is 8 bytes</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>CLSIZE_4KB</name>
+                  <description>Cache line size is 16 bytes</description>
+                  <value>0x2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>CLSIZE_8KB</name>
+                  <description>Cache line size is 32 bytes</description>
+                  <value>0x3</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CFG</name>
+          <description>Cache Controller Configuration Register</description>
+          <addressOffset>0x00000004</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>GCLKDIS</name>
+              <description>Disable Clock Gating</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CTRL</name>
+          <description>Cache Controller Control Register</description>
+          <addressOffset>0x00000008</addressOffset>
+          <size>32</size>
+          <access>write-only</access>
+          <fields>
+            <field>
+              <name>CEN</name>
+              <description>Cache Controller Enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>write-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SR</name>
+          <description>Cache Controller Status Register</description>
+          <addressOffset>0x0000000C</addressOffset>
+          <size>32</size>
+          <access>read-only</access>
+          <resetValue>0x00000001</resetValue>
+          <fields>
+            <field>
+              <name>CSTS</name>
+              <description>Cache Controller Status</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>MAINT0</name>
+          <description>Cache Controller Maintenance Register 0</description>
+          <addressOffset>0x00000020</addressOffset>
+          <size>32</size>
+          <access>write-only</access>
+          <fields>
+            <field>
+              <name>INVALL</name>
+              <description>Cache Controller Invalidate All</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>write-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>MAINT1</name>
+          <description>Cache Controller Maintenance Register 1</description>
+          <addressOffset>0x00000024</addressOffset>
+          <size>32</size>
+          <access>write-only</access>
+          <fields>
+            <field>
+              <name>INDEX</name>
+              <description>Invalidate Index</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>5</bitWidth>
+              <access>write-only</access>
+            </field>
+            <field>
+              <name>WAY</name>
+              <description>Invalidate Way</description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>write-only</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>WAY0</name>
+                  <description>Way 0 is selection for index invalidation</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>WAY1</name>
+                  <description>Way 1 is selection for index invalidation</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>WAY2</name>
+                  <description>Way 2 is selection for index invalidation</description>
+                  <value>0x2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>WAY3</name>
+                  <description>Way 3 is selection for index invalidation</description>
+                  <value>0x3</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>MCFG</name>
+          <description>Cache Controller Monitor Configuration Register</description>
+          <addressOffset>0x00000028</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>MODE</name>
+              <description>Cache Controller Monitor Counter Mode</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>CYCLE_COUNT</name>
+                  <description>Cycle counter</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>IHIT_COUNT</name>
+                  <description>Instruction hit counter</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>DHIT_COUNT</name>
+                  <description>Data hit counter</description>
+                  <value>0x2</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>MEN</name>
+          <description>Cache Controller Monitor Enable Register</description>
+          <addressOffset>0x0000002C</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>MENABLE</name>
+              <description>Cache Controller Monitor Enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>MCTRL</name>
+          <description>Cache Controller Monitor Control Register</description>
+          <addressOffset>0x00000030</addressOffset>
+          <size>32</size>
+          <access>write-only</access>
+          <fields>
+            <field>
+              <name>SWRST</name>
+              <description>Monitor</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>write-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>MSR</name>
+          <description>Cache Controller Monitor Status Register</description>
+          <addressOffset>0x00000034</addressOffset>
+          <size>32</size>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>EVENT_CNT</name>
+              <description>Monitor Event Counter</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    <peripheral>
       <name>SMC</name>
       <version>6498H</version>
       <description>Static Memory Controller</description>
@@ -31927,6 +32274,269 @@
       <interrupt>
         <name>EFC0</name>
         <value>6</value>
+      </interrupt>
+      <registers>
+        <register>
+          <name>FMR</name>
+          <description>EEFC Flash Mode Register</description>
+          <addressOffset>0x00000000</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+          <resetValue>0x04000000</resetValue>
+          <fields>
+            <field>
+              <name>FRDY</name>
+              <description>Flash Ready Interrupt Enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>FWS</name>
+              <description>Flash Wait State</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>4</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>SCOD</name>
+              <description>Sequential Code Optimization Disable</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>FAM</name>
+              <description>Flash Access Mode</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>CLOE</name>
+              <description>Code Loop Optimization Enable</description>
+              <bitOffset>26</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>FCR</name>
+          <description>EEFC Flash Command Register</description>
+          <addressOffset>0x00000004</addressOffset>
+          <size>32</size>
+          <access>write-only</access>
+          <fields>
+            <field>
+              <name>FCMD</name>
+              <description>Flash Command</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+              <access>write-only</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>GETD</name>
+                  <description>Get Flash descriptor</description>
+                  <value>0x00</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>WP</name>
+                  <description>Write page</description>
+                  <value>0x01</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>WPL</name>
+                  <description>Write page and lock</description>
+                  <value>0x02</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>EWP</name>
+                  <description>Erase page and write page</description>
+                  <value>0x03</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>EWPL</name>
+                  <description>Erase page and write page then lock</description>
+                  <value>0x04</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>EA</name>
+                  <description>Erase all</description>
+                  <value>0x05</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>EPA</name>
+                  <description>Erase pages</description>
+                  <value>0x07</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>SLB</name>
+                  <description>Set lock bit</description>
+                  <value>0x08</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>CLB</name>
+                  <description>Clear lock bit</description>
+                  <value>0x09</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>GLB</name>
+                  <description>Get lock bit</description>
+                  <value>0x0A</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>SGPB</name>
+                  <description>Set GPNVM bit</description>
+                  <value>0x0B</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>CGPB</name>
+                  <description>Clear GPNVM bit</description>
+                  <value>0x0C</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>GGPB</name>
+                  <description>Get GPNVM bit</description>
+                  <value>0x0D</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>STUI</name>
+                  <description>Start read unique identifier</description>
+                  <value>0x0E</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>SPUI</name>
+                  <description>Stop read unique identifier</description>
+                  <value>0x0F</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>GCALB</name>
+                  <description>Get CALIB bit</description>
+                  <value>0x10</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>ES</name>
+                  <description>Erase sector</description>
+                  <value>0x11</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>WUS</name>
+                  <description>Write user signature</description>
+                  <value>0x12</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>EUS</name>
+                  <description>Erase user signature</description>
+                  <value>0x13</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>STUS</name>
+                  <description>Start read user signature</description>
+                  <value>0x14</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>SPUS</name>
+                  <description>Stop read user signature</description>
+                  <value>0x15</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>FARG</name>
+              <description>Flash Command Argument</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>16</bitWidth>
+              <access>write-only</access>
+            </field>
+            <field>
+              <name>FKEY</name>
+              <description>Flash Writing Protection Key</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>8</bitWidth>
+              <access>write-only</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>PASSWD</name>
+                  <description>The 0x5A value enables the command defined by the bits of the register. If the field is written with a different value, the write is not performed and no action is started.</description>
+                  <value>0x5A</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>FSR</name>
+          <description>EEFC Flash Status Register</description>
+          <addressOffset>0x00000008</addressOffset>
+          <size>32</size>
+          <access>read-only</access>
+          <resetValue>0x00000001</resetValue>
+          <fields>
+            <field>
+              <name>FRDY</name>
+              <description>Flash Ready Status (cleared when Flash is busy)</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>FCMDE</name>
+              <description>Flash Command Error Status (cleared on read or by writing EEFC_FCR)</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>FLOCKE</name>
+              <description>Flash Lock Error Status (cleared on read)</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>FLERR</name>
+              <description>Flash Error Status (cleared when a programming operation starts)</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>FRR</name>
+          <description>EEFC Flash Result Register</description>
+          <addressOffset>0x0000000C</addressOffset>
+          <size>32</size>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>FVALUE</name>
+              <description>Flash Result Value</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    <peripheral>
+      <name>EFC1</name>
+      <version>6450X</version>
+      <description>Embedded Flash Controller 1</description>
+      <groupName>EFC</groupName>
+      <prependToName>EFC1_</prependToName>
+      <baseAddress>0x400E0C00</baseAddress>
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x200</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <interrupt>
+        <name>EFC1</name>
+        <value>7</value>
       </interrupt>
       <registers>
         <register>
