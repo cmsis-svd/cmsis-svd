@@ -6,7 +6,7 @@ CMSIS-SVD Repository and Parsers
 What is this?
 -------------
 
-This repository seeks to provide value to devlopers targetting ARM
+This repository seeks to provide value to developers targetting ARM
 platforms in two main ways:
 
 1. Provide a convenient place to access and aggregate CMSIS-SVD
