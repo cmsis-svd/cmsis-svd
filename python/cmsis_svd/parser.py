@@ -514,8 +514,8 @@ class SVDParser(object):
             vtor_present=_get_int(cpu_node, 'vtorPresent'),
             nvic_prio_bits=_get_int(cpu_node, 'nvicPrioBits'),
             vendor_systick_config=_get_int(cpu_node, 'vendorSystickConfig'),
-            device_num_interrupts=_get_int(cpu_node, 'vendorSystickConfig'),
-            sau_num_regions=_get_int(cpu_node, 'vendorSystickConfig'),
+            device_num_interrupts=_get_int(cpu_node, 'deviceNumInterrupts'),
+            sau_num_regions=_get_int(cpu_node, 'sauNumRegions'),
             sau_regions_config=_get_text(cpu_node, 'sauRegionsConfig')
         )
 
