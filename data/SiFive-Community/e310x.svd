@@ -213,7 +213,7 @@
     <peripheral>
       <name>RTC</name>
       <baseAddress>0x10000000</baseAddress>
-      <groupName>Watchdog</groupName>
+      <groupName>RTC</groupName>
       <description>Watchdog</description>
       <registers>
         <register>
