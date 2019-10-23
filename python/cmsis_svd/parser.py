@@ -16,6 +16,7 @@
 from xml.etree import ElementTree as ET
 
 import six
+import itertools
 
 from cmsis_svd.model import SVDDevice
 from cmsis_svd.model import SVDPeripheral
@@ -28,6 +29,95 @@ from cmsis_svd.model import SVDEnumeratedValue
 from cmsis_svd.model import SVDCpu
 import pkg_resources
 import re
+
+class ElementABC(object):
+    def __init__(self, tag):
+        self.tag = tag
+
+    def is_optional(self):
+        raise NotImplementedError("is_optional not implemented")
+
+    def parse(self, el):
+        raise NotImplementedError("parse not implemented")
+
+class OptionalElement(ElementABC):
+
+    def __init__(self, inner, default=None):
+        ElementABC.__init__(self, inner.tag)
+        self.inner = inner
+        self.default = default
+
+    def is_optional(self):
+        return True
+
+    def parse(self, el):
+        return self.inner.parse(el)
+
+class TextElement(ElementABC):
+
+    def is_optional(self):
+        return False
+
+    def parse(self, el):
+        return el.text
+
+class IntElement(ElementABC):
+
+    def is_optional(self):
+        return false
+
+    def parse(self, el):
+        text_value = el.text.strip().lower()
+        if text_value.startswith('0x'):
+            return int(text_value[2:], 16)  # hexadecimal
+        elif text_value.startswith('#'):
+            # TODO(posborne): Deal with strange #1xx case better
+            #
+            # Freescale will sometimes provide values that look like this:
+            #   #1xx
+            # In this case, there are a number of values which all mean the
+            # same thing as the field is a "don't care".  For now, we just
+            # replace those bits with zeros.
+            text_value = text_value.replace('x', '0')[1:]
+            is_bin = all(x in '01' for x in text_value)
+            return int(text_value, 2) if is_bin else int(text_value)  # binary
+        elif text_value.startswith('true'):
+            return 1
+        elif text_value.startswith('false'):
+            return 0
+        else:
+            return int(text_value)  # decimal
+
+def _parse_sequences(node, *tags):
+    tag_iter = iter(tags)
+    res = []
+
+    for el in node:
+        while True:
+            try:
+                tag = next(tag_iter)
+                if tag.tag == el.tag:
+                    res.append(tag.parse(el))
+                    break
+                elif tag.is_optional():
+                    res.append(tag.default)
+                    continue
+                else:
+                    raise KeyError("Expected tag not found in correct place. Expected: {}, Element was: {}\nNode:\n{}".format(tag.tag, el, ET.tostring(node)))
+            except StopIteration:
+                print("Res: {}".format(res))
+                yield tuple(res)
+                tag_iter = iter(tags)
+                res = []
+
+    if res:
+        for remtag in tag_iter:
+            if remtag.is_optional():
+                res.append(remtag.default)
+            else:
+                raise KeyError("Remaining non-optional element: {}".format(remtag))
+        yield tuple(res)
+
 
 
 def _get_text(node, tag, default=None):
@@ -83,7 +173,7 @@ class SVDParser(object):
 
         filename = pkg_resources.resource_filename("cmsis_svd", resource)
         return cls.for_xml_file(filename, remove_reserved)
-    
+
     @classmethod
     def for_mcu(cls, mcu):
         mcu = mcu.lower()
@@ -302,12 +392,18 @@ class SVDParser(object):
             _get_text(address_block_node, 'usage')
         )
 
-    def _parse_interrupt(self, interrupt_node):
-        return SVDInterrupt(
-            name=_get_text(interrupt_node, 'name'),
-            value=_get_int(interrupt_node, 'value'),
-            description=_get_text(interrupt_node, 'description')
-        )
+    def _parse_interrupts(self, interrupt_node):
+        tags = [
+            TextElement('name'),
+            OptionalElement(TextElement('description')),
+            TextElement('value'),
+        ]
+
+        for (name, value, description) in _parse_sequences(interrupt_node, *tags):
+            yield SVDInterrupt(
+                name=_get_text(interrupt_node, 'name'),
+                value=_get_int(interrupt_node, 'value'),
+                description=_get_text(interrupt_node, 'description'))
 
     def _parse_peripheral(self, peripheral_node):
         # parse registers
@@ -328,7 +424,8 @@ class SVDParser(object):
         # parse all interrupts for the peripheral
         interrupts = []
         for interrupt_node in peripheral_node.findall('./interrupt'):
-            interrupts.append(self._parse_interrupt(interrupt_node))
+            for interrupt in self._parse_interrupts(interrupt_node):
+                interrupts.append(interrupt)
         interrupts = interrupts if interrupts else None
 
         # parse address block if any
