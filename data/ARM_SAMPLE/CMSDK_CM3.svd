@@ -1,0 +1,1811 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- File naming: <part/series name>.svd -->
+
+<!--
+  Copyright (C) 2012-2014 ARM Limited. All rights reserved.
+
+  Purpose: System Viewer Description (SVD) Example (Schema Version 1.1)
+           This is a description of a none-existent and incomplete device
+		   for demonstration purposes only.
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions are met:
+   - Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+   - Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in the
+     documentation and/or other materials provided with the distribution.
+   - Neither the name of ARM nor the names of its contributors may be used
+     to endorse or promote products derived from this software without
+     specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  ARE DISCLAIMED. IN NO EVENT SHALL COPYRIGHT HOLDERS AND CONTRIBUTORS BE
+  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  POSSIBILITY OF SUCH DAMAGE.
+ -->
+
+<device schemaVersion="1.3" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="CMSIS-SVD.xsd" >
+  <vendor>ARM Ltd.</vendor>                                       <!-- device vendor name -->
+  <vendorID>ARM</vendorID>                                        <!-- device vendor short name -->
+  <name>CMSDK_CM3</name>                                          <!-- name of part-->
+  <series>ARM Cortex M3</series>                                  <!-- device series the device belongs to -->
+  <version>1.0</version>                                          <!-- version of this description, adding CMSIS-SVD 1.1 tags -->
+  <description>ARM 32-bit Cortex-M3 based device</description>
+  <licenseText>                                                   <!-- this license text will appear in header file. \n force line breaks -->
+    ARM Limited (ARM) is supplying this software for use with Cortex-M\n
+    processor based microcontroller, but can be equally used for other\n
+    suitable  processor architectures. This file can be freely distributed.\n
+    Modifications to this file shall be clearly marked.\n
+    \n
+    THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED\n
+    OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF\n
+    MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.\n
+    ARM SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, OR\n
+    CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+  </licenseText>
+  <cpu>                                                           <!-- details about the cpu embedded in the device -->
+    <name>CM3</name>
+    <revision>r2p1</revision>
+    <endian>little</endian>
+    <mpuPresent>true</mpuPresent>
+    <fpuPresent>false</fpuPresent>
+    <nvicPrioBits>3</nvicPrioBits>
+    <vendorSystickConfig>false</vendorSystickConfig>
+  </cpu>
+
+  <addressUnitBits>8</addressUnitBits>                            <!-- byte addressable memory -->
+  <width>32</width>                                               <!-- bus width is 32 bits -->
+  <!-- default settings implicitly inherited by subsequent sections -->
+  <size>32</size>                                                 <!-- this is the default size (number of bits) of all peripherals
+                                                                       and register that do not define "size" themselves -->
+  <access>read-write</access>                                     <!-- default access permission for all subsequent registers -->
+  <resetValue>0x00000000</resetValue>                             <!-- by default all bits of the registers are initialized to 0 on reset -->
+  <resetMask>0xFFFFFFFF</resetMask>                               <!-- by default all 32Bits of the registers are used -->
+
+  <peripherals>
+    <!-- Timer 0 -->
+    <peripheral>                      <name>TIMER0</name>
+        <version>1.0</version>
+        <description>Timer 0</description>
+        <groupName>TIMER</groupName>
+        <baseAddress>0x40000000</baseAddress>
+        <size>32</size>
+        <access>read-write</access>
+
+        <addressBlock>
+            <offset>0</offset>
+            <size>0x10</size>
+            <usage>registers</usage>
+        </addressBlock>
+
+        <interrupt>
+            <name>TIMER0</name>
+            <description>Timer 0 Interrupt</description>
+            <value>8</value>
+        </interrupt>
+        <registers>
+            <register>                <name>CTRL</name>
+                <description>Control Register</description>
+                <addressOffset>0x000</addressOffset>
+                <fields>
+                  <field>  <name>ENABLE</name>
+                    <description>Enable</description>
+                    <bitRange>[0:0]</bitRange>
+                        <enumeratedValues>
+                            <enumeratedValue>
+                                <name>Disable</name>
+                                <description>Timer is disabled</description>
+                                <value>0</value>
+                            </enumeratedValue>
+                            <enumeratedValue>
+                                <name>Enable</name>
+                                <description>Timer is enabled</description>
+                                <value>1</value>
+                            </enumeratedValue>
+                        </enumeratedValues>
+                  </field>
+                  <field>  <name>EXTIN</name>
+                    <description>External Input as Enable</description>
+                    <bitRange>[1:1]</bitRange>
+                        <enumeratedValues>
+                            <enumeratedValue>
+                                <name>Disable</name>
+                                <description>External Input as Enable is disabled</description>
+                                <value>0</value>
+                            </enumeratedValue>
+                            <enumeratedValue>
+                                <name>Enable</name>
+                                <description>External Input as Enable is enabled</description>
+                                <value>1</value>
+                            </enumeratedValue>
+                        </enumeratedValues>
+                  </field>
+                  <field>  <name>EXTCLK</name>
+                    <description>External Clock Enable</description>
+                    <bitRange>[2:2]</bitRange>
+                        <enumeratedValues>
+                            <enumeratedValue>
+                                <name>Disable</name>
+                                <description>External Clock s disabled</description>
+                                <value>0</value>
+                            </enumeratedValue>
+                            <enumeratedValue>
+                                <name>Enable</name>
+                                <description>External Clock is enabled</description>
+                                <value>1</value>
+                            </enumeratedValue>
+                        </enumeratedValues>
+                  </field>
+                  <field>  <name>INTEN</name>
+                    <description>Interrupt Enable</description>
+                    <bitRange>[3:3]</bitRange>
+                        <enumeratedValues>
+                            <enumeratedValue>
+                                <name>Disable</name>
+                                <description>Interrupt is disabled</description>
+                                <value>0</value>
+                            </enumeratedValue>
+                            <enumeratedValue>
+                                <name>Enable</name>
+                                <description>Interrupt is enabled</description>
+                                <value>1</value>
+                            </enumeratedValue>
+                        </enumeratedValues>
+                    </field>
+                </fields>
+            </register>
+            <register>                <name>VALUE</name>
+                <description>Current Timer Counter Value</description>
+                <addressOffset>0x004</addressOffset>
+            </register>
+            <register>                <name>RELOAD</name>
+                <description>Counter Reload Value</description>
+                <addressOffset>0x008</addressOffset>
+            </register>
+            <register>                <name>INTSTATUS</name>
+                <description>Timer Interrupt status register</description>
+                <addressOffset>0x00C</addressOffset>
+                <access>read-only</access>
+            </register>
+            <register>                <name>INTCLEAR</name>
+                <description>Timer Interrupt clear register</description>
+                <alternateRegister>INTSTATUS</alternateRegister>
+                <addressOffset>0x00C</addressOffset>
+                <access>write-only</access>
+                <modifiedWriteValues>oneToClear</modifiedWriteValues>
+            </register>
+        </registers>
+    </peripheral>
+
+    <!-- Timer 1 -->
+    <peripheral derivedFrom="TIMER0"> <name>TIMER1</name>
+      <baseAddress>0x40001000</baseAddress>
+      <interrupt>
+        <name>TIMER1</name>
+            <description>Timer 1 Interrupt</description>
+        <value>9</value>
+      </interrupt>
+    </peripheral>
+
+    <!-- Dual Timer-->
+    <peripheral>                      <name>DUALTIMER</name>
+        <version>1.0</version>
+        <description>Dual Timer</description>
+        <groupName>DUALTIMER</groupName>
+        <baseAddress>0x40002000</baseAddress>
+        <size>32</size>
+        <access>read-write</access>
+
+        <addressBlock>
+            <offset>0</offset>
+            <size>0x3C</size>
+            <usage>registers</usage>
+        </addressBlock>
+
+        <interrupt>
+            <name>DUALTIMER</name>
+            <description>Dual Timer Interrupt</description>
+            <value>10</value>
+        </interrupt>
+
+        <registers>
+          <register>                <name>TIMER1LOAD</name>
+            <description>Timer 1 Load Register</description>
+            <addressOffset>0x000</addressOffset>
+            <resetValue>0x00000000</resetValue>
+          </register>
+          <register>                <name>TIMER1VALUE</name>
+            <description>Timer 1 Value Register</description>
+            <addressOffset>0x004</addressOffset>
+            <resetValue>0xFFFFFFFF</resetValue>
+            <access>read-only</access>
+          </register>
+          <register>                <name>TIMER1CONTROL</name>
+            <description>Timer 1 Control Register</description>
+            <addressOffset>0x008</addressOffset>
+            <resetValue>0x20</resetValue>
+                <fields>
+                  <field>  <name>OneShotCount</name>
+                    <description>Selects one-shot or wrapping counter mode.</description>
+                    <bitOffset>0</bitOffset>
+                    <bitWidth>1</bitWidth>
+                    <enumeratedValues>
+                      <enumeratedValue>
+                          <name>Wrapping</name>
+                          <description>Wrapping counter mode</description>
+                          <value>0</value>
+                      </enumeratedValue>
+                      <enumeratedValue>
+                          <name>OneShot</name>
+                          <description>One-shot counter mode</description>
+                          <value>1</value>
+                      </enumeratedValue>
+                    </enumeratedValues>
+                  </field>
+                  <field>  <name>TimerSize</name>
+                    <description>Selects 16-bit or 32- bit counter operation.</description>
+                    <bitOffset>1</bitOffset>
+                    <bitWidth>1</bitWidth>
+                    <enumeratedValues>
+                      <enumeratedValue>
+                          <name>16-bit</name>
+                          <description>16-bit counter mode</description>
+                          <value>0</value>
+                      </enumeratedValue>
+                      <enumeratedValue>
+                          <name>32-bit</name>
+                          <description>32-bit counter mode</description>
+                          <value>1</value>
+                      </enumeratedValue>
+                    </enumeratedValues>
+                  </field>
+                  <field>  <name>TimerPre</name>
+                    <description>Timer prescale bits.</description>
+                    <bitOffset>2</bitOffset>
+                    <bitWidth>2</bitWidth>
+                    <enumeratedValues>
+                      <enumeratedValue>
+                          <name>divided by 1</name>
+                          <description>clock is divided by 1</description>
+                          <value>0</value>
+                      </enumeratedValue>
+                      <enumeratedValue>
+                          <name>divided by 16</name>
+                          <description>clock is divided by 16</description>
+                          <value>1</value>
+                      </enumeratedValue>
+                      <enumeratedValue>
+                          <name>divided by 256</name>
+                          <description>clock is divided by 256</description>
+                          <value>2</value>
+                      </enumeratedValue>
+                    </enumeratedValues>
+                  </field>
+                  <field>  <name>InterruptEnable</name>
+                    <description>Interrupt Enable bit.</description>
+                    <bitOffset>5</bitOffset>
+                    <bitWidth>1</bitWidth>
+                    <enumeratedValues>
+                      <enumeratedValue>
+                          <name>Disable</name>
+                          <description>Interrupt is disabled.</description>
+                          <value>0</value>
+                      </enumeratedValue>
+                      <enumeratedValue>
+                          <name>Enable</name>
+                          <description>Interrupt is enabled.</description>
+                          <value>1</value>
+                      </enumeratedValue>
+                    </enumeratedValues>
+                  </field>
+                  <field>  <name>TimerMode</name>
+                    <description>Timer Mode bit.</description>
+                    <bitOffset>6</bitOffset>
+                    <bitWidth>1</bitWidth>
+                    <enumeratedValues>
+                      <enumeratedValue>
+                          <name>Free-Running</name>
+                          <description>Free-Running timer mode.</description>
+                          <value>0</value>
+                      </enumeratedValue>
+                      <enumeratedValue>
+                          <name>Periodic</name>
+                          <description>Periodic timer mode.</description>
+                          <value>1</value>
+                      </enumeratedValue>
+                    </enumeratedValues>
+                  </field>
+                  <field>  <name>TimerEnable</name>
+                    <description>Timer Enable Enable bit.</description>
+                    <bitOffset>7</bitOffset>
+                    <bitWidth>1</bitWidth>
+                    <enumeratedValues>
+                      <enumeratedValue>
+                          <name>Disable</name>
+                          <description>Timer is disabled.</description>
+                          <value>0</value>
+                      </enumeratedValue>
+                      <enumeratedValue>
+                          <name>Enable</name>
+                          <description>Timer is enabled.</description>
+                          <value>1</value>
+                      </enumeratedValue>
+                    </enumeratedValues>
+                  </field>
+                </fields>
+          </register>
+          <register>                <name>TIMER1INTCLR</name>
+            <description>Timer 1 Interrupt Clear Register</description>
+            <addressOffset>0x00C</addressOffset>
+            <resetValue>0x00000000</resetValue>
+            <access>write-only</access>
+            <fields>
+              <field>
+                  <name>INT</name>
+                  <description>Interrupt</description>
+                  <bitOffset>0</bitOffset>
+                  <bitWidth>1</bitWidth>
+                  <modifiedWriteValues>oneToClear</modifiedWriteValues>
+              </field>
+            </fields>
+          </register>
+          <register>                <name>TIMER1RIS</name>
+            <description>Timer 1 Raw Interrupt Status Register</description>
+            <addressOffset>0x010</addressOffset>
+            <resetValue>0x0</resetValue>
+            <access>read-only</access>
+            <fields>
+              <field>  <name>RIS</name>
+                  <description>Raw Timer Interrupt</description>
+                  <bitOffset>0</bitOffset>
+                  <bitWidth>1</bitWidth>
+              </field>
+            </fields>
+          </register>
+          <register>                <name>TIMER1MIS</name>
+            <description>Timer 1 Mask Interrupt Status Register</description>
+            <addressOffset>0x014</addressOffset>
+            <resetValue>0x0</resetValue>
+            <access>read-only</access>
+            <fields>
+              <field>  <name>MIS</name>
+                  <description>Masked Timer Interrupt</description>
+                  <bitOffset>0</bitOffset>
+                  <bitWidth>1</bitWidth>
+              </field>
+            </fields>
+          </register>
+          <register>                <name>TIMER1BGLOAD</name>
+            <description>Timer 1 Background Load Register</description>
+            <addressOffset>0x018</addressOffset>
+            <resetValue>0x00000000</resetValue>
+          </register>
+          <register>                <name>TIMER2LOAD</name>
+            <description>Timer 2 Load Register</description>
+            <addressOffset>0x020</addressOffset>
+            <resetValue>0x00000000</resetValue>
+          </register>
+          <register>                <name>TIMER2VALUE</name>
+            <description>Timer 2 Value Register</description>
+            <addressOffset>0x024</addressOffset>
+            <resetValue>0xFFFFFFFF</resetValue>
+            <access>read-only</access>
+          </register>
+          <register>                <name>TIMER2CONTROL</name>
+            <description>Timer 2 Control Register</description>
+            <addressOffset>0x028</addressOffset>
+            <resetValue>0x20</resetValue>
+                <fields>
+                  <field>  <name>OneShotCount</name>
+                    <description>Selects one-shot or wrapping counter mode.</description>
+                    <bitOffset>0</bitOffset>
+                    <bitWidth>1</bitWidth>
+                    <enumeratedValues>
+                      <enumeratedValue>
+                          <name>Wrapping</name>
+                          <description>Wrapping counter mode</description>
+                          <value>0</value>
+                      </enumeratedValue>
+                      <enumeratedValue>
+                          <name>OneShot</name>
+                          <description>One-shot counter mode</description>
+                          <value>1</value>
+                      </enumeratedValue>
+                    </enumeratedValues>
+                  </field>
+                  <field>  <name>TimerSize</name>
+                    <description>Selects 16-bit or 32- bit counter operation.</description>
+                    <bitOffset>1</bitOffset>
+                    <bitWidth>1</bitWidth>
+                    <enumeratedValues>
+                      <enumeratedValue>
+                          <name>16-bit</name>
+                          <description>16-bit counter mode</description>
+                          <value>0</value>
+                      </enumeratedValue>
+                      <enumeratedValue>
+                          <name>32-bit</name>
+                          <description>32-bit counter mode</description>
+                          <value>1</value>
+                      </enumeratedValue>
+                    </enumeratedValues>
+                  </field>
+                  <field>  <name>TimerPre</name>
+                    <description>Timer prescale bits.</description>
+                    <bitOffset>2</bitOffset>
+                    <bitWidth>2</bitWidth>
+                    <enumeratedValues>
+                      <enumeratedValue>
+                          <name>divided by 1</name>
+                          <description>clock is divided by 1</description>
+                          <value>0</value>
+                      </enumeratedValue>
+                      <enumeratedValue>
+                          <name>divided by 16</name>
+                          <description>clock is divided by 16</description>
+                          <value>1</value>
+                      </enumeratedValue>
+                      <enumeratedValue>
+                          <name>divided by 256</name>
+                          <description>clock is divided by 256</description>
+                          <value>2</value>
+                      </enumeratedValue>
+                    </enumeratedValues>
+                  </field>
+                  <field>  <name>InterruptEnable</name>
+                    <description>Interrupt Enable bit.</description>
+                    <bitOffset>5</bitOffset>
+                    <bitWidth>1</bitWidth>
+                    <enumeratedValues>
+                      <enumeratedValue>
+                          <name>Disable</name>
+                          <description>Interrupt is disabled.</description>
+                          <value>0</value>
+                      </enumeratedValue>
+                      <enumeratedValue>
+                          <name>Enable</name>
+                          <description>Interrupt is enabled.</description>
+                          <value>1</value>
+                      </enumeratedValue>
+                    </enumeratedValues>
+                  </field>
+                  <field>  <name>TimerMode</name>
+                    <description>Timer Mode bit.</description>
+                    <bitOffset>6</bitOffset>
+                    <bitWidth>1</bitWidth>
+                    <enumeratedValues>
+                      <enumeratedValue>
+                          <name>Free-Running</name>
+                          <description>Free-Running timer mode.</description>
+                          <value>0</value>
+                      </enumeratedValue>
+                      <enumeratedValue>
+                          <name>Periodic</name>
+                          <description>Periodic timer mode.</description>
+                          <value>1</value>
+                      </enumeratedValue>
+                    </enumeratedValues>
+                  </field>
+                  <field>  <name>TimerEnable</name>
+                    <description>Timer Enable Enable bit.</description>
+                    <bitOffset>7</bitOffset>
+                    <bitWidth>1</bitWidth>
+                    <enumeratedValues>
+                      <enumeratedValue>
+                          <name>Disable</name>
+                          <description>Timer is disabled.</description>
+                          <value>0</value>
+                      </enumeratedValue>
+                      <enumeratedValue>
+                          <name>Enable</name>
+                          <description>Timer is enabled.</description>
+                          <value>1</value>
+                      </enumeratedValue>
+                    </enumeratedValues>
+                  </field>
+                </fields>
+          </register>
+          <register>                <name>TIMER2INTCLR</name>
+            <description>Timer 2 Interrupt Clear Register</description>
+            <addressOffset>0x02C</addressOffset>
+            <resetValue>0x00000000</resetValue>
+            <access>write-only</access>
+            <fields>
+              <field>
+                  <name>INT</name>
+                  <description>Interrupt</description>
+                  <bitOffset>0</bitOffset>
+                  <bitWidth>1</bitWidth>
+                  <modifiedWriteValues>oneToClear</modifiedWriteValues>
+              </field>
+            </fields>
+          </register>
+          <register>                <name>TIMER2RIS</name>
+            <description>Timer 2 Raw Interrupt Status Register</description>
+            <addressOffset>0x030</addressOffset>
+            <resetValue>0x0</resetValue>
+            <access>read-only</access>
+            <fields>
+              <field>  <name>RIS</name>
+                  <description>Raw Timer Interrupt</description>
+                  <bitOffset>0</bitOffset>
+                  <bitWidth>1</bitWidth>
+              </field>
+            </fields>
+          </register>
+          <register>                <name>TIMER2MIS</name>
+            <description>Timer 2 Mask Interrupt Status Register</description>
+            <addressOffset>0x034</addressOffset>
+            <resetValue>0x0</resetValue>
+            <access>read-only</access>
+            <fields>
+              <field>  <name>MIS</name>
+                  <description>Masked Timer Interrupt</description>
+                  <bitOffset>0</bitOffset>
+                  <bitWidth>1</bitWidth>
+              </field>
+            </fields>
+          </register>
+          <register>                <name>TIMER2BGLOAD</name>
+            <description>Timer 2 Background Load Register</description>
+            <addressOffset>0x038</addressOffset>
+            <resetValue>0x00000000</resetValue>
+          </register>
+      </registers>
+    </peripheral>
+
+    <!-- UART 0 -->
+    <peripheral>                      <name>UART0</name>
+        <version>1.0</version>
+        <description>UART 0</description>
+        <groupName>UART</groupName>
+        <baseAddress>0x40004000</baseAddress>
+        <size>32</size>
+        <access>read-write</access>
+
+        <addressBlock>
+            <offset>0</offset>
+            <size>0x14</size>
+            <usage>registers</usage>
+        </addressBlock>
+
+        <interrupt>
+            <name>UART0_RX</name>
+            <description>UART 0 Receive Interrupt</description>
+            <value>0</value>
+            <name>UART0_TX</name>
+            <description>UART 0 Transmit Interrupt</description>
+            <value>1</value>
+        </interrupt>
+
+        <registers>
+            <register>                <name>DATA</name>
+                <description>Recieve and Transmit Data Value</description>
+                <addressOffset>0x000</addressOffset>
+                <size>8</size>
+            </register>
+            <register>                <name>STATE</name>
+                <description>UART Status Register</description>
+                <addressOffset>0x004</addressOffset>
+                <fields>
+                    <field>
+                        <name>RXOV</name>
+                        <description>RX Buffer Overun (write 1 to clear)</description>
+                        <bitRange>[3:3]</bitRange>
+                        <modifiedWriteValues>oneToClear</modifiedWriteValues>
+                    </field>
+                    <field>
+                        <name>TXOV</name>
+                        <description>TX Buffer Overun (write 1 to clear)</description>
+                        <bitRange>[2:2]</bitRange>
+                        <modifiedWriteValues>oneToClear</modifiedWriteValues>
+                    </field>
+                    <field>
+                        <name>RXBF</name>
+                        <description>RX Buffer Full</description>
+                        <bitRange>[1:1]</bitRange>
+                        <access>read-only</access>
+                    </field>
+                    <field>
+                        <name>TXBF</name>
+                        <description>TX Buffer Full</description>
+                        <bitRange>[0:0]</bitRange>
+                        <access>read-only</access>
+                    </field>
+                </fields>
+            </register>
+            <register>                <name>CTRL</name>
+                <description>UART Control Register</description>
+                <addressOffset>0x008</addressOffset>
+                <fields>
+                    <field>  <name>HSTX</name>
+                        <description>High Speed Test Mode for TX only</description>
+                        <bitRange>[6:6]</bitRange>
+                        <enumeratedValues>
+                            <enumeratedValue>
+                                <name>Disable</name>
+                                <description>Disabled</description>
+                                <value>0</value>
+                            </enumeratedValue>
+                            <enumeratedValue>
+                                <name>Enable</name>
+                                <description>Enabled</description>
+                                <value>1</value>
+                            </enumeratedValue>
+                        </enumeratedValues>
+                    </field>
+                    <field>  <name>RVOVINT</name>
+                        <description>RX Overrun Interrupt Enable</description>
+                        <bitRange>[5:5]</bitRange>
+                        <enumeratedValues>
+                            <enumeratedValue>
+                                <name>Disable</name>
+                                <description>Disabled</description>
+                                <value>0</value>
+                            </enumeratedValue>
+                            <enumeratedValue>
+                                <name>Enable</name>
+                                <description>Enabled</description>
+                                <value>1</value>
+                            </enumeratedValue>
+                        </enumeratedValues>
+                    </field>
+                    <field>  <name>TXOVINT</name>
+                        <description>TX Overrun Interrupt Enable</description>
+                        <bitRange>[4:4]</bitRange>
+                        <enumeratedValues>
+                            <enumeratedValue>
+                                <name>Disable</name>
+                                <description>Disabled</description>
+                                <value>0</value>
+                            </enumeratedValue>
+                            <enumeratedValue>
+                                <name>Enable</name>
+                                <description>Enabled</description>
+                                <value>1</value>
+                            </enumeratedValue>
+                        </enumeratedValues>
+                    </field>
+                    <field>  <name>RXINT</name>
+                        <description>RX Interrupt Enable</description>
+                        <bitRange>[3:3]</bitRange>
+                        <enumeratedValues>
+                            <enumeratedValue>
+                                <name>Disable</name>
+                                <description>Disabled</description>
+                                <value>0</value>
+                            </enumeratedValue>
+                            <enumeratedValue>
+                                <name>Enable</name>
+                                <description>Enabled</description>
+                                <value>1</value>
+                            </enumeratedValue>
+                        </enumeratedValues>
+                    </field>
+                    <field>  <name>TXINT</name>
+                        <description>TX Interrupt Enable</description>
+                        <bitRange>[2:2]</bitRange>
+                        <enumeratedValues>
+                            <enumeratedValue>
+                                <name>Disable</name>
+                                <description>Disabled</description>
+                                <value>0</value>
+                            </enumeratedValue>
+                            <enumeratedValue>
+                                <name>Enable</name>
+                                <description>Enabled</description>
+                                <value>1</value>
+                            </enumeratedValue>
+                        </enumeratedValues>
+                    </field>
+                    <field>  <name>RXEN</name>
+                        <description>RX Enable</description>
+                        <bitRange>[1:1]</bitRange>
+                        <enumeratedValues>
+                            <enumeratedValue>
+                                <name>Disable</name>
+                                <description>Disabled</description>
+                                <value>0</value>
+                            </enumeratedValue>
+                            <enumeratedValue>
+                                <name>Enable</name>
+                                <description>Enabled</description>
+                                <value>1</value>
+                            </enumeratedValue>
+                        </enumeratedValues>
+                    </field>
+                    <field>  <name>TXEN</name>
+                        <description>TX Enable</description>
+                        <bitRange>[0:0]</bitRange>
+                        <enumeratedValues>
+                            <enumeratedValue>
+                                <name>Disable</name>
+                                <description>Disabled</description>
+                                <value>0</value>
+                            </enumeratedValue>
+                            <enumeratedValue>
+                                <name>Enable</name>
+                                <description>Enabled</description>
+                                <value>1</value>
+                            </enumeratedValue>
+                        </enumeratedValues>
+                    </field>
+                </fields>
+            </register>
+            <register>                <name>INTSTATUS</name>
+                <description>UART Interrupt Status Register</description>
+                <addressOffset>0x00C</addressOffset>
+                <access>read-only</access>
+                <fields>
+                    <field>
+                        <name>RXOV</name>
+                        <description>RX Overrun Interrupt</description>
+                        <bitRange>[3:3]</bitRange>
+                    </field>
+                    <field>
+                        <name>TXOV</name>
+                        <description>TX Overrun Interrupt</description>
+                        <bitRange>[2:2]</bitRange>
+                    </field>
+                    <field>
+                        <name>RXINT</name>
+                        <description>RX Interrupt</description>
+                        <bitRange>[1:1]</bitRange>
+                    </field>
+                    <field>
+                        <name>TXINT</name>
+                        <description>TX Interrupt</description>
+                        <bitRange>[0:0]</bitRange>
+                    </field>
+                </fields>
+            </register>
+            <register>                <name>INTCLEAR</name>
+                <description>UART Interrupt CLEAR Register</description>
+                <alternateRegister>INTSTATUS</alternateRegister>
+                <addressOffset>0x00C</addressOffset>
+                <access>write-only</access>
+                <fields>
+                    <field>  <name>RXOV</name>
+                        <description>RX Overrun Interrupt</description>
+                        <bitRange>[3:3]</bitRange>
+                        <modifiedWriteValues>oneToClear</modifiedWriteValues>
+                    </field>
+                    <field>  <name>TXOV</name>
+                        <description>TX Overrun Interrupt</description>
+                        <bitRange>[2:2]</bitRange>
+                        <modifiedWriteValues>oneToClear</modifiedWriteValues>
+                    </field>
+                    <field>  <name>RXINT</name>
+                        <description>RX Interrupt</description>
+                        <bitRange>[1:1]</bitRange>
+                        <modifiedWriteValues>oneToClear</modifiedWriteValues>
+                    </field>
+                    <field>  <name>TXINT</name>
+                        <description>TX Interrupt</description>
+                        <bitRange>[0:0]</bitRange>
+                        <modifiedWriteValues>oneToClear</modifiedWriteValues>
+                    </field>
+                </fields>
+            </register>
+            <register>                <name>BAUDDIV</name>
+                <description>Baudrate Divider</description>
+                <addressOffset>0x010</addressOffset>
+            </register>
+        </registers>
+
+    </peripheral>
+
+    <!-- UART 1 -->
+    <peripheral derivedFrom="UART0">  <name>UART1</name>
+        <baseAddress>0x40005000</baseAddress>
+        <interrupt>
+            <name>UART1_RX</name>
+            <description>UART 1 Receive Interrupt</description>
+            <value>2</value>
+            <name>UART1_TX</name>
+            <description>UART 1 Transmit Interrupt</description>
+            <value>3</value>
+        </interrupt>
+    </peripheral>
+
+    <!-- UART 2 -->
+    <peripheral derivedFrom="UART0">  <name>UART2</name>
+        <baseAddress>0x40006000</baseAddress>
+        <interrupt>
+            <name>UART2_RX</name>
+            <description>UART 1 Receive Interrupt</description>
+            <value>4</value>
+            <name>UART2_TX</name>
+            <description>UART 2 Transmit Interrupt</description>
+            <value>5</value>
+        </interrupt>
+    </peripheral>
+
+    <!-- UART 3 -->
+    <peripheral derivedFrom="UART0">  <name>UART3</name>
+        <baseAddress>0x40007000</baseAddress>
+        <interrupt>
+            <name>UART3_RX</name>
+            <description>UART 3 Receive Interrupt</description>
+            <value>18</value>
+            <name>UART3_TX</name>
+            <description>UART 3 Transmit Interrupt</description>
+            <value>19</value>
+        </interrupt>
+    </peripheral>
+
+    <!-- UART 4 -->
+    <peripheral derivedFrom="UART0">  <name>UART4</name>
+        <baseAddress>0x40009000</baseAddress>
+        <interrupt>
+            <name>UART4_RX</name>
+            <description>UART 4 Receive Interrupt</description>
+            <value>20</value>
+            <name>UART4_TX</name>
+            <description>UART 4 Transmit Interrupt</description>
+            <value>21</value>
+        </interrupt>
+    </peripheral>
+
+    <!-- GPIO 0-->
+    <peripheral>                      <name>GPIO0</name>
+        <version>1.0</version>
+        <description>general-purpose I/O</description>
+        <groupName>GPIO</groupName>
+        <baseAddress>0x40010000</baseAddress>
+        <size>32</size>
+        <access>read-write</access>
+
+        <addressBlock>
+            <offset>0</offset>
+            <size>0x3C</size>
+            <usage>registers</usage>
+        </addressBlock>
+
+        <interrupt>
+            <name>GPIO0</name>
+            <description>GPIO 0 combined interrupt</description>
+            <value>6</value>
+        </interrupt>
+
+        <registers>
+          <register>                <name>DATA</name>
+            <description>Data Register</description>
+            <addressOffset>0x000</addressOffset>
+          </register>
+          <register>                <name>DATAOUT</name>
+            <description>Data Output Register</description>
+            <addressOffset>0x004</addressOffset>
+          </register>
+          <register>                <name>OUTENSET</name>
+            <description>Ouptut enable set Register</description>
+            <addressOffset>0x010</addressOffset>
+          </register>
+          <register>                <name>OUTENCLR</name>
+            <description>Ouptut enable clear Register</description>
+            <addressOffset>0x014</addressOffset>
+          </register>
+          <register>                <name>ALTFUNCSET</name>
+            <description>Alternate function set Register</description>
+            <addressOffset>0x018</addressOffset>
+          </register>
+          <register>                <name>ALTFUNCCLR</name>
+            <description>Alternate function clear Register</description>
+            <addressOffset>0x01C</addressOffset>
+          </register>
+          <register>                <name>INTENSET</name>
+            <description>Interrupt enable set Register</description>
+            <addressOffset>0x020</addressOffset>
+          </register>
+          <register>                <name>INTENCLR</name>
+            <description>Interrupt enable clear Register</description>
+            <addressOffset>0x024</addressOffset>
+          </register>
+          <register>                <name>INTTYPESET</name>
+            <description>Interrupt type set Register</description>
+            <addressOffset>0x028</addressOffset>
+          </register>
+          <register>                <name>INTTYPECLR</name>
+            <description>Interrupt type clear Register</description>
+            <addressOffset>0x02C</addressOffset>
+          </register>
+          <register>                <name>INTPOLSET</name>
+            <description>Polarity-level, edge interrupt configuration set Register</description>
+            <addressOffset>0x030</addressOffset>
+          </register>
+          <register>                <name>INTPOLCLR</name>
+            <description>Polarity-level, edge interrupt configuration clear Register</description>
+            <addressOffset>0x034</addressOffset>
+          </register>
+          <register>                <name>INTSTATUS</name>
+              <description>Interrupt Status Register</description>
+              <addressOffset>0x038</addressOffset>
+              <access>read-only</access>
+          </register>
+          <register>                <name>INTCLEAR</name>
+              <description>Interrupt CLEAR Register</description>
+              <alternateRegister>INTSTATUS</alternateRegister>
+              <addressOffset>0x038</addressOffset>
+              <access>write-only</access>
+              <modifiedWriteValues>oneToClear</modifiedWriteValues>
+          </register>
+      </registers>
+    </peripheral>
+
+    <!-- GPIO 1 -->
+    <peripheral derivedFrom="GPIO0">  <name>GPIO1</name>
+        <baseAddress>0x40011000</baseAddress>
+
+        <interrupt>
+            <name>GPIO1</name>
+            <description>GPIO 1 combined interrupt</description>
+            <value>7</value>
+        </interrupt>
+    </peripheral>
+
+    <!-- SPI -->
+	<peripheral>                      <name>SPI</name>
+      <version>1.0</version>
+      <description>SPI</description>
+      <groupName>SPI</groupName>
+      <baseAddress>0x40027000</baseAddress>
+      <size>16</size>
+      <access>read-write</access>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>64</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <interrupt>
+        <name>SPI</name>
+        <description>Combined SPI 0, SPI 1 Interrupt</description>
+        <value>11</value>
+      </interrupt>
+
+      <registers>
+	  	<register>		  <name>SPSTAT</name>
+		  <description>SPI Status</description>
+		  <addressOffset>0</addressOffset>
+		</register>
+		<register>		  <name>SPDAT</name>
+		  <description>SPI Data</description>
+		  <addressOffset>2</addressOffset>
+		</register>
+		<register>		  <name>SPCLK</name>
+		  <description>SPI Clock Configuration</description>
+		  <addressOffset>4</addressOffset>
+		</register>
+		<register>		  <name>SPCON</name>
+		  <description>SPI Configuration</description>
+		  <addressOffset>6</addressOffset>
+		  <fields>
+		    <field>  <name>SPEN</name>
+              <bitRange>[0:0]</bitRange>
+			</field>
+		    <field>  <name>SSDIS</name>
+              <bitRange>[1:1]</bitRange>
+			</field>
+		    <field>  <name>MSTRS</name>
+              <bitRange>[2:2]</bitRange>
+			</field>
+		    <field>  <name>CPOL</name>
+              <bitRange>[3:3]</bitRange>
+			</field>
+			<field>  <name>CPHA</name>
+              <bitRange>[4:4]</bitRange>
+			</field>
+		    <field>  <name>SPR1</name>
+              <bitRange>[5:5]</bitRange>
+			</field>
+		    <field>  <name>SPR0</name>
+              <bitRange>[6:6]</bitRange>
+			</field>
+		  </fields>
+		</register>
+	  </registers>
+	</peripheral>
+
+    <!-- Watchdog -->
+    <peripheral>                      <name>WDT</name>
+      <description>Watchdog Timer</description>
+      <baseAddress>0x40008000</baseAddress>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0xC04</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <interrupt>
+        <name>WDT</name>
+        <description>Watchdog Interrupt</description>
+        <value>0</value>
+      </interrupt>
+
+      <registers>
+          <register>                <name>WDOGLOAD</name>
+            <description>Watchdog Load Register</description>
+            <addressOffset>0x000</addressOffset>
+            <resetValue>0xFFFFFFFF</resetValue>
+          </register>
+          <register>                <name>WDOGVALUE</name>
+            <description>Watchdog Value Register</description>
+            <addressOffset>0x004</addressOffset>
+            <resetValue>0xFFFFFFFF</resetValue>
+            <access>read-only</access>
+          </register>
+          <register>                <name>WDOGCONTROL</name>
+            <description>Watchdog Control Register</description>
+            <addressOffset>0x008</addressOffset>
+            <resetValue>0x20</resetValue>
+                <fields>
+                  <field>  <name>INTEN</name>
+                    <description>Enable the interrupt event</description>
+                    <bitOffset>0</bitOffset>
+                    <bitWidth>1</bitWidth>
+                    <enumeratedValues>
+                      <enumeratedValue>
+                          <name>Disable</name>
+                          <description>Disable Watchdog interrupt</description>
+                          <value>0</value>
+                      </enumeratedValue>
+                      <enumeratedValue>
+                          <name>Enable</name>
+                          <description>ENable Watchdog interrupt.</description>
+                          <value>1</value>
+                      </enumeratedValue>
+                    </enumeratedValues>
+                  </field>
+                  <field>  <name>RESEN</name>
+                    <description>Enable watchdog reset output</description>
+                    <bitOffset>1</bitOffset>
+                    <bitWidth>1</bitWidth>
+                    <enumeratedValues>
+                      <enumeratedValue>
+                          <name>Disable</name>
+                          <description>Disable Watchdog reset</description>
+                          <value>0</value>
+                      </enumeratedValue>
+                      <enumeratedValue>
+                          <name>Enable</name>
+                          <description>ENable Watchdog reset</description>
+                          <value>1</value>
+                      </enumeratedValue>
+                    </enumeratedValues>
+                  </field>
+                </fields>
+          </register>
+          <register>                <name>WDOGINTCLR</name>
+            <description>Watchdog Interrupt Clear Register</description>
+            <addressOffset>0x00C</addressOffset>
+            <resetValue>0x00000000</resetValue>
+            <access>write-only</access>
+            <fields>
+              <field>
+                  <name>INT</name>
+                  <description>Interrupt</description>
+                  <bitOffset>0</bitOffset>
+                  <bitWidth>1</bitWidth>
+                  <modifiedWriteValues>oneToClear</modifiedWriteValues>
+              </field>
+            </fields>
+          </register>
+          <register>                <name>WDOGRIS</name>
+            <description>Watchdog Raw Interrupt Status Register</description>
+            <addressOffset>0x010</addressOffset>
+            <resetValue>0x0</resetValue>
+            <access>read-only</access>
+            <fields>
+              <field>  <name>RIS</name>
+                  <description>Raw watchdog Interrupt</description>
+                  <bitOffset>0</bitOffset>
+                  <bitWidth>1</bitWidth>
+              </field>
+            </fields>
+          </register>
+          <register>                <name>WDOGMIS</name>
+            <description>Watchdog Mask Interrupt Status Register</description>
+            <addressOffset>0x014</addressOffset>
+            <resetValue>0x0</resetValue>
+            <access>read-only</access>
+            <fields>
+              <field>  <name>MIS</name>
+                  <description>Masked Watchdog Interrupt</description>
+                  <bitOffset>0</bitOffset>
+                  <bitWidth>1</bitWidth>
+              </field>
+            </fields>
+          </register>
+          <register>                <name>WDOGLOCK</name>
+            <description>Watchdog Lock Register</description>
+            <addressOffset>0xC00</addressOffset>
+            <resetValue>0x00000000</resetValue>
+          </register>
+      </registers>
+    </peripheral>
+
+    <!-- FPGA System Control I/O -->
+    <peripheral>                      <name>FPGAIO</name>
+      <description>FPGA System Control I/O</description>
+      <baseAddress>0x40028000</baseAddress>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x100</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <registers>
+        <register>          <name>LED</name>
+          <description>LED Connections</description>
+          <addressOffset>0x000</addressOffset>
+          <size>32</size>
+          <resetValue>0x0</resetValue>
+            <fields>
+                <field>
+                    <name>LED0</name>
+                    <bitRange>[0:0]</bitRange>
+                    <enumeratedValues>
+                        <enumeratedValue>
+                            <name>Off</name>
+                            <description>LED is off</description>
+                            <value>0</value>
+                        </enumeratedValue>
+                        <enumeratedValue>
+                            <name>On</name>
+                            <description>LED is on</description>
+                            <value>1</value>
+                        </enumeratedValue>
+                    </enumeratedValues>
+                </field>
+                <field>
+                    <name>LED1</name>
+                    <bitRange>[1:1]</bitRange>
+                    <enumeratedValues>
+                        <enumeratedValue>
+                            <name>Off</name>
+                            <description>LED is off</description>
+                            <value>0</value>
+                        </enumeratedValue>
+                        <enumeratedValue>
+                            <name>On</name>
+                            <description>LED is on</description>
+                            <value>1</value>
+                        </enumeratedValue>
+                    </enumeratedValues>
+                </field>
+            </fields>
+        </register>
+        <register>          <name>BUTTON</name>
+            <description>Button Connections</description>
+            <addressOffset>0x008</addressOffset>
+            <size>32</size>
+            <resetValue>0x0</resetValue>
+            <fields>
+                <field>
+                    <name>BUTTON0</name>
+                    <bitRange>[0:0]</bitRange>
+                    <enumeratedValues>
+                        <enumeratedValue>
+                            <name>Off</name>
+                            <description>BUTTON is off</description>
+                            <value>0</value>
+                        </enumeratedValue>
+                        <enumeratedValue>
+                            <name>On</name>
+                            <description>BUTTON is on</description>
+                            <value>1</value>
+                        </enumeratedValue>
+                    </enumeratedValues>
+                </field>
+                <field>
+                    <name>BUTTON1</name>
+                    <bitRange>[1:1]</bitRange>
+                    <enumeratedValues>
+                        <enumeratedValue>
+                            <name>Off</name>
+                            <description>BUTTON is off</description>
+                            <value>0</value>
+                        </enumeratedValue>
+                        <enumeratedValue>
+                            <name>On</name>
+                            <description>BUTTON is on</description>
+                            <value>1</value>
+                        </enumeratedValue>
+                    </enumeratedValues>
+                </field>
+            </fields>
+        </register>
+        <register>          <name>CLK1HZ</name>
+            <description>1Hz Up Counter</description>
+            <addressOffset>0x010</addressOffset>
+            <size>32</size>
+            <access>read-only</access>
+            <resetValue>0x0</resetValue>
+        </register>
+        <register>          <name>CLK100HZ</name>
+            <description>100Hz Up Counter</description>
+            <addressOffset>0x014</addressOffset>
+            <size>32</size>
+            <access>read-only</access>
+            <resetValue>0x0</resetValue>
+        </register>
+        <register>          <name>COUNTER</name>
+            <description>Cycle up counter</description>
+            <addressOffset>0x018</addressOffset>
+            <size>32</size>
+            <access>read-write</access>
+            <resetValue>0x0</resetValue>
+        </register>
+        <register>          <name>PRESCALER</name>
+            <description>Reload value for prescaler counter</description>
+            <addressOffset>0x01C</addressOffset>
+            <size>32</size>
+            <access>read-write</access>
+            <resetValue>0x0</resetValue>
+        </register>
+        <register>          <name>PSCNTR</name>
+            <description>Prescale Counter</description>
+            <addressOffset>0x020</addressOffset>
+            <size>32</size>
+            <access>read-write</access>
+            <resetValue>0x0</resetValue>
+        </register>
+        <register>          <name>MISC</name>
+            <description>Misc. Control</description>
+            <addressOffset>0x04C</addressOffset>
+            <size>32</size>
+            <access>read-write</access>
+            <resetValue>0x0</resetValue>
+            <fields>
+                <field>
+                    <name>SHIELD1_SPI_nCS</name>
+                    <bitRange>[9:9]</bitRange>
+                </field>
+                <field>
+                    <name>SHIELD0_SPI_nCS</name>
+                    <bitRange>[8:8]</bitRange>
+                </field>
+                <field>
+                    <name>ADC_SPI_nCS</name>
+                    <bitRange>[7:7]</bitRange>
+                </field>
+                <field>
+                    <name>CLCD_BL_CTRL</name>
+                    <bitRange>[6:6]</bitRange>
+                </field>
+                <field>
+                    <name>CLCD_RD</name>
+                    <bitRange>[5:5]</bitRange>
+                </field>
+                <field>
+                    <name>CLCD_RS</name>
+                    <bitRange>[4:4]</bitRange>
+                </field>
+                <field>
+                    <name>CLCD_RESET</name>
+                    <bitRange>[3:3]</bitRange>
+                </field>
+                <field>
+                    <name>SPI_nSS</name>
+                    <bitRange>[1:1]</bitRange>
+                </field>
+                <field>
+                    <name>CLCD_CS</name>
+                    <bitRange>[0:0]</bitRange>
+                </field>
+            </fields>
+        </register>
+      </registers>
+    </peripheral>
+
+    <!-- Serial Communication Controller (SCC) -->
+    <peripheral>                      <name>SCC</name>
+      <description>Serial Communication Controller</description>
+      <baseAddress>0x4002F000</baseAddress>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x1000</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <registers>
+        <register>            <name>CFG_REG0</name>
+            <addressOffset>0x000</addressOffset>
+            <size>32</size>
+            <access>read-write</access>
+            <resetValue>0x0</resetValue>
+            <fields>
+                <field>
+                    <name>REMAP</name>
+                    <description>1 = REMAP Block RAM to ZBT</description>
+                    <bitRange>[0:0]</bitRange>
+                </field>
+            </fields>
+        </register>
+        <register>            <name>CFG_REG1</name>
+            <addressOffset>0x004</addressOffset>
+            <size>32</size>
+            <access>read-write</access>
+            <resetValue>0x0</resetValue>
+            <fields>
+                <field>
+                    <name>MCC_LED7</name>
+                    <description>MCC LEDs: 0 = OFF 1 = ON</description>
+                    <bitRange>[7:7]</bitRange>
+                    <enumeratedValues>
+                        <enumeratedValue>
+                            <name>Off</name>
+                            <description>LED is off</description>
+                            <value>0</value>
+                        </enumeratedValue>
+                        <enumeratedValue>
+                            <name>On</name>
+                            <description>LED is on</description>
+                            <value>1</value>
+                        </enumeratedValue>
+                    </enumeratedValues>
+                </field>
+                <field>
+                    <name>MCC_LED6</name>
+                    <description>MCC LEDs: 0 = OFF 1 = ON</description>
+                    <bitRange>[6:6]</bitRange>
+                    <enumeratedValues>
+                        <enumeratedValue>
+                            <name>Off</name>
+                            <description>LED is off</description>
+                            <value>0</value>
+                        </enumeratedValue>
+                        <enumeratedValue>
+                            <name>On</name>
+                            <description>LED is on</description>
+                            <value>1</value>
+                        </enumeratedValue>
+                    </enumeratedValues>
+                </field>
+                <field>
+                    <name>MCC_LED5</name>
+                    <description>MCC LEDs: 0 = OFF 1 = ON</description>
+                    <bitRange>[5:5]</bitRange>
+                    <enumeratedValues>
+                        <enumeratedValue>
+                            <name>Off</name>
+                            <description>LED is off</description>
+                            <value>0</value>
+                        </enumeratedValue>
+                        <enumeratedValue>
+                            <name>On</name>
+                            <description>LED is on</description>
+                            <value>1</value>
+                        </enumeratedValue>
+                    </enumeratedValues>
+                </field>
+                <field>
+                    <name>MCC_LED4</name>
+                    <description>MCC LEDs: 0 = OFF 1 = ON</description>
+                    <bitRange>[4:4]</bitRange>
+                    <enumeratedValues>
+                        <enumeratedValue>
+                            <name>Off</name>
+                            <description>LED is off</description>
+                            <value>0</value>
+                        </enumeratedValue>
+                        <enumeratedValue>
+                            <name>On</name>
+                            <description>LED is on</description>
+                            <value>1</value>
+                        </enumeratedValue>
+                    </enumeratedValues>
+                </field>
+                <field>
+                    <name>MCC_LED3</name>
+                    <description>MCC LEDs: 0 = OFF 1 = ON</description>
+                    <bitRange>[3:3]</bitRange>
+                    <enumeratedValues>
+                        <enumeratedValue>
+                            <name>Off</name>
+                            <description>LED is off</description>
+                            <value>0</value>
+                        </enumeratedValue>
+                        <enumeratedValue>
+                            <name>On</name>
+                            <description>LED is on</description>
+                            <value>1</value>
+                        </enumeratedValue>
+                    </enumeratedValues>
+                </field>
+                <field>
+                    <name>MCC_LED2</name>
+                    <description>MCC LEDs: 0 = OFF 1 = ON</description>
+                    <bitRange>[2:2]</bitRange>
+                    <enumeratedValues>
+                        <enumeratedValue>
+                            <name>Off</name>
+                            <description>LED is off</description>
+                            <value>0</value>
+                        </enumeratedValue>
+                        <enumeratedValue>
+                            <name>On</name>
+                            <description>LED is on</description>
+                            <value>1</value>
+                        </enumeratedValue>
+                    </enumeratedValues>
+                </field>
+                <field>
+                    <name>MCC_LED1</name>
+                    <description>MCC LEDs: 0 = OFF 1 = ON</description>
+                    <bitRange>[1:1]</bitRange>
+                    <enumeratedValues>
+                        <enumeratedValue>
+                            <name>Off</name>
+                            <description>LED is off</description>
+                            <value>0</value>
+                        </enumeratedValue>
+                        <enumeratedValue>
+                            <name>On</name>
+                            <description>LED is on</description>
+                            <value>1</value>
+                        </enumeratedValue>
+                    </enumeratedValues>
+                </field>
+                <field>
+                    <name>MCC_LED0</name>
+                    <description>MCC LEDs: 0 = OFF 1 = ON</description>
+                    <bitRange>[0:0]</bitRange>
+                    <enumeratedValues>
+                        <enumeratedValue>
+                            <name>Off</name>
+                            <description>LED is off</description>
+                            <value>0</value>
+                        </enumeratedValue>
+                        <enumeratedValue>
+                            <name>On</name>
+                            <description>LED is on</description>
+                            <value>1</value>
+                        </enumeratedValue>
+                    </enumeratedValues>
+                </field>
+            </fields>
+        </register>
+        <register>            <name>CFG_REG2</name>
+            <addressOffset>0x008</addressOffset>
+            <size>32</size>
+            <access>read-only</access>
+            <resetValue>0x0</resetValue>
+        </register>
+        <register>            <name>CFG_REG3</name>
+            <addressOffset>0x00C</addressOffset>
+            <size>32</size>
+            <access>read-only</access>
+            <resetValue>0x0</resetValue>
+            <fields>
+                <field>
+                    <name>MCC_SWITCHE7</name>
+                    <description>MCC SWITCHES: 0 = OFF 1 = ON</description>
+                    <bitRange>[7:7]</bitRange>
+                    <enumeratedValues>
+                        <enumeratedValue>
+                            <name>Off</name>
+                            <description>Switch is off</description>
+                            <value>0</value>
+                        </enumeratedValue>
+                        <enumeratedValue>
+                            <name>On</name>
+                            <description>Switch is on</description>
+                            <value>1</value>
+                        </enumeratedValue>
+                    </enumeratedValues>
+                </field>
+                <field>
+                    <name>MCC_SWITCHE6</name>
+                    <description>MCC SWITCHES: 0 = OFF 1 = ON</description>
+                    <bitRange>[6:6]</bitRange>
+                    <enumeratedValues>
+                        <enumeratedValue>
+                            <name>Off</name>
+                            <description>Switch is off</description>
+                            <value>0</value>
+                        </enumeratedValue>
+                        <enumeratedValue>
+                            <name>On</name>
+                            <description>Switch is on</description>
+                            <value>1</value>
+                        </enumeratedValue>
+                    </enumeratedValues>
+                </field>
+                <field>
+                    <name>MCC_SWITCHE5</name>
+                    <description>MCC SWITCHES: 0 = OFF 1 = ON</description>
+                    <bitRange>[5:5]</bitRange>
+                    <enumeratedValues>
+                        <enumeratedValue>
+                            <name>Off</name>
+                            <description>Switch is off</description>
+                            <value>0</value>
+                        </enumeratedValue>
+                        <enumeratedValue>
+                            <name>On</name>
+                            <description>Switch is on</description>
+                            <value>1</value>
+                        </enumeratedValue>
+                    </enumeratedValues>
+                </field>
+                <field>
+                    <name>MCC_SWITCHE4</name>
+                    <description>MCC SWITCHES: 0 = OFF 1 = ON</description>
+                    <bitRange>[4:4]</bitRange>
+                    <enumeratedValues>
+                        <enumeratedValue>
+                            <name>Off</name>
+                            <description>Switch is off</description>
+                            <value>0</value>
+                        </enumeratedValue>
+                        <enumeratedValue>
+                            <name>On</name>
+                            <description>Switch is on</description>
+                            <value>1</value>
+                        </enumeratedValue>
+                    </enumeratedValues>
+                </field>
+                <field>
+                    <name>MCC_SWITCHE3</name>
+                    <description>MCC SWITCHES: 0 = OFF 1 = ON</description>
+                    <bitRange>[3:3]</bitRange>
+                    <enumeratedValues>
+                        <enumeratedValue>
+                            <name>Off</name>
+                            <description>Switch is off</description>
+                            <value>0</value>
+                        </enumeratedValue>
+                        <enumeratedValue>
+                            <name>On</name>
+                            <description>Switch is on</description>
+                            <value>1</value>
+                        </enumeratedValue>
+                    </enumeratedValues>
+                </field>
+                <field>
+                    <name>MCC_SWITCHE2</name>
+                    <description>MCC SWITCHES: 0 = OFF 1 = ON</description>
+                    <bitRange>[2:2]</bitRange>
+                    <enumeratedValues>
+                        <enumeratedValue>
+                            <name>Off</name>
+                            <description>Switch is off</description>
+                            <value>0</value>
+                        </enumeratedValue>
+                        <enumeratedValue>
+                            <name>On</name>
+                            <description>Switch is on</description>
+                            <value>1</value>
+                        </enumeratedValue>
+                    </enumeratedValues>
+                </field>
+                <field>
+                    <name>MCC_SWITCHE1</name>
+                    <description>MCC SWITCHES: 0 = OFF 1 = ON</description>
+                    <bitRange>[1:1]</bitRange>
+                    <enumeratedValues>
+                        <enumeratedValue>
+                            <name>Off</name>
+                            <description>Switch is off</description>
+                            <value>0</value>
+                        </enumeratedValue>
+                        <enumeratedValue>
+                            <name>On</name>
+                            <description>Switch is on</description>
+                            <value>1</value>
+                        </enumeratedValue>
+                    </enumeratedValues>
+                </field>
+                <field>
+                    <name>MCC_SWITCHE0</name>
+                    <description>MCC SWITCHES: 0 = OFF 1 = ON</description>
+                    <bitRange>[0:0]</bitRange>
+                    <enumeratedValues>
+                        <enumeratedValue>
+                            <name>Off</name>
+                            <description>Switch is off</description>
+                            <value>0</value>
+                        </enumeratedValue>
+                        <enumeratedValue>
+                            <name>On</name>
+                            <description>Switch is on</description>
+                            <value>1</value>
+                        </enumeratedValue>
+                    </enumeratedValues>
+                </field>
+            </fields>
+        </register>
+        <register>            <name>CFG_REG4</name>
+            <addressOffset>0x010</addressOffset>
+            <size>32</size>
+            <access>read-only</access>
+            <resetValue>0x0</resetValue>
+            <fields>
+                <field>
+                    <name>BRDREV</name>
+                    <description>Board Revision</description>
+                    <bitRange>[3:0]</bitRange>
+                </field>
+            </fields>
+        </register>
+        <register>            <name>CFG_REG5</name>
+            <addressOffset>0x014</addressOffset>
+            <size>32</size>
+            <access>read-write</access>
+            <resetValue>0x0</resetValue>
+            <fields>
+                <field>
+                    <name>DEBUG</name>
+                    <description>Debug: 0 = Serial Wire Debug 1 = JTAG</description>
+                    <bitRange>[5:5]</bitRange>
+                </field>
+            </fields>
+        </register>
+        <register>            <name>CFG_REG6</name>
+            <addressOffset>0x018</addressOffset>
+            <size>32</size>
+            <access>read-only</access>
+            <resetValue>0x0</resetValue>
+        </register>
+        <register>            <name>CFG_REG7</name>
+            <addressOffset>0x01C</addressOffset>
+            <size>32</size>
+            <access>read-only</access>
+            <resetValue>0x0</resetValue>
+        </register>
+        <register>            <name>SYS_CFGDATA_RTN</name>
+            <addressOffset>0x0A0</addressOffset>
+            <size>32</size>
+            <access>read-write</access>
+            <resetValue>0x0</resetValue>
+        </register>
+        <register>            <name>SYS_CFGDATA_OUT</name>
+            <addressOffset>0x0A4</addressOffset>
+            <size>32</size>
+            <access>read-write</access>
+            <resetValue>0x0</resetValue>
+        </register>
+        <register>            <name>SYS_CFGCTRL</name>
+            <addressOffset>0x0A8</addressOffset>
+            <size>32</size>
+            <access>read-write</access>
+            <resetValue>0x0</resetValue>
+            <fields>
+                <field>
+                    <name>START</name>
+                    <description>Start: generates interrupt on write to this bit</description>
+                    <bitRange>[31:31]</bitRange>
+                </field>
+                <field>
+                    <name>RW_ACCESS</name>
+                    <description>Read/Write Access</description>
+                    <bitRange>[30:30]</bitRange>
+                </field>
+                <field>
+                    <name>RFUNCVAL</name>
+                    <description>Function Value</description>
+                    <bitRange>[25:20]</bitRange>
+                </field>
+                <field>
+                    <name>DEVICE</name>
+                    <description>Device (value of 0/1/2 for supported clocks</description>
+                    <bitRange>[11:0]</bitRange>
+                </field>
+            </fields>
+        </register>
+        <register>            <name>SYS_CFGSTAT</name>
+            <addressOffset>0x0AC</addressOffset>
+            <size>32</size>
+            <access>read-write</access>
+            <resetValue>0x0</resetValue>
+            <fields>
+                <field>
+                    <name>ERROR</name>
+                    <description>Error Flag</description>
+                    <bitRange>[1:1]</bitRange>
+                </field>
+                <field>
+                    <name>COMPLETE</name>
+                    <description>Complete Flag</description>
+                    <bitRange>[0:0]</bitRange>
+                </field>
+            </fields>
+        </register>
+        <register>            <name>DLL</name>
+            <description>DLL Lock Register</description>
+            <addressOffset>0x100</addressOffset>
+            <size>32</size>
+            <access>read-write</access>
+            <resetValue>0x0</resetValue>
+            <fields>
+                <field>
+                    <name>LOCKED_MASKED</name>
+                    <description>Error Flag</description>
+                    <bitRange>[31:24]</bitRange>
+                </field>
+                <field>
+                    <name>LOCK_UNLOCK</name>
+                    <description>Complete Flag</description>
+                    <bitRange>[23:16]</bitRange>
+                </field>
+                <field>
+                    <name>LOCKED</name>
+                    <description>Complete Flag</description>
+                    <bitRange>[0:0]</bitRange>
+                </field>
+            </fields>
+        </register>
+        <register>            <name>AID</name>
+            <addressOffset>0xFF8</addressOffset>
+            <size>32</size>
+            <access>read-only</access>
+            <resetValue>0x0</resetValue>
+            <fields>
+                <field>
+                    <name>FPGA_BUILD</name>
+                    <description>FPGA Build Number</description>
+                    <bitRange>[31:24]</bitRange>
+                </field>
+                <field>
+                    <name>MPS2_REV</name>
+                    <description>V2M-MPS2 target Board Revision (A=0,B=1,C=2)</description>
+                    <bitRange>[23:20]</bitRange>
+                </field>
+                <field>
+                    <name>NUM_CFG_REG</name>
+                    <description>Number of SCC configuration register</description>
+                    <bitRange>[7:0]</bitRange>
+                </field>
+            </fields>
+        </register>
+        <register>            <name>ID</name>
+            <addressOffset>0xFFC</addressOffset>
+            <size>32</size>
+            <access>read-only</access>
+            <resetValue>0x0</resetValue>
+            <fields>
+                <field>
+                    <name>IMPLEMENTER_ID</name>
+                    <description>Implementer ID: 0x41 = ARM</description>
+                    <bitRange>[31:24]</bitRange>
+                </field>
+                <field>
+                    <name>APP_NOTE_VAR</name>
+                    <description>Application note IP variant number</description>
+                    <bitRange>[23:20]</bitRange>
+                </field>
+                <field>
+                    <name>IP_ARCH</name>
+                    <description>IP Architecture: 0x4 = AHB</description>
+                    <bitRange>[19:16]</bitRange>
+                </field>
+                <field>
+                    <name>PRI_NUM</name>
+                    <description>Primary Part Number: 383 = AN383</description>
+                    <bitRange>[11:4]</bitRange>
+                </field>
+                <field>
+                    <name>APP_REV</name>
+                    <description>Application note IP revision number</description>
+                    <bitRange>[3:0]</bitRange>
+                </field>
+            </fields>
+        </register>
+      </registers>
+    </peripheral>
+  </peripherals>
+</device>
