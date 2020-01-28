@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <device xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="1.1" xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
-   <name>STM32F7x9</name>
-   <version>1.8</version>
-   <description>STM32F7x9</description>
+   <name>STM32F7x8</name>
+   <version>1.0</version>
+   <description>STM32F7x8</description>
   <cpu>
     <name>CM7</name>
     <revision>r0p1</revision>
@@ -1471,7 +1471,7 @@
          </addressBlock>
          <interrupt>
             <name>CRYP</name>
-            <description>CRYP</description>
+            <description>CRYP crypto global interrupt</description>
             <value>79</value>
          </interrupt>
          <registers>
@@ -7737,7 +7737,7 @@
                      <name>CHSEL</name>
                      <description>Channel selection</description>
                      <bitOffset>25</bitOffset>
-                     <bitWidth>4</bitWidth>
+                     <bitWidth>3</bitWidth>
                   </field>
                   <field>
                      <name>MBURST</name>
@@ -15491,15 +15491,6 @@
          </interrupt>
       </peripheral>
       <peripheral derivedFrom="SPI1">
-         <name>SPI3</name>
-         <baseAddress>0x40003C00</baseAddress>
-         <interrupt>
-            <name>SPI3</name>
-            <description>SPI3 global interrupt</description>
-            <value>51</value>
-         </interrupt>
-      </peripheral>
-      <peripheral derivedFrom="SPI1">
          <name>SPI4</name>
          <baseAddress>0x40013400</baseAddress>
          <interrupt>
@@ -15515,6 +15506,15 @@
             <name>SPI5</name>
             <description>SPI 5 global interrupt</description>
             <value>85</value>
+         </interrupt>
+      </peripheral>
+      <peripheral derivedFrom="SPI1">
+         <name>SPI3</name>
+         <baseAddress>0x40003C00</baseAddress>
+         <interrupt>
+            <name>SPI3</name>
+            <description>SPI3 global interrupt</description>
+            <value>51</value>
          </interrupt>
       </peripheral>
       <peripheral derivedFrom="SPI1">
@@ -17128,19 +17128,19 @@
             <value>24</value>
          </interrupt>
          <interrupt>
+            <name>TIM1_UP_TIM10</name>
+            <description>TIM1 Update interrupt and TIM10</description>
+            <value>25</value>
+         </interrupt>
+         <interrupt>
             <name>TIM1_TRG_COM_TIM11</name>
             <description>TIM1 Trigger and Commutation interrupts and
         TIM11 global interrupt</description>
             <value>26</value>
          </interrupt>
          <interrupt>
-            <name>TIM1_UP_TIM10</name>
-            <description>TIM1_UP_TIM10</description>
-            <value>25</value>
-         </interrupt>
-         <interrupt>
             <name>TIM1_CC</name>
-            <description>TIM1_CC</description>
+            <description>TIM1 Capture Compare interrupt</description>
             <value>27</value>
          </interrupt>
          <registers>
@@ -18101,27 +18101,21 @@
                <resetValue>0x0000</resetValue>
                <fields>
                   <field>
-                     <name>MOE</name>
-                     <description>Main output enable</description>
-                     <bitOffset>15</bitOffset>
-                     <bitWidth>1</bitWidth>
+                     <name>DTG</name>
+                     <description>Dead-time generator setup</description>
+                     <bitOffset>0</bitOffset>
+                     <bitWidth>8</bitWidth>
                   </field>
                   <field>
-                     <name>AOE</name>
-                     <description>Automatic output enable</description>
-                     <bitOffset>14</bitOffset>
-                     <bitWidth>1</bitWidth>
+                     <name>LOCK</name>
+                     <description>Lock configuration</description>
+                     <bitOffset>8</bitOffset>
+                     <bitWidth>2</bitWidth>
                   </field>
                   <field>
-                     <name>BKP</name>
-                     <description>Break polarity</description>
-                     <bitOffset>13</bitOffset>
-                     <bitWidth>1</bitWidth>
-                  </field>
-                  <field>
-                     <name>BKE</name>
-                     <description>Break enable</description>
-                     <bitOffset>12</bitOffset>
+                     <name>OSSI</name>
+                     <description>Off-state selection for Idle               mode</description>
+                     <bitOffset>10</bitOffset>
                      <bitWidth>1</bitWidth>
                   </field>
                   <field>
@@ -18131,22 +18125,52 @@
                      <bitWidth>1</bitWidth>
                   </field>
                   <field>
-                     <name>OSSI</name>
-                     <description>Off-state selection for Idle               mode</description>
-                     <bitOffset>10</bitOffset>
+                     <name>BKE</name>
+                     <description>Break enable</description>
+                     <bitOffset>12</bitOffset>
                      <bitWidth>1</bitWidth>
                   </field>
                   <field>
-                     <name>LOCK</name>
-                     <description>Lock configuration</description>
-                     <bitOffset>8</bitOffset>
-                     <bitWidth>2</bitWidth>
+                     <name>BKP</name>
+                     <description>Break polarity</description>
+                     <bitOffset>13</bitOffset>
+                     <bitWidth>1</bitWidth>
                   </field>
                   <field>
-                     <name>DTG</name>
-                     <description>Dead-time generator setup</description>
-                     <bitOffset>0</bitOffset>
-                     <bitWidth>8</bitWidth>
+                     <name>AOE</name>
+                     <description>Automatic output enable</description>
+                     <bitOffset>14</bitOffset>
+                     <bitWidth>1</bitWidth>
+                  </field>
+                  <field>
+                     <name>MOE</name>
+                     <description>Main output enable</description>
+                     <bitOffset>15</bitOffset>
+                     <bitWidth>1</bitWidth>
+                  </field>
+                  <field>
+                     <name>BKF</name>
+                     <description>Break filter</description>
+                     <bitOffset>16</bitOffset>
+                     <bitWidth>4</bitWidth>
+                  </field>
+                  <field>
+                     <name>BK2F</name>
+                     <description>Break 2 filter</description>
+                     <bitOffset>20</bitOffset>
+                     <bitWidth>4</bitWidth>
+                  </field>
+                  <field>
+                     <name>BK2E</name>
+                     <description>Break 2 enable</description>
+                     <bitOffset>24</bitOffset>
+                     <bitWidth>1</bitWidth>
+                  </field>
+                  <field>
+                     <name>BK2P</name>
+                     <description>Break 2 polarity</description>
+                     <bitOffset>25</bitOffset>
+                     <bitWidth>1</bitWidth>
                   </field>
                </fields>
             </register>
@@ -18270,6 +18294,64 @@
                      <description>Capture/Compare 6 value</description>
                      <bitOffset>0</bitOffset>
                      <bitWidth>16</bitWidth>
+                  </field>
+               </fields>
+            </register>
+            <register>
+               <name>AF1</name>
+               <displayName>AF1</displayName>
+               <description>alternate function option register           1</description>
+               <addressOffset>0x60</addressOffset>
+               <size>0x20</size>
+               <access>read-write</access>
+               <resetValue>0x0000</resetValue>
+               <fields>
+                  <field>
+                     <name>BKINE</name>
+                     <description>BRK BKIN input enable</description>
+                     <bitOffset>0</bitOffset>
+                     <bitWidth>1</bitWidth>
+                  </field>
+                  <field>
+                     <name>BKDFBKE</name>
+                     <description>BRK DFSDM_BREAK[0] enable</description>
+                     <bitOffset>8</bitOffset>
+                     <bitWidth>1</bitWidth>
+                  </field>
+                  <field>
+                     <name>BKINP</name>
+                     <description>BRK BKIN input polarity</description>
+                     <bitOffset>9</bitOffset>
+                     <bitWidth>1</bitWidth>
+                  </field>
+               </fields>
+            </register>
+            <register>
+               <name>AF2</name>
+               <displayName>AF2</displayName>
+               <description>alternate function option register           2</description>
+               <addressOffset>0x64</addressOffset>
+               <size>0x20</size>
+               <access>read-write</access>
+               <resetValue>0x0000</resetValue>
+               <fields>
+                  <field>
+                     <name>BK2INE</name>
+                     <description>BRK2 BKIN input enable</description>
+                     <bitOffset>0</bitOffset>
+                     <bitWidth>1</bitWidth>
+                  </field>
+                  <field>
+                     <name>BK2DFBKE</name>
+                     <description>BRK2 DFSDM_BREAK enable</description>
+                     <bitOffset>8</bitOffset>
+                     <bitWidth>1</bitWidth>
+                  </field>
+                  <field>
+                     <name>BK2INP</name>
+                     <description>BRK2 BKIN2 input polarity</description>
+                     <bitOffset>9</bitOffset>
+                     <bitWidth>1</bitWidth>
                   </field>
                </fields>
             </register>
@@ -21013,11 +21095,6 @@
       <peripheral derivedFrom="TIM4">
          <name>TIM5</name>
          <baseAddress>0x40000C00</baseAddress>
-         <interrupt>
-            <name>TIM5</name>
-            <description>TIM5 global interrupt</description>
-            <value>50</value>
-         </interrupt>
       </peripheral>
       <peripheral>
          <name>TIM9</name>
@@ -21478,6 +21555,11 @@
             <size>0x400</size>
             <usage>registers</usage>
          </addressBlock>
+         <interrupt>
+            <name>TIM5</name>
+            <description>TIM5 global interrupt</description>
+            <value>50</value>
+         </interrupt>
          <registers>
             <register>
                <name>CR1</name>
@@ -22532,7 +22614,7 @@
                   </field>
                   <field>
                      <name>MMCS</name>
-                     <description>PMTS</description>
+                     <description>MMCS</description>
                      <bitOffset>4</bitOffset>
                      <bitWidth>1</bitWidth>
                      <access>read-only</access>
@@ -36728,6 +36810,18 @@
             <description>EXTI Line[15:10] interrupts</description>
             <value>40</value>
          </interrupt>
+         <interrupt>
+            <name>RTC_ALARM</name>
+            <description>RTC alarms through EXTI line 18
+        interrupts</description>
+            <value>41</value>
+         </interrupt>
+         <interrupt>
+            <name>OTG_FS_WKUP</name>
+            <description>USB On-The-Go FS Wakeup through EXTI line
+        interrupt</description>
+            <value>42</value>
+         </interrupt>
          <registers>
             <register>
                <name>IMR</name>
@@ -37626,7 +37720,7 @@
          </registers>
       </peripheral>
       <peripheral>
-         <name>LTDC</name>
+         <name>LTCD</name>
          <description>LCD-TFT Controller</description>
          <groupName>LTDC</groupName>
          <baseAddress>0x40016800</baseAddress>
@@ -40574,11 +40668,6 @@
             <size>0x400</size>
             <usage>registers</usage>
          </addressBlock>
-         <interrupt>
-            <name>HDMI_CEC</name>
-            <description>HDMI-CEC global interrupt</description>
-            <value>94</value>
-         </interrupt>
          <registers>
             <register>
                <name>CR</name>
@@ -42077,7 +42166,7 @@
             <usage>registers</usage>
          </addressBlock>
          <interrupt>
-            <name>LPTimer1</name>
+            <name>LP_Timer1</name>
             <description>LP Timer1 global interrupt</description>
             <value>93</value>
          </interrupt>
@@ -43033,12 +43122,12 @@
          <baseAddress>0x40005800</baseAddress>
          <interrupt>
             <name>I2C2_EV</name>
-            <description>I2C2_EV</description>
+            <description>I2C2 event interrupt</description>
             <value>33</value>
          </interrupt>
          <interrupt>
             <name>I2C2_ER</name>
-            <description>I2C2_ER</description>
+            <description>I2C2 error interrupt</description>
             <value>34</value>
          </interrupt>
       </peripheral>
@@ -43085,12 +43174,6 @@
             <description>RTC Tamper or TimeStamp /CSS on LSE through
         EXTI line 19 interrupts</description>
             <value>3</value>
-         </interrupt>
-         <interrupt>
-            <name>RTC_ALARM</name>
-            <description>RTC alarms through EXTI line 18
-        interrupts</description>
-            <value>41</value>
          </interrupt>
          <registers>
             <register>
@@ -45538,7 +45621,7 @@
          <baseAddress>0x40007800</baseAddress>
          <interrupt>
             <name>UART7</name>
-            <description>UART 7 global interrupt</description>
+            <description>UART7 global interrupt</description>
             <value>82</value>
          </interrupt>
       </peripheral>
@@ -45552,6 +45635,12 @@
             <size>0x400</size>
             <usage>registers</usage>
          </addressBlock>
+         <interrupt>
+            <name>OTG_FS</name>
+            <description>USB On The Go FS global
+        interrupt</description>
+            <value>67</value>
+         </interrupt>
          <registers>
             <register>
                <name>OTG_FS_GOTGCTL</name>
@@ -47076,6 +47165,30 @@
             <size>0x400</size>
             <usage>registers</usage>
          </addressBlock>
+         <interrupt>
+            <name>OTG_HS_EP1_OUT</name>
+            <description>USB On The Go HS End Point 1 Out global
+        interrupt</description>
+            <value>74</value>
+         </interrupt>
+         <interrupt>
+            <name>OTG_HS_EP1_IN</name>
+            <description>USB On The Go HS End Point 1 In global
+        interrupt</description>
+            <value>75</value>
+         </interrupt>
+         <interrupt>
+            <name>OTG_HS_WKUP</name>
+            <description>USB On The Go HS Wakeup through EXTI
+        interrupt</description>
+            <value>76</value>
+         </interrupt>
+         <interrupt>
+            <name>OTG_HS</name>
+            <description>USB On The Go HS global
+        interrupt</description>
+            <value>77</value>
+         </interrupt>
          <registers>
             <register>
                <name>OTG_HS_GOTGCTL</name>
@@ -49871,7 +49984,7 @@
                <name>DFSDM_CHCFG1R1</name>
                <displayName>DFSDM_CHCFG1R1</displayName>
                <description>DFSDM channel configuration 1 register           1</description>
-               <addressOffset>0x4</addressOffset>
+               <addressOffset>0x20</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -49948,7 +50061,7 @@
                <name>DFSDM_CHCFG2R1</name>
                <displayName>DFSDM_CHCFG2R1</displayName>
                <description>DFSDM channel configuration 2 register           1</description>
-               <addressOffset>0x8</addressOffset>
+               <addressOffset>0x40</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -50025,7 +50138,7 @@
                <name>DFSDM_CHCFG3R1</name>
                <displayName>DFSDM_CHCFG3R1</displayName>
                <description>DFSDM channel configuration 3 register           1</description>
-               <addressOffset>0xC</addressOffset>
+               <addressOffset>0x60</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -50102,7 +50215,7 @@
                <name>DFSDM_CHCFG4R1</name>
                <displayName>DFSDM_CHCFG4R1</displayName>
                <description>DFSDM channel configuration 4 register           1</description>
-               <addressOffset>0x10</addressOffset>
+               <addressOffset>0x80</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -50179,7 +50292,7 @@
                <name>DFSDM_CHCFG5R1</name>
                <displayName>DFSDM_CHCFG5R1</displayName>
                <description>DFSDM channel configuration 5 register           1</description>
-               <addressOffset>0x14</addressOffset>
+               <addressOffset>0xA0</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -50256,7 +50369,7 @@
                <name>DFSDM_CHCFG6R1</name>
                <displayName>DFSDM_CHCFG6R1</displayName>
                <description>DFSDM channel configuration 6 register           1</description>
-               <addressOffset>0x18</addressOffset>
+               <addressOffset>0xC0</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -50333,7 +50446,7 @@
                <name>DFSDM_CHCFG7R1</name>
                <displayName>DFSDM_CHCFG7R1</displayName>
                <description>DFSDM channel configuration 7 register           1</description>
-               <addressOffset>0x1C</addressOffset>
+               <addressOffset>0xE0</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -50410,7 +50523,7 @@
                <name>DFSDM_CHCFG0R2</name>
                <displayName>DFSDM_CHCFG0R2</displayName>
                <description>DFSDM channel configuration 0 register           2</description>
-               <addressOffset>0x20</addressOffset>
+               <addressOffset>0x4</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -50456,7 +50569,7 @@
                <name>DFSDM_CHCFG2R2</name>
                <displayName>DFSDM_CHCFG2R2</displayName>
                <description>DFSDM channel configuration 2 register           2</description>
-               <addressOffset>0x28</addressOffset>
+               <addressOffset>0x44</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -50479,7 +50592,7 @@
                <name>DFSDM_CHCFG3R2</name>
                <displayName>DFSDM_CHCFG3R2</displayName>
                <description>DFSDM channel configuration 3 register           2</description>
-               <addressOffset>0x2C</addressOffset>
+               <addressOffset>0x64</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -50502,7 +50615,7 @@
                <name>DFSDM_CHCFG4R2</name>
                <displayName>DFSDM_CHCFG4R2</displayName>
                <description>DFSDM channel configuration 4 register           2</description>
-               <addressOffset>0x30</addressOffset>
+               <addressOffset>0x84</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -50525,7 +50638,7 @@
                <name>DFSDM_CHCFG5R2</name>
                <displayName>DFSDM_CHCFG5R2</displayName>
                <description>DFSDM channel configuration 5 register           2</description>
-               <addressOffset>0x34</addressOffset>
+               <addressOffset>0xA4</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -50548,7 +50661,7 @@
                <name>DFSDM_CHCFG6R2</name>
                <displayName>DFSDM_CHCFG6R2</displayName>
                <description>DFSDM channel configuration 6 register           2</description>
-               <addressOffset>0x38</addressOffset>
+               <addressOffset>0xC4</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -50571,7 +50684,7 @@
                <name>DFSDM_CHCFG7R2</name>
                <displayName>DFSDM_CHCFG7R2</displayName>
                <description>DFSDM channel configuration 7 register           2</description>
-               <addressOffset>0x3C</addressOffset>
+               <addressOffset>0xE4</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -50594,7 +50707,7 @@
                <name>DFSDM_AWSCD0R</name>
                <displayName>DFSDM_AWSCD0R</displayName>
                <description>DFSDM analog watchdog and short-circuit           detector register</description>
-               <addressOffset>0x40</addressOffset>
+               <addressOffset>0x8</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -50629,7 +50742,7 @@
                <name>DFSDM_AWSCD1R</name>
                <displayName>DFSDM_AWSCD1R</displayName>
                <description>DFSDM analog watchdog and short-circuit           detector register</description>
-               <addressOffset>0x44</addressOffset>
+               <addressOffset>0x28</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -50699,7 +50812,7 @@
                <name>DFSDM_AWSCD3R</name>
                <displayName>DFSDM_AWSCD3R</displayName>
                <description>DFSDM analog watchdog and short-circuit           detector register</description>
-               <addressOffset>0x4C</addressOffset>
+               <addressOffset>0x68</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -50734,7 +50847,7 @@
                <name>DFSDM_AWSCD4R</name>
                <displayName>DFSDM_AWSCD4R</displayName>
                <description>DFSDM analog watchdog and short-circuit           detector register</description>
-               <addressOffset>0x50</addressOffset>
+               <addressOffset>0x88</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -50769,7 +50882,7 @@
                <name>DFSDM_AWSCD5R</name>
                <displayName>DFSDM_AWSCD5R</displayName>
                <description>DFSDM analog watchdog and short-circuit           detector register</description>
-               <addressOffset>0x54</addressOffset>
+               <addressOffset>0xA8</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -50804,7 +50917,7 @@
                <name>DFSDM_AWSCD6R</name>
                <displayName>DFSDM_AWSCD6R</displayName>
                <description>DFSDM analog watchdog and short-circuit           detector register</description>
-               <addressOffset>0x58</addressOffset>
+               <addressOffset>0xC8</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -50839,7 +50952,7 @@
                <name>DFSDM_AWSCD7R</name>
                <displayName>DFSDM_AWSCD7R</displayName>
                <description>DFSDM analog watchdog and short-circuit           detector register</description>
-               <addressOffset>0x5C</addressOffset>
+               <addressOffset>0xE8</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -50874,7 +50987,7 @@
                <name>DFSDM_CHWDAT0R</name>
                <displayName>DFSDM_CHWDAT0R</displayName>
                <description>DFSDM channel watchdog filter data           register</description>
-               <addressOffset>0x60</addressOffset>
+               <addressOffset>0xC</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
                <resetValue>0x00000000</resetValue>
@@ -50891,7 +51004,7 @@
                <name>DFSDM_CHWDAT1R</name>
                <displayName>DFSDM_CHWDAT1R</displayName>
                <description>DFSDM channel watchdog filter data           register</description>
-               <addressOffset>0x64</addressOffset>
+               <addressOffset>0x2C</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
                <resetValue>0x00000000</resetValue>
@@ -50908,7 +51021,7 @@
                <name>DFSDM_CHWDAT2R</name>
                <displayName>DFSDM_CHWDAT2R</displayName>
                <description>DFSDM channel watchdog filter data           register</description>
-               <addressOffset>0x68</addressOffset>
+               <addressOffset>0x4C</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
                <resetValue>0x00000000</resetValue>
@@ -50942,7 +51055,7 @@
                <name>DFSDM_CHWDAT4R</name>
                <displayName>DFSDM_CHWDAT4R</displayName>
                <description>DFSDM channel watchdog filter data           register</description>
-               <addressOffset>0x70</addressOffset>
+               <addressOffset>0x8C</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
                <resetValue>0x00000000</resetValue>
@@ -50959,7 +51072,7 @@
                <name>DFSDM_CHWDAT5R</name>
                <displayName>DFSDM_CHWDAT5R</displayName>
                <description>DFSDM channel watchdog filter data           register</description>
-               <addressOffset>0x74</addressOffset>
+               <addressOffset>0xAC</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
                <resetValue>0x00000000</resetValue>
@@ -50976,7 +51089,7 @@
                <name>DFSDM_CHWDAT6R</name>
                <displayName>DFSDM_CHWDAT6R</displayName>
                <description>DFSDM channel watchdog filter data           register</description>
-               <addressOffset>0x78</addressOffset>
+               <addressOffset>0xCC</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
                <resetValue>0x00000000</resetValue>
@@ -50993,7 +51106,7 @@
                <name>DFSDM_CHWDAT7R</name>
                <displayName>DFSDM_CHWDAT7R</displayName>
                <description>DFSDM channel watchdog filter data           register</description>
-               <addressOffset>0x7C</addressOffset>
+               <addressOffset>0xEC</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
                <resetValue>0x00000000</resetValue>
@@ -51010,7 +51123,7 @@
                <name>DFSDM_CHDATIN0R</name>
                <displayName>DFSDM_CHDATIN0R</displayName>
                <description>DFSDM channel data input           register</description>
-               <addressOffset>0x80</addressOffset>
+               <addressOffset>0x10</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -51033,7 +51146,7 @@
                <name>DFSDM_CHDATIN1R</name>
                <displayName>DFSDM_CHDATIN1R</displayName>
                <description>DFSDM channel data input           register</description>
-               <addressOffset>0x84</addressOffset>
+               <addressOffset>0x30</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -51056,7 +51169,7 @@
                <name>DFSDM_CHDATIN2R</name>
                <displayName>DFSDM_CHDATIN2R</displayName>
                <description>DFSDM channel data input           register</description>
-               <addressOffset>0x88</addressOffset>
+               <addressOffset>0x50</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -51079,7 +51192,7 @@
                <name>DFSDM_CHDATIN3R</name>
                <displayName>DFSDM_CHDATIN3R</displayName>
                <description>DFSDM channel data input           register</description>
-               <addressOffset>0x8C</addressOffset>
+               <addressOffset>0x70</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -51125,7 +51238,7 @@
                <name>DFSDM_CHDATIN5R</name>
                <displayName>DFSDM_CHDATIN5R</displayName>
                <description>DFSDM channel data input           register</description>
-               <addressOffset>0x94</addressOffset>
+               <addressOffset>0xB0</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -51148,7 +51261,7 @@
                <name>DFSDM_CHDATIN6R</name>
                <displayName>DFSDM_CHDATIN6R</displayName>
                <description>DFSDM channel data input           register</description>
-               <addressOffset>0x98</addressOffset>
+               <addressOffset>0xD0</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -51171,7 +51284,7 @@
                <name>DFSDM_CHDATIN7R</name>
                <displayName>DFSDM_CHDATIN7R</displayName>
                <description>DFSDM channel data input           register</description>
-               <addressOffset>0x9C</addressOffset>
+               <addressOffset>0xF0</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -51194,7 +51307,7 @@
                <name>DFSDM0_CR1</name>
                <displayName>DFSDM0_CR1</displayName>
                <description>DFSDM control register 1</description>
-               <addressOffset>0xA0</addressOffset>
+               <addressOffset>0x100</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -51289,7 +51402,7 @@
                <name>DFSDM1_CR1</name>
                <displayName>DFSDM1_CR1</displayName>
                <description>DFSDM control register 1</description>
-               <addressOffset>0xA4</addressOffset>
+               <addressOffset>0x180</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -51384,7 +51497,7 @@
                <name>DFSDM2_CR1</name>
                <displayName>DFSDM2_CR1</displayName>
                <description>DFSDM control register 1</description>
-               <addressOffset>0xA8</addressOffset>
+               <addressOffset>0x200</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -51479,7 +51592,7 @@
                <name>DFSDM3_CR1</name>
                <displayName>DFSDM3_CR1</displayName>
                <description>DFSDM control register 1</description>
-               <addressOffset>0xAC</addressOffset>
+               <addressOffset>0x380</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -51574,7 +51687,7 @@
                <name>DFSDM0_CR2</name>
                <displayName>DFSDM0_CR2</displayName>
                <description>DFSDM control register 2</description>
-               <addressOffset>0xB0</addressOffset>
+               <addressOffset>0x104</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -51639,7 +51752,7 @@
                <name>DFSDM1_CR2</name>
                <displayName>DFSDM1_CR2</displayName>
                <description>DFSDM control register 2</description>
-               <addressOffset>0xB4</addressOffset>
+               <addressOffset>0x184</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -51704,7 +51817,7 @@
                <name>DFSDM2_CR2</name>
                <displayName>DFSDM2_CR2</displayName>
                <description>DFSDM control register 2</description>
-               <addressOffset>0xB8</addressOffset>
+               <addressOffset>0x204</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -51769,7 +51882,7 @@
                <name>DFSDM3_CR2</name>
                <displayName>DFSDM3_CR2</displayName>
                <description>DFSDM control register 2</description>
-               <addressOffset>0xBC</addressOffset>
+               <addressOffset>0x384</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -51834,10 +51947,10 @@
                <name>DFSDM0_ISR</name>
                <displayName>DFSDM0_ISR</displayName>
                <description>DFSDM interrupt and status           register</description>
-               <addressOffset>0xC0</addressOffset>
+               <addressOffset>0x108</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
-               <resetValue>0x00000000</resetValue>
+               <resetValue>0x00FF0000</resetValue>
                <fields>
                   <field>
                      <name>JEOCF</name>
@@ -51899,10 +52012,10 @@
                <name>DFSDM1_ISR</name>
                <displayName>DFSDM1_ISR</displayName>
                <description>DFSDM interrupt and status           register</description>
-               <addressOffset>0xC4</addressOffset>
+               <addressOffset>0x188</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
-               <resetValue>0x00000000</resetValue>
+               <resetValue>0x00FF0000</resetValue>
                <fields>
                   <field>
                      <name>JEOCF</name>
@@ -51964,10 +52077,10 @@
                <name>DFSDM2_ISR</name>
                <displayName>DFSDM2_ISR</displayName>
                <description>DFSDM interrupt and status           register</description>
-               <addressOffset>0xC8</addressOffset>
+               <addressOffset>0x208</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
-               <resetValue>0x00000000</resetValue>
+               <resetValue>0x00FF0000</resetValue>
                <fields>
                   <field>
                      <name>JEOCF</name>
@@ -52029,10 +52142,10 @@
                <name>DFSDM3_ISR</name>
                <displayName>DFSDM3_ISR</displayName>
                <description>DFSDM interrupt and status           register</description>
-               <addressOffset>0xCC</addressOffset>
+               <addressOffset>0x388</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
-               <resetValue>0x00000000</resetValue>
+               <resetValue>0x00FF0000</resetValue>
                <fields>
                   <field>
                      <name>JEOCF</name>
@@ -52094,7 +52207,7 @@
                <name>DFSDM0_ICR</name>
                <displayName>DFSDM0_ICR</displayName>
                <description>DFSDM interrupt flag clear           register</description>
-               <addressOffset>0xD0</addressOffset>
+               <addressOffset>0x10C</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -52129,7 +52242,7 @@
                <name>DFSDM1_ICR</name>
                <displayName>DFSDM1_ICR</displayName>
                <description>DFSDM interrupt flag clear           register</description>
-               <addressOffset>0xD4</addressOffset>
+               <addressOffset>0x18C</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -52164,7 +52277,7 @@
                <name>DFSDM2_ICR</name>
                <displayName>DFSDM2_ICR</displayName>
                <description>DFSDM interrupt flag clear           register</description>
-               <addressOffset>0xD8</addressOffset>
+               <addressOffset>0x20C</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -52199,7 +52312,7 @@
                <name>DFSDM3_ICR</name>
                <displayName>DFSDM3_ICR</displayName>
                <description>DFSDM interrupt flag clear           register</description>
-               <addressOffset>0xDC</addressOffset>
+               <addressOffset>0x38C</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -52234,10 +52347,10 @@
                <name>DFSDM0_JCHGR</name>
                <displayName>DFSDM0_JCHGR</displayName>
                <description>DFSDM injected channel group selection           register</description>
-               <addressOffset>0xE0</addressOffset>
+               <addressOffset>0x110</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
-               <resetValue>0x00000000</resetValue>
+               <resetValue>0x00000001</resetValue>
                <fields>
                   <field>
                      <name>JCHG</name>
@@ -52251,10 +52364,10 @@
                <name>DFSDM1_JCHGR</name>
                <displayName>DFSDM1_JCHGR</displayName>
                <description>DFSDM injected channel group selection           register</description>
-               <addressOffset>0xE4</addressOffset>
+               <addressOffset>0x190</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
-               <resetValue>0x00000000</resetValue>
+               <resetValue>0x00000001</resetValue>
                <fields>
                   <field>
                      <name>JCHG</name>
@@ -52268,10 +52381,10 @@
                <name>DFSDM2_JCHGR</name>
                <displayName>DFSDM2_JCHGR</displayName>
                <description>DFSDM injected channel group selection           register</description>
-               <addressOffset>0xE8</addressOffset>
+               <addressOffset>0x210</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
-               <resetValue>0x00000000</resetValue>
+               <resetValue>0x00000001</resetValue>
                <fields>
                   <field>
                      <name>JCHG</name>
@@ -52285,10 +52398,10 @@
                <name>DFSDM3_JCHGR</name>
                <displayName>DFSDM3_JCHGR</displayName>
                <description>DFSDM injected channel group selection           register</description>
-               <addressOffset>0xEC</addressOffset>
+               <addressOffset>0x310</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
-               <resetValue>0x00000000</resetValue>
+               <resetValue>0x00000001</resetValue>
                <fields>
                   <field>
                      <name>JCHG</name>
@@ -52302,7 +52415,7 @@
                <name>DFSDM0_FCR</name>
                <displayName>DFSDM0_FCR</displayName>
                <description>DFSDM filter control register</description>
-               <addressOffset>0xF0</addressOffset>
+               <addressOffset>0x114</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -52331,7 +52444,7 @@
                <name>DFSDM1_FCR</name>
                <displayName>DFSDM1_FCR</displayName>
                <description>DFSDM filter control register</description>
-               <addressOffset>0xF4</addressOffset>
+               <addressOffset>0x194</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -52360,7 +52473,7 @@
                <name>DFSDM2_FCR</name>
                <displayName>DFSDM2_FCR</displayName>
                <description>DFSDM filter control register</description>
-               <addressOffset>0xF8</addressOffset>
+               <addressOffset>0x214</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -52389,7 +52502,7 @@
                <name>DFSDM3_FCR</name>
                <displayName>DFSDM3_FCR</displayName>
                <description>DFSDM filter control register</description>
-               <addressOffset>0xFC</addressOffset>
+               <addressOffset>0x314</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -52418,7 +52531,7 @@
                <name>DFSDM0_JDATAR</name>
                <displayName>DFSDM0_JDATAR</displayName>
                <description>DFSDM data register for injected           group</description>
-               <addressOffset>0x100</addressOffset>
+               <addressOffset>0x118</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
                <resetValue>0x00000000</resetValue>
@@ -52441,7 +52554,7 @@
                <name>DFSDM1_JDATAR</name>
                <displayName>DFSDM1_JDATAR</displayName>
                <description>DFSDM data register for injected           group</description>
-               <addressOffset>0x104</addressOffset>
+               <addressOffset>0x198</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
                <resetValue>0x00000000</resetValue>
@@ -52464,7 +52577,7 @@
                <name>DFSDM2_JDATAR</name>
                <displayName>DFSDM2_JDATAR</displayName>
                <description>DFSDM data register for injected           group</description>
-               <addressOffset>0x108</addressOffset>
+               <addressOffset>0x218</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
                <resetValue>0x00000000</resetValue>
@@ -52487,7 +52600,7 @@
                <name>DFSDM3_JDATAR</name>
                <displayName>DFSDM3_JDATAR</displayName>
                <description>DFSDM data register for injected           group</description>
-               <addressOffset>0x10C</addressOffset>
+               <addressOffset>0x318</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
                <resetValue>0x00000000</resetValue>
@@ -52510,7 +52623,7 @@
                <name>DFSDM0_RDATAR</name>
                <displayName>DFSDM0_RDATAR</displayName>
                <description>DFSDM data register for the regular           channel</description>
-               <addressOffset>0x110</addressOffset>
+               <addressOffset>0x11C</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
                <resetValue>0x00000000</resetValue>
@@ -52539,7 +52652,8 @@
                <name>DFSDM1_RDATAR</name>
                <displayName>DFSDM1_RDATAR</displayName>
                <description>DFSDM data register for the regular           channel</description>
-               <addressOffset>0x114</addressOffset>
+               <alternateRegister>DFSDM1_JDATAR</alternateRegister>
+               <addressOffset>0x198</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
                <resetValue>0x00000000</resetValue>
@@ -52568,7 +52682,8 @@
                <name>DFSDM2_RDATAR</name>
                <displayName>DFSDM2_RDATAR</displayName>
                <description>DFSDM data register for the regular           channel</description>
-               <addressOffset>0x118</addressOffset>
+               <alternateRegister>DFSDM2_JDATAR</alternateRegister>
+               <addressOffset>0x218</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
                <resetValue>0x00000000</resetValue>
@@ -52597,7 +52712,8 @@
                <name>DFSDM3_RDATAR</name>
                <displayName>DFSDM3_RDATAR</displayName>
                <description>DFSDM data register for the regular           channel</description>
-               <addressOffset>0x11C</addressOffset>
+               <alternateRegister>DFSDM3_JDATAR</alternateRegister>
+               <addressOffset>0x318</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
                <resetValue>0x00000000</resetValue>
@@ -52649,7 +52765,7 @@
                <name>DFSDM1_AWHTR</name>
                <displayName>DFSDM1_AWHTR</displayName>
                <description>DFSDM analog watchdog high threshold           register</description>
-               <addressOffset>0x124</addressOffset>
+               <addressOffset>0x1A0</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -52672,7 +52788,7 @@
                <name>DFSDM2_AWHTR</name>
                <displayName>DFSDM2_AWHTR</displayName>
                <description>DFSDM analog watchdog high threshold           register</description>
-               <addressOffset>0x128</addressOffset>
+               <addressOffset>0x220</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -52695,7 +52811,7 @@
                <name>DFSDM3_AWHTR</name>
                <displayName>DFSDM3_AWHTR</displayName>
                <description>DFSDM analog watchdog high threshold           register</description>
-               <addressOffset>0x12C</addressOffset>
+               <addressOffset>0x2A0</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -52718,7 +52834,7 @@
                <name>DFSDM0_AWLTR</name>
                <displayName>DFSDM0_AWLTR</displayName>
                <description>DFSDM analog watchdog low threshold           register</description>
-               <addressOffset>0x130</addressOffset>
+               <addressOffset>0x124</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -52741,7 +52857,7 @@
                <name>DFSDM1_AWLTR</name>
                <displayName>DFSDM1_AWLTR</displayName>
                <description>DFSDM analog watchdog low threshold           register</description>
-               <addressOffset>0x134</addressOffset>
+               <addressOffset>0x1A4</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -52764,7 +52880,7 @@
                <name>DFSDM2_AWLTR</name>
                <displayName>DFSDM2_AWLTR</displayName>
                <description>DFSDM analog watchdog low threshold           register</description>
-               <addressOffset>0x138</addressOffset>
+               <addressOffset>0x224</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -52787,7 +52903,7 @@
                <name>DFSDM3_AWLTR</name>
                <displayName>DFSDM3_AWLTR</displayName>
                <description>DFSDM analog watchdog low threshold           register</description>
-               <addressOffset>0x13C</addressOffset>
+               <addressOffset>0x2A4</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -52810,7 +52926,7 @@
                <name>DFSDM0_AWSR</name>
                <displayName>DFSDM0_AWSR</displayName>
                <description>DFSDM analog watchdog status           register</description>
-               <addressOffset>0x140</addressOffset>
+               <addressOffset>0x128</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
                <resetValue>0x00000000</resetValue>
@@ -52833,7 +52949,7 @@
                <name>DFSDM1_AWSR</name>
                <displayName>DFSDM1_AWSR</displayName>
                <description>DFSDM analog watchdog status           register</description>
-               <addressOffset>0x144</addressOffset>
+               <addressOffset>0x1A8</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
                <resetValue>0x00000000</resetValue>
@@ -52856,7 +52972,7 @@
                <name>DFSDM2_AWSR</name>
                <displayName>DFSDM2_AWSR</displayName>
                <description>DFSDM analog watchdog status           register</description>
-               <addressOffset>0x148</addressOffset>
+               <addressOffset>0x228</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
                <resetValue>0x00000000</resetValue>
@@ -52879,7 +52995,7 @@
                <name>DFSDM3_AWSR</name>
                <displayName>DFSDM3_AWSR</displayName>
                <description>DFSDM analog watchdog status           register</description>
-               <addressOffset>0x14C</addressOffset>
+               <addressOffset>0x2A8</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
                <resetValue>0x00000000</resetValue>
@@ -52902,7 +53018,7 @@
                <name>DFSDM0_AWCFR</name>
                <displayName>DFSDM0_AWCFR</displayName>
                <description>DFSDM analog watchdog clear flag           register</description>
-               <addressOffset>0x150</addressOffset>
+               <addressOffset>0x12C</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -52925,7 +53041,7 @@
                <name>DFSDM1_AWCFR</name>
                <displayName>DFSDM1_AWCFR</displayName>
                <description>DFSDM analog watchdog clear flag           register</description>
-               <addressOffset>0x154</addressOffset>
+               <addressOffset>0x1AC</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -52948,7 +53064,7 @@
                <name>DFSDM2_AWCFR</name>
                <displayName>DFSDM2_AWCFR</displayName>
                <description>DFSDM analog watchdog clear flag           register</description>
-               <addressOffset>0x158</addressOffset>
+               <addressOffset>0x22C</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -52971,7 +53087,7 @@
                <name>DFSDM3_AWCFR</name>
                <displayName>DFSDM3_AWCFR</displayName>
                <description>DFSDM analog watchdog clear flag           register</description>
-               <addressOffset>0x15C</addressOffset>
+               <addressOffset>0x2AC</addressOffset>
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
@@ -52994,7 +53110,7 @@
                <name>DFSDM0_EXMAX</name>
                <displayName>DFSDM0_EXMAX</displayName>
                <description>DFSDM Extremes detector maximum           register</description>
-               <addressOffset>0x160</addressOffset>
+               <addressOffset>0x130</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
                <resetValue>0x00000000</resetValue>
@@ -53017,7 +53133,7 @@
                <name>DFSDM1_EXMAX</name>
                <displayName>DFSDM1_EXMAX</displayName>
                <description>DFSDM Extremes detector maximum           register</description>
-               <addressOffset>0x164</addressOffset>
+               <addressOffset>0x1B0</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
                <resetValue>0x00000000</resetValue>
@@ -53040,7 +53156,7 @@
                <name>DFSDM2_EXMAX</name>
                <displayName>DFSDM2_EXMAX</displayName>
                <description>DFSDM Extremes detector maximum           register</description>
-               <addressOffset>0x168</addressOffset>
+               <addressOffset>0x230</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
                <resetValue>0x00000000</resetValue>
@@ -53063,7 +53179,7 @@
                <name>DFSDM3_EXMAX</name>
                <displayName>DFSDM3_EXMAX</displayName>
                <description>DFSDM Extremes detector maximum           register</description>
-               <addressOffset>0x16C</addressOffset>
+               <addressOffset>0x2B0</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
                <resetValue>0x00000000</resetValue>
@@ -53086,10 +53202,10 @@
                <name>DFSDM0_EXMIN</name>
                <displayName>DFSDM0_EXMIN</displayName>
                <description>DFSDM Extremes detector minimum           register</description>
-               <addressOffset>0x170</addressOffset>
+               <addressOffset>0x134</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
-               <resetValue>0x00000000</resetValue>
+               <resetValue>0x7FFFFF00</resetValue>
                <fields>
                   <field>
                      <name>EXMINCH</name>
@@ -53109,10 +53225,10 @@
                <name>DFSDM1_EXMIN</name>
                <displayName>DFSDM1_EXMIN</displayName>
                <description>DFSDM Extremes detector minimum           register</description>
-               <addressOffset>0x174</addressOffset>
+               <addressOffset>0x1B4</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
-               <resetValue>0x00000000</resetValue>
+               <resetValue>0x7FFFFF00</resetValue>
                <fields>
                   <field>
                      <name>EXMINCH</name>
@@ -53132,10 +53248,10 @@
                <name>DFSDM2_EXMIN</name>
                <displayName>DFSDM2_EXMIN</displayName>
                <description>DFSDM Extremes detector minimum           register</description>
-               <addressOffset>0x178</addressOffset>
+               <addressOffset>0x234</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
-               <resetValue>0x00000000</resetValue>
+               <resetValue>0x7FFFFF00</resetValue>
                <fields>
                   <field>
                      <name>EXMINCH</name>
@@ -53155,10 +53271,10 @@
                <name>DFSDM3_EXMIN</name>
                <displayName>DFSDM3_EXMIN</displayName>
                <description>DFSDM Extremes detector minimum           register</description>
-               <addressOffset>0x17C</addressOffset>
+               <addressOffset>0x2B4</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
-               <resetValue>0x00000000</resetValue>
+               <resetValue>0x7FFFFF00</resetValue>
                <fields>
                   <field>
                      <name>EXMINCH</name>
@@ -53178,7 +53294,7 @@
                <name>DFSDM0_CNVTIMR</name>
                <displayName>DFSDM0_CNVTIMR</displayName>
                <description>DFSDM conversion timer           register</description>
-               <addressOffset>0x180</addressOffset>
+               <addressOffset>0x138</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
                <resetValue>0x00000000</resetValue>
@@ -53195,7 +53311,7 @@
                <name>DFSDM1_CNVTIMR</name>
                <displayName>DFSDM1_CNVTIMR</displayName>
                <description>DFSDM conversion timer           register</description>
-               <addressOffset>0x184</addressOffset>
+               <addressOffset>0x1B8</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
                <resetValue>0x00000000</resetValue>
@@ -53212,7 +53328,7 @@
                <name>DFSDM2_CNVTIMR</name>
                <displayName>DFSDM2_CNVTIMR</displayName>
                <description>DFSDM conversion timer           register</description>
-               <addressOffset>0x188</addressOffset>
+               <addressOffset>0x238</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
                <resetValue>0x00000000</resetValue>
@@ -53229,7 +53345,7 @@
                <name>DFSDM3_CNVTIMR</name>
                <displayName>DFSDM3_CNVTIMR</displayName>
                <description>DFSDM conversion timer           register</description>
-               <addressOffset>0x18C</addressOffset>
+               <addressOffset>0x2B8</addressOffset>
                <size>0x20</size>
                <access>read-only</access>
                <resetValue>0x00000000</resetValue>
@@ -69100,18 +69216,6 @@
             <size>0x400</size>
             <usage>registers</usage>
          </addressBlock>
-         <interrupt>
-            <name>OTG_FS_WKUP</name>
-            <description>USB On-The-Go FS Wakeup through EXTI line
-        interrupt</description>
-            <value>42</value>
-         </interrupt>
-         <interrupt>
-            <name>OTG_FS</name>
-            <description>USB On The Go FS global
-        interrupt</description>
-            <value>67</value>
-         </interrupt>
          <registers>
             <register>
                <name>OTG_FS_PCGCCTL</name>
@@ -78208,30 +78312,6 @@
             <size>0x3F200</size>
             <usage>registers</usage>
          </addressBlock>
-         <interrupt>
-            <name>OTG_HS_EP1_OUT</name>
-            <description>USB On The Go HS End Point 1 Out global
-        interrupt</description>
-            <value>74</value>
-         </interrupt>
-         <interrupt>
-            <name>OTG_HS_EP1_IN</name>
-            <description>USB On The Go HS End Point 1 In global
-        interrupt</description>
-            <value>75</value>
-         </interrupt>
-         <interrupt>
-            <name>OTG_HS_WKUP</name>
-            <description>USB On The Go HS Wakeup through EXTI
-        interrupt</description>
-            <value>76</value>
-         </interrupt>
-         <interrupt>
-            <name>OTG_HS</name>
-            <description>USB On The Go HS global
-        interrupt</description>
-            <value>77</value>
-         </interrupt>
          <registers>
             <register>
                <name>OTG_HS_PCGCR</name>
@@ -80899,7 +80979,7 @@
          <baseAddress>0xE000E100</baseAddress>
          <addressBlock>
             <offset>0x0</offset>
-            <size>0x375</size>
+            <size>0x400</size>
             <usage>registers</usage>
          </addressBlock>
          <registers>
@@ -81901,6 +81981,32 @@
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
+               <fields>
+                  <field>
+                     <name>IPR_N0</name>
+                     <description>IPR_N0</description>
+                     <bitOffset>0</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+                  <field>
+                     <name>IPR_N1</name>
+                     <description>IPR_N1</description>
+                     <bitOffset>8</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+                  <field>
+                     <name>IPR_N2</name>
+                     <description>IPR_N2</description>
+                     <bitOffset>16</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+                  <field>
+                     <name>IPR_N3</name>
+                     <description>IPR_N3</description>
+                     <bitOffset>24</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+               </fields>
             </register>
             <register>
                <name>IPR22</name>
@@ -81910,6 +82016,32 @@
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
+               <fields>
+                  <field>
+                     <name>IPR_N0</name>
+                     <description>IPR_N0</description>
+                     <bitOffset>0</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+                  <field>
+                     <name>IPR_N1</name>
+                     <description>IPR_N1</description>
+                     <bitOffset>8</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+                  <field>
+                     <name>IPR_N2</name>
+                     <description>IPR_N2</description>
+                     <bitOffset>16</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+                  <field>
+                     <name>IPR_N3</name>
+                     <description>IPR_N3</description>
+                     <bitOffset>24</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+               </fields>
             </register>
             <register>
                <name>IPR23</name>
@@ -81919,6 +82051,32 @@
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
+               <fields>
+                  <field>
+                     <name>IPR_N0</name>
+                     <description>IPR_N0</description>
+                     <bitOffset>0</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+                  <field>
+                     <name>IPR_N1</name>
+                     <description>IPR_N1</description>
+                     <bitOffset>8</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+                  <field>
+                     <name>IPR_N2</name>
+                     <description>IPR_N2</description>
+                     <bitOffset>16</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+                  <field>
+                     <name>IPR_N3</name>
+                     <description>IPR_N3</description>
+                     <bitOffset>24</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+               </fields>
             </register>
             <register>
                <name>IPR24</name>
@@ -81928,6 +82086,32 @@
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
+               <fields>
+                  <field>
+                     <name>IPR_N0</name>
+                     <description>IPR_N0</description>
+                     <bitOffset>0</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+                  <field>
+                     <name>IPR_N1</name>
+                     <description>IPR_N1</description>
+                     <bitOffset>8</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+                  <field>
+                     <name>IPR_N2</name>
+                     <description>IPR_N2</description>
+                     <bitOffset>16</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+                  <field>
+                     <name>IPR_N3</name>
+                     <description>IPR_N3</description>
+                     <bitOffset>24</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+               </fields>
             </register>
             <register>
                <name>IPR25</name>
@@ -81937,6 +82121,32 @@
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
+               <fields>
+                  <field>
+                     <name>IPR_N0</name>
+                     <description>IPR_N0</description>
+                     <bitOffset>0</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+                  <field>
+                     <name>IPR_N1</name>
+                     <description>IPR_N1</description>
+                     <bitOffset>8</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+                  <field>
+                     <name>IPR_N2</name>
+                     <description>IPR_N2</description>
+                     <bitOffset>16</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+                  <field>
+                     <name>IPR_N3</name>
+                     <description>IPR_N3</description>
+                     <bitOffset>24</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+               </fields>
             </register>
             <register>
                <name>IPR26</name>
@@ -81946,6 +82156,32 @@
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
+               <fields>
+                  <field>
+                     <name>IPR_N0</name>
+                     <description>IPR_N0</description>
+                     <bitOffset>0</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+                  <field>
+                     <name>IPR_N1</name>
+                     <description>IPR_N1</description>
+                     <bitOffset>8</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+                  <field>
+                     <name>IPR_N2</name>
+                     <description>IPR_N2</description>
+                     <bitOffset>16</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+                  <field>
+                     <name>IPR_N3</name>
+                     <description>IPR_N3</description>
+                     <bitOffset>24</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+               </fields>
             </register>
             <register>
                <name>IPR27</name>
@@ -81955,6 +82191,32 @@
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
+               <fields>
+                  <field>
+                     <name>IPR_N0</name>
+                     <description>IPR_N0</description>
+                     <bitOffset>0</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+                  <field>
+                     <name>IPR_N1</name>
+                     <description>IPR_N1</description>
+                     <bitOffset>8</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+                  <field>
+                     <name>IPR_N2</name>
+                     <description>IPR_N2</description>
+                     <bitOffset>16</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+                  <field>
+                     <name>IPR_N3</name>
+                     <description>IPR_N3</description>
+                     <bitOffset>24</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+               </fields>
             </register>
             <register>
                <name>IPR28</name>
@@ -81964,6 +82226,32 @@
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
+               <fields>
+                  <field>
+                     <name>IPR_N0</name>
+                     <description>IPR_N0</description>
+                     <bitOffset>0</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+                  <field>
+                     <name>IPR_N1</name>
+                     <description>IPR_N1</description>
+                     <bitOffset>8</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+                  <field>
+                     <name>IPR_N2</name>
+                     <description>IPR_N2</description>
+                     <bitOffset>16</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+                  <field>
+                     <name>IPR_N3</name>
+                     <description>IPR_N3</description>
+                     <bitOffset>24</bitOffset>
+                     <bitWidth>8</bitWidth>
+                  </field>
+               </fields>
             </register>
          </registers>
       </peripheral>
