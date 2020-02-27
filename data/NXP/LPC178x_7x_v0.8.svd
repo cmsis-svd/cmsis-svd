@@ -49112,7 +49112,7 @@ data bytes 5-8 (Tx Buffer )</description>
 				</register>
 			</registers>
 		</peripheral>
-		<peripheral derivedFrom="SSP0">
+		<peripheral derivedFrom="SSP1">
 			<name>SSP2</name>
 			<baseAddress>0x400AC000</baseAddress>
 			<interrupt>
