@@ -148,9 +148,11 @@ class SVDField(SVDElement):
         if self.derived_from is None:
             return None
 
-        for field in self.parent.fields:
-            if field.name == self.derived_from:
-                return field
+        f = [f for f in self.parent.fields if f.name == self.derived_from][0]
+        if(f.get_derived_from == None):
+            return f
+        else:
+            return f.get_derived_from()
 
         raise KeyError("Unable to find derived_from: %r" % self.derived_from)
 
@@ -228,9 +230,12 @@ class SVDRegisterArray(SVDElement):
         if self.derived_from is None:
             return None
 
-        for register in self.parent.registers:
-            if register.name == self.derived_from:
-                return register
+        r = [r for r in self.parent.registers if r.name == self.derived_from][0]
+        if(r.get_derived_from() == None):
+            return r
+        else:
+            return r.get_derived_from()
+        
 
         raise KeyError("Unable to find derived_from: %r" % self.derived_from)
 
@@ -273,7 +278,7 @@ class SVDRegister(SVDElement):
         if self.derived_from is None:
             return None
 
-        r = [r for r in self.parent.registers if register.name == self.derived_from][0]
+        r = [r for r in self.parent.registers if r.name == self.derived_from][0]
         if(r.get_derived_from() == None):
             return r
         else:
@@ -351,7 +356,7 @@ class SVDRegisterCluster(SVDElement):
         if self.derived_from is None:
             return None
 
-        r = [r for r in self.parent.registers if register.name == self.derived_from][0]
+        r = [r for r in self.parent.registers if r.name == self.derived_from][0]
         if(r.get_derived_from() == None):
             return r
         else:
@@ -436,7 +441,7 @@ class SVDRegisterClusterArray(SVDElement):
         if self.derived_from is None:
             return None
 
-        r = [r for r in self.parent.registers if register.name == self.derived_from][0]
+        r = [r for r in self.parent.registers if r.name == self.derived_from][0]
         if(r.get_derived_from() == None):
             return r
         else:
