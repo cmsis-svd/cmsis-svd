@@ -73,6 +73,7 @@ class SVDElement(object):
 
     def _lookup_possibly_derived_attribute(self, attr):
         derived_from = self.get_derived_from()
+        
 
         # see if there is an attribute with the same name and leading underscore
         try:
@@ -499,6 +500,7 @@ class SVDPeripheral(SVDElement):
     @property
     def registers(self):
         regs = []
+
         for reg in self._lookup_possibly_derived_attribute('registers'):
             regs.append(reg)
         for arr in self._lookup_possibly_derived_attribute('register_arrays'):
@@ -513,7 +515,11 @@ class SVDPeripheral(SVDElement):
 
         # find the peripheral with this name in the tree
         try:
-            return [p for p in self.parent.peripherals if p.name == self._derived_from][0]
+            p = [p for p in self.parent.peripherals if p.name == self._derived_from][0]
+            if(p.get_derived_from() == None):
+                return p
+            else:
+                return p.get_derived_from()
         except IndexError:
             return None
 
