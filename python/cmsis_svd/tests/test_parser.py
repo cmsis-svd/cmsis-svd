@@ -302,3 +302,15 @@ class TestParserPackagedData(unittest.TestCase):
         self.assertTrue(parser is not None)
         device = parser.get_device()
         self.assertTrue(len(device.peripherals) > 0)
+        
+class TestParserNXP(unittest.TestCase):
+    def setUpClass(cls):
+        svd = os.path.join(DATA_DIR, "NXP", "LPC178x_7x.svd")
+        cls.parser = SVDParser.for_xml_file(svd)
+        cls.device = cls.parser.get_device()
+
+    def test_nested_derivedfrom(self):
+        device = self.device
+        ssp2 = [p for p in device.peripherals if p.name == "SSP2"][0]
+        ssp2cr1 = [r for r in p.registers if r.name =="CR1"]
+        self.assertEqual( ssp2.base_address + ssp2cr1.address_offset , 0x400ac004)
