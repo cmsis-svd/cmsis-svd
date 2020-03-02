@@ -149,7 +149,7 @@ class SVDField(SVDElement):
             return None
 
         f = [f for f in self.parent.fields if f.name == self.derived_from][0]
-        if(f.get_derived_from == None):
+        if(f.get_derived_from() == None):
             return f
         else:
             return f.get_derived_from()
