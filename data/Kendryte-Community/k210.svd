@@ -964,8 +964,8 @@
                     </fields>
                 </register>
                 <register>
-                    <name>interrupt mask</name>
-                    <description>intr_mask</description>
+                    <name>intr_mask</name>
+                    <description>interrupt mask</description>
                     <addressOffset>0x18</addressOffset>
                     <size>64</size>
                     <fields>
