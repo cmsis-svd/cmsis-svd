@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!-- File naming: <vendor>_<part/series name>_svd.xml -->
-
-<device schemaVersion="1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_0.xsd" >
+<device schemaVersion="1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" noNamespaceSchemaLocation="CMSIS-SVD.xsd">
   <vendor>Nordic Semiconductor</vendor>                           <!-- Name for Doxygroup -->
   <vendorID>Nordic</vendorID>                                     <!-- Vendor ID -->
   <name>nrf51</name>                                              <!-- Official name of part or part series -->
@@ -10,33 +8,33 @@
   <version>522</version>                                          <!-- Version of this description. It is the run of the automatic generation of SUS. -->
   <description>nRF51 reference description for radio MCU with ARM 32-bit Cortex-M0 Microcontroller at 16MHz CPU clock</description>
   <licenseText>
-    Copyright (c) 2013, Nordic Semiconductor ASA\n
-    All rights reserved.\n
-    \n
-    Redistribution and use in source and binary forms, with or without\n
-    modification, are permitted provided that the following conditions are met:\n
-    \n
-    * Redistributions of source code must retain the above copyright notice, this\n
-      list of conditions and the following disclaimer.\n
-    \n
-    * Redistributions in binary form must reproduce the above copyright notice,\n
-      this list of conditions and the following disclaimer in the documentation\n
-      and/or other materials provided with the distribution.\n
-    \n
-    * Neither the name of Nordic Semiconductor ASA nor the names of its\n
-      contributors may be used to endorse or promote products derived from\n
-      this software without specific prior written permission.\n
-    \n
-    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"\n
-    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\n
-    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\n
-    DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\n
-    FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\n
-    DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\n
-    SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\n
-    CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\n
-    OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\n
-    OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n
+Copyright (c) 2010 - 2018, Nordic Semiconductor ASA All rights reserved.\n
+\n
+Redistribution and use in source and binary forms, with or without\n
+modification, are permitted provided that the following conditions are met:\n
+\n
+1. Redistributions of source code must retain the above copyright notice, this\n
+   list of conditions and the following disclaimer.\n
+\n
+2. Redistributions in binary form must reproduce the above copyright\n
+   notice, this list of conditions and the following disclaimer in the\n
+   documentation and/or other materials provided with the distribution.\n
+\n
+3. Neither the name of Nordic Semiconductor ASA nor the names of its\n
+   contributors may be used to endorse or promote products derived from this\n
+   software without specific prior written permission.\n
+\n
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"\n
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\n
+IMPLIED WARRANTIES OF MERCHANTABILITY, AND FITNESS FOR A PARTICULAR PURPOSE\n
+ARE DISCLAIMED. IN NO EVENT SHALL NORDIC SEMICONDUCTOR ASA OR CONTRIBUTORS BE\n
+LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR\n
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF\n
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS\n
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN\n
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)\n
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE\n
+POSSIBILITY OF SUCH DAMAGE.\n
   </licenseText>
 
   <!-- Register Properties Group -->
@@ -3385,2332 +3383,6 @@
     </peripheral>
 
     <peripheral>
-      <name>AMLI</name>
-      <version>539</version>
-      <description>AHB Multi-Layer Interface.</description>
-      <groupName>AMLI</groupName>
-      <baseAddress>0x40000000</baseAddress>
-      <size>32</size>
-      <access>read-write</access>
-      <alternatePeripheral>POWER</alternatePeripheral>
-
-      <addressBlock>
-        <offset>0</offset>
-        <size>0x1000</size>
-        <usage>registers</usage>
-      </addressBlock>
-
-      <registers>
-        <cluster>
-          <name>RAMPRI</name>
-          <description>RAM configurable priority configuration structure.</description>
-          <headerStructName>AMLI_RAMPRI</headerStructName>
-          <addressOffset>0xE00</addressOffset>
-          <register>
-            <name>CPU0</name>
-            <description>Configurable priority configuration register for CPU0.</description>
-            <addressOffset>0x000</addressOffset>
-            <fields>
-              <field>
-                <name>RAM0</name>
-                <description>Configuration field for RAM block 0.</description>
-                <lsb>0</lsb> <msb>3</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM1</name>
-                <description>Configuration field for RAM block 1.</description>
-                <lsb>4</lsb> <msb>7</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM2</name>
-                <description>Configuration field for RAM block 2.</description>
-                <lsb>8</lsb> <msb>11</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM3</name>
-                <description>Configuration field for RAM block 3.</description>
-                <lsb>12</lsb> <msb>15</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM4</name>
-                <description>Configuration field for RAM block 4.</description>
-                <lsb>16</lsb> <msb>19</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM5</name>
-                <description>Configuration field for RAM block 5.</description>
-                <lsb>20</lsb> <msb>23</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM6</name>
-                <description>Configuration field for RAM block 6.</description>
-                <lsb>24</lsb> <msb>27</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM7</name>
-                <description>Configuration field for RAM block 7.</description>
-                <lsb>28</lsb> <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>SPIS1</name>
-            <description>Configurable priority configuration register for SPIS1.</description>
-            <addressOffset>0x004</addressOffset>
-            <fields>
-              <field>
-                <name>RAM0</name>
-                <description>Configuration field for RAM block 0.</description>
-                <lsb>0</lsb> <msb>3</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM1</name>
-                <description>Configuration field for RAM block 1.</description>
-                <lsb>4</lsb> <msb>7</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM2</name>
-                <description>Configuration field for RAM block 2.</description>
-                <lsb>8</lsb> <msb>11</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM3</name>
-                <description>Configuration field for RAM block 3.</description>
-                <lsb>12</lsb> <msb>15</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM4</name>
-                <description>Configuration field for RAM block 4.</description>
-                <lsb>16</lsb> <msb>19</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM5</name>
-                <description>Configuration field for RAM block 5.</description>
-                <lsb>20</lsb> <msb>23</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM6</name>
-                <description>Configuration field for RAM block 6.</description>
-                <lsb>24</lsb> <msb>27</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM7</name>
-                <description>Configuration field for RAM block 7.</description>
-                <lsb>28</lsb> <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>RADIO</name>
-            <description>Configurable priority configuration register for RADIO.</description>
-            <addressOffset>0x008</addressOffset>
-            <fields>
-              <field>
-                <name>RAM0</name>
-                <description>Configuration field for RAM block 0.</description>
-                <lsb>0</lsb> <msb>3</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM1</name>
-                <description>Configuration field for RAM block 1.</description>
-                <lsb>4</lsb> <msb>7</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM2</name>
-                <description>Configuration field for RAM block 2.</description>
-                <lsb>8</lsb> <msb>11</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM3</name>
-                <description>Configuration field for RAM block 3.</description>
-                <lsb>12</lsb> <msb>15</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM4</name>
-                <description>Configuration field for RAM block 4.</description>
-                <lsb>16</lsb> <msb>19</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM5</name>
-                <description>Configuration field for RAM block 5.</description>
-                <lsb>20</lsb> <msb>23</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM6</name>
-                <description>Configuration field for RAM block 6.</description>
-                <lsb>24</lsb> <msb>27</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM7</name>
-                <description>Configuration field for RAM block 7.</description>
-                <lsb>28</lsb> <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>ECB</name>
-            <description>Configurable priority configuration register for ECB.</description>
-            <addressOffset>0x00C</addressOffset>
-            <fields>
-              <field>
-                <name>RAM0</name>
-                <description>Configuration field for RAM block 0.</description>
-                <lsb>0</lsb> <msb>3</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM1</name>
-                <description>Configuration field for RAM block 1.</description>
-                <lsb>4</lsb> <msb>7</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM2</name>
-                <description>Configuration field for RAM block 2.</description>
-                <lsb>8</lsb> <msb>11</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM3</name>
-                <description>Configuration field for RAM block 3.</description>
-                <lsb>12</lsb> <msb>15</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM4</name>
-                <description>Configuration field for RAM block 4.</description>
-                <lsb>16</lsb> <msb>19</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM5</name>
-                <description>Configuration field for RAM block 5.</description>
-                <lsb>20</lsb> <msb>23</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM6</name>
-                <description>Configuration field for RAM block 6.</description>
-                <lsb>24</lsb> <msb>27</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM7</name>
-                <description>Configuration field for RAM block 7.</description>
-                <lsb>28</lsb> <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>CCM</name>
-            <description>Configurable priority configuration register for CCM.</description>
-            <addressOffset>0x010</addressOffset>
-            <fields>
-              <field>
-                <name>RAM0</name>
-                <description>Configuration field for RAM block 0.</description>
-                <lsb>0</lsb> <msb>3</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM1</name>
-                <description>Configuration field for RAM block 1.</description>
-                <lsb>4</lsb> <msb>7</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM2</name>
-                <description>Configuration field for RAM block 2.</description>
-                <lsb>8</lsb> <msb>11</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM3</name>
-                <description>Configuration field for RAM block 3.</description>
-                <lsb>12</lsb> <msb>15</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM4</name>
-                <description>Configuration field for RAM block 4.</description>
-                <lsb>16</lsb> <msb>19</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM5</name>
-                <description>Configuration field for RAM block 5.</description>
-                <lsb>20</lsb> <msb>23</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM6</name>
-                <description>Configuration field for RAM block 6.</description>
-                <lsb>24</lsb> <msb>27</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM7</name>
-                <description>Configuration field for RAM block 7.</description>
-                <lsb>28</lsb> <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>AAR</name>
-            <description>Configurable priority configuration register for AAR.</description>
-            <addressOffset>0x014</addressOffset>
-            <fields>
-              <field>
-                <name>RAM0</name>
-                <description>Configuration field for RAM block 0.</description>
-                <lsb>0</lsb> <msb>3</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM1</name>
-                <description>Configuration field for RAM block 1.</description>
-                <lsb>4</lsb> <msb>7</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM2</name>
-                <description>Configuration field for RAM block 2.</description>
-                <lsb>8</lsb> <msb>11</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM3</name>
-                <description>Configuration field for RAM block 3.</description>
-                <lsb>12</lsb> <msb>15</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM4</name>
-                <description>Configuration field for RAM block 4.</description>
-                <lsb>16</lsb> <msb>19</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM5</name>
-                <description>Configuration field for RAM block 5.</description>
-                <lsb>20</lsb> <msb>23</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM6</name>
-                <description>Configuration field for RAM block 6.</description>
-                <lsb>24</lsb> <msb>27</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>RAM7</name>
-                <description>Configuration field for RAM block 7.</description>
-                <lsb>28</lsb> <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Pri0</name>
-                    <description>Priority 0.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri2</name>
-                    <description>Priority 2.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri4</name>
-                    <description>Priority 4.</description>
-                    <value>0x4</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri6</name>
-                    <description>Priority 6.</description>
-                    <value>0x6</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri8</name>
-                    <description>Priority 8.</description>
-                    <value>0x8</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri10</name>
-                    <description>Priority 10.</description>
-                    <value>0xA</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri12</name>
-                    <description>Priority 12.</description>
-                    <value>0xC</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Pri14</name>
-                    <description>Priority 14.</description>
-                    <value>0xE</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-        </cluster>
-        
-      </registers>
-    </peripheral>
-    
-    
-    <peripheral>
       <name>RADIO</name>
       <version>522</version>
       <description>The radio.</description>
@@ -7157,7 +4829,6 @@
         <register>
           <dim>8</dim>
           <dimIncrement>0x04</dimIncrement>
-          <dimIndex>0-7</dimIndex>
           <name>DAB[%s]</name>
           <description>Device address base segment.</description>
           <addressOffset>0x600</addressOffset>
@@ -7165,7 +4836,6 @@
         <register>
           <dim>8</dim>
           <dimIncrement>0x04</dimIncrement>
-          <dimIndex>0-7</dimIndex>
           <name>DAP[%s]</name>
           <description>Device address prefix.</description>
           <addressOffset>0x620</addressOffset>
@@ -8157,9 +5827,19 @@
                   <value>0x0075F000</value>
                 </enumeratedValue>
                 <enumeratedValue>
+                  <name>Baud31250</name>
+                  <description>31250 baud.</description>
+                  <value>0x00800000</value>
+                </enumeratedValue>
+                <enumeratedValue>
                   <name>Baud38400</name>
                   <description>38400 baud.</description>
                   <value>0x009D5000</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Baud56000</name>
+                  <description>56000 baud.</description>
+                  <value>0x00E50000</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Baud57600</name>
@@ -9205,7 +6885,7 @@
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>K400</name>
-                  <description>400 kbps.</description>
+                  <description>400 kbps (actual rate 410.256 kbps).</description>
                   <value>0x06680000</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -9259,8 +6939,6 @@
       <version>522</version>
       <description>SPI master 1.</description>
       <baseAddress>0x40004000</baseAddress>
-      <groupName>SPI</groupName>
-      <size>32</size>
       <access>read-write</access>
       <interrupt>
         <name>SPI1_TWI1</name>
@@ -9273,8 +6951,6 @@
       <version>522</version>
       <description>Two-wire interface master 1.</description>
       <baseAddress>0x40004000</baseAddress>
-      <groupName>TWI</groupName>
-      <size>32</size>
       <access>read-write</access>
       <alternatePeripheral>SPI1</alternatePeripheral>
       <interrupt>
@@ -9323,6 +6999,12 @@
           <name>EVENTS_END</name>
           <description>Granted transaction completed.</description>
           <addressOffset>0x104</addressOffset>
+        </register>
+        <register>
+          <name>EVENTS_ENDRX</name>
+          <description>End of RXD buffer reached</description>
+          <addressOffset>0x110</addressOffset>
+          <access>read-write</access>
         </register>
         <register>
           <name>EVENTS_ACQUIRED</name>
@@ -9387,6 +7069,33 @@
               </enumeratedValues>
             </field>
             <field>
+              <name>ENDRX</name>
+              <description>enable interrupt on ENDRX event.</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Interrupt disabled.</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Interrupt enabled.</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable interrupt on write.</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
               <name>ACQUIRED</name>
               <description>Enable interrupt on ACQUIRED event.</description>
               <lsb>10</lsb> <msb>10</msb>
@@ -9423,6 +7132,32 @@
               <name>END</name>
               <description>Disable interrupt on END event.</description>
               <lsb>1</lsb> <msb>1</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Interrupt disabled.</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Interrupt enabled.</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable interrupt on write.</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ENDRX</name>
+              <description>Disable interrupt on ENDRX event.</description>
+              <lsb>4</lsb> <msb>4</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
@@ -9795,588 +7530,6 @@
     </peripheral>
 
     <peripheral>
-      <name>SPIM1</name>
-      <version>522</version>
-      <description>SPI master with easyDMA 1.</description>
-      <baseAddress>0x40004000</baseAddress>
-      <groupName>SPIM</groupName>
-      <size>32</size>
-      <access>read-write</access>
-      <alternatePeripheral>SPI1</alternatePeripheral>
-      <headerStructName>SPIM</headerStructName>
-
-      <addressBlock>
-        <offset>0</offset>
-        <size>0x1000</size>
-        <usage>registers</usage>
-      </addressBlock>
-
-      <interrupt>
-        <name>SPI1_TWI1</name>
-        <value>4</value>
-      </interrupt>
-
-      <registers>
-        <register>
-          <name>TASKS_START</name>
-          <description>Start SPI transaction.</description>
-          <addressOffset>0x010</addressOffset>
-          <access>write-only</access>
-        </register>
-        <register>
-          <name>TASKS_STOP</name>
-          <description>Stop SPI transaction.</description>
-          <addressOffset>0x014</addressOffset>
-          <access>write-only</access>
-        </register>
-        <register>
-          <name>TASKS_SUSPEND</name>
-          <description>Suspend SPI transaction.</description>
-          <addressOffset>0x01C</addressOffset>
-          <access>write-only</access>
-        </register>
-        <register>
-          <name>TASKS_RESUME</name>
-          <description>Resume SPI transaction.</description>
-          <addressOffset>0x020</addressOffset>
-          <access>write-only</access>
-        </register>
-
-        <register>
-          <name>EVENTS_STOPPED</name>
-          <description>SPI transaction has stopped.</description>
-          <addressOffset>0x104</addressOffset>
-        </register>
-        <register>
-          <name>EVENTS_ENDRX</name>
-          <description>End of RXD buffer reached.</description>
-          <addressOffset>0x110</addressOffset>
-        </register>
-        <register>
-          <name>EVENTS_ENDTX</name>
-          <description>End of TXD buffer reached.</description>
-          <addressOffset>0x120</addressOffset>
-        </register>
-        <register>
-          <name>EVENTS_STARTED</name>
-          <description>Transaction started.</description>
-          <addressOffset>0x14C</addressOffset>
-        </register>
-
-        <register>
-          <name>INTENSET</name>
-          <description>Interrupt enable set register.</description>
-          <addressOffset>0x304</addressOffset>
-          <fields>
-            <field>
-              <name>STOPPED</name>
-              <description>Enable interrupt on STOPPED event.</description>
-              <lsb>1</lsb> <msb>1</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Interrupt disabled.</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Interrupt enabled.</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable interrupt on write.</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>ENDRX</name>
-              <description>Enable interrupt on ENDRX event.</description>
-              <lsb>4</lsb> <msb>4</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Interrupt disabled.</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Interrupt enabled.</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable interrupt on write.</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>ENDTX</name>
-              <description>Enable interrupt on ENDTX event.</description>
-              <lsb>8</lsb> <msb>8</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Interrupt disabled.</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Interrupt enabled.</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable interrupt on write.</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>STARTED</name>
-              <description>Enable interrupt on STARTED event.</description>
-              <lsb>19</lsb> <msb>19</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Interrupt disabled.</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Interrupt enabled.</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable interrupt on write.</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTENCLR</name>
-          <description>Interrupt enable clear register.</description>
-          <addressOffset>0x308</addressOffset>
-          <fields>
-            <field>
-              <name>STOPPED</name>
-              <description>Disable interrupt on STOPPED event.</description>
-              <lsb>1</lsb> <msb>1</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Interrupt disabled.</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Interrupt enabled.</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable interrupt on write.</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>ENDRX</name>
-              <description>Disable interrupt on ENDRX event.</description>
-              <lsb>4</lsb> <msb>4</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Interrupt disabled.</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Interrupt enabled.</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable interrupt on write.</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>ENDTX</name>
-              <description>Disable interrupt on ENDTX event.</description>
-              <lsb>8</lsb> <msb>8</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Interrupt disabled.</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Interrupt enabled.</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable interrupt on write.</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>STARTED</name>
-              <description>Disable interrupt on STARTED event.</description>
-              <lsb>19</lsb> <msb>19</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Interrupt disabled.</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Interrupt enabled.</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable interrupt on write.</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            
-          </fields>
-        </register>
-
-        <register>
-          <name>ENABLE</name>
-          <description>Enable SPIM.</description>
-          <addressOffset>0x500</addressOffset>
-          <fields>
-            <field>
-              <name>ENABLE</name>
-              <description>Enable or disable SPIM.</description>
-              <lsb>0</lsb> <msb>3</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disabled SPIM.</description>
-                  <value>0x00</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable SPIM.</description>
-                  <value>0x07</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-
-        <cluster>
-          <name>PSEL</name>
-          <description>Pin select configuration.</description>
-          <addressOffset>0x508</addressOffset>
-          <headerStructName>SPIM_PSEL</headerStructName>
-          <register>
-            <name>SCK</name>
-            <description>Pin select for SCK.</description>
-            <addressOffset>0x0</addressOffset>
-            <resetValue>0xFFFFFFFF</resetValue>
-          </register>
-          <register>
-            <name>MOSI</name>
-            <description>Pin select for MOSI.</description>
-            <addressOffset>0x4</addressOffset>
-            <resetValue>0xFFFFFFFF</resetValue>
-          </register>
-          <register>
-            <name>MISO</name>
-            <description>Pin select for MISO.</description>
-            <addressOffset>0x8</addressOffset>
-            <resetValue>0xFFFFFFFF</resetValue>
-          </register>
-        </cluster>
-        
-        <register>
-          <name>FREQUENCY</name>
-          <description>SPI frequency.</description>
-          <addressOffset>0x524</addressOffset>
-          <resetValue>0x04000000</resetValue>
-          <fields>
-            <field>
-              <name>FREQUENCY</name>
-              <description>SPI master data rate.</description>
-              <lsb>0</lsb> <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>K125</name>
-                  <description>125 kbps.</description>
-                  <value>0x02000000</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>K250</name>
-                  <description>250 kbps.</description>
-                  <value>0x04000000</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>K500</name>
-                  <description>500 kbps.</description>
-                  <value>0x08000000</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>M1</name>
-                  <description>1 Mbps.</description>
-                  <value>0x10000000</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>M2</name>
-                  <description>2 Mbps.</description>
-                  <value>0x20000000</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>M4</name>
-                  <description>4 Mbps.</description>
-                  <value>0x40000000</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>M8</name>
-                  <description>8 Mbps.</description>
-                  <value>0x80000000</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        
-        <cluster>
-          <name>RXD</name>
-          <description>RXD EasyDMA configuration and status.</description>
-          <addressOffset>0x534</addressOffset>
-          <headerStructName>SPIM_RXD</headerStructName>
-          <register>
-            <name>PTR</name>
-            <description>Data pointer.</description>
-            <addressOffset>0x0</addressOffset>
-            <fields>
-              <field>
-                <name>PTR</name>
-                <description>Data pointer.</description>
-                <lsb>0</lsb> <msb>31</msb>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>MAXCNT</name>
-            <description>Maximum number of buffer bytes to receive.</description>
-            <addressOffset>0x4</addressOffset>
-            <fields>
-              <field>
-                <name>MAXCNT</name>
-                <description>Maximum number of buffer bytes to receive.</description>
-                <lsb>0</lsb> <msb>7</msb>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>AMOUNT</name>
-            <description>Number of bytes received in the last transaction.</description>
-            <addressOffset>0x8</addressOffset>
-            <access>read-only</access>
-            <fields>
-              <field>
-                <name>AMOUNT</name>
-                <description>Number of bytes received in the last transaction.</description>
-                <lsb>0</lsb> <msb>7</msb>
-              </field>
-            </fields>
-          </register>
-        </cluster>
-        
-        <cluster>
-          <name>TXD</name>
-          <description>TXD EasyDMA configuration and status.</description>
-          <addressOffset>0x544</addressOffset>
-          <headerStructName>SPIM_TXD</headerStructName>
-          <register>
-            <name>PTR</name>
-            <description>Data pointer.</description>
-            <addressOffset>0x0</addressOffset>
-            <fields>
-              <field>
-                <name>PTR</name>
-                <description>Data pointer.</description>
-                <lsb>0</lsb> <msb>31</msb>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>MAXCNT</name>
-            <description>Maximum number of buffer bytes to send.</description>
-            <addressOffset>0x4</addressOffset>
-            <fields>
-              <field>
-                <name>MAXCNT</name>
-                <description>Maximum number of buffer bytes to send.</description>
-                <lsb>0</lsb> <msb>7</msb>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>AMOUNT</name>
-            <description>Number of bytes sent in the last transaction.</description>
-            <addressOffset>0x8</addressOffset>
-            <access>read-only</access>
-            <fields>
-              <field>
-                <name>AMOUNT</name>
-                <description>Number of bytes sent in the last transaction.</description>
-                <lsb>0</lsb> <msb>7</msb>
-              </field>
-            </fields>
-          </register>
-        </cluster>
-        
-        <register>
-          <name>CONFIG</name>
-          <description>Configuration register.</description>
-          <addressOffset>0x554</addressOffset>
-          <fields>
-            <field>
-              <name>ORDER</name>
-              <description>Bit order.</description>
-              <lsb>0</lsb> <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>MsbFirst</name>
-                  <description>Most significant bit transmitted out first.</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>LsbFirst</name>
-                  <description>Least significant bit transmitted out first.</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CPHA</name>
-              <description>Serial clock (SCK) phase.</description>
-              <lsb>1</lsb> <msb>1</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Leading</name>
-                  <description>Sample on leading edge of the clock. Shift serial data on trailing edge.</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Trailing</name>
-                  <description>Sample on trailing edge of the clock. Shift serial data on leading edge.</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CPOL</name>
-              <description>Serial clock (SCK) polarity.</description>
-              <lsb>2</lsb> <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>ActiveHigh</name>
-                  <description>Active high.</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>ActiveLow</name>
-                  <description>Active low.</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        
-        <register>
-          <name>ORC</name>
-          <description>Over-read character.</description>
-          <addressOffset>0x5C0</addressOffset>
-          <fields>
-            <field>
-              <name>ORC</name>
-              <description>Over-read character.</description>
-              <lsb>0</lsb> <msb>7</msb>
-            </field>
-          </fields>
-        </register>
-        
-        <register>
-          <name>POWER</name>
-          <description>Peripheral power control.</description>
-          <addressOffset>0xFFC</addressOffset>
-          <fields>
-            <field>
-              <name>POWER</name>
-              <description>Peripheral power control.</description>
-              <lsb>0</lsb> <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Module power disabled.</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Module power enabled.</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        
-      </registers>
-    </peripheral>
-
-    <peripheral>
       <name>GPIOTE</name>
       <version>522</version>
       <description>GPIO tasks and events.</description>
@@ -10400,7 +7553,6 @@
         <register>
           <dim>4</dim>
           <dimIncrement>0x04</dimIncrement>
-          <dimIndex>0-3</dimIndex>
           <name>TASKS_OUT[%s]</name>
           <description>Tasks asssociated with GPIOTE channels.</description>
           <addressOffset>0x000</addressOffset>
@@ -10410,7 +7562,6 @@
         <register>
           <dim>4</dim>
           <dimIncrement>0x04</dimIncrement>
-          <dimIndex>0-3</dimIndex>
           <name>EVENTS_IN[%s]</name>
           <description>Tasks asssociated with GPIOTE channels.</description>
           <addressOffset>0x100</addressOffset>
@@ -10699,7 +7850,6 @@
         <register>
           <dim>4</dim>
           <dimIncrement>0x04</dimIncrement>
-          <dimIndex>0-3</dimIndex>
           <name>CONFIG[%s]</name>
           <description>Channel configuration registers.</description>
           <addressOffset>0x510</addressOffset>
@@ -11225,7 +8375,6 @@
         <register>
           <dim>4</dim>
           <dimIncrement>0x04</dimIncrement>
-          <dimIndex>0-3</dimIndex>
           <name>TASKS_CAPTURE[%s]</name>
           <description>Capture Timer value to CC[n] registers.</description>
           <addressOffset>0x040</addressOffset>
@@ -11235,7 +8384,6 @@
         <register>
           <dim>4</dim>
           <dimIncrement>0x04</dimIncrement>
-          <dimIndex>0-3</dimIndex>
           <name>EVENTS_COMPARE[%s]</name>
           <description>Compare event on CC[n] match.</description>
           <addressOffset>0x140</addressOffset>
@@ -11684,7 +8832,6 @@
         <register>
           <dim>4</dim>
           <dimIncrement>0x04</dimIncrement>
-          <dimIndex>0-3</dimIndex>
           <name>CC[%s]</name>
           <description>Capture/compare registers.</description>
           <addressOffset>0x540</addressOffset>
@@ -11723,8 +8870,6 @@
       <version>522</version>
       <description>Timer 1.</description>
       <baseAddress>0x40009000</baseAddress>
-      <groupName>TIMER</groupName>
-      <size>32</size>
       <access>read-write</access>
       <interrupt>
         <name>TIMER1</name>
@@ -11737,8 +8882,6 @@
       <version>522</version>
       <description>Timer 2.</description>
       <baseAddress>0x4000A000</baseAddress>
-      <groupName>TIMER</groupName>
-      <size>32</size>
       <access>read-write</access>
       <interrupt>
         <name>TIMER2</name>
@@ -11806,7 +8949,6 @@
         <register>
           <dim>4</dim>
           <dimIncrement>0x04</dimIncrement>
-          <dimIndex>0-3</dimIndex>
           <name>EVENTS_COMPARE[%s]</name>
           <description>Compare event on CC[n] match.</description>
           <addressOffset>0x140</addressOffset>
@@ -12605,7 +9747,6 @@
         <register>
           <dim>4</dim>
           <dimIncrement>0x04</dimIncrement>
-          <dimIndex>0-3</dimIndex>
           <name>CC[%s]</name>
           <description>Capture/compare registers.</description>
           <addressOffset>0x540</addressOffset>
@@ -13473,7 +10614,7 @@
         </register>
         <register>
           <name>SCRATCHPTR</name>
-          <description>Pointer to a "scratch" data area used for temporary storage during resolution. A minimum of 3 bytes must be reserved.</description>
+          <description>Pointer to a scratch data area used for temporary storage during resolution. A minimum of 3 bytes must be reserved.</description>
           <addressOffset>0x514</addressOffset>
         </register>
         
@@ -13852,7 +10993,7 @@
         </register>
         <register>
           <name>SCRATCHPTR</name>
-          <description>Pointer to a "scratch" data area used for temporary storage during resolution. A minimum of 43 bytes must be reserved.</description>
+          <description>Pointer to a scratch data area used for temporary storage during resolution. A minimum of 43 bytes must be reserved.</description>
           <addressOffset>0x514</addressOffset>
         </register>
         
@@ -14355,7 +11496,6 @@
         <register>
           <dim>8</dim>
           <dimIncrement>0x04</dimIncrement>
-          <dimIndex>0-7</dimIndex>
           <name>RR[%s]</name>
           <description>Reload requests registers.</description>
           <addressOffset>0x600</addressOffset>
@@ -14409,8 +11549,6 @@
       <version>522</version>
       <description>Real time counter 1.</description>
       <baseAddress>0x40011000</baseAddress>
-      <groupName>RTC</groupName>
-      <size>32</size>
       <access>read-write</access>
       <interrupt>
         <name>RTC1</name>
@@ -15381,7 +12519,7 @@
               <lsb>0</lsb> <msb>0</msb>
               <enumeratedValues>
                 <enumeratedValue>
-                  <name>Bellow</name>
+                  <name>Below</name>
                   <description>Input voltage is bellow the reference threshold.</description>
                   <value>0</value>
                 </enumeratedValue>
@@ -15823,10 +12961,8 @@
         <cluster>
           <dim>4</dim>
           <dimIncrement>0x08</dimIncrement>
-          <dimIndex>0-3</dimIndex>
           <name>TASKS_CHG[%s]</name>
           <description>Channel group tasks.</description>
-          <headerStructName>PPI_TASKS_CHG</headerStructName>
           <addressOffset>0x000</addressOffset>
           <register>
             <name>EN</name>
@@ -17799,10 +14935,8 @@
         <cluster>
           <dim>16</dim>
           <dimIncrement>0x08</dimIncrement>
-          <dimIndex>0-15</dimIndex>
           <name>CH[%s]</name>
           <description>PPI Channel.</description>
-          <headerStructName>PPI_CH</headerStructName>
           <addressOffset>0x510</addressOffset>
           <register>
             <name>EEP</name>
@@ -17819,7 +14953,6 @@
         <register>
           <dim>4</dim>
           <dimIncrement>0x04</dimIncrement>
-          <dimIndex>0-3</dimIndex>
           <name>CHG[%s]</name>
           <description>Channel group configuration.</description>
           <addressOffset>0x800</addressOffset>
@@ -18377,7 +15510,6 @@
         <register>
           <dim>4</dim>
           <dimIncrement>0x04</dimIncrement>
-          <dimIndex>0-3</dimIndex>
           <name>SIZERAMBLOCK[%s]</name>
           <description>Deprecated array of size of RAM block in bytes. This name is kept for backward compatinility purposes. Use SIZERAMBLOCKS instead.</description>
           <addressOffset>0x038</addressOffset>
@@ -18405,7 +15537,6 @@
         <register>
           <dim>2</dim>
           <dimIncrement>0x04</dimIncrement>
-          <dimIndex>0-1</dimIndex>
           <name>DEVICEID[%s]</name>
           <description>Device identifier.</description>
           <addressOffset>0x060</addressOffset>
@@ -18414,7 +15545,6 @@
         <register>
           <dim>4</dim>
           <dimIncrement>0x04</dimIncrement>
-          <dimIndex>0-3</dimIndex>
           <name>ER[%s]</name>
           <description>Encryption root.</description>
           <addressOffset>0x080</addressOffset>
@@ -18423,7 +15553,6 @@
         <register>
           <dim>4</dim>
           <dimIncrement>0x04</dimIncrement>
-          <dimIndex>0-3</dimIndex>
           <name>IR[%s]</name>
           <description>Identity root.</description>
           <addressOffset>0x090</addressOffset>
@@ -18457,7 +15586,6 @@
         <register>
           <dim>2</dim>
           <dimIncrement>0x04</dimIncrement>
-          <dimIndex>0-1</dimIndex>
           <name>DEVICEADDR[%s]</name>
           <description>Device address.</description>
           <addressOffset>0x0A4</addressOffset>
@@ -18508,7 +15636,6 @@
         <register>
           <dim>5</dim>
           <dimIncrement>0x04</dimIncrement>
-          <dimIndex>0-4</dimIndex>
           <name>NRF_1MBIT[%s]</name>
           <description>Override values for the OVERRIDEn registers in RADIO for NRF_1Mbit mode.</description>
           <addressOffset>0x0B0</addressOffset>
@@ -18516,7 +15643,6 @@
         <register>
           <dim>5</dim>
           <dimIncrement>0x04</dimIncrement>
-          <dimIndex>0-4</dimIndex>
           <name>BLE_1MBIT[%s]</name>
           <description>Override values for the OVERRIDEn registers in RADIO for BLE_1Mbit mode.</description>
           <addressOffset>0x0EC</addressOffset>
@@ -18638,7 +15764,6 @@
         <register>
           <dim>15</dim>
           <dimIncrement>0x04</dimIncrement>
-          <dimIndex>0-14</dimIndex>
           <name>NRFFW[%s]</name>
           <description>Reserved for Nordic firmware design.</description>
           <addressOffset>0x014</addressOffset>
@@ -18647,7 +15772,6 @@
         <register>
           <dim>12</dim>
           <dimIncrement>0x04</dimIncrement>
-          <dimIndex>0-11</dimIndex>
           <name>NRFHW[%s]</name>
           <description>Reserved for Nordic hardware design.</description>
           <addressOffset>0x050</addressOffset>
@@ -18655,7 +15779,6 @@
         <register>
           <dim>32</dim>
           <dimIncrement>0x04</dimIncrement>
-          <dimIndex>0-31</dimIndex>
           <name>CUSTOMER[%s]</name>
           <description>Reserved for customer.</description>
           <addressOffset>0x080</addressOffset>
@@ -23697,7 +20820,6 @@
         <register>
           <dim>32</dim>
           <dimIncrement>0x04</dimIncrement>
-          <dimIndex>0-31</dimIndex>
           <name>PIN_CNF[%s]</name>
           <description>Configuration of GPIO pins.</description>
           <addressOffset>0x700</addressOffset>
