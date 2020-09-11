@@ -245,7 +245,7 @@ class SVDParser(object):
         fields = []
         for field_node in register_node.findall('.//field'):
             node = self._parse_field(field_node)
-            if self.remove_reserved or 'reserved' not in node.name.lower():
+            if not self.remove_reserved or 'reserved' not in node.name.lower():
                 fields.append(node)
 
         dim = _get_int(register_node, 'dim')
