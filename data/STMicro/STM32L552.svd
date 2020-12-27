@@ -90948,6 +90948,16 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
         <description>TIM5 global interrupt</description>
         <value>048</value>
       </interrupt>
+      <interrupt>
+        <name>TIM2_6</name>
+        <description>TIM6 global interrupt</description>
+        <value>049</value>
+      </interrupt>
+      <interrupt>
+        <name>TIM2_7</name>
+        <description>TIM7 global interrupt</description>
+        <value>050</value>
+      </interrupt>
       <registers>
         <register>
           <name>CR1</name>
