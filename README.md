@@ -23,12 +23,12 @@ ARM provides the following description of
 
 > The CMSIS System View Description format(CMSIS-SVD) formalizes the
 > description of the system contained in ARM Cortex-M processor-based
-> microcontrollers, in particular, the memory mapped registers of
+> microcontrollers, in particular, the memory-mapped registers of
 > peripherals. The detail contained in system view descriptions is
 > comparable to the data in device reference manuals. The information
-> ranges from high level functional descriptions of a peripheral all the
+> ranges from high-level functional descriptions of a peripheral all the
 > way down to the definition and purpose of an individual bit field in a
-> memory mapped register.
+> memory-mapped register.
 
 The original vision of ARM appears to have been to aggregate SVDs from
 various sources into a single repository accessible via
@@ -37,7 +37,7 @@ Currently, however, this site fails to provide a comprehensive
 repository of CMSIS SVDs.  The SVDs in this repository have been
 previously aggregated as part of the Eclipse
 [Embedded Systems Register View](http://embsysregview.sourceforge.net/)
-plugin.  This repo builds on the shoulders of the devlopers of
+plugin.  This repo builds on the shoulders of the developers of
 EmbSysRegView and seeks to provide a repository of SVDs that is more
 accessible to a greater number of other projects.
 
@@ -47,7 +47,7 @@ How Can the CMSIS-SVD Be Used
 The generic description of each MCUs CPU and hardware registers is
 very valuable when generating code that can be used for talking to
 specific target hardware.  In fact, much of the code in parts of CMSIS
-itself are generated based of the SVD.  ARM distributes an executable
+itself are generated based on the SVD.  ARM distributes an executable
 that does this transformation (SVDConvert.exe).
 
 The information can also be used for building debug tooling, test
@@ -56,7 +56,7 @@ infrastructure, or whatever else.
 Contributing
 ------------
 
-Contributions from Silicon Vendors as well as community members are
+Contributions from Silicon Vendors, as well as community members, are
 greatly appreciated.  Please feel free to create an issue on Github
 and/or submit Pull Requests with proposed changes to the repository.
 These will be reviewed and pulled in if deemed appropriate.
