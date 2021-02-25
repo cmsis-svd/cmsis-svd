@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <device xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="1.1" xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
    <name>STM32G483xx</name>
-   <version>1.0</version>
+   <version>1.4</version>
    <description>STM32G483xx</description>
     <cpu>
     <name>CM4</name>
@@ -142,10 +142,10 @@
          </registers>
       </peripheral>
       <peripheral>
-         <name>WWDG</name>
+         <name>IWDG</name>
          <description>WinWATCHDOG</description>
          <groupName>IWDG</groupName>
-         <baseAddress>0x40002C00</baseAddress>
+         <baseAddress>0x40003000</baseAddress>
          <addressBlock>
             <offset>0x0</offset>
             <size>0x400</size>
@@ -252,10 +252,10 @@
          </registers>
       </peripheral>
       <peripheral>
-         <name>IWDG</name>
+         <name>WWDG</name>
          <description>System window watchdog</description>
          <groupName>WWDG</groupName>
-         <baseAddress>0x40003000</baseAddress>
+         <baseAddress>0x40002C00</baseAddress>
          <addressBlock>
             <offset>0x0</offset>
             <size>0x400</size>
@@ -26187,8 +26187,7 @@
                      <access>read-write</access>
                   </field>
                </fields>
-            </register>
-			
+            </register>			
             <register>
                <name>COMP_C3CSR</name>
                <displayName>COMP_C3CSR</displayName>
@@ -26275,13 +26274,12 @@
                      <access>read-write</access>
                   </field>
                </fields>
-            </register>
-			
+            </register>			
             <register>
                <name>COMP_C4CSR</name>
                <displayName>COMP_C4CSR</displayName>
                <description>Comparator control/status           register</description>
-               <addressOffset>0x12</addressOffset>
+               <addressOffset>0x0C</addressOffset>
                <size>0x20</size>
                <resetValue>0x00000000</resetValue>
                <fields>
@@ -26363,13 +26361,12 @@
                      <access>read-write</access>
                   </field>
                </fields>
-            </register>
-			
+            </register>			
             <register>
                <name>COMP_C5CSR</name>
                <displayName>COMP_C5CSR</displayName>
                <description>Comparator control/status           register</description>
-               <addressOffset>0x16</addressOffset>
+               <addressOffset>0x10</addressOffset>
                <size>0x20</size>
                <resetValue>0x00000000</resetValue>
                <fields>
@@ -26451,13 +26448,12 @@
                      <access>read-write</access>
                   </field>
                </fields>
-            </register>
-			
+            </register>			
             <register>
                <name>COMP_C6CSR</name>
                <displayName>COMP_C6CSR</displayName>
                <description>Comparator control/status           register</description>
-               <addressOffset>0x20</addressOffset>
+               <addressOffset>0x14</addressOffset>
                <size>0x20</size>
                <resetValue>0x00000000</resetValue>
                <fields>
@@ -26539,13 +26535,12 @@
                      <access>read-write</access>
                   </field>
                </fields>
-            </register>
-			
+            </register>			
             <register>
                <name>COMP_C7CSR</name>
                <displayName>COMP_C7CSR</displayName>
                <description>Comparator control/status           register</description>
-               <addressOffset>0x24</addressOffset>
+               <addressOffset>0x18</addressOffset>
                <size>0x20</size>
                <resetValue>0x00000000</resetValue>
                <fields>
@@ -31154,7 +31149,7 @@
          <name>ADC12_Common</name>
          <description>Analog-to-Digital Converter</description>
          <groupName>ADC</groupName>
-         <baseAddress>0x50000200</baseAddress>
+         <baseAddress>0x50000300</baseAddress>
          <addressBlock>
             <offset>0x0</offset>
             <size>0x11</size>
@@ -31350,14 +31345,14 @@
                      <bitWidth>1</bitWidth>
                   </field>
                   <field>
-                     <name>CH17SEL</name>
-                     <description>CH17 selection</description>
+                     <name>VSENSESEL</name>
+                     <description> VTS selection</description>
                      <bitOffset>23</bitOffset>
                      <bitWidth>1</bitWidth>
                   </field>
                   <field>
-                     <name>CH18SEL</name>
-                     <description>CH18 selection</description>
+                     <name>VBATSEL</name>
+                     <description>VBAT selection</description>
                      <bitOffset>24</bitOffset>
                      <bitWidth>1</bitWidth>
                   </field>
@@ -33906,7 +33901,7 @@
                <description>MPU control register</description>
                <addressOffset>0x4</addressOffset>
                <size>0x20</size>
-               <access>read-only</access>
+               <access>read-write</access>
                <resetValue>0X00000000</resetValue>
                <fields>
                   <field>
@@ -34157,7 +34152,7 @@
          <name>SCB</name>
          <description>System control block</description>
          <groupName>SCB</groupName>
-         <baseAddress>0xE000E040</baseAddress>
+         <baseAddress>0xE000ED00</baseAddress>
          <addressBlock>
             <offset>0x0</offset>
             <size>0x41</size>
@@ -34480,8 +34475,8 @@
                </fields>
             </register>
             <register>
-               <name>SHCRS</name>
-               <displayName>SHCRS</displayName>
+               <name>SHCSR</name>
+               <displayName>SHCSR</displayName>
                <description>System handler control and state           register</description>
                <addressOffset>0x24</addressOffset>
                <size>0x20</size>
@@ -34775,14 +34770,14 @@
             </register>
          </registers>
       </peripheral>      
-      <peripheral>
+       <peripheral>
          <name>NVIC</name>
          <description>Nested Vectored Interrupt       Controller</description>
          <groupName>NVIC</groupName>
          <baseAddress>0xE000E100</baseAddress>
          <addressBlock>
             <offset>0x0</offset>
-            <size>0xE04</size>
+            <size>0x400</size>
             <usage>registers</usage>
          </addressBlock>
          <registers>
@@ -35905,31 +35900,47 @@
                <size>0x20</size>
                <access>read-write</access>
                <resetValue>0x00000000</resetValue>
-            </register> 
-           <register>
-               <name>STIR</name>
-               <displayName>STIR</displayName>
-               <description>Software trigger interrupt register</description>
-               <addressOffset>0xE00</addressOffset>
-               <size>0x20</size>
-               <access>read-write</access>
-               <resetValue>0x00000000</resetValue>
-               <fields>
-                  <field>
-                     <name>INTID</name>
-                     <description>Software generated interrupt               ID</description>
-                     <bitOffset>0</bitOffset>
-                     <bitWidth>9</bitWidth>
-                  </field>
-               </fields>
-          </register>			
+            </register>        			
          </registers>
       </peripheral>
+	  <peripheral>
+      <name>NVIC_STIR</name>
+      <description>Nested vectored interrupt
+      controller</description>
+      <groupName>NVIC</groupName>
+      <baseAddress>0xE000EF00</baseAddress>
+      <addressBlock>
+        <offset>0x0</offset>
+        <size>0x5</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <register>
+          <name>STIR</name>
+          <displayName>STIR</displayName>
+          <description>Software trigger interrupt
+          register</description>
+          <addressOffset>0x0</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>INTID</name>
+              <description>Software generated interrupt
+              ID</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>9</bitWidth>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
       <peripheral>
          <name>FPU_CPACR</name>
          <description>Floating point unit CPACR</description>
          <groupName>FPU</groupName>
-         <baseAddress>0xE000EF08</baseAddress>
+         <baseAddress>0xE000ED88</baseAddress>
          <addressBlock>
             <offset>0x0</offset>
             <size>0x5</size>
@@ -35956,7 +35967,7 @@
          </registers>
       </peripheral>
       <peripheral>
-         <name>SCB_ACTRL</name>
+         <name>SCB_ACTLR</name>
          <description>System control block ACTLR</description>
          <groupName>SCB</groupName>
          <baseAddress>0xE000E008</baseAddress>
