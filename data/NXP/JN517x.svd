@@ -1,0 +1,3310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ============================================================================ -->
+<!-- This software is owned by NXP B.V. and/or its supplier and is protected      -->
+<!-- under applicable copyright laws. All rights are reserved. We grant You,      -->
+<!-- and any third parties, a license to use this software solely and             -->
+<!-- exclusively on NXP products [NXP Microcontrollers such as JN5179].           -->
+<!-- You, and any third parties must reproduce the copyright and warranty notice  -->
+<!-- and any other legend of ownership on each copy or partial copy of the        -->
+<!-- software.                                                                    -->
+<!--                                                                              -->
+<!-- THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  -->
+<!-- AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    -->
+<!-- IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   -->
+<!-- ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE    -->
+<!-- LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR          -->
+<!-- CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         -->
+<!-- SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS     -->
+<!-- INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      -->
+<!-- CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)      -->
+<!-- ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   -->
+<!-- POSSIBILITY OF SUCH DAMAGE.                                                  -->
+<!--                                                                              -->
+<!-- Copyright NXP B.V. 2015. All rights reserved                                 -->
+<!-- ============================================================================ -->
+
+<device schemaVersion="1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd" >
+  <vendor>NXP</vendor>
+  <name>JN5179</name>
+  <series>JN517x</series>
+  <version>20150316</version>
+  <description>NXP JN5179 Wireless MCU: Cortex-M3 Microcontroller with 512KB Flash, 32KB RAM, IEEE802.15.4 Radio (refer to http://www.nxp.com/techzones/wireless-connectivity/overview.html for more)</description>
+  <cpu>
+    <name>CM3</name>
+    <revision>r2p1</revision>
+    <endian>little</endian>
+    <mpuPresent>false</mpuPresent>
+    <fpuPresent>false</fpuPresent>
+    <nvicPrioBits>4</nvicPrioBits>
+    <vendorSystickConfig>false</vendorSystickConfig>
+  </cpu>
+  <addressUnitBits>8</addressUnitBits>
+  <width>32</width>
+  
+  <!-- Defaults for peripheral registers -->
+  <size>32</size>
+  <access>read-write</access>
+  <resetValue>0x00000000</resetValue>
+  <resetMask>0xFFFFFFFF</resetMask>
+  
+  <peripherals>
+  
+    <peripheral>
+      <name>SYS_CTRL</name>
+      <version>1.0</version>
+      <description>System Controller</description>
+      <groupName>SYSTEM_CONTROLLER</groupName>
+      <baseAddress>0x40000000</baseAddress>
+      <size>32</size>
+      <access>read-write</access>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x200</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <registers>
+      <!-- PWR_CTRL: Power Control -->
+        <register>
+          <name>PWR_CTRL</name>
+          <description>Power Control Register</description>
+          <addressOffset>0x00</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>PDR</name>
+              <description>Power Down Request (once set the chip begins power down sequence and it must not be cleared)</description>
+              <bitRange>[0:0]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>Power down not requested</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Power down requested</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>DSS</name>
+              <description>Deep sleep request</description>
+              <bitRange>[1:1]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Sleep</name>
+                  <description>Select normal sleep mode</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>DeepSleep</name>
+                  <description>Select deep sleep mode</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>PCEN</name>
+              <description>Protocol Clock Enable</description>
+              <bitRange>[3:3]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>Protocol clock disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Protocol clock enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>SPIMEN</name>
+              <description>SPI Master Enable</description>
+              <bitRange>[4:4]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>SPI master disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>SPI master enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>MHUP</name>
+              <description>Memory Hold Up</description>
+              <bitRange>[5:5]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>RAM is powered down during sleep</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>RAM remains powered during sleep</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>PWM6EN</name>
+              <description>Enable PWM6 Timer</description>
+              <bitRange>[6:6]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>PWM6 timer is disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>PWM6 timer is enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>PWM5EN</name>
+              <description>Enable PWM5 Timer</description>
+              <bitRange>[7:7]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>PWM5 timer is disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>PWM5 timer is enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>TADCEN</name>
+              <description>Enable ADC Timer</description>
+              <bitRange>[8:8]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>ADC timer is disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>ADC timer is enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>T1EN</name>
+              <description>Enable Timer 1</description>
+              <bitRange>[9:9]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>Timer 1 is disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Timer 1 is enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>UEN0</name>
+              <description>Enable UART 0</description>
+              <bitRange>[12:12]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>UART 0 is disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>UART 0 is enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>UEN1</name>
+              <description>Enable UART 1</description>
+              <bitRange>[13:13]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>UART 1 is disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>UART 1 is enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>T0EN</name>
+              <description>Enable Timer 0</description>
+              <bitRange>[14:14]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>Timer 0 is disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Timer 0 is enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>SPISEN</name>
+              <description>Enable SPI Slave</description>
+              <bitRange>[15:15]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>SPI slave is disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>SPI slave is enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>I2CEN</name>
+              <description>Enable I2C Interface</description>
+              <bitRange>[16:16]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>I2C interface is disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>I2C interface is enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>NASSEN</name>
+              <description>Number of additional SPI slave selects</description>
+              <bitRange>[18:17]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>0</name>
+                  <description>SPI slave select available for DIO6 (depending on DIO configuration)</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>1</name>
+                  <description>SPI slave select available for DIO6, DIO15 (depending on DIO configuration)</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>2</name>
+                  <description>SPI slave select available for DIO6, DIO7 (depending on DIO configuration)</description>
+                  <value>2</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>PWM4EN</name>
+              <description>Enable PWM4 Timer</description>
+              <bitRange>[20:20]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>PWM4 Timer is disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>PWM4 Timer is enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>PD32K</name>
+              <description>Power Down 32kHz Oscillator during sleep</description>
+              <bitRange>[21:21]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>32kHz Oscillator remains powered during sleep</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>32kHz Oscillator is powered down during sleep</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>APEN</name>
+              <description>Enable Analogue Peripheral Power</description>
+              <bitRange>[22:22]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>Analogue periperal power is disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Analogue periperal power is enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>PWM1EN</name>
+              <description>Enable PWM1 Timer</description>
+              <bitRange>[28:28]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>PWM1 Timer is disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>PWM1 Timer is enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>PWM2EN</name>
+              <description>Enable PWM2 Timer</description>
+              <bitRange>[29:29]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>PWM2 Timer is disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>PWM2 Timer is enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>PWM3EN</name>
+              <description>Enable PWM3 Timer</description>
+              <bitRange>[30:30]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>PWM3 Timer is disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>PWM3 Timer is enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        
+        <!-- STAT: Status Information -->
+        <register>
+          <name>STAT</name>
+          <description>Device Status Register</description>
+          <addressOffset>0x04</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>WUS</name>
+              <description>Wake Up Status</description>
+              <bitRange>[0:0]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>ColdStart</name>
+                  <description>Device cold start</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>WarmStart</name>
+                  <description>Device warm start</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>MS</name>
+              <description>Memory Status</description>
+              <bitRange>[1:1]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>MemoryClear</name>
+                  <description>Memory was powered down during sleep</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>MemoryHeld</name>
+                  <description>Memory was held during sleep</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>APPS</name>
+              <description>Analogue Periperhal Power Status</description>
+              <bitRange>[2:2]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Analogue peripherals are powered up</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Analogue peripherals are powered off</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>PCS</name>
+              <description>IEEE802.15.4 Radio Clock Status</description>
+              <bitRange>[3:3]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Protocol clock is stopped</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Protocol clock is running</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>MISOS</name>
+              <description>Value of SPIMISO pin</description>
+              <bitRange>[4:4]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>SPIMISO pin is low</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>SPIMISO pin is high</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>VBO_STAT</name>
+              <description>Voltage Brown Out Status</description>
+              <bitRange>[5:5]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Supply voltage is greater than VBO threshold</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Supply voltage is lower than VBO threshold</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>VBO_STAT_VAL</name>
+              <description>Voltage Brown Out Status Valid</description>
+              <bitRange>[6:6]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Voltage brown out status is invalid</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Voltage brown out status is valid</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>WD_RES</name>
+              <description>Watchdog Reset Event</description>
+              <bitRange>[7:7]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Normal power up</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Power up was proceeded by a watchdog timeout</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>VBO_RES</name>
+              <description>Voltage Brown Out Reset Event</description>
+              <bitRange>[8:8]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Normal power up</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Power up was proceeded by a voltage brown out</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>CLK32K</name>
+              <description>Instantaneous value of the 32kHz system clock</description>
+              <bitRange>[9:9]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>0</name>
+                  <description>Clock is low</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>1</name>
+                  <description>Clock is high</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>CLK32K_RDY</name>
+              <description>Status of the 32kHz system clock</description>
+              <bitRange>[10:10]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>0</name>
+                  <description>Clock is not running</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>1</name>
+                  <description>Clock is running satisfactorily</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>DS_WAKEUP</name>
+              <description>Deep sleep wake up</description>
+              <bitRange>[11:11]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Normal power up</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Power up was from deep sleep mode</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        
+        <!-- SYS_IM_1: System Interrrupt Mask 1 -->
+        <register>
+          <name>SYS_IM_1</name>
+          <description>System Interrrupt Mask 1 - Enable system controller interrupt sources</description>
+          <addressOffset>0x0C</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>PC0EM</name>
+              <description>Pulse Counter 0 Event Mask</description>
+              <bitRange>[22:22]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Pulse Counter 0 Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Pulse Counter 0 Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>PC1EM</name>
+              <description>Pulse Counter 1 Event Mask</description>
+              <bitRange>[23:23]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Pulse Counter 1 Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Pulse Counter 1 Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>VFEM</name>
+              <description>VBO Falling Event Mask (Voltage moved above threshold)</description>
+              <bitRange>[24:24]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>VBO Falling Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>VBO Falling Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>VREM</name>
+              <description>VBO Rising Event Mask (Voltage moved below threshold)</description>
+              <bitRange>[25:25]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>VBO Rising Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>VBO Rising Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>WT0EM</name>
+              <description>Wake Up Timer 0 Event Mask</description>
+              <bitRange>[26:26]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Wake Up Timer 0 Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Wake Up Timer 0 Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>WT1EM</name>
+              <description>Wake Up Timer 1 Event Mask</description>
+              <bitRange>[27:27]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Wake Up Timer 1 Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Wake Up Timer 1 Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>CEM</name>
+              <description>Comparator Event Mask</description>
+              <bitRange>[28:28]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Comparator Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Comparator Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>FLEM</name>
+              <description>Flash Controller Event Mask</description>
+              <bitRange>[29:29]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Flash Controller Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Flash Controller Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>RNDEM</name>
+              <description>Random Number Generator Event Mask</description>
+              <bitRange>[30:30]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Random Number Generator Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Random Number Generator Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>CKEM</name>
+              <description>Clock Change Event Mask</description>
+              <bitRange>[31:31]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Clock Change Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Clock Change Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        
+        <!-- SYS_IM_2: System Interrrupt Mask 2 -->
+        <register>
+          <name>SYS_IM_2</name>
+          <description>System Interrrupt Mask 2 - Enable system controller interrupt sources</description>
+          <addressOffset>0x10</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>GPIO0EM</name>
+              <description>GPIO0 Event Mask</description>
+              <bitRange>[0:0]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>GPIO0 Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>GPIO0 Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO1EM</name>
+              <description>GPIO1 Event Mask</description>
+              <bitRange>[1:1]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>GPIO1 Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>GPIO1 Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO2EM</name>
+              <description>GPIO2 Event Mask</description>
+              <bitRange>[2:2]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>GPIO2 Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>GPIO2 Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO3EM</name>
+              <description>GPIO3 Event Mask</description>
+              <bitRange>[3:3]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>GPIO3 Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>GPIO3 Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO4EM</name>
+              <description>GPIO4 Event Mask</description>
+              <bitRange>[4:4]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>GPIO4 Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>GPIO4 Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO5EM</name>
+              <description>GPIO5 Event Mask</description>
+              <bitRange>[5:5]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>GPIO5 Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>GPIO5 Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO6EM</name>
+              <description>GPIO6 Event Mask</description>
+              <bitRange>[6:6]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>GPIO6 Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>GPIO6 Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO7EM</name>
+              <description>GPIO7 Event Mask</description>
+              <bitRange>[7:7]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>GPIO7 Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>GPIO7 Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO8EM</name>
+              <description>GPIO8 Event Mask</description>
+              <bitRange>[8:8]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>GPIO8 Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>GPIO8 Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO9EM</name>
+              <description>GPIO9 Event Mask</description>
+              <bitRange>[9:9]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>GPIO9 Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>GPIO9 Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO10EM</name>
+              <description>GPIO10 Event Mask</description>
+              <bitRange>[10:10]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>GPIO10 Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>GPIO10 Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO11EM</name>
+              <description>GPIO11 Event Mask</description>
+              <bitRange>[11:11]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>GPIO11 Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>GPIO11 Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO12EM</name>
+              <description>GPIO12 Event Mask</description>
+              <bitRange>[12:12]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>GPIO12 Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>GPIO12 Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO13EM</name>
+              <description>GPIO13 Event Mask</description>
+              <bitRange>[13:13]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>GPIO13 Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>GPIO13 Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO14EM</name>
+              <description>GPIO14 Event Mask</description>
+              <bitRange>[14:14]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>GPIO14 Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>GPIO14 Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO15EM</name>
+              <description>GPIO15 Event Mask</description>
+              <bitRange>[15:15]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>GPIO15 Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>GPIO15 Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO16EM</name>
+              <description>GPIO16 Event Mask</description>
+              <bitRange>[16:16]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>GPIO16 Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>GPIO16 Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO17EM</name>
+              <description>GPIO17 Event Mask</description>
+              <bitRange>[17:17]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>GPIO17 Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>GPIO17 Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO18EM</name>
+              <description>GPIO18 Event Mask</description>
+              <bitRange>[18:18]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>GPIO18 Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>GPIO18 Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO19EM</name>
+              <description>GPIO19 Event Mask</description>
+              <bitRange>[19:19]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>GPIO19 Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>GPIO19 Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO20EM</name>
+              <description>GPIO20 Event Mask</description>
+              <bitRange>[20:20]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>GPIO20 Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>GPIO20 Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO21EM</name>
+              <description>GPIO21 Event Mask</description>
+              <bitRange>[21:21]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>GPIO21 Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>GPIO21 Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO22EM</name>
+              <description>GPIO22 Event Mask</description>
+              <bitRange>[22:22]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>GPIO22 Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>GPIO22 Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO23EM</name>
+              <description>GPIO23 Event Mask</description>
+              <bitRange>[23:23]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>GPIO23 Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>GPIO23 Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO24EM</name>
+              <description>GPIO24 Event Mask</description>
+              <bitRange>[24:24]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>GPIO24 Interrupt Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>GPIO24 Interrupt Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        
+        <!-- SYS_IS_1: System Interrrupt Status 1 -->
+        <register>
+          <name>SYS_IS_1</name>
+          <description>System Interrrupt Status 1 - system controller interrupt status</description>
+          <addressOffset>0x14</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>PC0ES</name>
+              <description>Pulse Counter 0 Event Status</description>
+              <bitRange>[22:22]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Pulse Counter 0 No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>Pulse Counter 0 Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>PC1ES</name>
+              <description>Pulse Counter 1 Event Status</description>
+              <bitRange>[23:23]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Pulse Counter 1 No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>Pulse Counter 1 Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>VFES</name>
+              <description>VBO Falling Event Status (Voltage moved above threshold)</description>
+              <bitRange>[24:24]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>VBO Falling No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>VBO Falling Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>VRES</name>
+              <description>VBO Rising Event Status (Voltage moved below threshold)</description>
+              <bitRange>[25:25]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>VBO Rising No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>VBO Rising Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>WT0ES</name>
+              <description>Wake Up Timer 0 Event Status</description>
+              <bitRange>[26:26]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Wake Up Timer 0 No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>Wake Up Timer 0 Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>WT1ES</name>
+              <description>Wake Up Timer 1 Event Status</description>
+              <bitRange>[27:27]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Wake Up Timer 1 No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>Wake Up Timer 1 Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>CES</name>
+              <description>Comparator Event Status</description>
+              <bitRange>[28:28]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Comparator No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>Comparator Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>FLES</name>
+              <description>Flash Controller Event Status</description>
+              <bitRange>[29:29]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Flash Controller No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>Flash Controller Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>RNDES</name>
+              <description>Random Number Generator Event Status</description>
+              <bitRange>[30:30]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Random Number Generator No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>Random Number Generator Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>CKES</name>
+              <description>Clock Change Event Status</description>
+              <bitRange>[31:31]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Clock Change No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>Clock Change Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        
+        <!-- SYS_IS_2: System Interrrupt Status 2 -->
+        <register>
+          <name>SYS_IS_2</name>
+          <description>System Interrrupt Status 2 - system controller interrupt status</description>
+          <addressOffset>0x18</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>GPIO0ES</name>
+              <description>GPIO0 Event Status</description>
+              <bitRange>[0:0]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>GPIO0 No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>GPIO0 Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO1ES</name>
+              <description>GPIO1 Event Status</description>
+              <bitRange>[1:1]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>GPIO1 No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>GPIO1 Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO2ES</name>
+              <description>GPIO2 Event Status</description>
+              <bitRange>[2:2]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>GPIO2 No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>GPIO2 Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO3ES</name>
+              <description>GPIO3 Event Status</description>
+              <bitRange>[3:3]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>GPIO3 No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>GPIO3 Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO4ES</name>
+              <description>GPIO4 Event Status</description>
+              <bitRange>[4:4]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>GPIO4 No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>GPIO4 Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO5ES</name>
+              <description>GPIO5 Event Status</description>
+              <bitRange>[5:5]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>GPIO5 No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>GPIO5 Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO6ES</name>
+              <description>GPIO6 Event Status</description>
+              <bitRange>[6:6]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>GPIO6 No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>GPIO6 Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO7ES</name>
+              <description>GPIO7 Event Status</description>
+              <bitRange>[7:7]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>GPIO7 No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>GPIO7 Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO8ES</name>
+              <description>GPIO8 Event Status</description>
+              <bitRange>[8:8]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>GPIO8 No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>GPIO8 Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO9ES</name>
+              <description>GPIO9 Event Status</description>
+              <bitRange>[9:9]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>GPIO9 No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>GPIO9 Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO10ES</name>
+              <description>GPIO10 Event Status</description>
+              <bitRange>[10:10]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>GPIO10 No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>GPIO10 Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO11ES</name>
+              <description>GPIO11 Event Status</description>
+              <bitRange>[11:11]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>GPIO11 No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>GPIO11 Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO12ES</name>
+              <description>GPIO12 Event Status</description>
+              <bitRange>[12:12]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>GPIO12 No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>GPIO12 Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO13ES</name>
+              <description>GPIO13 Event Status</description>
+              <bitRange>[13:13]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>GPIO13 No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>GPIO13 Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO14ES</name>
+              <description>GPIO14 Event Status</description>
+              <bitRange>[14:14]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>GPIO14 No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>GPIO14 Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO15ES</name>
+              <description>GPIO15 Event Status</description>
+              <bitRange>[15:15]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>GPIO15 No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>GPIO15 Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO16ES</name>
+              <description>GPIO16 Event Status</description>
+              <bitRange>[16:16]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>GPIO16 No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>GPIO16 Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO17ES</name>
+              <description>GPIO17 Event Status</description>
+              <bitRange>[17:17]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>GPIO17 No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>GPIO17 Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO18ES</name>
+              <description>GPIO18 Event Status</description>
+              <bitRange>[18:18]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>GPIO18 No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>GPIO18 Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO19ES</name>
+              <description>GPIO19 Event Status</description>
+              <bitRange>[19:19]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>GPIO19 No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>GPIO19 Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO20ES</name>
+              <description>GPIO20 Event Status</description>
+              <bitRange>[20:20]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>GPIO20 No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>GPIO20 Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO21ES</name>
+              <description>GPIO21 Event Status</description>
+              <bitRange>[21:21]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>GPIO21 No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>GPIO21 Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO22ES</name>
+              <description>GPIO22 Event Status</description>
+              <bitRange>[22:22]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>GPIO22 No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>GPIO22 Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO23ES</name>
+              <description>GPIO23 Event Status</description>
+              <bitRange>[23:23]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>GPIO23 No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>GPIO23 Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <field>
+              <name>GPIO24ES</name>
+              <description>GPIO24 Event Status</description>
+              <bitRange>[24:24]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>GPIO24 No Interrupt</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Flagged</name>
+                  <description>GPIO24 Interrupt Flagged</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+    
+    <!-- DIO_CFG_1: DIO configuration 1 -->
+        <register>
+          <name>DIO_CFG_1</name>
+          <description>DIO Configuration 1</description>
+          <addressOffset>0x1E0</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>DIO_0_FUNC</name>
+              <description>DIO0 Function</description>
+              <bitRange>[2:0]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>GPIO</name>
+                  <description>DIO0 functions as GPIO</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>RFRX</name>
+                  <description>DIO0 functions as RFRX</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>SPI_M_SEL0</name>
+                  <description>DIO0 functions as SPI master chip select 0</description>
+                  <value>2</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DIO_1_FUNC</name>
+              <description>DIO1 Function</description>
+              <bitRange>[6:4]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>GPIO</name>
+                  <description>DIO1 functions as GPIO</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>RFTX</name>
+                  <description>DIO1 functions as RFTX</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PC0</name>
+                  <description>DIO1 functions as pulse counter 0 input</description>
+                  <value>3</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DIO_2_FUNC</name>
+              <description>DIO2 Function</description>
+              <bitRange>[10:8]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>GPIO</name>
+                  <description>DIO2 functions as GPIO</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>RFRX</name>
+                  <description>DIO2 functions as RFRX</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>TIM0_CAP</name>
+                  <description>DIO2 functions as timer 0 capture input</description>
+                  <value>2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>I2C_SDA</name>
+                  <description>DIO2 functions as I2C SDA</description>
+                  <value>3</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>UART1_RX</name>
+                  <description>DIO2 functions as UART 1 RX</description>
+                  <value>5</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DIO_3_FUNC</name>
+              <description>DIO3 Function</description>
+              <bitRange>[14:12]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>GPIO</name>
+                  <description>DIO3 functions as GPIO</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>RFTX</name>
+                  <description>DIO3 functions as RFTX</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>TIM0_OUT</name>
+                  <description>DIO3 functions as timer 0 output</description>
+                  <value>2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>I2C_SCL</name>
+                  <description>DIO3 functions as I2C SCL</description>
+                  <value>3</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>UART1_TX</name>
+                  <description>DIO3 functions as UART 1 TX</description>
+                  <value>5</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PWM4</name>
+                  <description>DIO3 functions as PWM4 output</description>
+                  <value>6</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DIO_4_FUNC</name>
+              <description>DIO4 Function</description>
+              <bitRange>[18:16]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>GPIO</name>
+                  <description>DIO4 functions as GPIO</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>UART0_RX</name>
+                  <description>DIO4 functions as UART0 RX</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>TIM0_GT</name>
+                  <description>DIO4 functions as timer 0 clock gate</description>
+                  <value>2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>I2C_SCL</name>
+                  <description>DIO4 functions as I2C SCL</description>
+                  <value>3</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>ADO</name>
+                  <description>DIO4 functions as antenna diversity odd output</description>
+                  <value>4</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DIO_5_FUNC</name>
+              <description>DIO5 Function</description>
+              <bitRange>[22:20]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>GPIO</name>
+                  <description>DIO5 functions as GPIO</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>UART0_TX</name>
+                  <description>DIO5 functions as UART0 TX</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>TIM0_CAP</name>
+                  <description>DIO5 functions as timer 0 capture intput</description>
+                  <value>2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>I2C_SDA</name>
+                  <description>DIO5 functions as I2C SDA</description>
+                  <value>3</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>ADE</name>
+                  <description>DIO5 functions as antenna diversity even output</description>
+                  <value>4</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PC1</name>
+                  <description>DIO5 functions as pulse counter 1 intput</description>
+                  <value>5</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DIO_6_FUNC</name>
+              <description>DIO6 Function</description>
+              <bitRange>[26:24]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>GPIO</name>
+                  <description>DIO6 functions as GPIO</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>TIM1_CAP</name>
+                  <description>DIO6 functions as timer 1 capture input</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>SPI_M_SEL0</name>
+                  <description>DIO6 functions as SPI master chip select 0</description>
+                  <value>2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>TCK</name>
+                  <description>DIO6 functions as JTAG TCK / SWCK</description>
+                  <value>3</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>UART0_CTS</name>
+                  <description>DIO6 functions as UART0 CTS</description>
+                  <value>4</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>SPI_S_SCK</name>
+                  <description>DIO6 functions as SPI slave SCK</description>
+                  <value>5</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>UART1_RX</name>
+                  <description>DIO6 functions as UART1 RX</description>
+                  <value>7</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DIO_7_FUNC</name>
+              <description>DIO7 Function</description>
+              <bitRange>[30:28]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>GPIO</name>
+                  <description>DIO7 functions as GPIO</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>SPI_M_MOSI</name>
+                  <description>DIO7 functions as SPI master MOSI</description>
+                  <value>2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>TDI</name>
+                  <description>DIO7 functions as JTAG TDI</description>
+                  <value>3</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>SPI_M_SEL2</name>
+                  <description>DIO7 functions as SPI master chip select 2</description>
+                  <value>4</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>SPI_S_SEL</name>
+                  <description>DIO7 functions as SPI slave chip select</description>
+                  <value>5</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>COMP_OUT</name>
+                  <description>DIO7 functions as comparator output</description>
+                  <value>6</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        
+        <!-- DIO_CFG_2: DIO configuration 2 -->
+        <register>
+          <name>DIO_CFG_2</name>
+          <description>DIO Configuration 2</description>
+          <addressOffset>0x1E4</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>DIO_8_FUNC</name>
+              <description>DIO8 Function</description>
+              <bitRange>[2:0]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>GPIO</name>
+                  <description>DIO8 functions as GPIO</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PWM5</name>
+                  <description>DIO8 functions as PWM5 output</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>TIM0_OUT</name>
+                  <description>DIO8 functions as timer 0 output</description>
+                  <value>2</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DIO_9_FUNC</name>
+              <description>DIO9 Function</description>
+              <bitRange>[6:4]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>GPIO</name>
+                  <description>DIO9 functions as GPIO</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>UART0_TX</name>
+                  <description>DIO9 functions as UART0 TX</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>TDO</name>
+                  <description>DIO9 functions as JTAG TDO / SWV</description>
+                  <value>3</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DIO_10_FUNC</name>
+              <description>DIO10 Function</description>
+              <bitRange>[10:8]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>GPIO</name>
+                  <description>DIO10 functions as GPIO</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>UART0_RX</name>
+                  <description>DIO10 functions as UART0 RX</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>TDI</name>
+                  <description>DIO10 functions as JTAG TDI</description>
+                  <value>3</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DIO_11_FUNC</name>
+              <description>DIO11 Function</description>
+              <bitRange>[14:12]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>GPIO</name>
+                  <description>DIO11 functions as GPIO</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>TIM1_OUT</name>
+                  <description>DIO11 functions as timer 1 output</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>SPI_M_CLK</name>
+                  <description>DIO11 functions as SPI master SCK</description>
+                  <value>2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>TMS</name>
+                  <description>DIO11 functions as JTAG TMS / SWD</description>
+                  <value>3</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>UART0_RTS</name>
+                  <description>DIO11 functions as UART0 RTS</description>
+                  <value>4</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>SPI_S_MOSI</name>
+                  <description>DIO11 functions as SPI master MOSI</description>
+                  <value>5</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>UART1_TX</name>
+                  <description>DIO11 functions as UART1 TX</description>
+                  <value>6</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DIO_12_FUNC</name>
+              <description>DIO12 Function</description>
+              <bitRange>[18:16]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>GPIO</name>
+                  <description>DIO12 functions as GPIO</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PWM1</name>
+                  <description>DIO12 functions as PWM1 output</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>UART0_TX</name>
+                  <description>DIO12 functions as UART0 TX</description>
+                  <value>2</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DIO_13_FUNC</name>
+              <description>DIO13 Function</description>
+              <bitRange>[22:20]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>GPIO</name>
+                  <description>DIO13 functions as GPIO</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PWM2</name>
+                  <description>DIO13 functions as PWM2 output</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>UART0_RX</name>
+                  <description>DIO13 functions as UART0 RX</description>
+                  <value>2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PC0</name>
+                  <description>DIO13 functions as pulse counter 0 input</description>
+                  <value>5</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DIO_14_FUNC</name>
+              <description>DIO14 Function</description>
+              <bitRange>[26:24]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>GPIO</name>
+                  <description>DIO14 functions as GPIO</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PWM3</name>
+                  <description>DIO14 functions as PWM3 output</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PC1</name>
+                  <description>DIO14 functions as pulse counter 1 input</description>
+                  <value>5</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>COMP_OUT</name>
+                  <description>DIO14 functions as comparator output</description>
+                  <value>6</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DIO_15_FUNC</name>
+              <description>DIO15 Function</description>
+              <bitRange>[30:28]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>GPIO</name>
+                  <description>DIO15 functions as GPIO</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PWM6</name>
+                  <description>DIO15 functions as PWM6 output</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>SPI_M_MOSI</name>
+                  <description>DIO15 functions as SPI master MOSI</description>
+                  <value>2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>TDO</name>
+                  <description>DIO15 functions as JTAG TDO / SWV</description>
+                  <value>3</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>SPI_M_SEL1</name>
+                  <description>DIO15 functions as SPI master chip select 1</description>
+                  <value>4</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>TIM0_GT</name>
+                  <description>DIO15 functions as timer 1 clock gate input</description>
+                  <value>5</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>BackupClock</name>
+                  <description>DIO15 functions as backup clock</description>
+                  <value>7</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        
+        <!-- DIO_CFG_3: DIO configuration 3 -->
+        <register>
+          <name>DIO_CFG_3</name>
+          <description>DIO Configuration 3</description>
+          <addressOffset>0x1E8</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>DIO_17_FUNC</name>
+              <description>DIO17 Function</description>
+              <bitRange>[6:4]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>GPIO</name>
+                  <description>DIO17 functions as GPIO</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>TIM1_CAP</name>
+                  <description>DIO17 functions as timer 1 capture input</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>SPI_M_SEL0</name>
+                  <description>DIO17 functions as SPI master chip select 0</description>
+                  <value>2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>TCK</name>
+                  <description>DIO17 functions as JTAG TCK / SWCK</description>
+                  <value>3</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DIO_18_FUNC</name>
+              <description>DIO18 Function</description>
+              <bitRange>[10:8]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>GPIO</name>
+                  <description>DIO18 functions as GPIO</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>TIM1_OUT</name>
+                  <description>DIO18 functions as timer 1 output</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>SPI_M_MISO</name>
+                  <description>DIO18 functions as SPI master MISO</description>
+                  <value>2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>TMS</name>
+                  <description>DIO18 functions as JTAG TMS / SWD </description>
+                  <value>3</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+  
+    <!-- Timer 0 -->
+    <peripheral>
+      <name>Timer0</name>
+      <version>1.0</version>
+      <description>32 bit Timer / Counter</description>
+      <groupName>TIMER</groupName>
+      <baseAddress>0x40006000</baseAddress>
+      <size>32</size>
+      <access>read-write</access>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x20</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <registers>
+      <!-- CTR: Counter Register -->
+        <register>
+          <name>CTR</name>
+          <description>Counter Value</description>
+          <addressOffset>0x00</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+        </register>
+        
+      <!-- LO: Low time Register -->
+        <register>
+          <name>LO</name>
+          <description>Defines the point during the period at which the output goes high i.e. the low time.</description>
+          <addressOffset>0x04</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+          <resetMask>0x0000FFFF</resetMask>
+        </register>
+        
+      <!-- PERIOD: Period Register -->
+        <register>
+          <name>PERIOD</name>
+          <description>Defines the total period of the counter.</description>
+          <addressOffset>0x08</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+          <resetMask>0x0000FFFF</resetMask>
+        </register>
+        
+      <!-- CTRL: Control Register -->
+        <register>
+          <name>CTRL</name>
+          <description>Control Register</description>
+          <addressOffset>0x0C</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <resetMask>0x00001FFF</resetMask>
+
+          <fields>
+            <!-- EN: Enable -->
+            <field>
+              <name>EN</name>
+              <description>Enable</description>
+              <bitRange>[0:0]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>Timer is disabled and does not operate</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Timer is enabled and can operate</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+
+            <!-- EEVENT: External Event Select -->
+            <field>
+              <name>EEVENT</name>
+              <description>External Event Select</description>
+              <bitRange>[1:1]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>ck_gt_gate</name>
+                  <description>Use ck_gt pin as gate</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>ck_gt_event</name>
+                  <description>Use ck_gt pin as event</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+
+            <!-- INVCKGT: Invert ck_gt -->
+            <field>
+              <name>INVCKGT</name>
+              <description>Invert ck_gt</description>
+              <bitRange>[2:2]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>ck_gt_normal</name>
+                  <description>Do not invert ck_gt input</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>ck_gt_invert</name>
+                  <description>Invert ck_gt input</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+
+            <!-- OE: Output enable -->
+            <field>
+              <name>OE</name>
+              <description>Output Enable</description>
+              <bitRange>[3:3]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>output_disabled</name>
+                  <description>Output is in High-Z state</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>output_enabled</name>
+                  <description>Output is enabled for PWM and Delta-Sigma</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+
+            <!-- SINGLE: Single trigger -->
+            <field>
+              <name>SINGLE</name>
+              <description>Enable single shot</description>
+              <bitRange>[4:4]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>repeat</name>
+                  <description>Timer operates in repeat mode</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>single</name>
+                  <description>Timer operates in single-shot mode</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+
+            <!-- CTRRST: Reset -->
+            <field>
+              <name>CTRRST</name>
+              <description>Reset Counter</description>
+              <bitRange>[5:5]</bitRange>
+              <access>write-only</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Reserved</name>
+                  <description>Write as ZERO if necessary</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Reset</name>
+                  <description>Reset the Timer</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+
+            <!-- CAPTE: Enable Capture Mode -->
+            <field>
+              <name>CAPTE</name>
+              <description>Enable Capture Mode</description>
+              <bitRange>[6:6]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Capture_Disabled</name>
+                  <description>Capture Mode is disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Capture_Enabled</name>
+                  <description>Capture Mode is enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+
+            <!-- DSEN: Enable Delta-Sigma Mode -->
+            <field>
+              <name>DSEN</name>
+              <description>Enable Delta-Sigma Mode</description>
+              <bitRange>[7:7]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>DS_Disabled</name>
+                  <description>Delta-Sigma Mode is disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>DS_Enabled</name>
+                  <description>Delta-Sigma Modeis enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+
+            <!-- DSEN_RTZ: Return to Zero in DS Mode -->
+            <field>
+              <name>RTZ</name>
+              <description>Return to Zero in DS Mode</description>
+              <bitRange>[8:8]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>RTZ_Disabled</name>
+                  <description>Do not return to zero in Delta-Sigma Mode</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>RTZ_Enabled</name>
+                  <description>Return to zero in Delta-Sigma Mode</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+
+            <!-- GDIS: External gate disable -->
+            <field>
+              <name>GDIS</name>
+              <description>External gate disable</description>
+              <bitRange>[9:9]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Gate_Enabled</name>
+                  <description>External gate is enabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Gate_Disabled</name>
+                  <description>External gate is ignored</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+
+            <!-- INVOUT: Invert PWM output -->
+            <field>
+              <name>INVOUT</name>
+              <description>Invert PWM output</description>
+              <bitRange>[10:10]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>PWM_Normal</name>
+                  <description>PWM Output is not inverted (Mandatory for Delta-Sigma Mode)</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PWM_Inverted</name>
+                  <description>PWM Output is inverted</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+
+            <!-- INVCAP: Invert capture input -->
+            <field>
+              <name>INVCAP</name>
+              <description>Invert capture input</description>
+              <bitRange>[11:11]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Capture_Normal</name>
+                  <description>Capture input is not inverted</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Capture_Inverted</name>
+                  <description>Capture input is inverted</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+
+            <!-- EEDGE: Counter event edge select -->
+            <field>
+              <name>EEDGE</name>
+              <description>Counter event edge select</description>
+              <bitRange>[12:12]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Edge_Positive</name>
+                  <description>Use positive edge for counter</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Edge_Both</name>
+                  <description>Use both edges for counter</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <!-- RC_EN: Enable Intra-red transmitter -->
+            <field>
+              <name>RC_EN</name>
+              <description>Enable Intra-red transmitter (PWM2 timer only)</description>
+              <bitRange>[13:13]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>RC_Disabled</name>
+                  <description>Infra-red transmitter disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>RC_Enabled</name>
+                  <description>Infra-red transmitter enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        
+      <!-- PRE_SEL: Select Prescaler Register -->
+        <register>
+          <name>PRE_SEL</name>
+          <description>Clock divider prescale value. The prescaler divides by</description>
+          <addressOffset>0x10</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+          <resetMask>0x0000001F</resetMask>
+        </register>
+        
+      <!-- INT: Interrupt status Register -->
+        <register>
+          <name>INT</name>
+          <description>Interrupt Status</description>
+          <addressOffset>0x14</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+          <resetMask>0x00000003</resetMask>
+          <fields>
+            <!-- INT_P: Interrupt on end of period-->
+            <field>
+              <name>INT_P</name>
+              <description>End of period</description>
+              <bitRange>[0:0]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>INT_P_Clear</name>
+                  <description>Write as zero</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>INT_P_Asserted</name>
+                  <description>Timer falling edge (end of period) interrupt occured</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <!-- INT_L: Interrupt on end of period-->
+            <field>
+              <name>INT_L</name>
+              <description>End of low period</description>
+              <bitRange>[1:1]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>INT_L_Clear</name>
+                  <description>Write as zero</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>INT_L_Asserted</name>
+                  <description>Timer rising edge (end of low) interrupt occured</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        
+      <!-- INTE: Interrupt enable Register -->
+        <register>
+          <name>INTE</name>
+          <description>Interrupt enable</description>
+          <addressOffset>0x18</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+          <resetMask>0x00000003</resetMask>
+          <fields>
+            <!-- INT_P: Interrupt on end of period-->
+            <field>
+              <name>INTE_P</name>
+              <description>Enable end of period interrupt</description>
+              <bitRange>[0:0]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>INT_P_Disabled</name>
+                  <description>Disable interrupt on Timer falling edge (end of period)</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>INT_P_Enabled</name>
+                  <description>Generate interrupt on Timer falling edge (end of period)</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <!-- INT_L: Interrupt on end of period-->
+            <field>
+              <name>INT_L</name>
+              <description>Enable end of low period interrupt</description>
+              <bitRange>[1:1]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>INT_L_Disabled</name>
+                  <description>Disable interrupt on Timer rising edge (end of low)</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>INT_L_Enabled</name>
+                  <description>Generate interrupt on Timer rising edge (end of low)</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        
+      <!-- MINT: Masked interrupt status Register -->
+        <register>
+          <name>MINT</name>
+          <description>Masked interrupt status</description>
+          <addressOffset>0x1C</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+          <resetMask>0x00000003</resetMask>
+          <fields>
+            <!-- INT_P: Interrupt on end of period-->
+            <field>
+              <name>MINT_P</name>
+              <description>End of period</description>
+              <bitRange>[0:0]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>MINT_P_Clear</name>
+                  <description>Write as zero</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>MINT_P_Asserted</name>
+                  <description>Timer falling edge (end of period) interrupt enabled and occured</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            
+            <!-- MINT_L: Interrupt on end of period-->
+            <field>
+              <name>MINT_L</name>
+              <description>End of low period</description>
+              <bitRange>[1:1]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>MINT_L_Clear</name>
+                  <description>Write as zero</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>MINT_L_Asserted</name>
+                  <description>Timer rising edge (end of low) interrupt enabled and occured</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    
+    <peripheral derivedFrom="Timer0">
+      <name>Timer1</name>
+      <baseAddress>0x40007000</baseAddress>
+    </peripheral>
+    
+    <peripheral derivedFrom="Timer0">
+      <name>PWM1</name>
+      <baseAddress>0x4000B000</baseAddress>
+    </peripheral>
+    
+    <peripheral derivedFrom="Timer0">
+      <name>PWM2</name>
+      <baseAddress>0x4000C000</baseAddress>
+      
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x30</size>
+        <usage>registers</usage>
+      </addressBlock>
+      
+      <registers>
+
+        <register>
+          <name>RC_PERIOD</name>
+          <description>Infra-Red transmitter bit period. Bit period = (1 + PERIOD) x Carrier Period</description>
+          <addressOffset>0x20</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+          <resetMask>0x000000FF</resetMask>
+          <fields>
+            <field>
+              <name>PERIOD</name>
+              <description>Period value</description>
+              <bitRange>[7:0]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        
+        <register>
+          <name>RC_LEN</name>
+          <description>Infra-Red transmitter transmission length. Length = (1 + LEN) bits</description>
+          <addressOffset>0x24</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+          <resetMask>0x00000FFF</resetMask>
+          <fields>
+            <field>
+              <name>LEN</name>
+              <description>Transmission length value</description>
+              <bitRange>[11:0]</bitRange>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        
+        <register>
+          <name>RC_BUFAD</name>
+          <description>Infra-Red transmitter buffer address</description>
+          <addressOffset>0x28</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+          <dataType>uint8_t *</dataType>
+        </register>
+        
+        <register>
+          <name>RC_CTRL</name>
+          <description>Infra-Red transmitter control</description>
+          <addressOffset>0x2C</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+          <resetMask>0x00000001</resetMask>
+          <fields>
+            <field>
+              <name>GO</name>
+              <description>Start RC transmission. Automatically cleared when complete</description>
+              <bitRange>[0:0]</bitRange>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>GO_Clear</name>
+                  <description>RC Transmitter idle</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>GO_Asserted</name>
+                  <description>RC Transmitter start/active</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    
+    <peripheral derivedFrom="Timer0">
+      <name>PWM3</name>
+      <baseAddress>0x4000D000</baseAddress>
+    </peripheral>
+    
+    <peripheral derivedFrom="Timer0">
+      <name>PWM4</name>
+      <baseAddress>0x4000E000</baseAddress>
+    </peripheral>
+    
+    <peripheral derivedFrom="Timer0">
+      <name>PWM5</name>
+      <baseAddress>0x4000F000</baseAddress>
+    </peripheral>
+    
+    <peripheral derivedFrom="Timer0">
+      <name>PWM6</name>
+      <baseAddress>0x40010000</baseAddress>
+    </peripheral>
+    
+    <peripheral derivedFrom="Timer0">
+      <name>TimerAP</name>
+      <baseAddress>0x40011000</baseAddress>
+    </peripheral>
+    
+  </peripherals>
+</device>

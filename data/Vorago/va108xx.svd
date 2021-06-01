@@ -1,0 +1,2751 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<device schemaVersion="1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="CMSIS-SVD.xsd">
+  <vendor>VORAGO TECHNOLOGIES</vendor>
+  <vendorID>SST</vendorID>
+  <name>va108xx</name>
+  <series>M0</series>
+  <version>1.2-IAR</version>
+  <!--Release History
+V1.2-IAR - Feb 2020
+        - Fixed spelling of LOCKUP bitfields
+V1.2 - Feb 2017 
+        - Added missing CSDTRG2 in CSD_CTRL register 
+V1.1 - March 2016 
+V1.0 - Original release Dec 2015 
+-->
+  <description>ARM 32-bit Cortex-M0 Microcontroller based device, CPU clock up to 50MHz</description>
+  <licenseText>
+ VORAGO Technologies \n
+\n
+----------------------------------------------------------------------------\n
+ Copyright (c) 2013-2016 VORAGO Technologies\n
+\n
+ BY DOWNLOADING, INSTALLING OR USING THIS SOFTWARE, YOU AGREE TO BE BOUND BY ALL THE TERMS\n
+ AND CONDITIONS OF THE VORAGO TECHNOLOGIES END USER LICENSE AGREEMENT. \n
+\n
+ THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED\n
+ OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF\n
+ MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.\n
+ VORAGO TECHNOLOGIES SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE\n
+ FOR SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.\n
+  </licenseText>
+  <cpu>
+    <name>CM0</name>
+    <revision>r0p0</revision>
+    <endian>little</endian>
+    <mpuPresent>false</mpuPresent>
+    <fpuPresent>false</fpuPresent>
+    <nvicPrioBits>2</nvicPrioBits>
+    <vendorSystickConfig>false</vendorSystickConfig>
+  </cpu>
+  <headerSystemFilename>system_VA108xx</headerSystemFilename>
+  <headerDefinitionsPrefix>VOR_</headerDefinitionsPrefix>
+  <addressUnitBits>8</addressUnitBits><!--byte addressable memory-->
+  <width>32</width><!--bus width is 32 bits-->
+  <!-- registerPropertiesGroup: default settings implicitly inherited by subsequent sections -->
+  <size>32</size>
+  <access>read-write</access><!-- default size (number of bits) of all peripherals -->
+  <resetValue>0x00000000</resetValue><!-- by default all bits of the registers are initialized to 0 on reset -->
+  <resetMask>0xFFFFFFFF</resetMask><!-- by default all 32Bits of the registers are used -->
+  <peripherals>
+    <!-- **************************************************************************************** -->
+    <!--System Configuration Peripheral-->
+    <peripheral>
+      <name>SYSCONFIG</name>
+      <version>1.0</version>
+      <description>System Configuration Peripheral</description>
+      <baseAddress>0x40000000</baseAddress>
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x00001000</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <register>
+          <name>RST_STAT</name>
+          <description>System Reset Status</description>
+          <addressOffset>0x000</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000001</resetValue>
+          <fields>
+            <field>
+              <name>POR</name>
+              <description>Power On Reset Status</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>EXTRST</name>
+              <description>External Reset Status</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+            <field>
+              <name>SYSRSTREQ</name>
+              <description>SYSRESETREQ Reset Status</description>
+              <bitRange>[2:2]</bitRange>
+            </field>
+            <field>
+              <name>LOCKUP</name>
+              <description>LOCKUP Reset Status</description>
+              <bitRange>[3:3]</bitRange>
+            </field>
+            <field>
+              <name>WATCHDOG</name>
+              <description>WATCHDOG Reset Status</description>
+              <bitRange>[4:4]</bitRange>
+            </field>
+            <field>
+              <name>MEMERR</name>
+              <description>Memory Error Reset Status</description>
+              <bitRange>[5:5]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register derivedFrom="RST_STAT">
+          <name>RST_CNTL_ROM</name>
+          <description>ROM Reset Control</description>
+          <addressOffset>0x004</addressOffset>
+          <resetValue>0x0000001F</resetValue>
+        </register>
+        <register derivedFrom="RST_STAT">
+          <name>RST_CNTL_RAM</name>
+          <description>RAM Reset Control</description>
+          <addressOffset>0x008</addressOffset>
+          <resetValue>0x0000001F</resetValue>
+        </register>
+        <register>
+          <name>ROM_PROT</name>
+          <description>ROM Protection Configuration</description>
+          <addressOffset>0x00C</addressOffset>
+          <resetValue>0x00000001</resetValue>
+          <fields>
+            <field>
+              <name>WREN</name>
+              <description>ROM Write Enable Bit</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ROM_SCRUB</name>
+          <description>ROM Scrub Period Configuration</description>
+          <addressOffset>0x010</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>VALUE</name>
+              <description>Counter divide value</description>
+              <bitRange>[23:0]</bitRange>
+            </field>
+            <field>
+              <name>RESET</name>
+              <description>Reset Counter</description>
+              <bitRange>[31:31]</bitRange>
+              <access>write-only</access>
+              <modifiedWriteValues>
+                oneToClear
+              </modifiedWriteValues>
+            </field>
+          </fields>
+        </register>
+        <register derivedFrom="ROM_SCRUB">
+          <name>RAM_SCRUB</name>
+          <description>RAM Scrub Period Configuration</description>
+          <addressOffset>0x014</addressOffset>
+        </register>
+        <register>
+          <name>ROM_TRAP_ADDR</name>
+          <description>ROM Trap Address</description>
+          <addressOffset>0x018</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>ADDR</name>
+              <description>Trap Address Match Bits</description>
+              <bitRange>[15:2]</bitRange>
+            </field>
+            <field>
+              <name>ENABLE</name>
+              <description>Trap Enable Bit</description>
+              <bitRange>[31:31]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ROM_TRAP_SYND</name>
+          <description>ROM Trap Syndrome</description>
+          <addressOffset>0x01C</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>SYND</name>
+              <description>Trap Syndrom Bits</description>
+              <bitRange>[19:0]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register derivedFrom="ROM_TRAP_ADDR">
+          <name>RAM_TRAP_ADDR</name>
+          <description>RAM Trap Address</description>
+          <addressOffset>0x020</addressOffset>
+        </register>
+        <register derivedFrom="ROM_TRAP_SYND">
+          <name>RAM_TRAP_SYND</name>
+          <description>RAM Trap Syndrome</description>
+          <addressOffset>0x024</addressOffset>
+        </register>
+        <register>
+          <name>IRQ_ENB</name>
+          <description>Enable EDAC Error Interrupt Register</description>
+          <addressOffset>0x028</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>RAMSBE</name>
+              <description>RAM Single Bit Interrupt</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>RAMMBE</name>
+              <description>RAM Multi Bit Interrupt</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+            <field>
+              <name>ROMSBE</name>
+              <description>ROM Single Bit Interrupt</description>
+              <bitRange>[2:2]</bitRange>
+            </field>
+            <field>
+              <name>ROMMBE</name>
+              <description>ROM Multi Bit Interrupt</description>
+              <bitRange>[3:3]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register derivedFrom="IRQ_ENB">
+          <name>IRQ_RAW</name>
+          <description>Raw EDAC Error Interrupt Status</description>
+          <addressOffset>0x02C</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register derivedFrom="IRQ_ENB">
+          <name>IRQ_END</name>
+          <description>Enabled EDAC Error Interrupt Status</description>
+          <addressOffset>0x030</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register derivedFrom="IRQ_ENB">
+          <name>IRQ_CLR</name>
+          <description>Clear EDAC Error Interrupt Status</description>
+          <addressOffset>0x034</addressOffset>
+          <access>write-only</access>
+          <resetValue>0x00000000</resetValue>
+          <modifiedWriteValues>
+            oneToClear
+          </modifiedWriteValues>
+        </register>
+        <register>
+          <name>RAM_SBE</name>
+          <description>Count of RAM EDAC Single Bit Errors</description>
+          <addressOffset>0x038</addressOffset>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register derivedFrom="RAM_SBE">
+          <name>RAM_MBE</name>
+          <description>Count of RAM EDAC Multi Bit Errors</description>
+          <addressOffset>0x03C</addressOffset>
+        </register>
+        <register derivedFrom="RAM_SBE">
+          <name>ROM_SBE</name>
+          <description>Count of ROM EDAC Single Bit Errors</description>
+          <addressOffset>0x040</addressOffset>
+        </register>
+        <register derivedFrom="RAM_SBE">
+          <name>ROM_MBE</name>
+          <description>Count of ROM EDAC Multi Bit Errors</description>
+          <addressOffset>0x044</addressOffset>
+        </register>
+        <register>
+          <name>IOCONFIG_CLKDIV0</name>
+          <description>IO Configuration Clock Divider Register</description>
+          <addressOffset>0x048</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <dim>7</dim>
+          <dimIncrement>4</dimIncrement>
+          <dimIndex>1-7</dimIndex>
+          <name>IOCONFIG_CLKDIV%s</name>
+          <description>IO Configuration Clock Divider Register</description>
+          <addressOffset>0x04C</addressOffset>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>ROM_RETRIES</name>
+          <description>ROM BOOT Retry count</description>
+          <addressOffset>0x068</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>REFRESH_CONFIG</name>
+          <description>Register Refresh Control</description>
+          <addressOffset>0x06C</addressOffset>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>TIM_RESET</name>
+          <description>TIM Reset Control</description>
+          <addressOffset>0x070</addressOffset>
+          <resetValue>0xFFFFFFFF</resetValue>
+        </register>
+        <register>
+          <name>TIM_CLK_ENABLE</name>
+          <description>TIM Enable Control</description>
+          <addressOffset>0x074</addressOffset>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PERIPHERAL_RESET</name>
+          <description>Peripheral Reset Control</description>
+          <addressOffset>0x078</addressOffset>
+          <resetValue>0xFFFFFFFF</resetValue>
+        </register>
+        <register>
+          <name>PERIPHERAL_CLK_ENABLE</name>
+          <description>Peripheral Enable Control</description>
+          <addressOffset>0x07C</addressOffset>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>LOCKUP_RESET</name>
+          <description>Lockup Reset Configuration</description>
+          <addressOffset>0x080</addressOffset>
+          <resetValue>0x00000001</resetValue>
+          <fields>
+            <field>
+              <name>LREN</name>
+              <description>Lockup Reset Enable Bit</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>EF_CONFIG</name>
+          <description>EFuse Config Register</description>
+          <addressOffset>0xff0</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>EF_ID</name>
+          <description>EFuse ID Register</description>
+          <addressOffset>0xff4</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PROCID</name>
+          <description>Processor ID Register</description>
+          <addressOffset>0xff8</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x040017e3</resetValue>
+        </register>
+        <register>
+          <name>PERID</name>
+          <description>Peripheral ID Register</description>
+          <addressOffset>0xffc</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x008007e1</resetValue>
+        </register>
+      </registers>
+    </peripheral>
+    <!-- **************************************************************************************** -->
+    <!--Interrupt Redirect Selector-->
+    <peripheral>
+      <name>IRQSEL</name>
+      <version>1.0</version>
+      <description>Interrupt Selector Peripheral</description>
+      <baseAddress>0x40001000</baseAddress>
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x00001000</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <interrupt>
+        <name>OC0</name>
+        <value>0</value>
+      </interrupt>
+      <interrupt>
+        <name>OC1</name>
+        <value>1</value>
+      </interrupt>
+      <interrupt>
+        <name>OC2</name>
+        <value>2</value>
+      </interrupt>
+      <interrupt>
+        <name>OC3</name>
+        <value>3</value>
+      </interrupt>
+      <interrupt>
+        <name>OC4</name>
+        <value>4</value>
+      </interrupt>
+      <interrupt>
+        <name>OC5</name>
+        <value>5</value>
+      </interrupt>
+      <interrupt>
+        <name>OC6</name>
+        <value>6</value>
+      </interrupt>
+      <interrupt>
+        <name>OC7</name>
+        <value>7</value>
+      </interrupt>
+      <interrupt>
+        <name>OC8</name>
+        <value>8</value>
+      </interrupt>
+      <interrupt>
+        <name>OC9</name>
+        <value>9</value>
+      </interrupt>
+      <interrupt>
+        <name>OC10</name>
+        <value>10</value>
+      </interrupt>
+      <interrupt>
+        <name>OC11</name>
+        <value>11</value>
+      </interrupt>
+      <interrupt>
+        <name>OC12</name>
+        <value>12</value>
+      </interrupt>
+      <interrupt>
+        <name>OC13</name>
+        <value>13</value>
+      </interrupt>
+      <interrupt>
+        <name>OC14</name>
+        <value>14</value>
+      </interrupt>
+      <interrupt>
+        <name>OC15</name>
+        <value>15</value>
+      </interrupt>
+      <interrupt>
+        <name>OC16</name>
+        <value>16</value>
+      </interrupt>
+      <interrupt>
+        <name>OC17</name>
+        <value>17</value>
+      </interrupt>
+      <interrupt>
+        <name>OC18</name>
+        <value>18</value>
+      </interrupt>
+      <interrupt>
+        <name>OC19</name>
+        <value>19</value>
+      </interrupt>
+      <interrupt>
+        <name>OC20</name>
+        <value>20</value>
+      </interrupt>
+      <interrupt>
+        <name>OC21</name>
+        <value>21</value>
+      </interrupt>
+      <interrupt>
+        <name>OC22</name>
+        <value>22</value>
+      </interrupt>
+      <interrupt>
+        <name>OC23</name>
+        <value>23</value>
+      </interrupt>
+      <interrupt>
+        <name>OC24</name>
+        <value>24</value>
+      </interrupt>
+      <interrupt>
+        <name>OC25</name>
+        <value>25</value>
+      </interrupt>
+      <interrupt>
+        <name>OC26</name>
+        <value>26</value>
+      </interrupt>
+      <interrupt>
+        <name>OC27</name>
+        <value>27</value>
+      </interrupt>
+      <interrupt>
+        <name>OC28</name>
+        <value>28</value>
+      </interrupt>
+      <interrupt>
+        <name>OC29</name>
+        <value>29</value>
+      </interrupt>
+      <interrupt>
+        <name>OC30</name>
+        <value>30</value>
+      </interrupt>
+      <interrupt>
+        <name>OC31</name>
+        <value>31</value>
+      </interrupt>
+      <registers>
+        <register>
+          <name>INT_RAM_SBE</name>
+          <description>Internal Memory RAM SBE Interrupt Redirect Selection</description>
+          <addressOffset>0x01C0</addressOffset>
+          <access>read-write</access>
+          <resetValue>0xFFFFFFFF</resetValue>
+        </register>
+        <register derivedFrom="INT_RAM_SBE">
+          <dim>32</dim>
+          <dimIncrement>4</dimIncrement>
+          <name>PORTA[%s]</name>
+          <description>PORTA Interrupt Redirect Selection</description>
+          <addressOffset>0x000</addressOffset>
+        </register>
+        <register derivedFrom="INT_RAM_SBE">
+          <dim>32</dim>
+          <dimIncrement>4</dimIncrement>
+          <name>PORTB[%s]</name>
+          <description>PORTB Interrupt Redirect Selection</description>
+          <addressOffset>0x080</addressOffset>
+        </register>
+        <register derivedFrom="INT_RAM_SBE">
+          <dim>32</dim>
+          <dimIncrement>4</dimIncrement>
+          <name>TIM[%s]</name>
+          <description>TIM Interrupt Redirect Selection</description>
+          <addressOffset>0x100</addressOffset>
+        </register>
+        <register derivedFrom="INT_RAM_SBE">
+          <dim>4</dim>
+          <dimIncrement>4</dimIncrement>
+          <name>UART[%s]</name>
+          <description>UART Interrupt Redirect Selection</description>
+          <addressOffset>0x180</addressOffset>
+        </register>
+        <register derivedFrom="INT_RAM_SBE">
+          <dim>4</dim>
+          <dimIncrement>4</dimIncrement>
+          <name>SPI[%s]</name>
+          <description>SPI Interrupt Redirect Selection</description>
+          <addressOffset>0x190</addressOffset>
+        </register>
+        <register derivedFrom="INT_RAM_SBE">
+          <dim>4</dim>
+          <dimIncrement>4</dimIncrement>
+          <name>I2C_MS[%s]</name>
+          <description>Master I2C Interrupt Redirect Selection</description>
+          <addressOffset>0x01a0</addressOffset>
+        </register>
+        <register derivedFrom="INT_RAM_SBE">
+          <dim>4</dim>
+          <dimIncrement>4</dimIncrement>
+          <name>I2C_SL[%s]</name>
+          <description>Slave I2C Interrupt Redirect Selection</description>
+          <addressOffset>0x01B0</addressOffset>
+        </register>
+        <register derivedFrom="INT_RAM_SBE">
+          <name>INT_RAM_MBE</name>
+          <description>Internal Memory RAM MBE Interrupt Redirect Selection</description>
+          <addressOffset>0x01C4</addressOffset>
+        </register>
+        <register derivedFrom="INT_RAM_SBE">
+          <name>INT_ROM_SBE</name>
+          <description>Internal Memory ROM SBE Interrupt Redirect Selection</description>
+          <addressOffset>0x01C8</addressOffset>
+        </register>
+        <register derivedFrom="INT_RAM_SBE">
+          <name>INT_ROM_MBE</name>
+          <description>Internal Memory ROM MBE Interrupt Redirect Selection</description>
+          <addressOffset>0x01CC</addressOffset>
+        </register>
+        <register derivedFrom="INT_RAM_SBE">
+          <name>TXEV</name>
+          <description>Processor TXEV Interrupt Redirect Selection</description>
+          <addressOffset>0x01D0</addressOffset>
+        </register>
+        <register>
+          <name>NMI</name>
+          <description>NMI Status Register</description>
+          <addressOffset>0x8f8</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>ACTIVE</name>
+              <description>Active</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register derivedFrom="NMI">
+          <name>RXEV</name>
+          <description>RXEV Status Register</description>
+          <addressOffset>0x8f4</addressOffset>
+        </register>
+        <register derivedFrom="NMI">
+          <name>WATCHDOG</name>
+          <description>WATCHDOG Status Register</description>
+          <addressOffset>0x8f0</addressOffset>
+        </register>
+        <register derivedFrom="NMI">
+          <name>MERESET</name>
+          <description>MERESET Status Register</description>
+          <addressOffset>0x8ec</addressOffset>
+        </register>
+        <register derivedFrom="NMI">
+          <name>EDBGRQ</name>
+          <description>EDBGRQ Status Register</description>
+          <addressOffset>0x8e8</addressOffset>
+        </register>
+        <register derivedFrom="NMI">
+          <dim>32</dim>
+          <dimIncrement>4</dimIncrement>
+          <name>IRQS[%s]</name>
+          <description>Interrupt Status Register</description>
+          <addressOffset>0x800</addressOffset>
+        </register>
+        <register>
+          <name>PERID</name>
+          <description>Peripheral ID Register</description>
+          <addressOffset>0xffc</addressOffset>
+          <size>32</size>
+          <access>read-only</access>
+          <resetValue>0x008007e1</resetValue>
+        </register>
+      </registers>
+    </peripheral>
+    <!-- **************************************************************************************** -->
+    <!--IO Pin Configuration-->
+    <peripheral>
+      <name>IOCONFIG</name>
+      <version>1.0</version>
+      <description>IO Pin Configuration Peripheral</description>
+      <baseAddress>0x40002000</baseAddress>
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x00001000</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <register>
+          <dim>32</dim>
+          <dimIncrement>4</dimIncrement>
+          <name>PORTA[%s]</name>
+          <description>PORTA Pin Configuration Register</description>
+          <addressOffset>0x000</addressOffset>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>FLTTYPE</name>
+              <description>Input Filter Selectoin</description>
+              <bitRange>[2:0]</bitRange>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>SYNC</name>
+                  <description>Synchronize to system clock</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>DIRECT</name>
+                  <description>Direct input, no synchronization</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>FILTER1</name>
+                  <description>Require 2 samples to have the same value</description>
+                  <value>2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>FILTER2</name>
+                  <description>Require 3 samples to have the same value</description>
+                  <value>3</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>FILTER3</name>
+                  <description>Require 4 samples to have the same value</description>
+                  <value>4</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>FILTER4</name>
+                  <description>Require 5 samples to have the same value</description>
+                  <value>5</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>FLTCLK</name>
+              <description>Input Filter Clock Selection</description>
+              <bitRange>[5:3]</bitRange>
+            </field>
+            <field>
+              <name>INVINP</name>
+              <description>Input Invert Selection</description>
+              <bitRange>[6:6]</bitRange>
+            </field>
+            <field>
+              <name>IEWO</name>
+              <description>Input Enable While Output enabled</description>
+              <bitRange>[7:7]</bitRange>
+            </field>
+            <field>
+              <name>OPENDRN</name>
+              <description>Output Open Drain Mode</description>
+              <bitRange>[8:8]</bitRange>
+            </field>
+            <field>
+              <name>INVOUT</name>
+              <description>Output Invert Selection</description>
+              <bitRange>[9:9]</bitRange>
+            </field>
+            <field>
+              <name>PLEVEL</name>
+              <description>Internal Pull up/down level</description>
+              <bitRange>[10:10]</bitRange>
+            </field>
+            <field>
+              <name>PEN</name>
+              <description>Enable Internal Pull up/down </description>
+              <bitRange>[11:11]</bitRange>
+            </field>
+            <field>
+              <name>PWOA</name>
+              <description>Enable Pull when output active </description>
+              <bitRange>[12:12]</bitRange>
+            </field>
+            <field>
+              <name>FUNSEL</name>
+              <description>Pin Function Selection</description>
+              <bitRange>[15:13]</bitRange>
+            </field>
+            <field>
+              <name>IODIS</name>
+              <description>IO Pin Disable</description>
+              <bitRange>[16:16]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register derivedFrom="PORTA[%s]">
+          <name>PORTB[%s]</name>
+          <description>PORTB Pin Configuration Register</description>
+          <addressOffset>0x0080</addressOffset>
+          <resetValue>0x00000800</resetValue>
+        </register>
+        <register>
+          <name>PERID</name>
+          <description>Peripheral ID Register</description>
+          <addressOffset>0xffc</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x008207e1</resetValue>
+        </register>
+      </registers>
+    </peripheral>
+    <!-- **************************************************************************************** -->
+    <!--Utility Configuration-->
+    <peripheral>
+      <name>UTILITY</name>
+      <version>1.0</version>
+      <description>Utility Peripheral</description>
+      <baseAddress>0x40003000</baseAddress>
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x00001000</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <register>
+          <name>SYND_DATA0</name>
+          <description>Synd Data 0 Register</description>
+          <addressOffset>0x000</addressOffset>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>SYND_DATA1</name>
+          <description>Synd Data 1 Register</description>
+          <addressOffset>0x004</addressOffset>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>SYND_SYND</name>
+          <description>Synd Parity Register</description>
+          <addressOffset>0x008</addressOffset>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>SYND_ENC_32</name>
+          <description>Synd 32 bit Encoded Syndrome</description>
+          <addressOffset>0x00c</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>SYND_CHECK_32_DATA</name>
+          <description>Synd 32 bit Corrected Data</description>
+          <addressOffset>0x010</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>SYND_CHECK_32_SYND</name>
+          <description>Synd 32 bit Corrected Syndrome and Status</description>
+          <addressOffset>0x014</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>SYND_ENC_64</name>
+          <description>Synd 64 bit Encoded Syndrome</description>
+          <addressOffset>0x018</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>SYND_CHECK_64_DATA0</name>
+          <description>Synd 64 bit Corrected Data 0</description>
+          <addressOffset>0x01c</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>SYND_CHECK_64_DATA1</name>
+          <description>Synd 64 bit Corrected Data 1</description>
+          <addressOffset>0x020</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>SYND_CHECK_64_SYND</name>
+          <description>Synd 64 bit Corrected Parity and Status</description>
+          <addressOffset>0x024</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>SYND_ENC_32_52</name>
+          <description>Synd 32/52 bit Encoded Syndrome</description>
+          <addressOffset>0x028</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>SYND_CHECK_32_52_DATA</name>
+          <description>Synd 32/52 bit Corrected Data</description>
+          <addressOffset>0x02c</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>SYND_CHECK_32_52_SYND</name>
+          <description>Synd 32/52 bit Corrected Syndrome and Status</description>
+          <addressOffset>0x030</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PERID</name>
+          <description>Peripheral ID Register</description>
+          <addressOffset>0xffc</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x008207e1</resetValue>
+        </register>
+      </registers>
+    </peripheral>
+    <!-- **************************************************************************************** -->
+    <!--General Purpose IOs -->
+    <peripheral>
+      <name>PORTA</name>
+      <version>1.0</version>
+      <description>GPIO Peripheral</description>
+      <groupName>GPIO</groupName>
+      <baseAddress>0x50000000</baseAddress>
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x00001000</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <!-- <headerStructName>GPIO_PERIPHERAL</headerStructName> -->
+      <registers>
+        <register>
+          <name>DATAIN</name>
+          <description>Data In Register</description>
+          <addressOffset>0x000</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register>
+          <dim>4</dim>
+          <dimIncrement>1</dimIncrement>
+          <name>DATAINBYTE[%s]</name>
+          <description>Data In Register by Byte</description>
+          <alternateRegister>DATAIN</alternateRegister>
+          <addressOffset>0x000</addressOffset>
+          <size>8</size>
+          <access>read-only</access>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register derivedFrom="DATAIN">
+          <name>DATAINRAW</name>
+          <description>Data In Raw Register</description>
+          <addressOffset>0x004</addressOffset>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register derivedFrom="DATAINBYTE[%s]">
+          <name>DATAINRAWBYTE[%s]</name>
+          <description>Data In Raw Register by Byte</description>
+          <alternateRegister>DATAINRAW</alternateRegister>
+          <addressOffset>0x004</addressOffset>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register>
+          <name>DATAOUT</name>
+          <description>Data Out Register</description>
+          <addressOffset>0x008</addressOffset>
+          <access>write-only</access>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register>
+          <dim>4</dim>
+          <dimIncrement>1</dimIncrement>
+          <name>DATAOUTBYTE[%s]</name>
+          <description>Data Out Register by Byte</description>
+          <alternateRegister>DATAOUT</alternateRegister>
+          <addressOffset>0x008</addressOffset>
+          <size>8</size>
+          <access>write-only</access>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register derivedFrom="DATAOUT">
+          <name>DATAOUTRAW</name>
+          <description>Data Out Register</description>
+          <addressOffset>0x00c</addressOffset>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register derivedFrom="DATAOUTBYTE[%s]">
+          <name>DATAOUTRAWBYTE[%s]</name>
+          <description>Data Out Register by Byte</description>
+          <alternateRegister>DATAOUTRAW</alternateRegister>
+          <addressOffset>0x00c</addressOffset>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register derivedFrom="DATAOUT">
+          <name>SETOUT</name>
+          <description>Set Out Register</description>
+          <addressOffset>0x010</addressOffset>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register derivedFrom="DATAOUTBYTE[%s]">
+          <name>SETOUTBYTE[%s]</name>
+          <description>Set Out Register by Byte</description>
+          <alternateRegister>SETOUT</alternateRegister>
+          <addressOffset>0x010</addressOffset>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register derivedFrom="DATAOUT">
+          <name>CLROUT</name>
+          <description>Clear Out Register</description>
+          <addressOffset>0x014</addressOffset>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register derivedFrom="DATAOUTBYTE[%s]">
+          <name>CLROUTBYTE[%s]</name>
+          <description>Clear Out Register by Byte</description>
+          <alternateRegister>CLROUT</alternateRegister>
+          <addressOffset>0x014</addressOffset>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register derivedFrom="DATAOUT">
+          <name>TOGOUT</name>
+          <description>Toggle Out Register</description>
+          <addressOffset>0x018</addressOffset>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register derivedFrom="DATAOUTBYTE[%s]">
+          <name>TOGOUTBYTE[%s]</name>
+          <description>Toggle Out Register by Byte</description>
+          <alternateRegister>TOGOUT</alternateRegister>
+          <addressOffset>0x018</addressOffset>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register>
+          <name>DATAMASK</name>
+          <description>Data mask Register</description>
+          <addressOffset>0x01c</addressOffset>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register>
+          <dim>4</dim>
+          <dimIncrement>1</dimIncrement>
+          <name>DATAMASKBYTE[%s]</name>
+          <description>Data Out Register by Byte</description>
+          <alternateRegister>DATAMASK</alternateRegister>
+          <addressOffset>0x01c</addressOffset>
+          <size>8</size>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register derivedFrom="DATAMASK">
+          <name>DIR</name>
+          <description>Direction Register (1:Output, 0:Input)</description>
+          <addressOffset>0x020</addressOffset>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register derivedFrom="DATAMASKBYTE[%s]">
+          <name>DIRBYTE[%s]</name>
+          <description>Direction Register by Byte</description>
+          <alternateRegister>DIR</alternateRegister>
+          <addressOffset>0x020</addressOffset>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register derivedFrom="DATAMASK">
+          <name>PULSE</name>
+          <description>Pulse Mode Register</description>
+          <addressOffset>0x024</addressOffset>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register derivedFrom="DATAMASKBYTE[%s]">
+          <name>PULSEBYTE[%s]</name>
+          <description>Pulse Mode Register by Byte</description>
+          <alternateRegister>PULSE</alternateRegister>
+          <addressOffset>0x024</addressOffset>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register derivedFrom="DATAMASK">
+          <name>PULSEBASE</name>
+          <description>Pulse Base Value Register</description>
+          <addressOffset>0x028</addressOffset>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register derivedFrom="DATAMASKBYTE[%s]">
+          <name>PULSEBASEBYTE[%s]</name>
+          <description>Pulse Base Mode Register by Byte</description>
+          <alternateRegister>PULSEBASE</alternateRegister>
+          <addressOffset>0x028</addressOffset>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register derivedFrom="DATAMASK">
+          <name>DELAY1</name>
+          <description>Delay1 Register</description>
+          <addressOffset>0x02c</addressOffset>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register derivedFrom="DATAMASKBYTE[%s]">
+          <name>DELAY1BYTE[%s]</name>
+          <description>Delay1 Register by Byte</description>
+          <alternateRegister>DELAY1</alternateRegister>
+          <addressOffset>0x02c</addressOffset>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register derivedFrom="DATAMASK">
+          <name>DELAY2</name>
+          <description>Delay2 Register</description>
+          <addressOffset>0x030</addressOffset>
+          <size>32</size>
+          <access>read-write</access>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register derivedFrom="DATAMASKBYTE[%s]">
+          <name>DELAY2BYTE[%s]</name>
+          <description>Delay2 Register by Byte</description>
+          <alternateRegister>DELAY2</alternateRegister>
+          <addressOffset>0x030</addressOffset>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register>
+          <name>IRQ_SEN</name>
+          <description>Interrupt Sense Register (1:Level Sensitive, 0:Edge Sensitive)</description>
+          <addressOffset>0x034</addressOffset>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register>
+          <name>IRQ_EDGE</name>
+          <description>Interrupt Both Edge Register (1:Both Edges, 0:Single Edge)</description>
+          <addressOffset>0x038</addressOffset>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register>
+          <name>IRQ_EVT</name>
+          <description>Interrupt Event Register (1:HighLevel/L->H Edge, 0:LowLevel/H->L Edge)</description>
+          <addressOffset>0x03c</addressOffset>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register>
+          <name>IRQ_ENB</name>
+          <description>Interrupt Enable Register</description>
+          <addressOffset>0x040</addressOffset>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register>
+          <name>IRQ_RAW</name>
+          <description>Raw Interrupt Status</description>
+          <addressOffset>0x044</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register>
+          <name>IRQ_END</name>
+          <description>Masked Interrupt Status</description>
+          <addressOffset>0x048</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register>
+          <name>EDGE_STATUS</name>
+          <description>Edge Status Register</description>
+          <addressOffset>0x04c</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+        </register>
+        <register>
+          <name>PERID</name>
+          <description>Peripheral ID Register</description>
+          <addressOffset>0xffc</addressOffset>
+          <size>32</size>
+          <access>read-only</access>
+          <resetValue>0x001007e1</resetValue>
+        </register>
+      </registers>
+    </peripheral>
+    <peripheral derivedFrom="PORTA">
+      <name>PORTB</name>
+      <baseAddress>0x50001000</baseAddress>
+    </peripheral>
+    <!-- **************************************************************************************** -->
+    <!--Real Time Counter-->
+    <peripheral>
+      <name>TIM0</name>
+      <version>1.0</version>
+      <description>Timer/Counter Peripheral</description>
+      <groupName>Timer_Counter</groupName>
+      <baseAddress>0x40020000</baseAddress>
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x00001000</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <!-- <headerStructName>TIM_PERIPHERAL</headerStructName> --> 
+      <registers>
+        <register>
+          <name>CTRL</name>
+          <description>Control Register</description>
+          <addressOffset>0x000</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>ENABLE</name>
+              <description>Counter Enable</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>ACTIVE</name>
+              <description>Counter Active</description>
+              <bitRange>[1:1]</bitRange>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>AUTO_DISABLE</name>
+              <description>Auto Disables the counter (set ENABLE to 0) when the count reaches 0</description>
+              <bitRange>[2:2]</bitRange>
+            </field>
+            <field>
+              <name>AUTO_DEACTIVATE</name>
+              <description>Auto Deactivate the counter (set ACTIVE to 0) when the count reaches 0</description>
+              <bitRange>[3:3]</bitRange>
+            </field>
+            <field>
+              <name>IRQ_ENB</name>
+              <description>Interrupt Enable</description>
+              <bitRange>[4:4]</bitRange>
+            </field>
+            <field>
+              <name>STATUS_SEL</name>
+              <description>Counter Status Selection</description>
+              <bitRange>[7:5]</bitRange>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>DONE</name>
+                  <description>Single cycle pulse when the counter reaches 0</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>ACTIVE</name>
+                  <description>Returns the counter ACTIVE bit</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>TOGGLE</name>
+                  <description>Toggles the STATUS bit everytime the counter reaches 0. Basically a divide by 2 counter output.</description>
+                  <value>2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PWMA</name>
+                  <description>Selects the Pulse Width Modulated output. It 1 when the counter value is &gt;= the PWMA_VALUE</description>
+                  <value>3</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PWMB</name>
+                  <description>Selects the Pulse Width Modulated output. It 1 when the counter value is &lt; the PWMA_VALUE and value is &gt; PWMA_VALUE</description>
+                  <value>4</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>ENABLED</name>
+                  <description>Returns the counter ENABLED bit</description>
+                  <value>5</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PWMA_ACTIVE</name>
+                  <description>Selects the Pulse Width Modulated output. It 1 when the counter value is &lt;= the PWMA_VALUE and value is &gt;= 0</description>
+                  <value>6</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>STATUS_INV</name>
+              <description>Invert the Output Status</description>
+              <bitRange>[8:8]</bitRange>
+            </field>
+            <field>
+              <name>REQ_STOP</name>
+              <description>Stop Request</description>
+              <bitRange>[9:9]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RST_VALUE</name>
+          <description>The value that counter start from after reaching 0.</description>
+          <addressOffset>0x004</addressOffset>
+        </register>
+        <register>
+          <name>CNT_VALUE</name>
+          <description>The current value of the counter</description>
+          <addressOffset>0x008</addressOffset>
+        </register>
+        <register>
+          <name>ENABLE</name>
+          <description>Alternate access to the Counter ENABLE bit in the CTRL Register</description>
+          <addressOffset>0x00c</addressOffset>
+          <fields>
+            <field>
+              <name>ENABLE</name>
+              <description>Counter Enable</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CSD_CTRL</name>
+          <description>The Cascade Control Register. Controls the counter external enable signals</description>
+          <addressOffset>0x010</addressOffset>
+          <fields>
+            <field>
+              <name>CSDEN0</name>
+              <description>Cascade 0 Enable</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>CSDINV0</name>
+              <description>Cascade 0 Invert</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+            <field>
+              <name>CSDEN1</name>
+              <description>Cascade 1 Enable</description>
+              <bitRange>[2:2]</bitRange>
+            </field>
+            <field>
+              <name>CSDINV1</name>
+              <description>Cascade 1 Invert</description>
+              <bitRange>[3:3]</bitRange>
+            </field>
+            <field>
+              <name>DCASOP</name>
+              <description>Dual Cascade Operation (0:AND, 1:OR)</description>
+              <bitRange>[4:4]</bitRange>
+            </field>
+            <field>
+              <name>CSDTRG0</name>
+              <description>Cascade 0 Enabled as Trigger</description>
+              <bitRange>[6:6]</bitRange>
+            </field>
+            <field>
+              <name>CSDTRG1</name>
+              <description>Cascade 1 Enabled as Trigger</description>
+              <bitRange>[7:7]</bitRange>
+            </field>
+            <field>
+              <name>CSDEN2</name>
+              <description>Cascade 2 Enable</description>
+              <bitRange>[8:8]</bitRange>
+            </field>
+            <field>
+              <name>CSDINV2</name>
+              <description>Cascade 2 Invert</description>
+              <bitRange>[9:9]</bitRange>
+            </field>
+            <field>
+              <name>CSDTRG2</name>
+              <description>Cascade 2 Trigger mode</description>
+              <bitRange>[10:10]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CASCADE0</name>
+          <description>Cascade Enable Selection</description>
+          <addressOffset>0x014</addressOffset>
+          <fields>
+            <field>
+              <name>CASSEL</name>
+              <description>Cascade Selection</description>
+              <bitRange>[7:0]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register derivedFrom="CASCADE0">
+          <name>CASCADE1</name>
+          <description>Cascade Enable Selection</description>
+          <addressOffset>0x018</addressOffset>
+        </register>
+        <register derivedFrom="CASCADE0">
+          <name>CASCADE2</name>
+          <description>Cascade Enable Selection</description>
+          <addressOffset>0x01c</addressOffset>
+        </register>
+        <register>
+          <name>PWM_VALUE</name>
+          <description>The Pulse Width Modulation Value</description>
+          <addressOffset>0x020</addressOffset>
+        </register>
+        <register>
+          <name>PWMA_VALUE</name>
+          <description>The Pulse Width Modulation ValueA</description>
+          <alternateRegister>PWM_VALUE</alternateRegister>
+          <addressOffset>0x020</addressOffset>
+        </register>
+        <register>
+          <name>PWMB_VALUE</name>
+          <description>The Pulse Width Modulation ValueB</description>
+          <addressOffset>0x024</addressOffset>
+        </register>
+        <register>
+          <name>PERID</name>
+          <description>Peripheral ID Register</description>
+          <addressOffset>0xffc</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x001107e1</resetValue>
+        </register>
+      </registers>
+    </peripheral>
+    <peripheral derivedFrom="TIM0">
+      <name>TIM1</name>
+      <baseAddress>0x40021000</baseAddress>
+    </peripheral>
+    <peripheral derivedFrom="TIM0">
+      <name>TIM2</name>
+      <baseAddress>0x40022000</baseAddress>
+    </peripheral>
+    <peripheral derivedFrom="TIM0">
+      <name>TIM3</name>
+      <baseAddress>0x40023000</baseAddress>
+    </peripheral>
+    <peripheral derivedFrom="TIM0">
+      <name>TIM4</name>
+      <baseAddress>0x40024000</baseAddress>
+    </peripheral>
+    <peripheral derivedFrom="TIM0">
+      <name>TIM5</name>
+      <baseAddress>0x40025000</baseAddress>
+    </peripheral>
+    <peripheral derivedFrom="TIM0">
+      <name>TIM6</name>
+      <baseAddress>0x40026000</baseAddress>
+    </peripheral>
+    <peripheral derivedFrom="TIM0">
+      <name>TIM7</name>
+      <baseAddress>0x40027000</baseAddress>
+    </peripheral>
+    <peripheral derivedFrom="TIM0">
+      <name>TIM8</name>
+      <baseAddress>0x40028000</baseAddress>
+    </peripheral>
+    <peripheral derivedFrom="TIM0">
+      <name>TIM9</name>
+      <baseAddress>0x40029000</baseAddress>
+    </peripheral>
+    <peripheral derivedFrom="TIM0">
+      <name>TIM10</name>
+      <baseAddress>0x4002a000</baseAddress>
+    </peripheral>
+    <peripheral derivedFrom="TIM0">
+      <name>TIM11</name>
+      <baseAddress>0x4002b000</baseAddress>
+    </peripheral>
+    <peripheral derivedFrom="TIM0">
+      <name>TIM12</name>
+      <baseAddress>0x4002c000</baseAddress>
+    </peripheral>
+    <peripheral derivedFrom="TIM0">
+      <name>TIM13</name>
+      <baseAddress>0x4002d000</baseAddress>
+    </peripheral>
+    <peripheral derivedFrom="TIM0">
+      <name>TIM14</name>
+      <baseAddress>0x4002e000</baseAddress>
+    </peripheral>
+    <peripheral derivedFrom="TIM0">
+      <name>TIM15</name>
+      <baseAddress>0x4002f000</baseAddress>
+    </peripheral>
+    <peripheral derivedFrom="TIM0">
+      <name>TIM16</name>
+      <baseAddress>0x40030000</baseAddress>
+    </peripheral>
+    <peripheral derivedFrom="TIM0">
+      <name>TIM17</name>
+      <baseAddress>0x40031000</baseAddress>
+    </peripheral>
+    <peripheral derivedFrom="TIM0">
+      <name>TIM18</name>
+      <baseAddress>0x40032000</baseAddress>
+    </peripheral>
+    <peripheral derivedFrom="TIM0">
+      <name>TIM19</name>
+      <baseAddress>0x40033000</baseAddress>
+    </peripheral>
+    <peripheral derivedFrom="TIM0">
+      <name>TIM20</name>
+      <baseAddress>0x40034000</baseAddress>
+    </peripheral>
+    <peripheral derivedFrom="TIM0">
+      <name>TIM21</name>
+      <baseAddress>0x40035000</baseAddress>
+    </peripheral>
+    <peripheral derivedFrom="TIM0">
+      <name>TIM22</name>
+      <baseAddress>0x40036000</baseAddress>
+    </peripheral>
+    <peripheral derivedFrom="TIM0">
+      <name>TIM23</name>
+      <baseAddress>0x40037000</baseAddress>
+    </peripheral>
+    <!-- **************************************************************************************** -->
+    <!-- UART -->
+    <peripheral>
+      <name>UARTA</name>
+      <version>1.0</version>
+      <description>UART Peripheral</description>
+      <groupName>UART</groupName>
+      <baseAddress>0x40040000</baseAddress>
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x00001000</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <!-- <headerStructName>UART_PERIPHERAL</headerStructName> -->
+      <registers>
+        <register>
+          <name>DATA</name>
+          <description>Data In/Out Register</description>
+          <addressOffset>0x000</addressOffset>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register>
+          <name>ENABLE</name>
+          <description>Enable Register</description>
+          <addressOffset>0x004</addressOffset>
+          <resetValue>0x0000000</resetValue>
+          <fields>
+            <field>
+              <name>RXENABLE</name>
+              <description>Rx Enable</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>TXENABLE</name>
+              <description>Tx Enable</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CTRL</name>
+          <description>Control Register</description>
+          <addressOffset>0x008</addressOffset>
+          <resetValue>0x0000000</resetValue>
+          <fields>
+            <field>
+              <name>PAREN</name>
+              <description>Parity Enable</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>PAREVEN</name>
+              <description>Parity Even/Odd(1/0)</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+            <field>
+              <name>PARSTK</name>
+              <description>Parity Sticky</description>
+              <bitRange>[2:2]</bitRange>
+            </field>
+            <field>
+              <name>STOPBITS</name>
+              <description>Stop Bits 1/2(0/1)</description>
+              <bitRange>[3:3]</bitRange>
+            </field>
+            <field>
+              <name>WORDSIZE</name>
+              <description>Word Size in Bits 5/6/7/8(00/01/10/11)</description>
+              <bitRange>[5:4]</bitRange>
+            </field>
+            <field>
+              <name>LOOPBACK</name>
+              <description>Loopback Enable</description>
+              <bitRange>[6:6]</bitRange>
+            </field>
+            <field>
+              <name>LOOPBACKBLK</name>
+              <description>Loopback Block</description>
+              <bitRange>[7:7]</bitRange>
+            </field>
+            <field>
+              <name>AUTOCTS</name>
+              <description>Enable Auto CTS mode</description>
+              <bitRange>[8:8]</bitRange>
+            </field>
+            <field>
+              <name>DEFRTS</name>
+              <description>Default RTSn value</description>
+              <bitRange>[9:9]</bitRange>
+            </field>
+            <field>
+              <name>AUTORTS</name>
+              <description>Enable Auto RTS mode</description>
+              <bitRange>[10:10]</bitRange>
+            </field>
+            <field>
+              <name>BAUD8</name>
+              <description>Enable BAUD8 mode</description>
+              <bitRange>[11:11]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CLKSCALE</name>
+          <description>Clock Scale Register</description>
+          <addressOffset>0x00c</addressOffset>
+          <resetValue>0x0000000</resetValue>
+          <fields>
+            <field>
+              <name>FRAC</name>
+              <description>Fractional Divide (64ths)</description>
+              <bitRange>[5:0]</bitRange>
+            </field>
+            <field>
+              <name>INT</name>
+              <description>Integer Divide</description>
+              <bitRange>[23:6]</bitRange>
+            </field>
+            <field>
+              <name>RESET</name>
+              <description>Reset Baud Counter</description>
+              <bitRange>[31:31]</bitRange>
+              <access>write-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RXSTATUS</name>
+          <description>Status Register</description>
+          <addressOffset>0x010</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x0000000</resetValue>
+          <fields>
+            <field>
+              <name>RDAVL</name>
+              <description>Read Data Available</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>RDNFULL</name>
+              <description>Read Fifo NOT Full</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+            <field>
+              <name>RXBUSY</name>
+              <description>RX Busy Receiving</description>
+              <bitRange>[2:2]</bitRange>
+            </field>
+            <field>
+              <name>RXTO</name>
+              <description>RX Receive Timeout</description>
+              <bitRange>[3:3]</bitRange>
+            </field>
+            <field>
+              <name>RXOVR</name>
+              <description>Read Fifo Overflow</description>
+              <bitRange>[4:4]</bitRange>
+            </field>
+            <field>
+              <name>RXFRM</name>
+              <description>RX Framing Error</description>
+              <bitRange>[5:5]</bitRange>
+            </field>
+            <field>
+              <name>RXPAR</name>
+              <description>RX Parity Error</description>
+              <bitRange>[6:6]</bitRange>
+            </field>
+            <field>
+              <name>RXBRK</name>
+              <description>RX Break Error</description>
+              <bitRange>[7:7]</bitRange>
+            </field>
+            <field>
+              <name>RXBUSYBRK</name>
+              <description>RX Busy Receiving Break</description>
+              <bitRange>[8:8]</bitRange>
+            </field>
+            <field>
+              <name>RXADDR9</name>
+              <description>Address Match for 9 bit mode</description>
+              <bitRange>[9:9]</bitRange>
+            </field>
+            <field>
+              <name>RXRTSN</name>
+              <description>RX RTSn Output Value</description>
+              <bitRange>[15:15]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TXSTATUS</name>
+          <description>Status Register</description>
+          <addressOffset>0x014</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x0000000</resetValue>
+          <fields>
+            <field>
+              <name>WRRDY</name>
+              <description>Write Fifo NOT Full</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>WRBUSY</name>
+              <description>Write Fifo Full</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+            <field>
+              <name>TXBUSY</name>
+              <description>TX Busy Transmitting</description>
+              <bitRange>[2:2]</bitRange>
+            </field>
+            <field>
+              <name>WRLOST</name>
+              <description>Write Data Lost (Fifo Overflow)</description>
+              <bitRange>[3:3]</bitRange>
+            </field>
+            <field>
+              <name>TXCTSN</name>
+              <description>TX CTSn Input Value</description>
+              <bitRange>[15:15]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>FIFO_CLR</name>
+          <description>Clear FIFO Register</description>
+          <addressOffset>0x018</addressOffset>
+          <access>write-only</access>
+          <resetValue>0x0000000</resetValue>
+          <fields>
+            <field>
+              <name>RXSTS</name>
+              <description>Clear Rx Status</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>TXSTS</name>
+              <description>Clear Tx Status</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+            <field>
+              <name>RXFIFO</name>
+              <description>Clear Rx FIFO</description>
+              <bitRange>[2:2]</bitRange>
+            </field>
+            <field>
+              <name>TXFIFO</name>
+              <description>Clear Tx FIFO</description>
+              <bitRange>[3:3]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TXBREAK</name>
+          <description>Break Transmit Register</description>
+          <addressOffset>0x01c</addressOffset>
+          <access>write-only</access>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register>
+          <name>ADDR9</name>
+          <description>Address9 Register</description>
+          <addressOffset>0x020</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register>
+          <name>ADDR9MASK</name>
+          <description>Address9 Mask Register</description>
+          <addressOffset>0x024</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register>
+          <name>IRQ_ENB</name>
+          <description>IRQ Enable Register</description>
+          <addressOffset>0x028</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x0000000</resetValue>
+          <fields>
+            <field>
+              <name>IRQ_RX</name>
+              <description>RX Interrupt</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>IRQ_RX_STATUS</name>
+              <description>RX Status Interrupt</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+            <field>
+              <name>IRQ_RX_TO</name>
+              <description>RX Timeout Interrupt</description>
+              <bitRange>[2:2]</bitRange>
+            </field>
+            <field>
+              <name>IRQ_TX</name>
+              <description>TX Interrupt</description>
+              <bitRange>[4:4]</bitRange>
+            </field>
+            <field>
+              <name>IRQ_TX_STATUS</name>
+              <description>TX Status Interrupt</description>
+              <bitRange>[5:5]</bitRange>
+            </field>
+            <field>
+              <name>IRQ_TX_EMPTY</name>
+              <description>TX Empty Interrupt</description>
+              <bitRange>[6:6]</bitRange>
+            </field>
+            <field>
+              <name>IRQ_TX_CTS</name>
+              <description>TX CTS Change Interrupt</description>
+              <bitRange>[7:7]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register derivedFrom="IRQ_ENB">
+          <name>IRQ_RAW</name>
+          <description>IRQ Raw Status Register</description>
+          <addressOffset>0x02c</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register derivedFrom="IRQ_ENB">
+          <name>IRQ_END</name>
+          <description>IRQ Enabled Status Register</description>
+          <addressOffset>0x030</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register derivedFrom="IRQ_ENB">
+          <name>IRQ_CLR</name>
+          <description>IRQ Clear Status Register</description>
+          <addressOffset>0x034</addressOffset>
+          <access>write-only</access>
+          <resetValue>0x0000000</resetValue>
+        </register>
+        <register>
+          <name>RXFIFOIRQTRG</name>
+          <description>Rx FIFO IRQ Trigger Level</description>
+          <addressOffset>0x038</addressOffset>
+        </register>
+        <register>
+          <name>TXFIFOIRQTRG</name>
+          <description>Tx FIFO IRQ Trigger Level</description>
+          <addressOffset>0x03c</addressOffset>
+        </register>
+        <register>
+          <name>RXFIFORTSTRG</name>
+          <description>Rx FIFO RTS Trigger Level</description>
+          <addressOffset>0x040</addressOffset>
+        </register>
+        <register>
+          <name>STATE</name>
+          <description>Internal STATE of UART Controller</description>
+          <addressOffset>0x044</addressOffset>
+          <size>32</size>
+          <access>read-only</access>
+        </register>
+        <register>
+          <name>PERID</name>
+          <description>Peripheral ID Register</description>
+          <addressOffset>0xffc</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x001207e1</resetValue>
+        </register>
+      </registers>
+    </peripheral>
+    <peripheral derivedFrom="UARTA">
+      <name>UARTB</name>
+      <baseAddress>0x40041000</baseAddress>
+    </peripheral>
+    <!-- **************************************************************************************** -->
+    <!-- SPI -->
+    <peripheral>
+      <name>SPIA</name>
+      <version>1.0</version>
+      <description>SPI Peripheral</description>
+      <groupName>SPI</groupName>
+      <baseAddress>0x40050000</baseAddress>
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x00001000</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <!-- <headerStructName>SPI_PERIPHERAL</headerStructName> --> 
+      <registers>
+        <register>
+          <name>CTRL0</name>
+          <description>Control Register 0</description>
+          <addressOffset>0x000</addressOffset>
+          <resetValue>0x0000000</resetValue>
+          <fields>
+            <field>
+              <name>SIZE</name>
+              <description>Data Size(0x3=>4, 0xf=>16)</description>
+              <bitRange>[3:0]</bitRange>
+            </field>
+            <field>
+              <name>SPO</name>
+              <description>SPI Clock Polarity</description>
+              <bitRange>[6:6]</bitRange>
+            </field>
+            <field>
+              <name>SPH</name>
+              <description>SPI Clock Phase</description>
+              <bitRange>[7:7]</bitRange>
+            </field>
+            <field>
+              <name>SCRDV</name>
+              <description>Serial Clock Rate divide+1 value</description>
+              <bitRange>[15:8]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CTRL1</name>
+          <description>Control Register 1</description>
+          <addressOffset>0x004</addressOffset>
+          <resetValue>0x0000000</resetValue>
+          <fields>
+            <field>
+              <name>LBM</name>
+              <description>Loop Back</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>ENABLE</name>
+              <description>Enable</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+            <field>
+              <name>MS</name>
+              <description>Master/Slave (0:Master, 1:Slave)</description>
+              <bitRange>[2:2]</bitRange>
+            </field>
+            <field>
+              <name>SOD</name>
+              <description>Slave output Disable</description>
+              <bitRange>[3:3]</bitRange>
+            </field>
+            <field>
+              <name>SS</name>
+              <description>Slave Select</description>
+              <bitRange>[6:4]</bitRange>
+            </field>
+            <field>
+              <name>BLOCKMODE</name>
+              <description>Block Mode Enable</description>
+              <bitRange>[7:7]</bitRange>
+            </field>
+            <field>
+              <name>BMSTART</name>
+              <description>Block Mode Start Status Enable</description>
+              <bitRange>[8:8]</bitRange>
+            </field>
+            <field>
+              <name>BMSTALL</name>
+              <description>Block Mode Stall Enable</description>
+              <bitRange>[9:9]</bitRange>
+            </field>
+            <field>
+              <name>MDLYCAP</name>
+              <description>Master Delayed Capture Enable</description>
+              <bitRange>[10:10]</bitRange>
+            </field>
+            <field>
+              <name>MTXPAUSE</name>
+              <description>Master Tx Pause Enable</description>
+              <bitRange>[11:11]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DATA</name>
+          <description>Data Input/Output</description>
+          <addressOffset>0x008</addressOffset>
+        </register>
+        <register>
+          <name>STATUS</name>
+          <description>Status Register</description>
+          <addressOffset>0x00C</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x0000000</resetValue>
+          <fields>
+            <field>
+              <name>TFE</name>
+              <description>Transmit FIFO empty</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>TNF</name>
+              <description>Transmit FIFO not full</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+            <field>
+              <name>RNE</name>
+              <description>Receive FIFO not empty</description>
+              <bitRange>[2:2]</bitRange>
+            </field>
+            <field>
+              <name>RFF</name>
+              <description>Receive FIFO Full</description>
+              <bitRange>[3:3]</bitRange>
+            </field>
+            <field>
+              <name>BUSY</name>
+              <description>Busy</description>
+              <bitRange>[4:4]</bitRange>
+            </field>
+            <field>
+              <name>RXDATAFIRST</name>
+              <description>Pending Data is first Byte in BLOCKMODE</description>
+              <bitRange>[5:5]</bitRange>
+            </field>
+            <field>
+              <name>RXTRIGGER</name>
+              <description>RX FIFO Above Trigger Level</description>
+              <bitRange>[6:6]</bitRange>
+            </field>
+            <field>
+              <name>TXTRIGGER</name>
+              <description>TX FIFO Below Trigger Level</description>
+              <bitRange>[7:7]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CLKPRESCALE</name>
+          <description>Clock Pre Scale divide value</description>
+          <addressOffset>0x010</addressOffset>
+        </register>
+        <register>
+          <name>IRQ_ENB</name>
+          <description>Interrupt Enable Register</description>
+          <addressOffset>0x014</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x0000000</resetValue>
+          <fields>
+            <field>
+              <name>RORIM</name>
+              <description>RX Overrun</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>RTIM</name>
+              <description>RX Timeout</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+            <field>
+              <name>RXIM</name>
+              <description>RX Fifo is at least half full</description>
+              <bitRange>[2:2]</bitRange>
+            </field>
+            <field>
+              <name>TXIM</name>
+              <description>TX Fifo is at least half empty</description>
+              <bitRange>[3:3]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register derivedFrom="IRQ_ENB">
+          <name>IRQ_RAW</name>
+          <description>Raw Interrupt Status Register</description>
+          <addressOffset>0x018</addressOffset>
+          <access>read-only</access>
+        </register>
+        <register derivedFrom="IRQ_ENB">
+          <name>IRQ_END</name>
+          <description>Enabled Interrupt Status Register</description>
+          <addressOffset>0x01C</addressOffset>
+          <access>read-only</access>
+        </register>
+        <register derivedFrom="IRQ_ENB">
+          <name>IRQ_CLR</name>
+          <description>Clear Interrupt Status Register</description>
+          <addressOffset>0x020</addressOffset>
+          <access>write-only</access>
+          <modifiedWriteValues>
+            oneToClear
+          </modifiedWriteValues>
+        </register>
+        <register>
+          <name>RXFIFOIRQTRG</name>
+          <description>Rx FIFO IRQ Trigger Level</description>
+          <addressOffset>0x024</addressOffset>
+        </register>
+        <register>
+          <name>TXFIFOIRQTRG</name>
+          <description>Tx FIFO IRQ Trigger Level</description>
+          <addressOffset>0x028</addressOffset>
+        </register>
+        <register>
+          <name>FIFO_CLR</name>
+          <description>Clear FIFO Register</description>
+          <addressOffset>0x02c</addressOffset>
+          <access>write-only</access>
+          <fields>
+            <field>
+              <name>RXFIFO</name>
+              <description>Clear Rx FIFO</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>TXFIFO</name>
+              <description>Clear Tx FIFO</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>STATE</name>
+          <description>Internal STATE of SPI Controller</description>
+          <addressOffset>0x030</addressOffset>
+          <access>read-only</access>
+        </register>
+        <register>
+          <name>PERID</name>
+          <description>Peripheral ID Register</description>
+          <addressOffset>0xffc</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x001207e1</resetValue>
+        </register>
+      </registers>
+    </peripheral>
+    <peripheral derivedFrom="SPIA">
+      <name>SPIB</name>
+      <baseAddress>0x40051000</baseAddress>
+    </peripheral>
+    <peripheral derivedFrom="SPIA">
+      <name>SPIC</name>
+      <baseAddress>0x40052000</baseAddress>
+    </peripheral>
+    <!-- **************************************************************************************** -->
+    <!-- I2C -->
+    <peripheral>
+      <name>I2CA</name>
+      <version>1.0</version>
+      <description>I2C Peripheral</description>
+      <groupName>I2C</groupName>
+      <baseAddress>0x40060000</baseAddress>
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x00001000</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <!-- <headerStructName>I2C_PERIPHERAL</headerStructName> --> 
+      <registers>
+        <!-- I2C Master ************************************************************ -->
+        <register>
+          <name>CTRL</name>
+          <description>Control Register</description>
+          <addressOffset>0x000</addressOffset>
+          <resetValue>0x0000000</resetValue>
+          <fields>
+            <field>
+              <name>CLKENABLED</name>
+              <description>I2C CLK Enabled</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>ENABLED</name>
+              <description>I2C Activated</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+            <field>
+              <name>ENABLE</name>
+              <description>I2C Active</description>
+              <bitRange>[2:2]</bitRange>
+            </field>
+            <field>
+              <name>TXFEMD</name>
+              <description>TX FIFIO Empty Mode</description>
+              <bitRange>[3:3]</bitRange>
+            </field>
+            <field>
+              <name>RXFFMD</name>
+              <description>RX FIFO Full Mode</description>
+              <bitRange>[4:4]</bitRange>
+            </field>
+            <field>
+              <name>ALGFILTER</name>
+              <description>Enable Input Analog Glitch Filter</description>
+              <bitRange>[5:5]</bitRange>
+            </field>
+            <field>
+              <name>DLGFILTER</name>
+              <description>Enable Input Digital Glitch Filter</description>
+              <bitRange>[6:6]</bitRange>
+            </field>
+            <field>
+              <name>LOOPBACK</name>
+              <description>Enable LoopBack Mode</description>
+              <bitRange>[8:8]</bitRange>
+            </field>
+            <field>
+              <name>TMCONFIGENB</name>
+              <description>Enable Timing Config Register</description>
+              <bitRange>[9:9]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CLKSCALE</name>
+          <description>Clock Scale divide value</description>
+          <addressOffset>0x004</addressOffset>
+          <fields>
+            <field>
+              <name>VALUE</name>
+              <description>Enable FastMode</description>
+              <bitRange>[30:0]</bitRange>
+            </field>
+            <field>
+              <name>FASTMODE</name>
+              <description>Enable FastMode</description>
+              <bitRange>[31:31]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>WORDS</name>
+          <description>Word Count value</description>
+          <addressOffset>0x008</addressOffset>
+        </register>
+        <register>
+          <name>ADDRESS</name>
+          <description>I2C Address value</description>
+          <addressOffset>0x00c</addressOffset>
+        </register>
+        <register>
+          <name>DATA</name>
+          <description>Data Input/Output</description>
+          <addressOffset>0x010</addressOffset>
+        </register>
+        <register>
+          <name>CMD</name>
+          <description>Command Register</description>
+          <addressOffset>0x014</addressOffset>
+        </register>
+        <register>
+          <name>STATUS</name>
+          <description>I2C Controller Status Register</description>
+          <addressOffset>0x018</addressOffset>
+          <fields>
+            <field>
+              <name>WAITING</name>
+              <description>Controller is Waiting</description>
+              <bitRange>[2:2]</bitRange>
+            </field>
+            <field>
+              <name>STALLED</name>
+              <description>Controller is Stalled</description>
+              <bitRange>[3:3]</bitRange>
+            </field>
+            <field>
+              <name>ARBLOST</name>
+              <description>I2C Arbitration was lost</description>
+              <bitRange>[4:4]</bitRange>
+            </field>
+            <field>
+              <name>NACKADDR</name>
+              <description>I2C Address was not Acknowledged</description>
+              <bitRange>[5:5]</bitRange>
+            </field>
+            <field>
+              <name>NACKDATA</name>
+              <description>I2C Data was not Acknowledged</description>
+              <bitRange>[6:6]</bitRange>
+            </field>
+            <field>
+              <name>RXNEMPTY</name>
+              <description>RX FIFO is Not Empty</description>
+              <bitRange>[8:8]</bitRange>
+            </field>
+            <field>
+              <name>RXFULL</name>
+              <description>RX FIFO is Full</description>
+              <bitRange>[9:9]</bitRange>
+            </field>
+            <field>
+              <name>RXTRIGGER</name>
+              <description>RX FIFO Above Trigger Level</description>
+              <bitRange>[11:11]</bitRange>
+            </field>
+            <field>
+              <name>TXEMPTY</name>
+              <description>TX FIFO is Empty</description>
+              <bitRange>[12:12]</bitRange>
+            </field>
+            <field>
+              <name>TXNFULL</name>
+              <description>TX FIFO is Full</description>
+              <bitRange>[13:13]</bitRange>
+            </field>
+            <field>
+              <name>TXTRIGGER</name>
+              <description>TX FIFO Below Trigger Level</description>
+              <bitRange>[15:15]</bitRange>
+            </field>
+            <field>
+              <name>RAW_SDA</name>
+              <description>I2C Raw SDA value</description>
+              <bitRange>[30:30]</bitRange>
+            </field>
+            <field>
+              <name>RAW_SCL</name>
+              <description>I2C Raw SCL value</description>
+              <bitRange>[31:31]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>STATE</name>
+          <description>Internal STATE of I2C Master Controller</description>
+          <addressOffset>0x01c</addressOffset>
+          <access>read-only</access>
+        </register>
+        <register>
+          <name>TXCOUNT</name>
+          <description>TX Count Register</description>
+          <addressOffset>0x020</addressOffset>
+          <access>read-only</access>
+        </register>
+        <register>
+          <name>RXCOUNT</name>
+          <description>RX Count Register</description>
+          <addressOffset>0x024</addressOffset>
+          <access>read-only</access>
+        </register>
+        <register>
+          <name>IRQ_ENB</name>
+          <description>Interrupt Enable Register</description>
+          <addressOffset>0x028</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x0000000</resetValue>
+          <fields>
+            <field>
+              <name>I2CIDLE</name>
+              <description>I2C Bus is Idle</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>IDLE</name>
+              <description>Controller is Idle</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+            <field>
+              <name>WAITING</name>
+              <description>Controller is Waiting</description>
+              <bitRange>[2:2]</bitRange>
+            </field>
+            <field>
+              <name>STALLED</name>
+              <description>Controller is Stalled</description>
+              <bitRange>[3:3]</bitRange>
+            </field>
+            <field>
+              <name>ARBLOST</name>
+              <description>I2C Arbitration was lost</description>
+              <bitRange>[4:4]</bitRange>
+            </field>
+            <field>
+              <name>NACKADDR</name>
+              <description>I2C Address was not Acknowledged</description>
+              <bitRange>[5:5]</bitRange>
+            </field>
+            <field>
+              <name>NACKDATA</name>
+              <description>I2C Data was not Acknowledged</description>
+              <bitRange>[6:6]</bitRange>
+            </field>
+            <field>
+              <name>CLKLOTO</name>
+              <description>I2C Clock Low Timeout</description>
+              <bitRange>[7:7]</bitRange>
+            </field>
+            <field>
+              <name>TXOVERFLOW</name>
+              <description>TX FIFO Overflowed</description>
+              <bitRange>[10:10]</bitRange>
+            </field>
+            <field>
+              <name>RXOVERFLOW</name>
+              <description>TX FIFO Overflowed</description>
+              <bitRange>[11:11]</bitRange>
+            </field>
+            <field>
+              <name>TXREADY</name>
+              <description>TX FIFO Ready</description>
+              <bitRange>[12:12]</bitRange>
+            </field>
+            <field>
+              <name>RXREADY</name>
+              <description>RX FIFO Ready</description>
+              <bitRange>[13:13]</bitRange>
+            </field>
+            <field>
+              <name>TXEMPTY</name>
+              <description>TX FIFO Empty</description>
+              <bitRange>[14:14]</bitRange>
+            </field>
+            <field>
+              <name>RXFULL</name>
+              <description>RX FIFO Full</description>
+              <bitRange>[15:15]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register derivedFrom="IRQ_ENB">
+          <name>IRQ_RAW</name>
+          <description>Raw Interrupt Status Register</description>
+          <addressOffset>0x02c</addressOffset>
+          <access>read-only</access>
+        </register>
+        <register derivedFrom="IRQ_ENB">
+          <name>IRQ_END</name>
+          <description>Enabled Interrupt Status Register</description>
+          <addressOffset>0x030</addressOffset>
+          <access>read-only</access>
+        </register>
+        <register derivedFrom="IRQ_ENB">
+          <name>IRQ_CLR</name>
+          <description>Clear Interrupt Status Register</description>
+          <addressOffset>0x034</addressOffset>
+          <access>write-only</access>
+          <modifiedWriteValues>
+            oneToClear
+          </modifiedWriteValues>
+        </register>
+        <register>
+          <name>RXFIFOIRQTRG</name>
+          <description>Rx FIFO IRQ Trigger Level</description>
+          <addressOffset>0x038</addressOffset>
+        </register>
+        <register>
+          <name>TXFIFOIRQTRG</name>
+          <description>Tx FIFO IRQ Trigger Level</description>
+          <addressOffset>0x03c</addressOffset>
+        </register>
+        <register>
+          <name>FIFO_CLR</name>
+          <description>Clear FIFO Register</description>
+          <addressOffset>0x040</addressOffset>
+          <access>write-only</access>
+          <fields>
+            <field>
+              <name>RXFIFO</name>
+              <description>Clear Rx FIFO</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>TXFIFO</name>
+              <description>Clear Tx FIFO</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TMCONFIG</name>
+          <description>Timing Config Register</description>
+          <addressOffset>0x044</addressOffset>
+        </register>
+        <register>
+          <name>CLKTOLIMIT</name>
+          <description>Clock Low Timeout Limit Register</description>
+          <addressOffset>0x048</addressOffset>
+        </register>
+        <!-- I2C Slave ************************************************************ -->
+        <register>
+          <name>S0_CTRL</name>
+          <description>Slave Control Register</description>
+          <addressOffset>0x100</addressOffset>
+          <resetValue>0x0000000</resetValue>
+          <fields>
+            <field>
+              <name>CLKENABLED</name>
+              <description>I2C Enabled</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>ENABLED</name>
+              <description>I2C Activated</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+            <field>
+              <name>ENABLE</name>
+              <description>I2C Active</description>
+              <bitRange>[2:2]</bitRange>
+            </field>
+            <field>
+              <name>TXFEMD</name>
+              <description>TX FIFIO Empty Mode</description>
+              <bitRange>[3:3]</bitRange>
+            </field>
+            <field>
+              <name>RXFFMD</name>
+              <description>RX FIFO Full Mode</description>
+              <bitRange>[4:4]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>S0_MAXWORDS</name>
+          <description>Slave MaxWords Register</description>
+          <addressOffset>0x104</addressOffset>
+        </register>
+        <register>
+          <name>S0_ADDRESS</name>
+          <description>Slave I2C Address Value</description>
+          <addressOffset>0x108</addressOffset>
+        </register>
+        <register>
+          <name>S0_ADDRESSMASK</name>
+          <description>Slave I2C Address Mask value</description>
+          <addressOffset>0x10c</addressOffset>
+        </register>
+        <register>
+          <name>S0_DATA</name>
+          <description>Slave Data Input/Output</description>
+          <addressOffset>0x110</addressOffset>
+        </register>
+        <register>
+          <name>S0_LASTADDRESS</name>
+          <description>Slave I2C Last Address value</description>
+          <addressOffset>0x114</addressOffset>
+          <access>read-only</access>
+        </register>
+        <register>
+          <name>S0_STATUS</name>
+          <description>Slave I2C Controller Status Register</description>
+          <addressOffset>0x118</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x0000000</resetValue>
+          <fields>
+            <field>
+              <name>COMPLETED</name>
+              <description>Controller Complted a Transaction</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>IDLE</name>
+              <description>Controller is Idle</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+            <field>
+              <name>WAITING</name>
+              <description>Controller is Waiting</description>
+              <bitRange>[2:2]</bitRange>
+            </field>
+            <field>
+              <name>TXSTALLED</name>
+              <description>Controller is Tx Stalled</description>
+              <bitRange>[3:3]</bitRange>
+            </field>
+            <field>
+              <name>RXSTALLED</name>
+              <description>Controller is Rx Stalled</description>
+              <bitRange>[4:4]</bitRange>
+            </field>
+            <field>
+              <name>ADDRESSMATCH</name>
+              <description>I2C Address Match</description>
+              <bitRange>[5:5]</bitRange>
+            </field>
+            <field>
+              <name>NACKDATA</name>
+              <description>I2C Data was not Acknowledged</description>
+              <bitRange>[6:6]</bitRange>
+            </field>
+            <field>
+              <name>RXDATAFIRST</name>
+              <description>Pending Data is first Byte following Address</description>
+              <bitRange>[7:7]</bitRange>
+            </field>
+            <field>
+              <name>RXNEMPTY</name>
+              <description>RX FIFO is Not Empty</description>
+              <bitRange>[8:8]</bitRange>
+            </field>
+            <field>
+              <name>RXFULL</name>
+              <description>RX FIFO is Full</description>
+              <bitRange>[9:9]</bitRange>
+            </field>
+            <field>
+              <name>RXTRIGGER</name>
+              <description>RX FIFO Above Trigger Level</description>
+              <bitRange>[11:11]</bitRange>
+            </field>
+            <field>
+              <name>TXEMPTY</name>
+              <description>TX FIFO is Empty</description>
+              <bitRange>[12:12]</bitRange>
+            </field>
+            <field>
+              <name>TXNFULL</name>
+              <description>TX FIFO is Full</description>
+              <bitRange>[13:13]</bitRange>
+            </field>
+            <field>
+              <name>TXTRIGGER</name>
+              <description>TX FIFO Below Trigger Level</description>
+              <bitRange>[15:15]</bitRange>
+            </field>
+            <field>
+              <name>RAW_BUSY</name>
+              <description>I2C Raw Busy value</description>
+              <bitRange>[29:29]</bitRange>
+            </field>
+            <field>
+              <name>RAW_SDA</name>
+              <description>I2C Raw SDA value</description>
+              <bitRange>[30:30]</bitRange>
+            </field>
+            <field>
+              <name>RAW_SCL</name>
+              <description>I2C Raw SCL value</description>
+              <bitRange>[31:31]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>S0_STATE</name>
+          <description>Internal STATE of I2C Slave Controller</description>
+          <addressOffset>0x11c</addressOffset>
+          <access>read-only</access>
+        </register>
+        <register>
+          <name>S0_TXCOUNT</name>
+          <description>Slave TX Count Register</description>
+          <addressOffset>0x120</addressOffset>
+          <access>read-only</access>
+        </register>
+        <register>
+          <name>S0_RXCOUNT</name>
+          <description>Slave RX Count Register</description>
+          <addressOffset>0x124</addressOffset>
+          <access>read-only</access>
+        </register>
+        <register>
+          <name>S0_IRQ_ENB</name>
+          <description>Slave Interrupt Enable Register</description>
+          <addressOffset>0x128</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x0000000</resetValue>
+          <fields>
+            <field>
+              <name>COMPLETED</name>
+              <description>Controller Complted a Transaction</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>IDLE</name>
+              <description>Controller is Idle</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+            <field>
+              <name>WAITING</name>
+              <description>Controller is Waiting</description>
+              <bitRange>[2:2]</bitRange>
+            </field>
+            <field>
+              <name>TXSTALLED</name>
+              <description>Controller is Tx Stalled</description>
+              <bitRange>[3:3]</bitRange>
+            </field>
+            <field>
+              <name>RXSTALLED</name>
+              <description>Controller is Rx Stalled</description>
+              <bitRange>[4:4]</bitRange>
+            </field>
+            <field>
+              <name>ADDRESSMATCH</name>
+              <description>I2C Address Match</description>
+              <bitRange>[5:5]</bitRange>
+            </field>
+            <field>
+              <name>NACKDATA</name>
+              <description>I2C Data was not Acknowledged</description>
+              <bitRange>[6:6]</bitRange>
+            </field>
+            <field>
+              <name>RXDATAFIRST</name>
+              <description>Pending Data is first Byte following Address</description>
+              <bitRange>[7:7]</bitRange>
+            </field>
+            <field>
+              <name>I2C_START</name>
+              <description>I2C Start Condition</description>
+              <bitRange>[8:8]</bitRange>
+            </field>
+            <field>
+              <name>I2C_STOP</name>
+              <description>I2C Stop Condition</description>
+              <bitRange>[9:9]</bitRange>
+            </field>
+            <field>
+              <name>TXUNDERFLOW</name>
+              <description>TX FIFO Underflowed</description>
+              <bitRange>[10:10]</bitRange>
+            </field>
+            <field>
+              <name>RXOVERFLOW</name>
+              <description>TX FIFO Overflowed</description>
+              <bitRange>[11:11]</bitRange>
+            </field>
+            <field>
+              <name>TXREADY</name>
+              <description>TX FIFO Ready</description>
+              <bitRange>[12:12]</bitRange>
+            </field>
+            <field>
+              <name>RXREADY</name>
+              <description>RX FIFO Ready</description>
+              <bitRange>[13:13]</bitRange>
+            </field>
+            <field>
+              <name>TXEMPTY</name>
+              <description>TX FIFO Empty</description>
+              <bitRange>[14:14]</bitRange>
+            </field>
+            <field>
+              <name>RXFULL</name>
+              <description>RX FIFO Full</description>
+              <bitRange>[15:15]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register derivedFrom="S0_IRQ_ENB">
+          <name>S0_IRQ_RAW</name>
+          <description>Slave Raw Interrupt Status Register</description>
+          <addressOffset>0x12c</addressOffset>
+          <access>read-only</access>
+        </register>
+        <register derivedFrom="S0_IRQ_ENB">
+          <name>S0_IRQ_END</name>
+          <description>Slave Enabled Interrupt Status Register</description>
+          <addressOffset>0x130</addressOffset>
+          <access>read-only</access>
+        </register>
+        <register derivedFrom="S0_IRQ_ENB">
+          <name>S0_IRQ_CLR</name>
+          <description>Slave Clear Interrupt Status Register</description>
+          <addressOffset>0x134</addressOffset>
+          <access>write-only</access>
+          <modifiedWriteValues>
+            oneToClear
+          </modifiedWriteValues>
+        </register>
+        <register>
+          <name>S0_RXFIFOIRQTRG</name>
+          <description>Slave Rx FIFO IRQ Trigger Level</description>
+          <addressOffset>0x138</addressOffset>
+        </register>
+        <register>
+          <name>S0_TXFIFOIRQTRG</name>
+          <description>Slave Tx FIFO IRQ Trigger Level</description>
+          <addressOffset>0x13c</addressOffset>
+        </register>
+        <register>
+          <name>S0_FIFO_CLR</name>
+          <description>Slave Clear FIFO Register</description>
+          <addressOffset>0x140</addressOffset>
+          <access>write-only</access>
+          <fields>
+            <field>
+              <name>RXFIFO</name>
+              <description>Clear Rx FIFO</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>TXFIFO</name>
+              <description>Clear Tx FIFO</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>S0_ADDRESSB</name>
+          <description>Slave I2C Address B Value</description>
+          <addressOffset>0x144</addressOffset>
+        </register>
+        <register>
+          <name>S0_ADDRESSMASKB</name>
+          <description>Slave I2C Address B Mask value</description>
+          <addressOffset>0x148</addressOffset>
+        </register>
+        <register>
+          <name>PERID</name>
+          <description>Peripheral ID Register</description>
+          <addressOffset>0xffc</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x001407e1</resetValue>
+        </register>
+      </registers>
+    </peripheral>
+    <peripheral derivedFrom="I2CA">
+      <name>I2CB</name>
+      <baseAddress>0x40061000</baseAddress>
+    </peripheral>
+    <!-- **************************************************************************************** -->
+</peripherals>
+</device>
