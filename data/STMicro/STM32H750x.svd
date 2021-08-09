@@ -67743,7 +67743,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <name>DMAMR</name>
           <displayName>DMAMR</displayName>
           <description>DMA mode register</description>
-          <addressOffset>0x0</addressOffset>
+          <addressOffset>0x1000</addressOffset>
           <size>0x20</size>
           <access>read-write</access>
           <resetValue>0x0008000</resetValue>
