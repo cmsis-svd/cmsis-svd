@@ -87008,7 +87008,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitWidth>6</bitWidth>
             </field>
           </fields>
-        </register>     
+        </register>
 		<register>
           <name>CH2CFGR1</name>
           <displayName>CH2CFGR1</displayName>
@@ -87182,7 +87182,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitWidth>6</bitWidth>
             </field>
           </fields>
-        </register>        
+        </register>
 		<register>
           <name>CH3CFGR1</name>
           <displayName>CH3CFGR1</displayName>
@@ -87356,7 +87356,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitWidth>6</bitWidth>
             </field>
           </fields>
-        </register>        
+        </register>
 		<register>
           <name>CH4CFGR1</name>
           <displayName>CH4CFGR1</displayName>
@@ -87530,7 +87530,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitWidth>6</bitWidth>
             </field>
           </fields>
-        </register>        
+        </register>
 		<register>
           <name>CH5CFGR1</name>
           <displayName>CH5CFGR1</displayName>
@@ -87704,7 +87704,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitWidth>6</bitWidth>
             </field>
           </fields>
-        </register>            
+        </register>
 		<register>
           <name>CH6CFGR1</name>
           <displayName>CH6CFGR1</displayName>
@@ -87878,7 +87878,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitWidth>6</bitWidth>
             </field>
           </fields>
-        </register> 
+        </register>
         <register>
           <name>CH7CFGR1</name>
           <displayName>CH7CFGR1</displayName>
@@ -88052,7 +88052,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitWidth>6</bitWidth>
             </field>
           </fields>
-        </register>     
+        </register>
         <register>
           <name>DFSDM_FLT0CR1</name>
           <displayName>DFSDM_FLT0CR1</displayName>
@@ -103035,7 +103035,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
                      <description>Allow D1 domain debug in Standby mode</description>
                      <bitOffset>2</bitOffset>
                      <bitWidth>1</bitWidth>
-                  </field>                 
+                  </field>
 				  <field>
                      <name>DBGSLEEP_D2</name>
                      <description> Allow D2 domain debug in Sleep mode</description>
@@ -103065,7 +103065,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
                      <description>Allow debug in D3 Standby mode</description>
                      <bitOffset>8</bitOffset>
                      <bitWidth>1</bitWidth>
-                  </field>				
+                  </field>
 				  <field>
                      <name>TRACECLKEN</name>
                      <description>Trace port clock enable</description>
@@ -103089,7 +103089,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
                      <description>External trigger output enable</description>
                      <bitOffset>28</bitOffset>
                      <bitWidth>1</bitWidth>
-                  </field>				  
+                  </field>
                </fields>
             </register>
             <register>
@@ -103106,9 +103106,9 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
                      <description>WWDG1 stop in debug</description>
                      <bitOffset>6</bitOffset>
                      <bitWidth>1</bitWidth>
-                  </field>                                                 
+                  </field>
                </fields>
-            </register>           
+            </register>
 			<register>
                <name>APB1LFZ1</name>
                <displayName>APB1LFZ1</displayName>
@@ -103177,7 +103177,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
                      <description> LPTIM1 stop in debug</description>
                      <bitOffset>9</bitOffset>
                      <bitWidth>1</bitWidth>
-                  </field>				  
+                  </field>
 				  <field>
                      <name>DBG_I2C1</name>
                      <description> I2C1 SMBUS timeout stop in debug </description>
@@ -103195,9 +103195,9 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
                      <description> I2C3 SMBUS timeout stop in debug</description>
                      <bitOffset>23</bitOffset>
                      <bitWidth>1</bitWidth>
-                  </field>				   
+                  </field>
                </fields>
-            </register>           	                     
+            </register>
             <register>
                <name>APB2FZ1</name>
                <displayName>APB2FZ1</displayName>
@@ -103242,9 +103242,9 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
                      <description> HRTIM stop in debug</description>
                      <bitOffset>29</bitOffset>
                      <bitWidth>1</bitWidth>
-                  </field>				  
+                  </field>
                </fields>
-            </register>			
+            </register>
             <register>
                <name>APB4FZ1</name>
                <displayName>APB4FZ1</displayName>
@@ -103295,9 +103295,9 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
                      <description>Independent watchdog for D1 stop in debug</description>
                      <bitOffset>18</bitOffset>
                      <bitWidth>1</bitWidth>
-                  </field>				  				  
+                  </field>
                </fields>
-            </register>		
+            </register>
          </registers>
     </peripheral>
 	<peripheral>
