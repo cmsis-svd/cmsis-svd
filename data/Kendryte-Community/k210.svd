@@ -5517,12 +5517,10 @@
             <interrupt>
                 <name>TIMER0A</name>
                 <value>14</value>
-                <description>TIMER0 channel 0 or 1 interrupt</description>
             </interrupt>
             <interrupt>
                 <name>TIMER0B</name>
                 <value>15</value>
-                <description>TIMER0 channel 2 or 3 interrupt</description>
             </interrupt>
         </peripheral>
         <!-- TIMER0 -->
@@ -5535,12 +5533,10 @@
             <interrupt>
                 <name>TIMER1A</name>
                 <value>16</value>
-                <description>TIMER1 channel 0 or 1 interrupt</description>
             </interrupt>
             <interrupt>
                 <name>TIMER1B</name>
                 <value>17</value>
-                <description>TIMER1 channel 2 or 3 interrupt</description>
             </interrupt>
         </peripheral>
         <!-- TIMER1 -->
@@ -5553,12 +5549,10 @@
             <interrupt>
                 <name>TIMER2A</name>
                 <value>18</value>
-                <description>TIMER2 channel 0 or 1 interrupt</description>
             </interrupt>
             <interrupt>
                 <name>TIMER2B</name>
                 <value>19</value>
-                <description>TIMER2 channel 2 or 3 interrupt</description>
             </interrupt>
         </peripheral>
         <!-- TIMER2 -->

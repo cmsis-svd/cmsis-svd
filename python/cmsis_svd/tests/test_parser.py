@@ -201,10 +201,10 @@ class TestParserNordic(unittest.TestCase):
         # Ensure we got all of them
         device = self.device
         self.assertEqual(list(sorted([p.name for p in device.peripherals])),
-                         ['AAR', 'ADC', 'AMLI', 'CCM', 'CLOCK', 'ECB', 'FICR', 'GPIO', 'GPIOTE', 'LPCOMP', 'MPU',
-                          'NVMC', 'POWER', 'PPI', 'QDEC', 'RADIO', 'RNG', 'RTC0', 'RTC1', 'SPI0', 'SPI1', 'SPIM1',
-                          'SPIS1',
-                          'SWI', 'TEMP', 'TIMER0', 'TIMER1', 'TIMER2', 'TWI0', 'TWI1', 'UART0', 'UICR', 'WDT'
+                         ['AAR', 'ADC', 'CCM', 'CLOCK', 'ECB', 'FICR', 'GPIO', 'GPIOTE', 'LPCOMP', 'MPU',
+                          'NVMC', 'POWER', 'PPI', 'QDEC', 'RADIO', 'RNG', 'RTC0', 'RTC1', 'SPI0', 'SPI1',
+                          'SPIS1','SWI', 'TEMP', 'TIMER0', 'TIMER1', 'TIMER2', 'TWI0', 'TWI1', 'UART0', 'UICR', 
+                          'WDT'
                           ])
 
     def test_peripheral_details(self):
@@ -257,19 +257,6 @@ class TestParserNordic(unittest.TestCase):
                           for r in radio.register_arrays],
                          [('DAB[%s]', 8, [0, 1, 2, 3, 4, 5, 6, 7], 4),
                           ('DAP[%s]', 8, [0, 1, 2, 3, 4, 5, 6, 7], 4)])
-
-    def test_register_cluster(self):
-        amli = [p for p in self.device.peripherals if p.name == "AMLI"][0]
-        regs = list(amli.registers)
-        register_names = [r.name for r in regs]
-        self.assertIn("RAMPRI_CPU0", register_names)
-        self.assertIn("RAMPRI_SPIS1", register_names)
-        self.assertIn("RAMPRI_RADIO", register_names)
-        self.assertIn("RAMPRI_ECB", register_names)
-        self.assertIn("RAMPRI_CCM", register_names)
-        self.assertIn("RAMPRI_AAR", register_names)
-        aar = [r for r in regs if r.name == "RAMPRI_AAR"][0]
-        self.assertEqual(aar.address_offset, 0xE14)
 
     def test_register_cluster_array(self):
         ppi = [p for p in self.device.peripherals if p.name == "PPI"][0]

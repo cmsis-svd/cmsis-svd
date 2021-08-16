@@ -1,6 +1,7 @@
 <device xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="1.0" xsi:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1.0.xsd">
     <name>esp32</name>
     <version>1.0</version>
+    <addressUnitBits>8</addressUnitBits>
     <width>32</width>
     <cpu>
         <name>Xtensa LX6</name>
