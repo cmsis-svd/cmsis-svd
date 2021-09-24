@@ -328,7 +328,7 @@ class SVDParser(object):
         reset_mask = _get_int(cluster_node, 'resetMask')
         dim_increment = _get_int(cluster_node, 'dimIncrement')
         dim_index_text = _get_text(cluster_node, 'dimIndex')
-        alternate_cluster = _get_text(cluster_node, 'alternateGluster')
+        alternate_cluster = _get_text(cluster_node, 'alternateCluster')
         header_struct_name = _get_text(cluster_node, 'headerStructName')
         cluster = []
         for sub_cluster_node in cluster_node.findall("./cluster"):
