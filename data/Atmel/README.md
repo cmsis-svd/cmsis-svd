@@ -15,6 +15,7 @@ Apache License, version 2.0.
 * `Atmel.SAMD21_DFP.1.3.331.atpack`: `ATSAMD21*.svd`
 * `Atmel.SAMD51_DFP.1.2.139.atpack`: `ATSAMD51*.svd`
 * `Atmel.SAML11_DFP.1.0.109.atpack`: `ATSAML11*.svd`
+* `Atmel.SAML22_DFP.1.2.77.atpack` : `ATSAML22*.svd`
 * `Atmel.SAMR21_DFP.1.1.72.atpack`: `ATSAMR21*.svd`
 * `Atmel.SAMV71_DFP.2.4.182.atpack`: `ATSAMV71*.svd`
 
