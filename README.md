@@ -1,7 +1,7 @@
 CMSIS-SVD Repository and Parsers
 ================================
 
-[![Travis](https://img.shields.io/travis/posborne/cmsis-svd.svg)](https://travis-ci.org/posborne/cmsis-svd)
+[![CI Results](https://github.com/posborne/cmsis-svd/workflows/test/badge.svg)](https://github.com/posborne/cmsis-svd/actions)
 
 What is this?
 -------------
