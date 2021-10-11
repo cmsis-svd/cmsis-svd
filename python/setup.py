@@ -29,11 +29,7 @@ def read_version(filename):
 
 
 def get_long_description():
-    try:
-        import pypandoc
-        long_description = pypandoc.convert('README.md', 'rst')
-    except ImportError:
-        long_description = open('README.md').read()
+    return open('README.md').read()
 
 
 setup(
@@ -42,6 +38,7 @@ setup(
     url="https://github.com/posborne/cmsis-svd",
     description="CMSIS SVD data files and parser",
     long_description=get_long_description(),
+    long_description_content_type="text/markdown",
     author="Paul Osborne",
     author_email="osbpau@gmail.com",
     license="Apache 2.0",
