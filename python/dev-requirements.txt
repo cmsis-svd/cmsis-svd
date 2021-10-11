@@ -1,2 +1,2 @@
 --editable .
-nose
+nose2
