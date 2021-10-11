@@ -89,19 +89,11 @@ pip install -r dev-requirements.txt
 Then, to run the tests:
 
 ```sh
-nosetests .
+nose2 .
 ```
 
-There are quite a few SVD files, so the tests take a bit.  If you have
-some extra CPUs to throw at the problem, you can do the following:
-
-```sh
-nosetests --processes=8 .
-```
-
-Where `8` can be replaced with as many processes as you see fit.
-Generally, 2x the number of processors in your machine is a good
-starting place.
+By default, tests will run in parallel according to the number of
+processors available on the system.
 
 Contributing
 ------------
