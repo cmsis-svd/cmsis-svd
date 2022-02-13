@@ -203,7 +203,7 @@ class TestParserNordic(unittest.TestCase):
         self.assertEqual(list(sorted([p.name for p in device.peripherals])),
                          ['AAR', 'ADC', 'CCM', 'CLOCK', 'ECB', 'FICR', 'GPIO', 'GPIOTE', 'LPCOMP', 'MPU',
                           'NVMC', 'POWER', 'PPI', 'QDEC', 'RADIO', 'RNG', 'RTC0', 'RTC1', 'SPI0', 'SPI1',
-                          'SPIS1','SWI', 'TEMP', 'TIMER0', 'TIMER1', 'TIMER2', 'TWI0', 'TWI1', 'UART0', 'UICR', 
+                          'SPIS1','SWI', 'TEMP', 'TIMER0', 'TIMER1', 'TIMER2', 'TWI0', 'TWI1', 'UART0', 'UICR',
                           'WDT'
                           ])
 
@@ -269,6 +269,20 @@ class TestParserNordic(unittest.TestCase):
         reg = [r for r in regs if r.name == "CH[15]_TEP"][0]
         self.assertEqual(reg.address_offset, 0x58C)
 
+class TestParserSpansion(unittest.TestCase):
+    def test_derived_register_attributes(self):
+        parser = SVDParser.for_packaged_svd('Spansion', 'MB9BF46xx.svd')
+        mft0_regs = [p.registers for p in parser.get_device().peripherals if p.name == "MFT0"][0]
+        reg_map = {r.name: r for r in mft0_regs}
+
+        # Test to see if the derived register has the attributes of the base register
+        base_reg = reg_map['FRT_TCCP0']
+        derived_reg = reg_map['FRT_TCCP1']
+
+        self.assertEqual(derived_reg.size, base_reg.size)
+        self.assertEqual(derived_reg.access, base_reg.access)
+        self.assertEqual(derived_reg.reset_value, base_reg.reset_value)
+        self.assertEqual(derived_reg.reset_mask, base_reg.reset_mask)
 
 class TestParserExample(unittest.TestCase):
     def test_derived_from_registers(self):
