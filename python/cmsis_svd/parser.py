@@ -231,7 +231,7 @@ class SVDParser(object):
 
         return SVDField(
             name=_get_text(field_node, 'name'),
-            derived_from=_get_text(field_node, 'derivedFrom'),
+            derived_from=field_node.get('derivedFrom'),
             description=_get_text(field_node, 'description'),
             bit_offset=bit_offset,
             bit_width=bit_width,
@@ -250,7 +250,7 @@ class SVDParser(object):
 
         dim = _get_int(register_node, 'dim')
         name = _get_text(register_node, 'name')
-        derived_from = _get_text(register_node, 'derivedFrom')
+        derived_from = register_node.get('derivedFrom')
         description = _get_text(register_node, 'description')
         address_offset = _get_int(register_node, 'addressOffset')
         size = _get_int(register_node, 'size')
@@ -318,7 +318,7 @@ class SVDParser(object):
     def _parse_cluster(self, cluster_node):
         dim = _get_int(cluster_node, 'dim')
         name = _get_text(cluster_node, 'name')
-        derived_from = _get_text(cluster_node, 'derivedFrom')
+        derived_from = cluster_node.get('derivedFrom')
         description = _get_text(cluster_node, 'description')
         address_offset = _get_int(cluster_node, 'addressOffset')
         size = _get_int(cluster_node, 'size')
