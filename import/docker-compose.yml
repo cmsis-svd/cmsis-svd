@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+    rust:
+        build: .
+        image: rust
+        volumes:
+          - C:/Users/John/tmp/msp430_svd:/code
+        environment:
+          ARCH: rust
+        container_name: rust
+        stdin_open: true # docker run -i
+        tty: true        # docker run -t
+        privileged: true
+        
