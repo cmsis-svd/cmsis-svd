@@ -18,6 +18,7 @@ Apache License, version 2.0.
 * `Atmel.SAML22_DFP.1.2.77.atpack` : `ATSAML22*.svd`
 * `Atmel.SAMR21_DFP.1.1.72.atpack`: `ATSAMR21*.svd`
 * `Atmel.SAMV71_DFP.2.4.182.atpack`: `ATSAMV71*.svd`
+* `Atmel.SAMS70_DFP.2.4.134.atpack`: `ATSAMS70*.svd`
 
 EmbSysRegView
 =============
