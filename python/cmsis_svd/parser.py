@@ -209,8 +209,23 @@ class SVDParser(object):
             is_default=_get_int(enumerated_value_node, 'isDefault')
         )
 
-    def _parse_field(self, field_node):
+    def _parse_field(self, field_node, register_node):
         enumerated_values = []
+
+        # handle DerivedFrom for enumeratedValues probably a hack
+        for enumerated_values_node in field_node.findall("./enumeratedValues"):
+            # if inheritance is at play
+            if "derivedFrom" in enumerated_values_node.attrib:
+                # get node name to inherit from
+                derived_node_name = enumerated_values_node.attrib["derivedFrom"]
+
+                # find that node
+                for evs in register_node.findall("./fields/field/enumeratedValues"):
+                    if evs.find("./name") is not None and evs.find("./name").text == derived_node_name:
+                        # copy all its goodness to this node
+                        for ev in evs.findall("./enumeratedValue"):
+                            enumerated_values_node.append(ev)
+
         for enumerated_value_node in field_node.findall("./enumeratedValues/enumeratedValue"):
             enumerated_values.append(self._parse_enumerated_value(enumerated_value_node))
 
@@ -244,7 +259,7 @@ class SVDParser(object):
     def _parse_registers(self, register_node):
         fields = []
         for field_node in register_node.findall('.//field'):
-            node = self._parse_field(field_node)
+            node = self._parse_field(field_node, register_node)
             if not self.remove_reserved or 'reserved' not in node.name.lower():
                 fields.append(node)
 
