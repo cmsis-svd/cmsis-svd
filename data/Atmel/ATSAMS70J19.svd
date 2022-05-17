@@ -59,7 +59,7 @@ Copyright (c) 2017 Microchip Technology Inc.
          </interrupt>
          <registers>
             <register>
-               <name>ACC_CR</name>
+               <name>CR</name>
                <description>Control Register</description>
                <addressOffset>0x00</addressOffset>
                <size>32</size>
@@ -74,7 +74,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ACC_MR</name>
+               <name>MR</name>
                <description>Mode Register</description>
                <addressOffset>0x04</addressOffset>
                <size>32</size>
@@ -280,7 +280,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ACC_IER</name>
+               <name>IER</name>
                <description>Interrupt Enable Register</description>
                <addressOffset>0x24</addressOffset>
                <size>32</size>
@@ -295,7 +295,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ACC_IDR</name>
+               <name>IDR</name>
                <description>Interrupt Disable Register</description>
                <addressOffset>0x28</addressOffset>
                <size>32</size>
@@ -310,7 +310,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ACC_IMR</name>
+               <name>IMR</name>
                <description>Interrupt Mask Register</description>
                <addressOffset>0x2C</addressOffset>
                <size>32</size>
@@ -325,7 +325,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ACC_ISR</name>
+               <name>ISR</name>
                <description>Interrupt Status Register</description>
                <addressOffset>0x30</addressOffset>
                <size>32</size>
@@ -352,7 +352,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ACC_ACR</name>
+               <name>ACR</name>
                <description>Analog Control Register</description>
                <addressOffset>0x94</addressOffset>
                <size>32</size>
@@ -385,7 +385,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ACC_WPMR</name>
+               <name>WPMR</name>
                <description>Write Protection Mode Register</description>
                <addressOffset>0xE4</addressOffset>
                <size>32</size>
@@ -413,7 +413,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ACC_WPSR</name>
+               <name>WPSR</name>
                <description>Write Protection Status Register</description>
                <addressOffset>0xE8</addressOffset>
                <size>32</size>
@@ -447,7 +447,7 @@ Copyright (c) 2017 Microchip Technology Inc.
          </interrupt>
          <registers>
             <register>
-               <name>AES_CR</name>
+               <name>CR</name>
                <description>Control Register</description>
                <addressOffset>0x00</addressOffset>
                <size>32</size>
@@ -468,7 +468,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AES_MR</name>
+               <name>MR</name>
                <description>Mode Register</description>
                <addressOffset>0x04</addressOffset>
                <size>32</size>
@@ -654,7 +654,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AES_IER</name>
+               <name>IER</name>
                <description>Interrupt Enable Register</description>
                <addressOffset>0x10</addressOffset>
                <size>32</size>
@@ -681,7 +681,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AES_IDR</name>
+               <name>IDR</name>
                <description>Interrupt Disable Register</description>
                <addressOffset>0x14</addressOffset>
                <size>32</size>
@@ -708,7 +708,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AES_IMR</name>
+               <name>IMR</name>
                <description>Interrupt Mask Register</description>
                <addressOffset>0x18</addressOffset>
                <size>32</size>
@@ -735,7 +735,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AES_ISR</name>
+               <name>ISR</name>
                <description>Interrupt Status Register</description>
                <addressOffset>0x1C</addressOffset>
                <size>32</size>
@@ -803,7 +803,7 @@ Copyright (c) 2017 Microchip Technology Inc.
             <register>
                <dim>8</dim>
                <dimIncrement>4</dimIncrement>
-               <name>AES_KEYWR[%s]</name>
+               <name>KEYWR[%s]</name>
                <description>Key Word Register 0</description>
                <addressOffset>0x20</addressOffset>
                <size>32</size>
@@ -820,7 +820,7 @@ Copyright (c) 2017 Microchip Technology Inc.
             <register>
                <dim>4</dim>
                <dimIncrement>4</dimIncrement>
-               <name>AES_IDATAR[%s]</name>
+               <name>IDATAR[%s]</name>
                <description>Input Data Register 0</description>
                <addressOffset>0x40</addressOffset>
                <size>32</size>
@@ -837,7 +837,7 @@ Copyright (c) 2017 Microchip Technology Inc.
             <register>
                <dim>4</dim>
                <dimIncrement>4</dimIncrement>
-               <name>AES_ODATAR[%s]</name>
+               <name>ODATAR[%s]</name>
                <description>Output Data Register 0</description>
                <addressOffset>0x50</addressOffset>
                <size>32</size>
@@ -854,7 +854,7 @@ Copyright (c) 2017 Microchip Technology Inc.
             <register>
                <dim>4</dim>
                <dimIncrement>4</dimIncrement>
-               <name>AES_IVR[%s]</name>
+               <name>IVR[%s]</name>
                <description>Initialization Vector Register 0</description>
                <addressOffset>0x60</addressOffset>
                <size>32</size>
@@ -869,7 +869,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AES_AADLENR</name>
+               <name>AADLENR</name>
                <description>Additional Authenticated Data Length Register</description>
                <addressOffset>0x70</addressOffset>
                <size>32</size>
@@ -883,7 +883,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AES_CLENR</name>
+               <name>CLENR</name>
                <description>Plaintext/Ciphertext Length Register</description>
                <addressOffset>0x74</addressOffset>
                <size>32</size>
@@ -899,7 +899,7 @@ Copyright (c) 2017 Microchip Technology Inc.
             <register>
                <dim>4</dim>
                <dimIncrement>4</dimIncrement>
-               <name>AES_GHASHR[%s]</name>
+               <name>GHASHR[%s]</name>
                <description>GCM Intermediate Hash Word Register 0</description>
                <addressOffset>0x78</addressOffset>
                <size>32</size>
@@ -915,7 +915,7 @@ Copyright (c) 2017 Microchip Technology Inc.
             <register>
                <dim>4</dim>
                <dimIncrement>4</dimIncrement>
-               <name>AES_TAGR[%s]</name>
+               <name>TAGR[%s]</name>
                <description>GCM Authentication Tag Word Register 0</description>
                <addressOffset>0x88</addressOffset>
                <size>32</size>
@@ -930,7 +930,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AES_CTRR</name>
+               <name>CTRR</name>
                <description>GCM Encryption Counter Value Register</description>
                <addressOffset>0x98</addressOffset>
                <size>32</size>
@@ -947,7 +947,7 @@ Copyright (c) 2017 Microchip Technology Inc.
             <register>
                <dim>4</dim>
                <dimIncrement>4</dimIncrement>
-               <name>AES_GCMHR[%s]</name>
+               <name>GCMHR[%s]</name>
                <description>GCM H Word Register 0</description>
                <addressOffset>0x9C</addressOffset>
                <size>32</size>
@@ -980,7 +980,7 @@ Copyright (c) 2017 Microchip Technology Inc.
          </interrupt>
          <registers>
             <register>
-               <name>AFEC_CR</name>
+               <name>CR</name>
                <description>AFEC Control Register</description>
                <addressOffset>0x00</addressOffset>
                <size>32</size>
@@ -1001,7 +1001,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AFEC_MR</name>
+               <name>MR</name>
                <description>AFEC Mode Register</description>
                <addressOffset>0x04</addressOffset>
                <size>32</size>
@@ -1261,7 +1261,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AFEC_EMR</name>
+               <name>EMR</name>
                <description>AFEC Extended Mode Register</description>
                <addressOffset>0x08</addressOffset>
                <size>32</size>
@@ -1391,7 +1391,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AFEC_SEQ1R</name>
+               <name>SEQ1R</name>
                <description>AFEC Channel Sequence 1 Register</description>
                <addressOffset>0x0C</addressOffset>
                <size>32</size>
@@ -1447,7 +1447,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AFEC_SEQ2R</name>
+               <name>SEQ2R</name>
                <description>AFEC Channel Sequence 2 Register</description>
                <addressOffset>0x10</addressOffset>
                <size>32</size>
@@ -1479,7 +1479,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AFEC_CHER</name>
+               <name>CHER</name>
                <description>AFEC Channel Enable Register</description>
                <addressOffset>0x14</addressOffset>
                <size>32</size>
@@ -1560,7 +1560,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AFEC_CHDR</name>
+               <name>CHDR</name>
                <description>AFEC Channel Disable Register</description>
                <addressOffset>0x18</addressOffset>
                <size>32</size>
@@ -1641,7 +1641,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AFEC_CHSR</name>
+               <name>CHSR</name>
                <description>AFEC Channel Status Register</description>
                <addressOffset>0x1C</addressOffset>
                <size>32</size>
@@ -1722,7 +1722,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AFEC_LCDR</name>
+               <name>LCDR</name>
                <description>AFEC Last Converted Data Register</description>
                <addressOffset>0x20</addressOffset>
                <size>32</size>
@@ -1743,7 +1743,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AFEC_IER</name>
+               <name>IER</name>
                <description>AFEC Interrupt Enable Register</description>
                <addressOffset>0x24</addressOffset>
                <size>32</size>
@@ -1848,7 +1848,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AFEC_IDR</name>
+               <name>IDR</name>
                <description>AFEC Interrupt Disable Register</description>
                <addressOffset>0x28</addressOffset>
                <size>32</size>
@@ -1953,7 +1953,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AFEC_IMR</name>
+               <name>IMR</name>
                <description>AFEC Interrupt Mask Register</description>
                <addressOffset>0x2C</addressOffset>
                <size>32</size>
@@ -2058,7 +2058,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AFEC_ISR</name>
+               <name>ISR</name>
                <description>AFEC Interrupt Status Register</description>
                <addressOffset>0x30</addressOffset>
                <size>32</size>
@@ -2163,7 +2163,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AFEC_OVER</name>
+               <name>OVER</name>
                <description>AFEC Overrun Status Register</description>
                <addressOffset>0x4C</addressOffset>
                <size>32</size>
@@ -2244,7 +2244,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AFEC_CWR</name>
+               <name>CWR</name>
                <description>AFEC Compare Window Register</description>
                <addressOffset>0x50</addressOffset>
                <size>32</size>
@@ -2264,7 +2264,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AFEC_CGR</name>
+               <name>CGR</name>
                <description>AFEC Channel Gain Register</description>
                <addressOffset>0x54</addressOffset>
                <size>32</size>
@@ -2344,7 +2344,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AFEC_DIFFR</name>
+               <name>DIFFR</name>
                <description>AFEC Channel Differential Register</description>
                <addressOffset>0x60</addressOffset>
                <size>32</size>
@@ -2424,7 +2424,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AFEC_CSELR</name>
+               <name>CSELR</name>
                <description>AFEC Channel Selection Register</description>
                <addressOffset>0x64</addressOffset>
                <size>32</size>
@@ -2438,7 +2438,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AFEC_CDR</name>
+               <name>CDR</name>
                <description>AFEC Channel Data Register</description>
                <addressOffset>0x68</addressOffset>
                <size>32</size>
@@ -2453,7 +2453,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AFEC_COCR</name>
+               <name>COCR</name>
                <description>AFEC Channel Offset Compensation Register</description>
                <addressOffset>0x6C</addressOffset>
                <size>32</size>
@@ -2467,7 +2467,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AFEC_TEMPMR</name>
+               <name>TEMPMR</name>
                <description>AFEC Temperature Sensor Mode Register</description>
                <addressOffset>0x70</addressOffset>
                <size>32</size>
@@ -2510,7 +2510,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AFEC_TEMPCWR</name>
+               <name>TEMPCWR</name>
                <description>AFEC Temperature Compare Window Register</description>
                <addressOffset>0x74</addressOffset>
                <size>32</size>
@@ -2530,7 +2530,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AFEC_ACR</name>
+               <name>ACR</name>
                <description>AFEC Analog Control Register</description>
                <addressOffset>0x94</addressOffset>
                <size>32</size>
@@ -2556,7 +2556,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AFEC_SHMR</name>
+               <name>SHMR</name>
                <description>AFEC Sample &amp; Hold Mode Register</description>
                <addressOffset>0xA0</addressOffset>
                <size>32</size>
@@ -2636,7 +2636,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AFEC_COSR</name>
+               <name>COSR</name>
                <description>AFEC Correction Select Register</description>
                <addressOffset>0xD0</addressOffset>
                <size>32</size>
@@ -2650,7 +2650,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AFEC_CVR</name>
+               <name>CVR</name>
                <description>AFEC Correction Values Register</description>
                <addressOffset>0xD4</addressOffset>
                <size>32</size>
@@ -2670,7 +2670,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AFEC_CECR</name>
+               <name>CECR</name>
                <description>AFEC Channel Error Correction Register</description>
                <addressOffset>0xD8</addressOffset>
                <size>32</size>
@@ -2750,7 +2750,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AFEC_WPMR</name>
+               <name>WPMR</name>
                <description>AFEC Write Protection Mode Register</description>
                <addressOffset>0xE4</addressOffset>
                <size>32</size>
@@ -2778,7 +2778,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>AFEC_WPSR</name>
+               <name>WPSR</name>
                <description>AFEC Write Protection Status Register</description>
                <addressOffset>0xE8</addressOffset>
                <size>32</size>
@@ -2822,7 +2822,7 @@ Copyright (c) 2017 Microchip Technology Inc.
          </addressBlock>
          <registers>
             <register>
-               <name>CHIPID_CIDR</name>
+               <name>CIDR</name>
                <description>Chip ID Register</description>
                <addressOffset>0x0</addressOffset>
                <size>32</size>
@@ -3167,7 +3167,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>CHIPID_EXID</name>
+               <name>EXID</name>
                <description>Chip ID Extension Register</description>
                <addressOffset>0x4</addressOffset>
                <size>32</size>
@@ -3201,7 +3201,7 @@ Copyright (c) 2017 Microchip Technology Inc.
          </interrupt>
          <registers>
             <register>
-               <name>DACC_CR</name>
+               <name>CR</name>
                <description>Control Register</description>
                <addressOffset>0x00</addressOffset>
                <size>32</size>
@@ -3216,7 +3216,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>DACC_MR</name>
+               <name>MR</name>
                <description>Mode Register</description>
                <addressOffset>0x04</addressOffset>
                <size>32</size>
@@ -3312,7 +3312,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>DACC_TRIGR</name>
+               <name>TRIGR</name>
                <description>Trigger Register</description>
                <addressOffset>0x08</addressOffset>
                <size>32</size>
@@ -3534,7 +3534,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>DACC_CHER</name>
+               <name>CHER</name>
                <description>Channel Enable Register</description>
                <addressOffset>0x10</addressOffset>
                <size>32</size>
@@ -3555,7 +3555,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>DACC_CHDR</name>
+               <name>CHDR</name>
                <description>Channel Disable Register</description>
                <addressOffset>0x14</addressOffset>
                <size>32</size>
@@ -3576,7 +3576,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>DACC_CHSR</name>
+               <name>CHSR</name>
                <description>Channel Status Register</description>
                <addressOffset>0x18</addressOffset>
                <size>32</size>
@@ -3611,7 +3611,7 @@ Copyright (c) 2017 Microchip Technology Inc.
             <register>
                <dim>2</dim>
                <dimIncrement>4</dimIncrement>
-               <name>DACC_CDR[%s]</name>
+               <name>CDR[%s]</name>
                <description>Conversion Data Register 0</description>
                <addressOffset>0x1C</addressOffset>
                <size>32</size>
@@ -3632,7 +3632,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>DACC_IER</name>
+               <name>IER</name>
                <description>Interrupt Enable Register</description>
                <addressOffset>0x24</addressOffset>
                <size>32</size>
@@ -3665,7 +3665,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>DACC_IDR</name>
+               <name>IDR</name>
                <description>Interrupt Disable Register</description>
                <addressOffset>0x28</addressOffset>
                <size>32</size>
@@ -3698,7 +3698,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>DACC_IMR</name>
+               <name>IMR</name>
                <description>Interrupt Mask Register</description>
                <addressOffset>0x2C</addressOffset>
                <size>32</size>
@@ -3731,7 +3731,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>DACC_ISR</name>
+               <name>ISR</name>
                <description>Interrupt Status Register</description>
                <addressOffset>0x30</addressOffset>
                <size>32</size>
@@ -3764,7 +3764,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>DACC_ACR</name>
+               <name>ACR</name>
                <description>Analog Current Register</description>
                <addressOffset>0x94</addressOffset>
                <size>32</size>
@@ -3784,7 +3784,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>DACC_WPMR</name>
+               <name>WPMR</name>
                <description>Write Protection Mode Register</description>
                <addressOffset>0xE4</addressOffset>
                <size>32</size>
@@ -3812,7 +3812,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>DACC_WPSR</name>
+               <name>WPSR</name>
                <description>Write Protection Status Register</description>
                <addressOffset>0xE8</addressOffset>
                <size>32</size>
@@ -4177,7 +4177,7 @@ Copyright (c) 2017 Microchip Technology Inc.
          </interrupt>
          <registers>
             <register>
-               <name>ICM_CFG</name>
+               <name>CFG</name>
                <description>Configuration Register</description>
                <addressOffset>0x00</addressOffset>
                <size>32</size>
@@ -4251,7 +4251,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ICM_CTRL</name>
+               <name>CTRL</name>
                <description>Control Register</description>
                <addressOffset>0x04</addressOffset>
                <size>32</size>
@@ -4296,7 +4296,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ICM_SR</name>
+               <name>SR</name>
                <description>Status Register</description>
                <addressOffset>0x08</addressOffset>
                <size>32</size>
@@ -4323,7 +4323,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ICM_IER</name>
+               <name>IER</name>
                <description>Interrupt Enable Register</description>
                <addressOffset>0x10</addressOffset>
                <size>32</size>
@@ -4374,7 +4374,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ICM_IDR</name>
+               <name>IDR</name>
                <description>Interrupt Disable Register</description>
                <addressOffset>0x14</addressOffset>
                <size>32</size>
@@ -4425,7 +4425,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ICM_IMR</name>
+               <name>IMR</name>
                <description>Interrupt Mask Register</description>
                <addressOffset>0x18</addressOffset>
                <size>32</size>
@@ -4476,7 +4476,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ICM_ISR</name>
+               <name>ISR</name>
                <description>Interrupt Status Register</description>
                <addressOffset>0x1C</addressOffset>
                <size>32</size>
@@ -4527,7 +4527,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ICM_UASR</name>
+               <name>UASR</name>
                <description>Undefined Access Status Register</description>
                <addressOffset>0x20</addressOffset>
                <size>32</size>
@@ -4570,7 +4570,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ICM_DSCR</name>
+               <name>DSCR</name>
                <description>Region Descriptor Area Start Address Register</description>
                <addressOffset>0x30</addressOffset>
                <size>32</size>
@@ -4584,7 +4584,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ICM_HASH</name>
+               <name>HASH</name>
                <description>Region Hash Area Start Address Register</description>
                <addressOffset>0x34</addressOffset>
                <size>32</size>
@@ -4600,7 +4600,7 @@ Copyright (c) 2017 Microchip Technology Inc.
             <register>
                <dim>8</dim>
                <dimIncrement>4</dimIncrement>
-               <name>ICM_UIHVAL[%s]</name>
+               <name>UIHVAL[%s]</name>
                <description>User Initial Hash Value 0 Register 0</description>
                <addressOffset>0x38</addressOffset>
                <size>32</size>
@@ -4634,7 +4634,7 @@ Copyright (c) 2017 Microchip Technology Inc.
          </interrupt>
          <registers>
             <register>
-               <name>ISI_CFG1</name>
+               <name>CFG1</name>
                <description>ISI Configuration 1 Register</description>
                <addressOffset>0x00</addressOffset>
                <size>32</size>
@@ -4732,7 +4732,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ISI_CFG2</name>
+               <name>CFG2</name>
                <description>ISI Configuration 2 Register</description>
                <addressOffset>0x04</addressOffset>
                <size>32</size>
@@ -4840,7 +4840,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ISI_PSIZE</name>
+               <name>PSIZE</name>
                <description>ISI Preview Size Register</description>
                <addressOffset>0x08</addressOffset>
                <size>32</size>
@@ -4860,7 +4860,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ISI_PDECF</name>
+               <name>PDECF</name>
                <description>ISI Preview Decimation Factor Register</description>
                <addressOffset>0x0C</addressOffset>
                <size>32</size>
@@ -4874,7 +4874,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ISI_Y2R_SET0</name>
+               <name>Y2R_SET0</name>
                <description>ISI Color Space Conversion YCrCb To RGB Set 0 Register</description>
                <addressOffset>0x10</addressOffset>
                <size>32</size>
@@ -4906,7 +4906,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ISI_Y2R_SET1</name>
+               <name>Y2R_SET1</name>
                <description>ISI Color Space Conversion YCrCb To RGB Set 1 Register</description>
                <addressOffset>0x14</addressOffset>
                <size>32</size>
@@ -4938,7 +4938,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ISI_R2Y_SET0</name>
+               <name>R2Y_SET0</name>
                <description>ISI Color Space Conversion RGB To YCrCb Set 0 Register</description>
                <addressOffset>0x18</addressOffset>
                <size>32</size>
@@ -4970,7 +4970,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ISI_R2Y_SET1</name>
+               <name>R2Y_SET1</name>
                <description>ISI Color Space Conversion RGB To YCrCb Set 1 Register</description>
                <addressOffset>0x1C</addressOffset>
                <size>32</size>
@@ -5002,7 +5002,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ISI_R2Y_SET2</name>
+               <name>R2Y_SET2</name>
                <description>ISI Color Space Conversion RGB To YCrCb Set 2 Register</description>
                <addressOffset>0x20</addressOffset>
                <size>32</size>
@@ -5034,7 +5034,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ISI_CR</name>
+               <name>CR</name>
                <description>ISI Control Register</description>
                <addressOffset>0x24</addressOffset>
                <size>32</size>
@@ -5067,7 +5067,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ISI_SR</name>
+               <name>SR</name>
                <description>ISI Status Register</description>
                <addressOffset>0x28</addressOffset>
                <size>32</size>
@@ -5148,7 +5148,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ISI_IER</name>
+               <name>IER</name>
                <description>ISI Interrupt Enable Register</description>
                <addressOffset>0x2C</addressOffset>
                <size>32</size>
@@ -5211,7 +5211,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ISI_IDR</name>
+               <name>IDR</name>
                <description>ISI Interrupt Disable Register</description>
                <addressOffset>0x30</addressOffset>
                <size>32</size>
@@ -5274,7 +5274,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ISI_IMR</name>
+               <name>IMR</name>
                <description>ISI Interrupt Mask Register</description>
                <addressOffset>0x34</addressOffset>
                <size>32</size>
@@ -5337,7 +5337,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ISI_DMA_CHER</name>
+               <name>DMA_CHER</name>
                <description>DMA Channel Enable Register</description>
                <addressOffset>0x38</addressOffset>
                <size>32</size>
@@ -5358,7 +5358,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ISI_DMA_CHDR</name>
+               <name>DMA_CHDR</name>
                <description>DMA Channel Disable Register</description>
                <addressOffset>0x3C</addressOffset>
                <size>32</size>
@@ -5379,7 +5379,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ISI_DMA_CHSR</name>
+               <name>DMA_CHSR</name>
                <description>DMA Channel Status Register</description>
                <addressOffset>0x40</addressOffset>
                <size>32</size>
@@ -5400,7 +5400,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ISI_DMA_P_ADDR</name>
+               <name>DMA_P_ADDR</name>
                <description>DMA Preview Base Address Register</description>
                <addressOffset>0x44</addressOffset>
                <size>32</size>
@@ -5414,7 +5414,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ISI_DMA_P_CTRL</name>
+               <name>DMA_P_CTRL</name>
                <description>DMA Preview Control Register</description>
                <addressOffset>0x48</addressOffset>
                <size>32</size>
@@ -5446,7 +5446,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ISI_DMA_P_DSCR</name>
+               <name>DMA_P_DSCR</name>
                <description>DMA Preview Descriptor Address Register</description>
                <addressOffset>0x4C</addressOffset>
                <size>32</size>
@@ -5460,7 +5460,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ISI_DMA_C_ADDR</name>
+               <name>DMA_C_ADDR</name>
                <description>DMA Codec Base Address Register</description>
                <addressOffset>0x50</addressOffset>
                <size>32</size>
@@ -5474,7 +5474,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ISI_DMA_C_CTRL</name>
+               <name>DMA_C_CTRL</name>
                <description>DMA Codec Control Register</description>
                <addressOffset>0x54</addressOffset>
                <size>32</size>
@@ -5506,7 +5506,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ISI_DMA_C_DSCR</name>
+               <name>DMA_C_DSCR</name>
                <description>DMA Codec Descriptor Address Register</description>
                <addressOffset>0x58</addressOffset>
                <size>32</size>
@@ -5520,7 +5520,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ISI_WPMR</name>
+               <name>WPMR</name>
                <description>Write Protection Mode Register</description>
                <addressOffset>0xE4</addressOffset>
                <size>32</size>
@@ -5548,7 +5548,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>ISI_WPSR</name>
+               <name>WPSR</name>
                <description>Write Protection Status Register</description>
                <addressOffset>0xE8</addressOffset>
                <size>32</size>
@@ -5586,7 +5586,7 @@ Copyright (c) 2017 Microchip Technology Inc.
             <register>
                <dim>9</dim>
                <dimIncrement>4</dimIncrement>
-               <name>MATRIX_MCFG[%s]</name>
+               <name>MCFG[%s]</name>
                <description>Master Configuration Register 0</description>
                <addressOffset>0x0</addressOffset>
                <size>32</size>
@@ -5645,7 +5645,7 @@ Copyright (c) 2017 Microchip Technology Inc.
             <register>
                <dim>9</dim>
                <dimIncrement>4</dimIncrement>
-               <name>MATRIX_SCFG[%s]</name>
+               <name>SCFG[%s]</name>
                <description>Slave Configuration Register 0</description>
                <addressOffset>0x40</addressOffset>
                <size>32</size>
@@ -5695,7 +5695,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                <description>Priority Register A for Slave 0</description>
                <addressOffset>0x0080</addressOffset>
                <register>
-                  <name>MATRIX_PRAS</name>
+                  <name>PRAS</name>
                   <description>Priority Register A for Slave 0</description>
                   <addressOffset>0x00</addressOffset>
                   <size>32</size>
@@ -5745,7 +5745,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>MATRIX_PRBS</name>
+                  <name>PRBS</name>
                   <description>Priority Register B for Slave 0</description>
                   <addressOffset>0x04</addressOffset>
                   <size>32</size>
@@ -5760,7 +5760,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </register>
             </cluster>
             <register>
-               <name>MATRIX_MRCR</name>
+               <name>MRCR</name>
                <description>Master Remap Control Register</description>
                <addressOffset>0x0100</addressOffset>
                <size>32</size>
@@ -5892,7 +5892,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>MATRIX_WPMR</name>
+               <name>WPMR</name>
                <description>Write Protection Mode Register</description>
                <addressOffset>0x01E4</addressOffset>
                <size>32</size>
@@ -5920,7 +5920,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>MATRIX_WPSR</name>
+               <name>WPSR</name>
                <description>Write Protection Status Register</description>
                <addressOffset>0x01E8</addressOffset>
                <size>32</size>
@@ -5960,7 +5960,7 @@ Copyright (c) 2017 Microchip Technology Inc.
          </interrupt>
          <registers>
             <register>
-               <name>PIO_PER</name>
+               <name>PER</name>
                <description>PIO Enable Register</description>
                <addressOffset>0x0000</addressOffset>
                <size>32</size>
@@ -6161,7 +6161,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_PDR</name>
+               <name>PDR</name>
                <description>PIO Disable Register</description>
                <addressOffset>0x0004</addressOffset>
                <size>32</size>
@@ -6362,7 +6362,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_PSR</name>
+               <name>PSR</name>
                <description>PIO Status Register</description>
                <addressOffset>0x0008</addressOffset>
                <size>32</size>
@@ -6563,7 +6563,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_OER</name>
+               <name>OER</name>
                <description>Output Enable Register</description>
                <addressOffset>0x0010</addressOffset>
                <size>32</size>
@@ -6764,7 +6764,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_ODR</name>
+               <name>ODR</name>
                <description>Output Disable Register</description>
                <addressOffset>0x0014</addressOffset>
                <size>32</size>
@@ -6965,7 +6965,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_OSR</name>
+               <name>OSR</name>
                <description>Output Status Register</description>
                <addressOffset>0x0018</addressOffset>
                <size>32</size>
@@ -7166,7 +7166,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_IFER</name>
+               <name>IFER</name>
                <description>Glitch Input Filter Enable Register</description>
                <addressOffset>0x0020</addressOffset>
                <size>32</size>
@@ -7367,7 +7367,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_IFDR</name>
+               <name>IFDR</name>
                <description>Glitch Input Filter Disable Register</description>
                <addressOffset>0x0024</addressOffset>
                <size>32</size>
@@ -7568,7 +7568,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_IFSR</name>
+               <name>IFSR</name>
                <description>Glitch Input Filter Status Register</description>
                <addressOffset>0x0028</addressOffset>
                <size>32</size>
@@ -7769,7 +7769,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_SODR</name>
+               <name>SODR</name>
                <description>Set Output Data Register</description>
                <addressOffset>0x0030</addressOffset>
                <size>32</size>
@@ -7970,7 +7970,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_CODR</name>
+               <name>CODR</name>
                <description>Clear Output Data Register</description>
                <addressOffset>0x0034</addressOffset>
                <size>32</size>
@@ -8171,7 +8171,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_ODSR</name>
+               <name>ODSR</name>
                <description>Output Data Status Register</description>
                <addressOffset>0x0038</addressOffset>
                <size>32</size>
@@ -8371,7 +8371,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_PDSR</name>
+               <name>PDSR</name>
                <description>Pin Data Status Register</description>
                <addressOffset>0x003C</addressOffset>
                <size>32</size>
@@ -8572,7 +8572,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_IER</name>
+               <name>IER</name>
                <description>Interrupt Enable Register</description>
                <addressOffset>0x0040</addressOffset>
                <size>32</size>
@@ -8773,7 +8773,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_IDR</name>
+               <name>IDR</name>
                <description>Interrupt Disable Register</description>
                <addressOffset>0x0044</addressOffset>
                <size>32</size>
@@ -8974,7 +8974,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_IMR</name>
+               <name>IMR</name>
                <description>Interrupt Mask Register</description>
                <addressOffset>0x0048</addressOffset>
                <size>32</size>
@@ -9175,7 +9175,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_ISR</name>
+               <name>ISR</name>
                <description>Interrupt Status Register</description>
                <addressOffset>0x004C</addressOffset>
                <size>32</size>
@@ -9376,7 +9376,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_MDER</name>
+               <name>MDER</name>
                <description>Multi-driver Enable Register</description>
                <addressOffset>0x0050</addressOffset>
                <size>32</size>
@@ -9577,7 +9577,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_MDDR</name>
+               <name>MDDR</name>
                <description>Multi-driver Disable Register</description>
                <addressOffset>0x0054</addressOffset>
                <size>32</size>
@@ -9778,7 +9778,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_MDSR</name>
+               <name>MDSR</name>
                <description>Multi-driver Status Register</description>
                <addressOffset>0x0058</addressOffset>
                <size>32</size>
@@ -9979,7 +9979,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_PUDR</name>
+               <name>PUDR</name>
                <description>Pull-up Disable Register</description>
                <addressOffset>0x0060</addressOffset>
                <size>32</size>
@@ -10180,7 +10180,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_PUER</name>
+               <name>PUER</name>
                <description>Pull-up Enable Register</description>
                <addressOffset>0x0064</addressOffset>
                <size>32</size>
@@ -10381,7 +10381,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_PUSR</name>
+               <name>PUSR</name>
                <description>Pad Pull-up Status Register</description>
                <addressOffset>0x0068</addressOffset>
                <size>32</size>
@@ -10584,7 +10584,7 @@ Copyright (c) 2017 Microchip Technology Inc.
             <register>
                <dim>2</dim>
                <dimIncrement>4</dimIncrement>
-               <name>PIO_ABCDSR[%s]</name>
+               <name>ABCDSR[%s]</name>
                <description>Peripheral ABCD Select Register 0</description>
                <addressOffset>0x70</addressOffset>
                <size>32</size>
@@ -10784,7 +10784,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_IFSCDR</name>
+               <name>IFSCDR</name>
                <description>Input Filter Slow Clock Disable Register</description>
                <addressOffset>0x0080</addressOffset>
                <size>32</size>
@@ -10985,7 +10985,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_IFSCER</name>
+               <name>IFSCER</name>
                <description>Input Filter Slow Clock Enable Register</description>
                <addressOffset>0x0084</addressOffset>
                <size>32</size>
@@ -11186,7 +11186,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_IFSCSR</name>
+               <name>IFSCSR</name>
                <description>Input Filter Slow Clock Status Register</description>
                <addressOffset>0x0088</addressOffset>
                <size>32</size>
@@ -11387,7 +11387,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_SCDR</name>
+               <name>SCDR</name>
                <description>Slow Clock Divider Debouncing Register</description>
                <addressOffset>0x008C</addressOffset>
                <size>32</size>
@@ -11401,7 +11401,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_PPDDR</name>
+               <name>PPDDR</name>
                <description>Pad Pull-down Disable Register</description>
                <addressOffset>0x0090</addressOffset>
                <size>32</size>
@@ -11602,7 +11602,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_PPDER</name>
+               <name>PPDER</name>
                <description>Pad Pull-down Enable Register</description>
                <addressOffset>0x0094</addressOffset>
                <size>32</size>
@@ -11803,7 +11803,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_PPDSR</name>
+               <name>PPDSR</name>
                <description>Pad Pull-down Status Register</description>
                <addressOffset>0x0098</addressOffset>
                <size>32</size>
@@ -12004,7 +12004,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_OWER</name>
+               <name>OWER</name>
                <description>Output Write Enable</description>
                <addressOffset>0x00A0</addressOffset>
                <size>32</size>
@@ -12205,7 +12205,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_OWDR</name>
+               <name>OWDR</name>
                <description>Output Write Disable</description>
                <addressOffset>0x00A4</addressOffset>
                <size>32</size>
@@ -12406,7 +12406,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_OWSR</name>
+               <name>OWSR</name>
                <description>Output Write Status Register</description>
                <addressOffset>0x00A8</addressOffset>
                <size>32</size>
@@ -12607,7 +12607,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_AIMER</name>
+               <name>AIMER</name>
                <description>Additional Interrupt Modes Enable Register</description>
                <addressOffset>0x00B0</addressOffset>
                <size>32</size>
@@ -12808,7 +12808,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_AIMDR</name>
+               <name>AIMDR</name>
                <description>Additional Interrupt Modes Disable Register</description>
                <addressOffset>0x00B4</addressOffset>
                <size>32</size>
@@ -13009,7 +13009,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_AIMMR</name>
+               <name>AIMMR</name>
                <description>Additional Interrupt Modes Mask Register</description>
                <addressOffset>0x00B8</addressOffset>
                <size>32</size>
@@ -13210,7 +13210,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_ESR</name>
+               <name>ESR</name>
                <description>Edge Select Register</description>
                <addressOffset>0x00C0</addressOffset>
                <size>32</size>
@@ -13411,7 +13411,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_LSR</name>
+               <name>LSR</name>
                <description>Level Select Register</description>
                <addressOffset>0x00C4</addressOffset>
                <size>32</size>
@@ -13612,7 +13612,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_ELSR</name>
+               <name>ELSR</name>
                <description>Edge/Level Status Register</description>
                <addressOffset>0x00C8</addressOffset>
                <size>32</size>
@@ -13813,7 +13813,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_FELLSR</name>
+               <name>FELLSR</name>
                <description>Falling Edge/Low-Level Select Register</description>
                <addressOffset>0x00D0</addressOffset>
                <size>32</size>
@@ -14014,7 +14014,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_REHLSR</name>
+               <name>REHLSR</name>
                <description>Rising Edge/High-Level Select Register</description>
                <addressOffset>0x00D4</addressOffset>
                <size>32</size>
@@ -14215,7 +14215,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_FRLHSR</name>
+               <name>FRLHSR</name>
                <description>Fall/Rise - Low/High Status Register</description>
                <addressOffset>0x00D8</addressOffset>
                <size>32</size>
@@ -14416,7 +14416,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_LOCKSR</name>
+               <name>LOCKSR</name>
                <description>Lock Status</description>
                <addressOffset>0x00E0</addressOffset>
                <size>32</size>
@@ -14617,7 +14617,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_WPMR</name>
+               <name>WPMR</name>
                <description>Write Protection Mode Register</description>
                <addressOffset>0x00E4</addressOffset>
                <size>32</size>
@@ -14645,7 +14645,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_WPSR</name>
+               <name>WPSR</name>
                <description>Write Protection Status Register</description>
                <addressOffset>0x00E8</addressOffset>
                <size>32</size>
@@ -14666,7 +14666,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_SCHMITT</name>
+               <name>SCHMITT</name>
                <description>Schmitt Trigger Register</description>
                <addressOffset>0x0100</addressOffset>
                <size>32</size>
@@ -14866,7 +14866,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_DRIVER</name>
+               <name>DRIVER</name>
                <description>I/O Drive Register</description>
                <addressOffset>0x0118</addressOffset>
                <size>32</size>
@@ -15482,7 +15482,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_PCMR</name>
+               <name>PCMR</name>
                <description>Parallel Capture Mode Register</description>
                <addressOffset>0x0150</addressOffset>
                <size>32</size>
@@ -15538,7 +15538,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_PCIER</name>
+               <name>PCIER</name>
                <description>Parallel Capture Interrupt Enable Register</description>
                <addressOffset>0x0154</addressOffset>
                <size>32</size>
@@ -15571,7 +15571,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_PCIDR</name>
+               <name>PCIDR</name>
                <description>Parallel Capture Interrupt Disable Register</description>
                <addressOffset>0x0158</addressOffset>
                <size>32</size>
@@ -15604,7 +15604,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_PCIMR</name>
+               <name>PCIMR</name>
                <description>Parallel Capture Interrupt Mask Register</description>
                <addressOffset>0x015C</addressOffset>
                <size>32</size>
@@ -15637,7 +15637,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_PCISR</name>
+               <name>PCISR</name>
                <description>Parallel Capture Interrupt Status Register</description>
                <addressOffset>0x0160</addressOffset>
                <size>32</size>
@@ -15658,7 +15658,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PIO_PCRHR</name>
+               <name>PCRHR</name>
                <description>Parallel Capture Reception Holding Register</description>
                <addressOffset>0x0164</addressOffset>
                <size>32</size>
@@ -15708,7 +15708,7 @@ Copyright (c) 2017 Microchip Technology Inc.
          </interrupt>
          <registers>
             <register>
-               <name>PMC_SCER</name>
+               <name>SCER</name>
                <description>System Clock Enable Register</description>
                <addressOffset>0x0000</addressOffset>
                <size>32</size>
@@ -15765,7 +15765,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PMC_SCDR</name>
+               <name>SCDR</name>
                <description>System Clock Disable Register</description>
                <addressOffset>0x0004</addressOffset>
                <size>32</size>
@@ -15822,7 +15822,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PMC_SCSR</name>
+               <name>SCSR</name>
                <description>System Clock Status Register</description>
                <addressOffset>0x0008</addressOffset>
                <size>32</size>
@@ -15885,7 +15885,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PMC_PCER0</name>
+               <name>PCER0</name>
                <description>Peripheral Clock Enable Register 0</description>
                <addressOffset>0x0010</addressOffset>
                <size>32</size>
@@ -16044,7 +16044,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PMC_PCDR0</name>
+               <name>PCDR0</name>
                <description>Peripheral Clock Disable Register 0</description>
                <addressOffset>0x0014</addressOffset>
                <size>32</size>
@@ -16203,7 +16203,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PMC_PCSR0</name>
+               <name>PCSR0</name>
                <description>Peripheral Clock Status Register 0</description>
                <addressOffset>0x0018</addressOffset>
                <size>32</size>
@@ -16553,7 +16553,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PMC_MCKR</name>
+               <name>MCKR</name>
                <description>Master Clock Register</description>
                <addressOffset>0x0030</addressOffset>
                <size>32</size>
@@ -16674,7 +16674,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PMC_USB</name>
+               <name>USB</name>
                <description>USB Clock Register</description>
                <addressOffset>0x0038</addressOffset>
                <size>32</size>
@@ -16696,7 +16696,7 @@ Copyright (c) 2017 Microchip Technology Inc.
             <register>
                <dim>8</dim>
                <dimIncrement>4</dimIncrement>
-               <name>PMC_PCK[%s]</name>
+               <name>PCK[%s]</name>
                <description>Programmable Clock Register</description>
                <addressOffset>0x40</addressOffset>
                <size>32</size>
@@ -16744,7 +16744,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PMC_IER</name>
+               <name>IER</name>
                <description>Interrupt Enable Register</description>
                <addressOffset>0x0060</addressOffset>
                <size>32</size>
@@ -16843,7 +16843,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PMC_IDR</name>
+               <name>IDR</name>
                <description>Interrupt Disable Register</description>
                <addressOffset>0x0064</addressOffset>
                <size>32</size>
@@ -16942,7 +16942,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PMC_SR</name>
+               <name>SR</name>
                <description>Status Register</description>
                <addressOffset>0x0068</addressOffset>
                <size>32</size>
@@ -17059,7 +17059,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PMC_IMR</name>
+               <name>IMR</name>
                <description>Interrupt Mask Register</description>
                <addressOffset>0x006C</addressOffset>
                <size>32</size>
@@ -17158,7 +17158,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PMC_FSMR</name>
+               <name>FSMR</name>
                <description>Fast Startup Mode Register</description>
                <addressOffset>0x0070</addressOffset>
                <size>32</size>
@@ -17316,7 +17316,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PMC_FSPR</name>
+               <name>FSPR</name>
                <description>Fast Startup Polarity Register</description>
                <addressOffset>0x0074</addressOffset>
                <size>32</size>
@@ -17420,7 +17420,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PMC_FOCR</name>
+               <name>FOCR</name>
                <description>Fault Output Clear Register</description>
                <addressOffset>0x0078</addressOffset>
                <size>32</size>
@@ -17435,7 +17435,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PMC_WPMR</name>
+               <name>WPMR</name>
                <description>Write Protection Mode Register</description>
                <addressOffset>0x00E4</addressOffset>
                <size>32</size>
@@ -17463,7 +17463,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PMC_WPSR</name>
+               <name>WPSR</name>
                <description>Write Protection Status Register</description>
                <addressOffset>0x00E8</addressOffset>
                <size>32</size>
@@ -17484,7 +17484,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PMC_PCER1</name>
+               <name>PCER1</name>
                <description>Peripheral Clock Enable Register 1</description>
                <addressOffset>0x0100</addressOffset>
                <size>32</size>
@@ -17643,7 +17643,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PMC_PCDR1</name>
+               <name>PCDR1</name>
                <description>Peripheral Clock Disable Register 1</description>
                <addressOffset>0x0104</addressOffset>
                <size>32</size>
@@ -17802,7 +17802,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PMC_PCSR1</name>
+               <name>PCSR1</name>
                <description>Peripheral Clock Status Register 1</description>
                <addressOffset>0x0108</addressOffset>
                <size>32</size>
@@ -17961,7 +17961,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PMC_PCR</name>
+               <name>PCR</name>
                <description>Peripheral Control Register</description>
                <addressOffset>0x010C</addressOffset>
                <size>32</size>
@@ -18033,7 +18033,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PMC_OCR</name>
+               <name>OCR</name>
                <description>Oscillator Calibration Register</description>
                <addressOffset>0x0110</addressOffset>
                <size>32</size>
@@ -18077,7 +18077,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PMC_SLPWK_ER0</name>
+               <name>SLPWK_ER0</name>
                <description>SleepWalking Enable Register 0</description>
                <addressOffset>0x0114</addressOffset>
                <size>32</size>
@@ -18236,7 +18236,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PMC_SLPWK_DR0</name>
+               <name>SLPWK_DR0</name>
                <description>SleepWalking Disable Register 0</description>
                <addressOffset>0x0118</addressOffset>
                <size>32</size>
@@ -18395,7 +18395,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PMC_SLPWK_SR0</name>
+               <name>SLPWK_SR0</name>
                <description>SleepWalking Status Register 0</description>
                <addressOffset>0x011C</addressOffset>
                <size>32</size>
@@ -18554,7 +18554,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PMC_SLPWK_ASR0</name>
+               <name>SLPWK_ASR0</name>
                <description>SleepWalking Activity Status Register 0</description>
                <addressOffset>0x0120</addressOffset>
                <size>32</size>
@@ -18713,7 +18713,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PMC_PMMR</name>
+               <name>PMMR</name>
                <description>PLL Maximum Multiplier Value Register</description>
                <addressOffset>0x0130</addressOffset>
                <size>32</size>
@@ -18727,7 +18727,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PMC_SLPWK_ER1</name>
+               <name>SLPWK_ER1</name>
                <description>SleepWalking Enable Register 1</description>
                <addressOffset>0x0134</addressOffset>
                <size>32</size>
@@ -18886,7 +18886,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PMC_SLPWK_DR1</name>
+               <name>SLPWK_DR1</name>
                <description>SleepWalking Disable Register 1</description>
                <addressOffset>0x0138</addressOffset>
                <size>32</size>
@@ -19045,7 +19045,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PMC_SLPWK_SR1</name>
+               <name>SLPWK_SR1</name>
                <description>SleepWalking Status Register 1</description>
                <addressOffset>0x013C</addressOffset>
                <size>32</size>
@@ -19204,7 +19204,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PMC_SLPWK_ASR1</name>
+               <name>SLPWK_ASR1</name>
                <description>SleepWalking Activity Status Register 1</description>
                <addressOffset>0x0140</addressOffset>
                <size>32</size>
@@ -19363,7 +19363,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PMC_SLPWK_AIPR</name>
+               <name>SLPWK_AIPR</name>
                <description>SleepWalking Activity In Progress Register</description>
                <addressOffset>0x0144</addressOffset>
                <size>32</size>
@@ -19397,7 +19397,7 @@ Copyright (c) 2017 Microchip Technology Inc.
          </interrupt>
          <registers>
             <register>
-               <name>PWM_CLK</name>
+               <name>CLK</name>
                <description>PWM Clock Register</description>
                <addressOffset>0x00</addressOffset>
                <size>32</size>
@@ -19571,7 +19571,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_ENA</name>
+               <name>ENA</name>
                <description>PWM Enable Register</description>
                <addressOffset>0x04</addressOffset>
                <size>32</size>
@@ -19604,7 +19604,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_DIS</name>
+               <name>DIS</name>
                <description>PWM Disable Register</description>
                <addressOffset>0x08</addressOffset>
                <size>32</size>
@@ -19637,7 +19637,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_SR</name>
+               <name>SR</name>
                <description>PWM Status Register</description>
                <addressOffset>0x0C</addressOffset>
                <size>32</size>
@@ -19670,7 +19670,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_IER1</name>
+               <name>IER1</name>
                <description>PWM Interrupt Enable Register 1</description>
                <addressOffset>0x10</addressOffset>
                <size>32</size>
@@ -19727,7 +19727,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_IDR1</name>
+               <name>IDR1</name>
                <description>PWM Interrupt Disable Register 1</description>
                <addressOffset>0x14</addressOffset>
                <size>32</size>
@@ -19784,7 +19784,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_IMR1</name>
+               <name>IMR1</name>
                <description>PWM Interrupt Mask Register 1</description>
                <addressOffset>0x18</addressOffset>
                <size>32</size>
@@ -19841,7 +19841,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_ISR1</name>
+               <name>ISR1</name>
                <description>PWM Interrupt Status Register 1</description>
                <addressOffset>0x1C</addressOffset>
                <size>32</size>
@@ -19898,7 +19898,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_SCM</name>
+               <name>SCM</name>
                <description>PWM Sync Channels Mode Register</description>
                <addressOffset>0x20</addressOffset>
                <size>32</size>
@@ -19966,7 +19966,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_DMAR</name>
+               <name>DMAR</name>
                <description>PWM DMA Register</description>
                <addressOffset>0x24</addressOffset>
                <size>32</size>
@@ -19981,7 +19981,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_SCUC</name>
+               <name>SCUC</name>
                <description>PWM Sync Channels Update Control Register</description>
                <addressOffset>0x28</addressOffset>
                <size>32</size>
@@ -19995,7 +19995,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_SCUP</name>
+               <name>SCUP</name>
                <description>PWM Sync Channels Update Period Register</description>
                <addressOffset>0x2C</addressOffset>
                <size>32</size>
@@ -20015,7 +20015,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_SCUPUPD</name>
+               <name>SCUPUPD</name>
                <description>PWM Sync Channels Update Period Update Register</description>
                <addressOffset>0x30</addressOffset>
                <size>32</size>
@@ -20030,7 +20030,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_IER2</name>
+               <name>IER2</name>
                <description>PWM Interrupt Enable Register 2</description>
                <addressOffset>0x34</addressOffset>
                <size>32</size>
@@ -20147,7 +20147,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_IDR2</name>
+               <name>IDR2</name>
                <description>PWM Interrupt Disable Register 2</description>
                <addressOffset>0x38</addressOffset>
                <size>32</size>
@@ -20264,7 +20264,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_IMR2</name>
+               <name>IMR2</name>
                <description>PWM Interrupt Mask Register 2</description>
                <addressOffset>0x3C</addressOffset>
                <size>32</size>
@@ -20381,7 +20381,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_ISR2</name>
+               <name>ISR2</name>
                <description>PWM Interrupt Status Register 2</description>
                <addressOffset>0x40</addressOffset>
                <size>32</size>
@@ -20498,7 +20498,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_OOV</name>
+               <name>OOV</name>
                <description>PWM Output Override Value Register</description>
                <addressOffset>0x44</addressOffset>
                <size>32</size>
@@ -20554,7 +20554,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_OS</name>
+               <name>OS</name>
                <description>PWM Output Selection Register</description>
                <addressOffset>0x48</addressOffset>
                <size>32</size>
@@ -20610,7 +20610,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_OSS</name>
+               <name>OSS</name>
                <description>PWM Output Selection Set Register</description>
                <addressOffset>0x4C</addressOffset>
                <size>32</size>
@@ -20667,7 +20667,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_OSC</name>
+               <name>OSC</name>
                <description>PWM Output Selection Clear Register</description>
                <addressOffset>0x50</addressOffset>
                <size>32</size>
@@ -20724,7 +20724,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_OSSUPD</name>
+               <name>OSSUPD</name>
                <description>PWM Output Selection Set Update Register</description>
                <addressOffset>0x54</addressOffset>
                <size>32</size>
@@ -20781,7 +20781,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_OSCUPD</name>
+               <name>OSCUPD</name>
                <description>PWM Output Selection Clear Update Register</description>
                <addressOffset>0x58</addressOffset>
                <size>32</size>
@@ -20838,7 +20838,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_FMR</name>
+               <name>FMR</name>
                <description>PWM Fault Mode Register</description>
                <addressOffset>0x5C</addressOffset>
                <size>32</size>
@@ -20864,7 +20864,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_FSR</name>
+               <name>FSR</name>
                <description>PWM Fault Status Register</description>
                <addressOffset>0x60</addressOffset>
                <size>32</size>
@@ -20885,7 +20885,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_FCR</name>
+               <name>FCR</name>
                <description>PWM Fault Clear Register</description>
                <addressOffset>0x64</addressOffset>
                <size>32</size>
@@ -20900,7 +20900,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_FPV1</name>
+               <name>FPV1</name>
                <description>PWM Fault Protection Value Register 1</description>
                <addressOffset>0x68</addressOffset>
                <size>32</size>
@@ -20956,7 +20956,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_FPE</name>
+               <name>FPE</name>
                <description>PWM Fault Protection Enable Register</description>
                <addressOffset>0x6C</addressOffset>
                <size>32</size>
@@ -20990,7 +20990,7 @@ Copyright (c) 2017 Microchip Technology Inc.
             <register>
                <dim>2</dim>
                <dimIncrement>4</dimIncrement>
-               <name>PWM_ELMR[%s]</name>
+               <name>ELMR[%s]</name>
                <description>PWM Event Line 0 Mode Register 0</description>
                <addressOffset>0x7C</addressOffset>
                <size>32</size>
@@ -21046,7 +21046,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_SSPR</name>
+               <name>SSPR</name>
                <description>PWM Spread Spectrum Register</description>
                <addressOffset>0xA0</addressOffset>
                <size>32</size>
@@ -21066,7 +21066,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_SSPUP</name>
+               <name>SSPUP</name>
                <description>PWM Spread Spectrum Update Register</description>
                <addressOffset>0xA4</addressOffset>
                <size>32</size>
@@ -21081,7 +21081,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_SMMR</name>
+               <name>SMMR</name>
                <description>PWM Stepper Motor Mode Register</description>
                <addressOffset>0xB0</addressOffset>
                <size>32</size>
@@ -21113,7 +21113,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_FPV2</name>
+               <name>FPV2</name>
                <description>PWM Fault Protection Value 2 Register</description>
                <addressOffset>0xC0</addressOffset>
                <size>32</size>
@@ -21169,7 +21169,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_WPCR</name>
+               <name>WPCR</name>
                <description>PWM Write Protection Control Register</description>
                <addressOffset>0xE4</addressOffset>
                <size>32</size>
@@ -21252,7 +21252,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_WPSR</name>
+               <name>WPSR</name>
                <description>PWM Write Protection Status Register</description>
                <addressOffset>0xE8</addressOffset>
                <size>32</size>
@@ -21351,7 +21351,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                <description>PWM Comparison 0 Value Register</description>
                <addressOffset>0x130</addressOffset>
                <register>
-                  <name>PWM_CMPV</name>
+                  <name>CMPV</name>
                   <description>PWM Comparison 0 Value Register</description>
                   <addressOffset>0x00</addressOffset>
                   <size>32</size>
@@ -21371,7 +21371,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>PWM_CMPVUPD</name>
+                  <name>CMPVUPD</name>
                   <description>PWM Comparison 0 Value Update Register</description>
                   <addressOffset>0x04</addressOffset>
                   <size>32</size>
@@ -21392,7 +21392,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>PWM_CMPM</name>
+                  <name>CMPM</name>
                   <description>PWM Comparison 0 Mode Register</description>
                   <addressOffset>0x08</addressOffset>
                   <size>32</size>
@@ -21436,7 +21436,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>PWM_CMPMUPD</name>
+                  <name>CMPMUPD</name>
                   <description>PWM Comparison 0 Mode Update Register</description>
                   <addressOffset>0x0C</addressOffset>
                   <size>32</size>
@@ -21476,7 +21476,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                <description>PWM Channel Mode Register (ch_num = 0)</description>
                <addressOffset>0x200</addressOffset>
                <register>
-                  <name>PWM_CMR</name>
+                  <name>CMR</name>
                   <description>PWM Channel Mode Register (ch_num = 0)</description>
                   <addressOffset>0x00</addressOffset>
                   <size>32</size>
@@ -21618,7 +21618,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>PWM_CDTY</name>
+                  <name>CDTY</name>
                   <description>PWM Channel Duty Cycle Register (ch_num = 0)</description>
                   <addressOffset>0x04</addressOffset>
                   <size>32</size>
@@ -21632,7 +21632,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>PWM_CDTYUPD</name>
+                  <name>CDTYUPD</name>
                   <description>PWM Channel Duty Cycle Update Register (ch_num = 0)</description>
                   <addressOffset>0x08</addressOffset>
                   <size>32</size>
@@ -21647,7 +21647,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>PWM_CPRD</name>
+                  <name>CPRD</name>
                   <description>PWM Channel Period Register (ch_num = 0)</description>
                   <addressOffset>0x0C</addressOffset>
                   <size>32</size>
@@ -21661,7 +21661,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>PWM_CPRDUPD</name>
+                  <name>CPRDUPD</name>
                   <description>PWM Channel Period Update Register (ch_num = 0)</description>
                   <addressOffset>0x10</addressOffset>
                   <size>32</size>
@@ -21676,7 +21676,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>PWM_CCNT</name>
+                  <name>CCNT</name>
                   <description>PWM Channel Counter Register (ch_num = 0)</description>
                   <addressOffset>0x14</addressOffset>
                   <size>32</size>
@@ -21691,7 +21691,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>PWM_DT</name>
+                  <name>DT</name>
                   <description>PWM Channel Dead Time Register (ch_num = 0)</description>
                   <addressOffset>0x18</addressOffset>
                   <size>32</size>
@@ -21711,7 +21711,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>PWM_DTUPD</name>
+                  <name>DTUPD</name>
                   <description>PWM Channel Dead Time Update Register (ch_num = 0)</description>
                   <addressOffset>0x1C</addressOffset>
                   <size>32</size>
@@ -21733,7 +21733,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </register>
             </cluster>
             <register>
-               <name>PWM_CMUPD0</name>
+               <name>CMUPD0</name>
                <description>PWM Channel Mode Update Register (ch_num = 0)</description>
                <addressOffset>0x400</addressOffset>
                <size>32</size>
@@ -21754,7 +21754,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_CMUPD1</name>
+               <name>CMUPD1</name>
                <description>PWM Channel Mode Update Register (ch_num = 1)</description>
                <addressOffset>0x420</addressOffset>
                <size>32</size>
@@ -21775,7 +21775,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_ETRG1</name>
+               <name>ETRG1</name>
                <description>PWM External Trigger Register (trg_num = 1)</description>
                <addressOffset>0x42C</addressOffset>
                <size>32</size>
@@ -21855,7 +21855,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_LEBR1</name>
+               <name>LEBR1</name>
                <description>PWM Leading-Edge Blanking Register (trg_num = 1)</description>
                <addressOffset>0x430</addressOffset>
                <size>32</size>
@@ -21893,7 +21893,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_CMUPD2</name>
+               <name>CMUPD2</name>
                <description>PWM Channel Mode Update Register (ch_num = 2)</description>
                <addressOffset>0x440</addressOffset>
                <size>32</size>
@@ -21914,7 +21914,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_ETRG2</name>
+               <name>ETRG2</name>
                <description>PWM External Trigger Register (trg_num = 2)</description>
                <addressOffset>0x44C</addressOffset>
                <size>32</size>
@@ -21994,7 +21994,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_LEBR2</name>
+               <name>LEBR2</name>
                <description>PWM Leading-Edge Blanking Register (trg_num = 2)</description>
                <addressOffset>0x450</addressOffset>
                <size>32</size>
@@ -22032,7 +22032,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>PWM_CMUPD3</name>
+               <name>CMUPD3</name>
                <description>PWM Channel Mode Update Register (ch_num = 3)</description>
                <addressOffset>0x460</addressOffset>
                <size>32</size>
@@ -22080,7 +22080,7 @@ Copyright (c) 2017 Microchip Technology Inc.
          </interrupt>
          <registers>
             <register>
-               <name>QSPI_CR</name>
+               <name>CR</name>
                <description>Control Register</description>
                <addressOffset>0x00</addressOffset>
                <size>32</size>
@@ -22113,7 +22113,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>QSPI_MR</name>
+               <name>MR</name>
                <description>Mode Register</description>
                <addressOffset>0x04</addressOffset>
                <size>32</size>
@@ -22233,7 +22233,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>QSPI_RDR</name>
+               <name>RDR</name>
                <description>Receive Data Register</description>
                <addressOffset>0x08</addressOffset>
                <size>32</size>
@@ -22248,7 +22248,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>QSPI_TDR</name>
+               <name>TDR</name>
                <description>Transmit Data Register</description>
                <addressOffset>0x0C</addressOffset>
                <size>32</size>
@@ -22263,7 +22263,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>QSPI_SR</name>
+               <name>SR</name>
                <description>Status Register</description>
                <addressOffset>0x10</addressOffset>
                <size>32</size>
@@ -22320,7 +22320,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>QSPI_IER</name>
+               <name>IER</name>
                <description>Interrupt Enable Register</description>
                <addressOffset>0x14</addressOffset>
                <size>32</size>
@@ -22371,7 +22371,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>QSPI_IDR</name>
+               <name>IDR</name>
                <description>Interrupt Disable Register</description>
                <addressOffset>0x18</addressOffset>
                <size>32</size>
@@ -22422,7 +22422,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>QSPI_IMR</name>
+               <name>IMR</name>
                <description>Interrupt Mask Register</description>
                <addressOffset>0x1C</addressOffset>
                <size>32</size>
@@ -22473,7 +22473,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>QSPI_SCR</name>
+               <name>SCR</name>
                <description>Serial Clock Register</description>
                <addressOffset>0x20</addressOffset>
                <size>32</size>
@@ -22505,7 +22505,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>QSPI_IAR</name>
+               <name>IAR</name>
                <description>Instruction Address Register</description>
                <addressOffset>0x30</addressOffset>
                <size>32</size>
@@ -22519,7 +22519,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>QSPI_ICR</name>
+               <name>ICR</name>
                <description>Instruction Code Register</description>
                <addressOffset>0x34</addressOffset>
                <size>32</size>
@@ -22539,7 +22539,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>QSPI_IFR</name>
+               <name>IFR</name>
                <description>Instruction Frame Register</description>
                <addressOffset>0x38</addressOffset>
                <size>32</size>
@@ -22717,7 +22717,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>QSPI_SMR</name>
+               <name>SMR</name>
                <description>Scrambling Mode Register</description>
                <addressOffset>0x40</addressOffset>
                <size>32</size>
@@ -22750,7 +22750,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>QSPI_SKR</name>
+               <name>SKR</name>
                <description>Scrambling Key Register</description>
                <addressOffset>0x44</addressOffset>
                <size>32</size>
@@ -22765,7 +22765,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>QSPI_WPMR</name>
+               <name>WPMR</name>
                <description>Write Protection Mode Register</description>
                <addressOffset>0xE4</addressOffset>
                <size>32</size>
@@ -22793,7 +22793,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>QSPI_WPSR</name>
+               <name>WPSR</name>
                <description>Write Protection Status Register</description>
                <addressOffset>0xE8</addressOffset>
                <size>32</size>
@@ -22833,7 +22833,7 @@ Copyright (c) 2017 Microchip Technology Inc.
          </interrupt>
          <registers>
             <register>
-               <name>RSTC_CR</name>
+               <name>CR</name>
                <description>Control Register</description>
                <addressOffset>0x00</addressOffset>
                <size>32</size>
@@ -22868,7 +22868,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>RSTC_SR</name>
+               <name>SR</name>
                <description>Status Register</description>
                <addressOffset>0x04</addressOffset>
                <size>32</size>
@@ -22929,7 +22929,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>RSTC_MR</name>
+               <name>MR</name>
                <description>Mode Register</description>
                <addressOffset>0x08</addressOffset>
                <size>32</size>
@@ -22988,7 +22988,7 @@ Copyright (c) 2017 Microchip Technology Inc.
          </interrupt>
          <registers>
             <register>
-               <name>RSWDT_CR</name>
+               <name>CR</name>
                <description>Control Register</description>
                <addressOffset>0x00</addressOffset>
                <size>32</size>
@@ -23017,7 +23017,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>RSWDT_MR</name>
+               <name>MR</name>
                <description>Mode Register</description>
                <addressOffset>0x04</addressOffset>
                <size>32</size>
@@ -23067,7 +23067,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>RSWDT_SR</name>
+               <name>SR</name>
                <description>Status Register</description>
                <addressOffset>0x08</addressOffset>
                <size>32</size>
@@ -23101,7 +23101,7 @@ Copyright (c) 2017 Microchip Technology Inc.
          </interrupt>
          <registers>
             <register>
-               <name>RTC_CR</name>
+               <name>CR</name>
                <description>Control Register</description>
                <addressOffset>0x00</addressOffset>
                <size>32</size>
@@ -23174,7 +23174,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>RTC_MR</name>
+               <name>MR</name>
                <description>Mode Register</description>
                <addressOffset>0x04</addressOffset>
                <size>32</size>
@@ -23388,7 +23388,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>RTC_TIMR</name>
+               <name>TIMR</name>
                <description>Time Register</description>
                <addressOffset>0x08</addressOffset>
                <size>32</size>
@@ -23420,7 +23420,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>RTC_CALR</name>
+               <name>CALR</name>
                <description>Calendar Register</description>
                <addressOffset>0x0C</addressOffset>
                <size>32</size>
@@ -23458,7 +23458,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>RTC_TIMALR</name>
+               <name>TIMALR</name>
                <description>Time Alarm Register</description>
                <addressOffset>0x10</addressOffset>
                <size>32</size>
@@ -23508,7 +23508,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>RTC_CALALR</name>
+               <name>CALALR</name>
                <description>Calendar Alarm Register</description>
                <addressOffset>0x14</addressOffset>
                <size>32</size>
@@ -23540,7 +23540,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>RTC_SR</name>
+               <name>SR</name>
                <description>Status Register</description>
                <addressOffset>0x18</addressOffset>
                <size>32</size>
@@ -23663,7 +23663,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>RTC_SCCR</name>
+               <name>SCCR</name>
                <description>Status Clear Command Register</description>
                <addressOffset>0x1C</addressOffset>
                <size>32</size>
@@ -23708,7 +23708,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>RTC_IER</name>
+               <name>IER</name>
                <description>Interrupt Enable Register</description>
                <addressOffset>0x20</addressOffset>
                <size>32</size>
@@ -23753,7 +23753,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>RTC_IDR</name>
+               <name>IDR</name>
                <description>Interrupt Disable Register</description>
                <addressOffset>0x24</addressOffset>
                <size>32</size>
@@ -23798,7 +23798,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>RTC_IMR</name>
+               <name>IMR</name>
                <description>Interrupt Mask Register</description>
                <addressOffset>0x28</addressOffset>
                <size>32</size>
@@ -23843,7 +23843,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>RTC_VER</name>
+               <name>VER</name>
                <description>Valid Entry Register</description>
                <addressOffset>0x2C</addressOffset>
                <size>32</size>
@@ -23895,7 +23895,7 @@ Copyright (c) 2017 Microchip Technology Inc.
          </interrupt>
          <registers>
             <register>
-               <name>RTT_MR</name>
+               <name>MR</name>
                <description>Mode Register</description>
                <addressOffset>0x00</addressOffset>
                <size>32</size>
@@ -23939,7 +23939,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>RTT_AR</name>
+               <name>AR</name>
                <description>Alarm Register</description>
                <addressOffset>0x04</addressOffset>
                <size>32</size>
@@ -23953,7 +23953,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>RTT_VR</name>
+               <name>VR</name>
                <description>Value Register</description>
                <addressOffset>0x08</addressOffset>
                <size>32</size>
@@ -23968,7 +23968,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>RTT_SR</name>
+               <name>SR</name>
                <description>Status Register</description>
                <addressOffset>0x0C</addressOffset>
                <size>32</size>
@@ -24008,7 +24008,7 @@ Copyright (c) 2017 Microchip Technology Inc.
          </interrupt>
          <registers>
             <register>
-               <name>SSC_CR</name>
+               <name>CR</name>
                <description>Control Register</description>
                <addressOffset>0x0</addressOffset>
                <size>32</size>
@@ -24047,7 +24047,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>SSC_CMR</name>
+               <name>CMR</name>
                <description>Clock Mode Register</description>
                <addressOffset>0x4</addressOffset>
                <size>32</size>
@@ -24061,7 +24061,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>SSC_RCMR</name>
+               <name>RCMR</name>
                <description>Receive Clock Mode Register</description>
                <addressOffset>0x10</addressOffset>
                <size>32</size>
@@ -24219,7 +24219,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>SSC_RFMR</name>
+               <name>RFMR</name>
                <description>Receive Frame Mode Register</description>
                <addressOffset>0x14</addressOffset>
                <size>32</size>
@@ -24321,7 +24321,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>SSC_TCMR</name>
+               <name>TCMR</name>
                <description>Transmit Clock Mode Register</description>
                <addressOffset>0x18</addressOffset>
                <size>32</size>
@@ -24468,7 +24468,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>SSC_TFMR</name>
+               <name>TFMR</name>
                <description>Transmit Frame Mode Register</description>
                <addressOffset>0x1C</addressOffset>
                <size>32</size>
@@ -24576,7 +24576,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>SSC_RHR</name>
+               <name>RHR</name>
                <description>Receive Holding Register</description>
                <addressOffset>0x20</addressOffset>
                <size>32</size>
@@ -24591,7 +24591,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>SSC_THR</name>
+               <name>THR</name>
                <description>Transmit Holding Register</description>
                <addressOffset>0x24</addressOffset>
                <size>32</size>
@@ -24606,7 +24606,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>SSC_RSHR</name>
+               <name>RSHR</name>
                <description>Receive Sync. Holding Register</description>
                <addressOffset>0x30</addressOffset>
                <size>32</size>
@@ -24621,7 +24621,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>SSC_TSHR</name>
+               <name>TSHR</name>
                <description>Transmit Sync. Holding Register</description>
                <addressOffset>0x34</addressOffset>
                <size>32</size>
@@ -24635,7 +24635,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>SSC_RC0R</name>
+               <name>RC0R</name>
                <description>Receive Compare 0 Register</description>
                <addressOffset>0x38</addressOffset>
                <size>32</size>
@@ -24649,7 +24649,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>SSC_RC1R</name>
+               <name>RC1R</name>
                <description>Receive Compare 1 Register</description>
                <addressOffset>0x3C</addressOffset>
                <size>32</size>
@@ -24663,7 +24663,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>SSC_SR</name>
+               <name>SR</name>
                <description>Status Register</description>
                <addressOffset>0x40</addressOffset>
                <size>32</size>
@@ -24732,7 +24732,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>SSC_IER</name>
+               <name>IER</name>
                <description>Interrupt Enable Register</description>
                <addressOffset>0x44</addressOffset>
                <size>32</size>
@@ -24789,7 +24789,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>SSC_IDR</name>
+               <name>IDR</name>
                <description>Interrupt Disable Register</description>
                <addressOffset>0x48</addressOffset>
                <size>32</size>
@@ -24846,7 +24846,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>SSC_IMR</name>
+               <name>IMR</name>
                <description>Interrupt Mask Register</description>
                <addressOffset>0x4C</addressOffset>
                <size>32</size>
@@ -24903,7 +24903,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>SSC_WPMR</name>
+               <name>WPMR</name>
                <description>Write Protection Mode Register</description>
                <addressOffset>0xE4</addressOffset>
                <size>32</size>
@@ -24931,7 +24931,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>SSC_WPSR</name>
+               <name>WPSR</name>
                <description>Write Protection Status Register</description>
                <addressOffset>0xE8</addressOffset>
                <size>32</size>
@@ -24971,7 +24971,7 @@ Copyright (c) 2017 Microchip Technology Inc.
          </interrupt>
          <registers>
             <register>
-               <name>SUPC_CR</name>
+               <name>CR</name>
                <description>Supply Controller Control Register</description>
                <addressOffset>0x00</addressOffset>
                <size>32</size>
@@ -25032,7 +25032,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>SUPC_SMMR</name>
+               <name>SMMR</name>
                <description>Supply Controller Supply Monitor Mode Register</description>
                <addressOffset>0x04</addressOffset>
                <size>32</size>
@@ -25118,7 +25118,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>SUPC_MR</name>
+               <name>MR</name>
                <description>Supply Controller Mode Register</description>
                <addressOffset>0x08</addressOffset>
                <size>32</size>
@@ -25222,7 +25222,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>SUPC_WUMR</name>
+               <name>WUMR</name>
                <description>Supply Controller Wake-up Mode Register</description>
                <addressOffset>0x0C</addressOffset>
                <size>32</size>
@@ -25432,7 +25432,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>SUPC_WUIR</name>
+               <name>WUIR</name>
                <description>Supply Controller Wake-up Inputs Register</description>
                <addressOffset>0x10</addressOffset>
                <size>32</size>
@@ -25972,7 +25972,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>SUPC_SR</name>
+               <name>SR</name>
                <description>Supply Controller Status Register</description>
                <addressOffset>0x14</addressOffset>
                <size>32</size>
@@ -26451,7 +26451,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                <description>Channel Control Register (channel = 0)</description>
                <addressOffset>0x0</addressOffset>
                <register>
-                  <name>TC_CCR</name>
+                  <name>CCR</name>
                   <description>Channel Control Register (channel = 0)</description>
                   <addressOffset>0x00</addressOffset>
                   <size>32</size>
@@ -26478,7 +26478,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>TC_CMR</name>
+                  <name>CMR</name>
                   <description>Channel Mode Register (channel = 0)</description>
                   <addressOffset>0x04</addressOffset>
                   <size>32</size>
@@ -26721,7 +26721,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>TC_SMMR</name>
+                  <name>SMMR</name>
                   <description>Stepper Motor Mode Register (channel = 0)</description>
                   <addressOffset>0x08</addressOffset>
                   <size>32</size>
@@ -26741,7 +26741,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>TC_RAB</name>
+                  <name>RAB</name>
                   <description>Register AB (channel = 0)</description>
                   <addressOffset>0x0C</addressOffset>
                   <size>32</size>
@@ -26756,7 +26756,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>TC_CV</name>
+                  <name>CV</name>
                   <description>Counter Value (channel = 0)</description>
                   <addressOffset>0x10</addressOffset>
                   <size>32</size>
@@ -26771,7 +26771,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>TC_RA</name>
+                  <name>RA</name>
                   <description>Register A (channel = 0)</description>
                   <addressOffset>0x14</addressOffset>
                   <size>32</size>
@@ -26785,7 +26785,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>TC_RB</name>
+                  <name>RB</name>
                   <description>Register B (channel = 0)</description>
                   <addressOffset>0x18</addressOffset>
                   <size>32</size>
@@ -26799,7 +26799,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>TC_RC</name>
+                  <name>RC</name>
                   <description>Register C (channel = 0)</description>
                   <addressOffset>0x1C</addressOffset>
                   <size>32</size>
@@ -26813,7 +26813,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>TC_SR</name>
+                  <name>SR</name>
                   <description>Status Register (channel = 0)</description>
                   <addressOffset>0x20</addressOffset>
                   <size>32</size>
@@ -26888,7 +26888,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>TC_IER</name>
+                  <name>IER</name>
                   <description>Interrupt Enable Register (channel = 0)</description>
                   <addressOffset>0x24</addressOffset>
                   <size>32</size>
@@ -26945,7 +26945,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>TC_IDR</name>
+                  <name>IDR</name>
                   <description>Interrupt Disable Register (channel = 0)</description>
                   <addressOffset>0x28</addressOffset>
                   <size>32</size>
@@ -27002,7 +27002,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>TC_IMR</name>
+                  <name>IMR</name>
                   <description>Interrupt Mask Register (channel = 0)</description>
                   <addressOffset>0x2C</addressOffset>
                   <size>32</size>
@@ -27059,7 +27059,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>TC_EMR</name>
+                  <name>EMR</name>
                   <description>Extended Mode Register (channel = 0)</description>
                   <addressOffset>0x30</addressOffset>
                   <size>32</size>
@@ -27112,7 +27112,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </register>
             </cluster>
             <register>
-               <name>TC_BCR</name>
+               <name>BCR</name>
                <description>Block Control Register</description>
                <addressOffset>0xC0</addressOffset>
                <size>32</size>
@@ -27127,7 +27127,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>TC_BMR</name>
+               <name>BMR</name>
                <description>Block Mode Register</description>
                <addressOffset>0xC4</addressOffset>
                <size>32</size>
@@ -27273,7 +27273,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>TC_QIER</name>
+               <name>QIER</name>
                <description>QDEC Interrupt Enable Register</description>
                <addressOffset>0xC8</addressOffset>
                <size>32</size>
@@ -27300,7 +27300,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>TC_QIDR</name>
+               <name>QIDR</name>
                <description>QDEC Interrupt Disable Register</description>
                <addressOffset>0xCC</addressOffset>
                <size>32</size>
@@ -27327,7 +27327,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>TC_QIMR</name>
+               <name>QIMR</name>
                <description>QDEC Interrupt Mask Register</description>
                <addressOffset>0xD0</addressOffset>
                <size>32</size>
@@ -27354,7 +27354,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>TC_QISR</name>
+               <name>QISR</name>
                <description>QDEC Interrupt Status Register</description>
                <addressOffset>0xD4</addressOffset>
                <size>32</size>
@@ -27387,7 +27387,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>TC_FMR</name>
+               <name>FMR</name>
                <description>Fault Mode Register</description>
                <addressOffset>0xD8</addressOffset>
                <size>32</size>
@@ -27407,7 +27407,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>TC_WPMR</name>
+               <name>WPMR</name>
                <description>Write Protection Mode Register</description>
                <addressOffset>0xE4</addressOffset>
                <size>32</size>
@@ -27502,7 +27502,7 @@ Copyright (c) 2017 Microchip Technology Inc.
          </interrupt>
          <registers>
             <register>
-               <name>TRNG_CR</name>
+               <name>CR</name>
                <description>Control Register</description>
                <addressOffset>0x00</addressOffset>
                <size>32</size>
@@ -27531,7 +27531,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>TRNG_IER</name>
+               <name>IER</name>
                <description>Interrupt Enable Register</description>
                <addressOffset>0x10</addressOffset>
                <size>32</size>
@@ -27546,7 +27546,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>TRNG_IDR</name>
+               <name>IDR</name>
                <description>Interrupt Disable Register</description>
                <addressOffset>0x14</addressOffset>
                <size>32</size>
@@ -27561,7 +27561,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>TRNG_IMR</name>
+               <name>IMR</name>
                <description>Interrupt Mask Register</description>
                <addressOffset>0x18</addressOffset>
                <size>32</size>
@@ -27576,7 +27576,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>TRNG_ISR</name>
+               <name>ISR</name>
                <description>Interrupt Status Register</description>
                <addressOffset>0x1C</addressOffset>
                <size>32</size>
@@ -27591,7 +27591,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>TRNG_ODATA</name>
+               <name>ODATA</name>
                <description>Output Data Register</description>
                <addressOffset>0x50</addressOffset>
                <size>32</size>
@@ -27625,7 +27625,7 @@ Copyright (c) 2017 Microchip Technology Inc.
          </interrupt>
          <registers>
             <register>
-               <name>TWIHS_CR</name>
+               <name>CR</name>
                <description>Control Register</description>
                <addressOffset>0x00</addressOffset>
                <size>32</size>
@@ -27766,7 +27766,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>TWIHS_MMR</name>
+               <name>MMR</name>
                <description>Master Mode Register</description>
                <addressOffset>0x04</addressOffset>
                <size>32</size>
@@ -27815,7 +27815,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>TWIHS_SMR</name>
+               <name>SMR</name>
                <description>Slave Mode Register</description>
                <addressOffset>0x08</addressOffset>
                <size>32</size>
@@ -27883,7 +27883,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>TWIHS_IADR</name>
+               <name>IADR</name>
                <description>Internal Address Register</description>
                <addressOffset>0x0C</addressOffset>
                <size>32</size>
@@ -27897,7 +27897,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>TWIHS_CWGR</name>
+               <name>CWGR</name>
                <description>Clock Waveform Generator Register</description>
                <addressOffset>0x10</addressOffset>
                <size>32</size>
@@ -27929,7 +27929,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>TWIHS_SR</name>
+               <name>SR</name>
                <description>Status Register</description>
                <addressOffset>0x20</addressOffset>
                <size>32</size>
@@ -28052,7 +28052,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>TWIHS_IER</name>
+               <name>IER</name>
                <description>Interrupt Enable Register</description>
                <addressOffset>0x24</addressOffset>
                <size>32</size>
@@ -28157,7 +28157,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>TWIHS_IDR</name>
+               <name>IDR</name>
                <description>Interrupt Disable Register</description>
                <addressOffset>0x28</addressOffset>
                <size>32</size>
@@ -28262,7 +28262,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>TWIHS_IMR</name>
+               <name>IMR</name>
                <description>Interrupt Mask Register</description>
                <addressOffset>0x2C</addressOffset>
                <size>32</size>
@@ -28367,7 +28367,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>TWIHS_RHR</name>
+               <name>RHR</name>
                <description>Receive Holding Register</description>
                <addressOffset>0x30</addressOffset>
                <size>32</size>
@@ -28382,7 +28382,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>TWIHS_THR</name>
+               <name>THR</name>
                <description>Transmit Holding Register</description>
                <addressOffset>0x34</addressOffset>
                <size>32</size>
@@ -28397,7 +28397,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>TWIHS_SMBTR</name>
+               <name>SMBTR</name>
                <description>SMBus Timing Register</description>
                <addressOffset>0x38</addressOffset>
                <size>32</size>
@@ -28429,7 +28429,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>TWIHS_FILTR</name>
+               <name>FILTR</name>
                <description>Filter Register</description>
                <addressOffset>0x44</addressOffset>
                <size>32</size>
@@ -28461,7 +28461,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>TWIHS_SWMR</name>
+               <name>SWMR</name>
                <description>SleepWalking Matching Register</description>
                <addressOffset>0x4C</addressOffset>
                <size>32</size>
@@ -28493,7 +28493,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>TWIHS_WPMR</name>
+               <name>WPMR</name>
                <description>Write Protection Mode Register</description>
                <addressOffset>0xE4</addressOffset>
                <size>32</size>
@@ -28521,7 +28521,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>TWIHS_WPSR</name>
+               <name>WPSR</name>
                <description>Write Protection Status Register</description>
                <addressOffset>0xE8</addressOffset>
                <size>32</size>
@@ -28569,7 +28569,7 @@ Copyright (c) 2017 Microchip Technology Inc.
          </interrupt>
          <registers>
             <register>
-               <name>UART_CR</name>
+               <name>CR</name>
                <description>Control Register</description>
                <addressOffset>0x0000</addressOffset>
                <size>32</size>
@@ -28626,7 +28626,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>UART_MR</name>
+               <name>MR</name>
                <description>Mode Register</description>
                <addressOffset>0x0004</addressOffset>
                <size>32</size>
@@ -28735,7 +28735,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>UART_IER</name>
+               <name>IER</name>
                <description>Interrupt Enable Register</description>
                <addressOffset>0x0008</addressOffset>
                <size>32</size>
@@ -28786,7 +28786,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>UART_IDR</name>
+               <name>IDR</name>
                <description>Interrupt Disable Register</description>
                <addressOffset>0x000C</addressOffset>
                <size>32</size>
@@ -28837,7 +28837,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>UART_IMR</name>
+               <name>IMR</name>
                <description>Interrupt Mask Register</description>
                <addressOffset>0x0010</addressOffset>
                <size>32</size>
@@ -28888,7 +28888,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>UART_SR</name>
+               <name>SR</name>
                <description>Status Register</description>
                <addressOffset>0x0014</addressOffset>
                <size>32</size>
@@ -28939,7 +28939,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>UART_RHR</name>
+               <name>RHR</name>
                <description>Receive Holding Register</description>
                <addressOffset>0x0018</addressOffset>
                <size>32</size>
@@ -28954,7 +28954,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>UART_THR</name>
+               <name>THR</name>
                <description>Transmit Holding Register</description>
                <addressOffset>0x001C</addressOffset>
                <size>32</size>
@@ -28969,7 +28969,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>UART_BRGR</name>
+               <name>BRGR</name>
                <description>Baud Rate Generator Register</description>
                <addressOffset>0x0020</addressOffset>
                <size>32</size>
@@ -28983,7 +28983,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>UART_CMPR</name>
+               <name>CMPR</name>
                <description>Comparison Register</description>
                <addressOffset>0x0024</addressOffset>
                <size>32</size>
@@ -29028,7 +29028,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>UART_WPMR</name>
+               <name>WPMR</name>
                <description>Write Protection Mode Register</description>
                <addressOffset>0x00E4</addressOffset>
                <size>32</size>
@@ -30587,7 +30587,7 @@ Copyright (c) 2017 Microchip Technology Inc.
          </interrupt>
          <registers>
             <register>
-               <name>USBHS_DEVCTRL</name>
+               <name>DEVCTRL</name>
                <description>Device General Control Register</description>
                <addressOffset>0x0000</addressOffset>
                <size>32</size>
@@ -30668,7 +30668,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>USBHS_DEVISR</name>
+               <name>DEVISR</name>
                <description>Device Global Interrupt Status Register</description>
                <addressOffset>0x0004</addressOffset>
                <size>32</size>
@@ -30833,7 +30833,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>USBHS_DEVICR</name>
+               <name>DEVICR</name>
                <description>Device Global Interrupt Clear Register</description>
                <addressOffset>0x0008</addressOffset>
                <size>32</size>
@@ -30884,7 +30884,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>USBHS_DEVIFR</name>
+               <name>DEVIFR</name>
                <description>Device Global Interrupt Set Register</description>
                <addressOffset>0x000C</addressOffset>
                <size>32</size>
@@ -30977,7 +30977,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>USBHS_DEVIMR</name>
+               <name>DEVIMR</name>
                <description>Device Global Interrupt Mask Register</description>
                <addressOffset>0x0010</addressOffset>
                <size>32</size>
@@ -31142,7 +31142,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>USBHS_DEVIDR</name>
+               <name>DEVIDR</name>
                <description>Device Global Interrupt Disable Register</description>
                <addressOffset>0x0014</addressOffset>
                <size>32</size>
@@ -31307,7 +31307,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>USBHS_DEVIER</name>
+               <name>DEVIER</name>
                <description>Device Global Interrupt Enable Register</description>
                <addressOffset>0x0018</addressOffset>
                <size>32</size>
@@ -31472,7 +31472,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>USBHS_DEVEPT</name>
+               <name>DEVEPT</name>
                <description>Device Endpoint Register</description>
                <addressOffset>0x001C</addressOffset>
                <size>32</size>
@@ -31600,7 +31600,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>USBHS_DEVFNUM</name>
+               <name>DEVFNUM</name>
                <description>Device Frame Number Register</description>
                <addressOffset>0x0020</addressOffset>
                <size>32</size>
@@ -31629,7 +31629,7 @@ Copyright (c) 2017 Microchip Technology Inc.
             <register>
                <dim>10</dim>
                <dimIncrement>4</dimIncrement>
-               <name>USBHS_DEVEPTCFG[%s]</name>
+               <name>DEVEPTCFG[%s]</name>
                <description>Device Endpoint Configuration Register (n = 0) 0</description>
                <addressOffset>0x100</addressOffset>
                <size>32</size>
@@ -31801,7 +31801,7 @@ Copyright (c) 2017 Microchip Technology Inc.
             <register>
                <dim>10</dim>
                <dimIncrement>4</dimIncrement>
-               <name>USBHS_DEVEPTISR[%s]</name>
+               <name>DEVEPTISR[%s]</name>
                <description>Device Endpoint Status Register (n = 0) 0</description>
                <addressOffset>0x130</addressOffset>
                <size>32</size>
@@ -31966,7 +31966,7 @@ Copyright (c) 2017 Microchip Technology Inc.
             <register>
                <dim>10</dim>
                <dimIncrement>4</dimIncrement>
-               <name>USBHS_DEVEPTICR[%s]</name>
+               <name>DEVEPTICR[%s]</name>
                <description>Device Endpoint Clear Register (n = 0) 0</description>
                <addressOffset>0x160</addressOffset>
                <size>32</size>
@@ -32025,7 +32025,7 @@ Copyright (c) 2017 Microchip Technology Inc.
             <register>
                <dim>10</dim>
                <dimIncrement>4</dimIncrement>
-               <name>USBHS_DEVEPTIFR[%s]</name>
+               <name>DEVEPTIFR[%s]</name>
                <description>Device Endpoint Set Register (n = 0) 0</description>
                <addressOffset>0x190</addressOffset>
                <size>32</size>
@@ -32090,7 +32090,7 @@ Copyright (c) 2017 Microchip Technology Inc.
             <register>
                <dim>10</dim>
                <dimIncrement>4</dimIncrement>
-               <name>USBHS_DEVEPTIMR[%s]</name>
+               <name>DEVEPTIMR[%s]</name>
                <description>Device Endpoint Mask Register (n = 0) 0</description>
                <addressOffset>0x1C0</addressOffset>
                <size>32</size>
@@ -32191,7 +32191,7 @@ Copyright (c) 2017 Microchip Technology Inc.
             <register>
                <dim>10</dim>
                <dimIncrement>4</dimIncrement>
-               <name>USBHS_DEVEPTIER[%s]</name>
+               <name>DEVEPTIER[%s]</name>
                <description>Device Endpoint Enable Register (n = 0) 0</description>
                <addressOffset>0x1F0</addressOffset>
                <size>32</size>
@@ -32292,7 +32292,7 @@ Copyright (c) 2017 Microchip Technology Inc.
             <register>
                <dim>10</dim>
                <dimIncrement>4</dimIncrement>
-               <name>USBHS_DEVEPTIDR[%s]</name>
+               <name>DEVEPTIDR[%s]</name>
                <description>Device Endpoint Disable Register (n = 0) 0</description>
                <addressOffset>0x220</addressOffset>
                <size>32</size>
@@ -32385,7 +32385,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                <description>Device DMA Channel Next Descriptor Address Register (n = 1)</description>
                <addressOffset>0x310</addressOffset>
                <register>
-                  <name>USBHS_DEVDMANXTDSC</name>
+                  <name>DEVDMANXTDSC</name>
                   <description>Device DMA Channel Next Descriptor Address Register (n = 1)</description>
                   <addressOffset>0x00</addressOffset>
                   <size>32</size>
@@ -32399,7 +32399,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>USBHS_DEVDMAADDRESS</name>
+                  <name>DEVDMAADDRESS</name>
                   <description>Device DMA Channel Address Register (n = 1)</description>
                   <addressOffset>0x04</addressOffset>
                   <size>32</size>
@@ -32413,7 +32413,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>USBHS_DEVDMACONTROL</name>
+                  <name>DEVDMACONTROL</name>
                   <description>Device DMA Channel Control Register (n = 1)</description>
                   <addressOffset>0x08</addressOffset>
                   <size>32</size>
@@ -32475,7 +32475,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>USBHS_DEVDMASTATUS</name>
+                  <name>DEVDMASTATUS</name>
                   <description>Device DMA Channel Status Register (n = 1)</description>
                   <addressOffset>0x0C</addressOffset>
                   <size>32</size>
@@ -32520,7 +32520,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </register>
             </cluster>
             <register>
-               <name>USBHS_HSTCTRL</name>
+               <name>HSTCTRL</name>
                <description>Host General Control Register</description>
                <addressOffset>0x0400</addressOffset>
                <size>32</size>
@@ -32565,7 +32565,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>USBHS_HSTISR</name>
+               <name>HSTISR</name>
                <description>Host Global Interrupt Status Register</description>
                <addressOffset>0x0404</addressOffset>
                <size>32</size>
@@ -32730,7 +32730,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>USBHS_HSTICR</name>
+               <name>HSTICR</name>
                <description>Host Global Interrupt Clear Register</description>
                <addressOffset>0x0408</addressOffset>
                <size>32</size>
@@ -32781,7 +32781,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>USBHS_HSTIFR</name>
+               <name>HSTIFR</name>
                <description>Host Global Interrupt Set Register</description>
                <addressOffset>0x040C</addressOffset>
                <size>32</size>
@@ -32874,7 +32874,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>USBHS_HSTIMR</name>
+               <name>HSTIMR</name>
                <description>Host Global Interrupt Mask Register</description>
                <addressOffset>0x0410</addressOffset>
                <size>32</size>
@@ -33039,7 +33039,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>USBHS_HSTIDR</name>
+               <name>HSTIDR</name>
                <description>Host Global Interrupt Disable Register</description>
                <addressOffset>0x0414</addressOffset>
                <size>32</size>
@@ -33204,7 +33204,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>USBHS_HSTIER</name>
+               <name>HSTIER</name>
                <description>Host Global Interrupt Enable Register</description>
                <addressOffset>0x0418</addressOffset>
                <size>32</size>
@@ -33369,7 +33369,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>USBHS_HSTPIP</name>
+               <name>HSTPIP</name>
                <description>Host Pipe Register</description>
                <addressOffset>0x0041C</addressOffset>
                <size>32</size>
@@ -33485,7 +33485,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>USBHS_HSTFNUM</name>
+               <name>HSTFNUM</name>
                <description>Host Frame Number Register</description>
                <addressOffset>0x0420</addressOffset>
                <size>32</size>
@@ -33511,7 +33511,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>USBHS_HSTADDR1</name>
+               <name>HSTADDR1</name>
                <description>Host Address 1 Register</description>
                <addressOffset>0x0424</addressOffset>
                <size>32</size>
@@ -33543,7 +33543,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>USBHS_HSTADDR2</name>
+               <name>HSTADDR2</name>
                <description>Host Address 2 Register</description>
                <addressOffset>0x0428</addressOffset>
                <size>32</size>
@@ -33575,7 +33575,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>USBHS_HSTADDR3</name>
+               <name>HSTADDR3</name>
                <description>Host Address 3 Register</description>
                <addressOffset>0x042C</addressOffset>
                <size>32</size>
@@ -33597,7 +33597,7 @@ Copyright (c) 2017 Microchip Technology Inc.
             <register>
                <dim>10</dim>
                <dimIncrement>4</dimIncrement>
-               <name>USBHS_HSTPIPCFG[%s]</name>
+               <name>HSTPIPCFG[%s]</name>
                <description>Host Pipe Configuration Register (n = 0) 0</description>
                <addressOffset>0x500</addressOffset>
                <size>32</size>
@@ -33757,7 +33757,7 @@ Copyright (c) 2017 Microchip Technology Inc.
             <register>
                <dim>10</dim>
                <dimIncrement>4</dimIncrement>
-               <name>USBHS_HSTPIPISR[%s]</name>
+               <name>HSTPIPISR[%s]</name>
                <description>Host Pipe Status Register (n = 0) 0</description>
                <addressOffset>0x530</addressOffset>
                <size>32</size>
@@ -33906,7 +33906,7 @@ Copyright (c) 2017 Microchip Technology Inc.
             <register>
                <dim>10</dim>
                <dimIncrement>4</dimIncrement>
-               <name>USBHS_HSTPIPICR[%s]</name>
+               <name>HSTPIPICR[%s]</name>
                <description>Host Pipe Clear Register (n = 0) 0</description>
                <addressOffset>0x560</addressOffset>
                <size>32</size>
@@ -33959,7 +33959,7 @@ Copyright (c) 2017 Microchip Technology Inc.
             <register>
                <dim>10</dim>
                <dimIncrement>4</dimIncrement>
-               <name>USBHS_HSTPIPIFR[%s]</name>
+               <name>HSTPIPIFR[%s]</name>
                <description>Host Pipe Set Register (n = 0) 0</description>
                <addressOffset>0x590</addressOffset>
                <size>32</size>
@@ -34024,7 +34024,7 @@ Copyright (c) 2017 Microchip Technology Inc.
             <register>
                <dim>10</dim>
                <dimIncrement>4</dimIncrement>
-               <name>USBHS_HSTPIPIMR[%s]</name>
+               <name>HSTPIPIMR[%s]</name>
                <description>Host Pipe Mask Register (n = 0) 0</description>
                <addressOffset>0x5C0</addressOffset>
                <size>32</size>
@@ -34113,7 +34113,7 @@ Copyright (c) 2017 Microchip Technology Inc.
             <register>
                <dim>10</dim>
                <dimIncrement>4</dimIncrement>
-               <name>USBHS_HSTPIPIER[%s]</name>
+               <name>HSTPIPIER[%s]</name>
                <description>Host Pipe Enable Register (n = 0) 0</description>
                <addressOffset>0x5F0</addressOffset>
                <size>32</size>
@@ -34196,7 +34196,7 @@ Copyright (c) 2017 Microchip Technology Inc.
             <register>
                <dim>10</dim>
                <dimIncrement>4</dimIncrement>
-               <name>USBHS_HSTPIPIDR[%s]</name>
+               <name>HSTPIPIDR[%s]</name>
                <description>Host Pipe Disable Register (n = 0) 0</description>
                <addressOffset>0x620</addressOffset>
                <size>32</size>
@@ -34279,7 +34279,7 @@ Copyright (c) 2017 Microchip Technology Inc.
             <register>
                <dim>10</dim>
                <dimIncrement>4</dimIncrement>
-               <name>USBHS_HSTPIPINRQ[%s]</name>
+               <name>HSTPIPINRQ[%s]</name>
                <description>Host Pipe IN Request Register (n = 0) 0</description>
                <addressOffset>0x650</addressOffset>
                <size>32</size>
@@ -34301,7 +34301,7 @@ Copyright (c) 2017 Microchip Technology Inc.
             <register>
                <dim>10</dim>
                <dimIncrement>4</dimIncrement>
-               <name>USBHS_HSTPIPERR[%s]</name>
+               <name>HSTPIPERR[%s]</name>
                <description>Host Pipe Error Register (n = 0) 0</description>
                <addressOffset>0x680</addressOffset>
                <size>32</size>
@@ -34351,7 +34351,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                <description>Host DMA Channel Next Descriptor Address Register (n = 1)</description>
                <addressOffset>0x710</addressOffset>
                <register>
-                  <name>USBHS_HSTDMANXTDSC</name>
+                  <name>HSTDMANXTDSC</name>
                   <description>Host DMA Channel Next Descriptor Address Register (n = 1)</description>
                   <addressOffset>0x00</addressOffset>
                   <size>32</size>
@@ -34365,7 +34365,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>USBHS_HSTDMAADDRESS</name>
+                  <name>HSTDMAADDRESS</name>
                   <description>Host DMA Channel Address Register (n = 1)</description>
                   <addressOffset>0x04</addressOffset>
                   <size>32</size>
@@ -34379,7 +34379,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>USBHS_HSTDMACONTROL</name>
+                  <name>HSTDMACONTROL</name>
                   <description>Host DMA Channel Control Register (n = 1)</description>
                   <addressOffset>0x08</addressOffset>
                   <size>32</size>
@@ -34441,7 +34441,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>USBHS_HSTDMASTATUS</name>
+                  <name>HSTDMASTATUS</name>
                   <description>Host DMA Channel Status Register (n = 1)</description>
                   <addressOffset>0x0C</addressOffset>
                   <size>32</size>
@@ -34486,7 +34486,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </register>
             </cluster>
             <register>
-               <name>USBHS_CTRL</name>
+               <name>CTRL</name>
                <description>General Control Register</description>
                <addressOffset>0x0800</addressOffset>
                <size>32</size>
@@ -34537,7 +34537,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>USBHS_SR</name>
+               <name>SR</name>
                <description>General Status Register</description>
                <addressOffset>0x0804</addressOffset>
                <size>32</size>
@@ -34582,7 +34582,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>USBHS_SCR</name>
+               <name>SCR</name>
                <description>General Status Clear Register</description>
                <addressOffset>0x0808</addressOffset>
                <size>32</size>
@@ -34597,7 +34597,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>USBHS_SFR</name>
+               <name>SFR</name>
                <description>General Status Set Register</description>
                <addressOffset>0x080C</addressOffset>
                <size>32</size>
@@ -34633,7 +34633,7 @@ Copyright (c) 2017 Microchip Technology Inc.
          </addressBlock>
          <registers>
             <register>
-               <name>UTMI_OHCIICR</name>
+               <name>OHCIICR</name>
                <description>OHCI Interrupt Configuration Register</description>
                <addressOffset>0x10</addressOffset>
                <size>32</size>
@@ -34664,7 +34664,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>UTMI_CKTRIM</name>
+               <name>CKTRIM</name>
                <description>UTMI Clock Trimming Register</description>
                <addressOffset>0x30</addressOffset>
                <size>32</size>
@@ -34710,7 +34710,7 @@ Copyright (c) 2017 Microchip Technology Inc.
          </interrupt>
          <registers>
             <register>
-               <name>WDT_CR</name>
+               <name>CR</name>
                <description>Control Register</description>
                <addressOffset>0x00</addressOffset>
                <size>32</size>
@@ -34739,7 +34739,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>WDT_MR</name>
+               <name>MR</name>
                <description>Mode Register</description>
                <addressOffset>0x04</addressOffset>
                <size>32</size>
@@ -34789,7 +34789,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>WDT_SR</name>
+               <name>SR</name>
                <description>Status Register</description>
                <addressOffset>0x08</addressOffset>
                <size>32</size>
@@ -34829,7 +34829,7 @@ Copyright (c) 2017 Microchip Technology Inc.
          </interrupt>
          <registers>
             <register>
-               <name>XDMAC_GTYPE</name>
+               <name>GTYPE</name>
                <description>Global Type Register</description>
                <addressOffset>0x00</addressOffset>
                <size>32</size>
@@ -34856,7 +34856,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>XDMAC_GCFG</name>
+               <name>GCFG</name>
                <description>Global Configuration Register</description>
                <addressOffset>0x04</addressOffset>
                <size>32</size>
@@ -34894,7 +34894,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>XDMAC_GWAC</name>
+               <name>GWAC</name>
                <description>Global Weighted Arbiter Configuration Register</description>
                <addressOffset>0x08</addressOffset>
                <size>32</size>
@@ -34926,7 +34926,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>XDMAC_GIE</name>
+               <name>GIE</name>
                <description>Global Interrupt Enable Register</description>
                <addressOffset>0x0C</addressOffset>
                <size>32</size>
@@ -35079,7 +35079,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>XDMAC_GID</name>
+               <name>GID</name>
                <description>Global Interrupt Disable Register</description>
                <addressOffset>0x10</addressOffset>
                <size>32</size>
@@ -35232,7 +35232,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>XDMAC_GIM</name>
+               <name>GIM</name>
                <description>Global Interrupt Mask Register</description>
                <addressOffset>0x14</addressOffset>
                <size>32</size>
@@ -35385,7 +35385,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>XDMAC_GIS</name>
+               <name>GIS</name>
                <description>Global Interrupt Status Register</description>
                <addressOffset>0x18</addressOffset>
                <size>32</size>
@@ -35538,7 +35538,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>XDMAC_GE</name>
+               <name>GE</name>
                <description>Global Channel Enable Register</description>
                <addressOffset>0x1C</addressOffset>
                <size>32</size>
@@ -35691,7 +35691,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>XDMAC_GD</name>
+               <name>GD</name>
                <description>Global Channel Disable Register</description>
                <addressOffset>0x20</addressOffset>
                <size>32</size>
@@ -35844,7 +35844,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>XDMAC_GS</name>
+               <name>GS</name>
                <description>Global Channel Status Register</description>
                <addressOffset>0x24</addressOffset>
                <size>32</size>
@@ -35997,7 +35997,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>XDMAC_GRS</name>
+               <name>GRS</name>
                <description>Global Channel Read Suspend Register</description>
                <addressOffset>0x28</addressOffset>
                <size>32</size>
@@ -36149,7 +36149,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>XDMAC_GWS</name>
+               <name>GWS</name>
                <description>Global Channel Write Suspend Register</description>
                <addressOffset>0x2C</addressOffset>
                <size>32</size>
@@ -36301,7 +36301,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>XDMAC_GRWS</name>
+               <name>GRWS</name>
                <description>Global Channel Read Write Suspend Register</description>
                <addressOffset>0x30</addressOffset>
                <size>32</size>
@@ -36454,7 +36454,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>XDMAC_GRWR</name>
+               <name>GRWR</name>
                <description>Global Channel Read Write Resume Register</description>
                <addressOffset>0x34</addressOffset>
                <size>32</size>
@@ -36607,7 +36607,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>XDMAC_GSWR</name>
+               <name>GSWR</name>
                <description>Global Channel Software Request Register</description>
                <addressOffset>0x38</addressOffset>
                <size>32</size>
@@ -36760,7 +36760,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>XDMAC_GSWS</name>
+               <name>GSWS</name>
                <description>Global Channel Software Request Status Register</description>
                <addressOffset>0x3C</addressOffset>
                <size>32</size>
@@ -36913,7 +36913,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                </fields>
             </register>
             <register>
-               <name>XDMAC_GSWF</name>
+               <name>GSWF</name>
                <description>Global Channel Software Flush Request Register</description>
                <addressOffset>0x40</addressOffset>
                <size>32</size>
@@ -37072,7 +37072,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                <description>Channel Interrupt Enable Register (chid = 0)</description>
                <addressOffset>0x50</addressOffset>
                <register>
-                  <name>XDMAC_CIE</name>
+                  <name>CIE</name>
                   <description>Channel Interrupt Enable Register (chid = 0)</description>
                   <addressOffset>0x00</addressOffset>
                   <size>32</size>
@@ -37123,7 +37123,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>XDMAC_CID</name>
+                  <name>CID</name>
                   <description>Channel Interrupt Disable Register (chid = 0)</description>
                   <addressOffset>0x04</addressOffset>
                   <size>32</size>
@@ -37174,7 +37174,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>XDMAC_CIM</name>
+                  <name>CIM</name>
                   <description>Channel Interrupt Mask Register (chid = 0)</description>
                   <addressOffset>0x08</addressOffset>
                   <size>32</size>
@@ -37225,7 +37225,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>XDMAC_CIS</name>
+                  <name>CIS</name>
                   <description>Channel Interrupt Status Register (chid = 0)</description>
                   <addressOffset>0x0C</addressOffset>
                   <size>32</size>
@@ -37276,7 +37276,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>XDMAC_CSA</name>
+                  <name>CSA</name>
                   <description>Channel Source Address Register (chid = 0)</description>
                   <addressOffset>0x10</addressOffset>
                   <size>32</size>
@@ -37290,7 +37290,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>XDMAC_CDA</name>
+                  <name>CDA</name>
                   <description>Channel Destination Address Register (chid = 0)</description>
                   <addressOffset>0x14</addressOffset>
                   <size>32</size>
@@ -37304,7 +37304,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>XDMAC_CNDA</name>
+                  <name>CNDA</name>
                   <description>Channel Next Descriptor Address Register (chid = 0)</description>
                   <addressOffset>0x18</addressOffset>
                   <size>32</size>
@@ -37324,7 +37324,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>XDMAC_CNDC</name>
+                  <name>CNDC</name>
                   <description>Channel Next Descriptor Control Register (chid = 0)</description>
                   <addressOffset>0x1C</addressOffset>
                   <size>32</size>
@@ -37418,7 +37418,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>XDMAC_CUBC</name>
+                  <name>CUBC</name>
                   <description>Channel Microblock Control Register (chid = 0)</description>
                   <addressOffset>0x20</addressOffset>
                   <size>32</size>
@@ -37432,7 +37432,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>XDMAC_CBC</name>
+                  <name>CBC</name>
                   <description>Channel Block Control Register (chid = 0)</description>
                   <addressOffset>0x24</addressOffset>
                   <size>32</size>
@@ -37446,7 +37446,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>XDMAC_CC</name>
+                  <name>CC</name>
                   <description>Channel Configuration Register (chid = 0)</description>
                   <addressOffset>0x28</addressOffset>
                   <size>32</size>
@@ -37776,7 +37776,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>XDMAC_CDS_MSP</name>
+                  <name>CDS_MSP</name>
                   <description>Channel Data Stride Memory Set Pattern (chid = 0)</description>
                   <addressOffset>0x2C</addressOffset>
                   <size>32</size>
@@ -37796,7 +37796,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>XDMAC_CSUS</name>
+                  <name>CSUS</name>
                   <description>Channel Source Microblock Stride (chid = 0)</description>
                   <addressOffset>0x30</addressOffset>
                   <size>32</size>
@@ -37810,7 +37810,7 @@ Copyright (c) 2017 Microchip Technology Inc.
                   </fields>
                </register>
                <register>
-                  <name>XDMAC_CDUS</name>
+                  <name>CDUS</name>
                   <description>Channel Destination Microblock Stride (chid = 0)</description>
                   <addressOffset>0x34</addressOffset>
                   <size>32</size>
@@ -37838,7 +37838,7 @@ Copyright (c) 2017 Microchip Technology Inc.
          </addressBlock>
          <registers>
             <register>
-               <name>LOCKBIT_WORD0</name>
+               <name>WORD0</name>
                <description>Lock Bits Word 0</description>
                <addressOffset>0x0</addressOffset>
                <size>32</size>

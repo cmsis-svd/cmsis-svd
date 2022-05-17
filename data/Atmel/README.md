@@ -2,7 +2,7 @@ Microchip (Atmel) Pack Repository
 =================================
 
 The following files were downloaded from the [Atmel Pack
-Repository](http://packs.download.atmel.com/) and the corresponding `svd` files
+Repository](http://packs.download.microchip.com/) and the corresponding `svd` files
 extracted to be placed in this repository. The files are all provided under the
 Apache License, version 2.0.
 
@@ -14,13 +14,23 @@ Apache License, version 2.0.
 * `Atmel.SAM4S_DFP.1.0.56.atpack`: `ATSAM4S*.svd`
 * `Atmel.SAMD21_DFP.1.3.331.atpack`: `ATSAMD21*.svd`
 * `Atmel.SAMD51_DFP.1.2.139.atpack`: `ATSAMD51*.svd`
-* `Atmel.SAME70_DFP.2.4.166.atpack`: `ATSAME70*.svd`
+* `Atmel.SAME70_DFP.4.8.125.atpack`: `ATSAME70*B.svd`
 * `Atmel.SAML11_DFP.1.0.109.atpack`: `ATSAML11*.svd`
 * `Atmel.SAML22_DFP.1.2.77.atpack` : `ATSAML22*.svd`
 * `Atmel.SAMR21_DFP.1.1.72.atpack`: `ATSAMR21*.svd`
-* `Atmel.SAMS70_DFP.2.4.134.atpack`: `ATSAMS70*.svd`
-* `Atmel.SAMV70_DFP.2.4.134.atpack`: `ATSAMV70*.svd`
-* `Atmel.SAMV71_DFP.2.4.182.atpack`: `ATSAMV71*.svd`
+* `Atmel.SAMS70_DFP.4.8.100.atpack`: `ATSAMS70*B.svd`
+* `Atmel.SAMV70_DFP.4.8.97.atpack`: `ATSAMV70*B.svd`
+* `Atmel.SAMV71_DFP.4.8.113.atpack`: `ATSAMV71*B.svd`
+
+Deprecated by Microchip
+=======================
+
+Last versions where deprecated **Rev A** chips SVDs are available:
+
+* `Atmel.SAME70_DFP.4.5.86.atpack`: `ATSAMS70*[^B].svd`
+* `Atmel.SAMS70_DFP.4.5.74.atpack`: `ATSAMS70*[^B].svd`
+* `Atmel.SAMV70_DFP.4.5.75.atpack`: `ATSAMV70*[^B].svd`
+* `Atmel.SAMV71_DFP.4.6.82.atpack`: `ATSAMV71*[^B].svd`
 
 EmbSysRegView
 =============
