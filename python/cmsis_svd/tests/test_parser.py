@@ -109,7 +109,7 @@ class TestParserFreescale(unittest.TestCase):
         self.assertEqual(uart0.base_address, 0x4006A000)
 
         # address block verification
-        block = uart0.address_block
+        block = uart0.address_blocks[0]
         self.assertEqual(block.usage, 'registers')
         self.assertEqual(block.size, 0x0C)
         self.assertEqual(block.offset, 0)
@@ -215,7 +215,7 @@ class TestParserNordic(unittest.TestCase):
         self.assertEqual(spi1.base_address, 0x40004000)
 
         # address block verification
-        block = spi1.address_block
+        block = spi1.address_blocks[0]
         self.assertEqual(block.usage, 'registers')
         self.assertEqual(block.size, 0x1000)
         self.assertEqual(block.offset, 0)
