@@ -492,6 +492,8 @@ class SVDPeripheral(SVDElement):
             i.parent = self
         for r in _none_as_empty(self._registers):
             r.parent = self
+        for arr in _none_as_empty(self._register_arrays):
+            arr.parent = self
 
     def __getattr__(self, attr):
         return self._lookup_possibly_derived_attribute(attr)
