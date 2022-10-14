@@ -459,7 +459,7 @@ class SVDInterrupt(SVDElement):
 
 class SVDPeripheral(SVDElement):
     def __init__(self, name, version, derived_from, description,
-                 prepend_to_name, base_address, address_block,
+                 prepend_to_name, base_address, address_blocks,
                  interrupts, registers, register_arrays, size, access,
                  protection, reset_value, reset_mask,
                  group_name, append_to_name, disable_condition,
@@ -473,7 +473,7 @@ class SVDPeripheral(SVDElement):
         self._description = description
         self._prepend_to_name = prepend_to_name
         self._base_address = base_address
-        self._address_block = address_block
+        self._address_blocks = address_blocks
         self._interrupts = interrupts
         self._registers = registers
         self._register_arrays = register_arrays
