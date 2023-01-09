@@ -292,6 +292,32 @@ class TestParserExample(unittest.TestCase):
         self.assertEqual(len(regs["TIMER0"]), len(regs["TIMER2"]))
         self.assertEqual(len(regs["TIMER1"]), len(regs["TIMER2"]))
 
+    def test_derived_from_peripheral_attributes(self):
+        parser = SVDParser.for_packaged_svd("ARM_SAMPLE", "ARM_Sample.svd")
+        timer0 = parser.get_device().peripherals[0]
+        timer1 = parser.get_device().peripherals[1]
+
+        # Check if we have selected the correct peripherals
+        self.assertEqual(timer0.name, "TIMER0")
+        self.assertEqual(timer1.name, "TIMER1")
+
+        # Check the derived attributes
+        self.assertEqual(timer0.version, timer1.version)
+        self.assertEqual(timer0.description, timer1.description)
+        self.assertEqual(timer0.prepend_to_name, timer1.prepend_to_name)
+        self.assertEqual(timer0.append_to_name, timer1.append_to_name)
+        self.assertEqual(timer0.disable_condition, timer1.disable_condition)
+        self.assertEqual(timer0.group_name, timer1.group_name)
+        self.assertNotEqual(timer0.base_address, timer1.base_address)
+        self.assertEqual(timer0.size, timer1.size)
+        self.assertEqual(timer0.access, timer1.access)
+        self.assertEqual(timer0.address_blocks[0].offset, timer1.address_blocks[0].offset)
+        self.assertEqual(timer0.address_blocks[0].size, timer1.address_blocks[0].size)
+        self.assertEqual(timer0.address_blocks[0].usage, timer1.address_blocks[0].usage)
+        self.assertEqual(timer0.protection, timer1.protection)
+        self.assertEqual(timer0.reset_value, timer1.reset_value)
+        self.assertEqual(timer0.reset_mask, timer1.reset_mask)
+
 class TestParserPackagedData(unittest.TestCase):
     def test_packaged_xml(self):
         parser = SVDParser.for_packaged_svd('Freescale', 'MK20D7.svd')

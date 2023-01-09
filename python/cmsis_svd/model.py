@@ -90,7 +90,10 @@ class SVDElement(object):
 
         # if there is a derivedFrom, check there first
         elif derived_from is not None:
-            derived_value = getattr(derived_from, "_{}".format(attr), NOT_PRESENT)
+            if attr in REGISTER_PROPERTY_KEYS:
+                derived_value = getattr(derived_from, attr, NOT_PRESENT)
+            else:
+                derived_value = getattr(derived_from, "_{}".format(attr), NOT_PRESENT)
             if derived_value is not NOT_PRESENT:
                 return derived_value
 
