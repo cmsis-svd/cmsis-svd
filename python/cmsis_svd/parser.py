@@ -13,10 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-from xml.etree import ElementTree as ET
-
-import six
-import itertools
+import copy
+from lxml import etree
 
 from cmsis_svd.model import SVDDevice
 from cmsis_svd.model import SVDPeripheral
@@ -157,12 +155,148 @@ def _get_int(node, tag, default=None):
     return default
 
 
+class SVDXmlPreprocessing:
+    """This class is responsible for modifying the SVD device tree for
+    propagating inherited tag through the tree."""
+
+    _REGISTER_PROPERTIES_GROUP = {
+        "size", "access", "protection", "resetValue", "resetMask"}
+
+    def __init__(self, document_root):
+        self._root = document_root
+
+    @staticmethod
+    def _propagate_register_properties_keys(targets, properties):
+        for node in targets:
+            for prop in properties:
+                if node.find(prop) is None and properties[prop] is not None:
+                    node.append(copy.deepcopy(properties[prop]))
+
+    def _propagate_register_properties_group(self):
+        rpg = {k: self._root.find(k) for k in self._REGISTER_PROPERTIES_GROUP}
+
+        self._propagate_register_properties_keys(
+            self._root.findall('.//peripheral'), rpg)
+
+        self._propagate_register_properties_keys(
+            self._root.findall('.//sauRegionsConfig[@protectionWhenDisabled]'),
+            {'protection': rpg['protection']})
+
+        for periph in self._root.findall(".//peripheral"):
+            rpg_copy = copy.deepcopy(rpg)
+            for k in self._REGISTER_PROPERTIES_GROUP:
+                node_k = periph.find(k)
+                if node_k is not None:
+                    rpg_copy[k] = node_k
+
+            self._propagate_register_properties_keys(
+                periph.findall('.//register'), rpg_copy)
+            self._propagate_register_properties_keys(
+                periph.findall('.//cluster'), rpg_copy)
+            self._propagate_register_properties_keys(
+                periph.findall('.//addressBlock'),
+                {'protection': rpg_copy['protection']})
+
+        for reg in self._root.findall('.//register'):
+            rpg_copy = copy.deepcopy(rpg)
+            for k in self._REGISTER_PROPERTIES_GROUP:
+                node_k = reg.find(k)
+                if node_k is not None:
+                    rpg_copy[k] = node_k
+
+            self._propagate_register_properties_keys(
+                reg.findall('.//field'), {'access': rpg_copy['access']})
+
+    @staticmethod
+    def _derive_tag(src, dst, override=True):
+        dst_tags = [t.tag for t in dst.findall('./')] if override else list()
+        for src_tag in filter(lambda t: t.tag not in dst_tags, src.findall('./')):
+            dst.append(copy.deepcopy(src_tag))
+
+    def _derived_from_enumerated_values(self):
+        for dst in self._root.findall('.//enumeratedValues[@derivedFrom]'):
+            src = self._root.find('.//enumeratedValues[name="{}"]'
+                                  .format(dst.attrib['derivedFrom']))
+            if src is not None:
+                 for src_tag in src.findall('./enumeratedValue'):
+                     self._derive_tag(src_tag, dst)
+
+    def _derived_from_field(self):
+        for dst in self._root.findall('.//field[@derivedFrom]'):
+            derived_path = dst.attrib['derivedFrom'].split('.')
+
+            if len(derived_path) == 1:
+                src = dst.find('../field[name="{}"]'.format(derived_path[0]))
+            elif len(derived_path) == 3:
+                src = self._root.find('.//peripheral[name="{}"]'
+                                      '//register[name="{}"]//field[name="{}"]'
+                                      .format(derived_path[0], derived_path[1],
+                                              derived_path[3]))
+            else:
+                src = None
+
+            if (src is not None and dst.find('./name') is not None
+                    and dst.find('./description') is not None):
+                self._derive_tag(src, dst)
+
+    def _derived_from_register(self):
+        for dst in self._root.findall('.//register[@derivedFrom]'):
+            derived_path = dst.attrib['derivedFrom'].split('.')
+
+            if len(derived_path) == 1:
+                src = dst.find('../register[name="{}"]'.format(derived_path[0]))
+            elif len(derived_path) == 2:
+                src = self._root.find('.//peripheral[name="{}"]'
+                                      '//register[name="{}"]'.format(
+                                      derived_path[0], derived_path[1]))
+            else:
+                src = None
+
+            if (src is not None and dst.find('./name') is not None
+                    and dst.find('./description') is not None
+                    and dst.find('./addressOffset') is not None):
+                self._derive_tag(src, dst)
+
+    def _derived_from_cluster(self):
+        for dst in self._root.findall('.//cluster[@derivedFrom]'):
+            derived_path = dst.attrib['derivedFrom'].split('.')
+
+            if len(derived_path) == 1:
+                src = dst.find('../cluster[name="{}"]'.format(derived_path[0]))
+            elif len(derived_path) == 2:
+                src = self._root.find('.//peripheral[name="{}"]'
+                                      '//cluster[name="{}"]'.format(
+                                      derived_path[0], derived_path[1]))
+            else:
+                src = None
+
+            if (src is not None and dst.find('./name') is not None
+                    and dst.find('./description') is not None
+                    and dst.find('./addressOffset') is not None):
+                self._derive_tag(src, dst)
+
+    def _derived_from_peripherals(self):
+        for dst in self._root.findall('.//peripheral[@derivedFrom]'):
+            src = self._root.find('.//peripheral[name="{}"]'.format(
+                                  dst.attrib['derivedFrom']))
+            if src is not None:
+                self._derive_tag(src, dst)
+
+    def preprocess_xml(self):
+        self._derived_from_enumerated_values()
+        self._derived_from_field()
+        self._derived_from_register()
+        self._derived_from_cluster()
+        self._derived_from_peripherals()
+        self._propagate_register_properties_group()
+
+
 class SVDParser(object):
     """The SVDParser is responsible for mapping the SVD XML to Python Objects"""
 
     @classmethod
     def for_xml_file(cls, path, remove_reserved=False):
-        return cls(ET.parse(path), remove_reserved)
+        return cls(etree.parse(path))
 
     @classmethod
     def for_packaged_svd(cls, vendor, filename, remove_reserved=False):
@@ -211,21 +345,6 @@ class SVDParser(object):
 
     def _parse_field(self, field_node, register_node):
         enumerated_values = []
-
-        # handle DerivedFrom for enumeratedValues probably a hack
-        for enumerated_values_node in field_node.findall("./enumeratedValues"):
-            # if inheritance is at play
-            if "derivedFrom" in enumerated_values_node.attrib:
-                # get node name to inherit from
-                derived_node_name = enumerated_values_node.attrib["derivedFrom"]
-
-                # find that node
-                for evs in register_node.findall("./fields/field/enumeratedValues"):
-                    if evs.find("./name") is not None and evs.find("./name").text == derived_node_name:
-                        # copy all its goodness to this node
-                        for ev in evs.findall("./enumeratedValue"):
-                            enumerated_values_node.append(ev)
-
         for enumerated_value_node in field_node.findall("./enumeratedValues/enumeratedValue"):
             enumerated_values.append(self._parse_enumerated_value(enumerated_value_node))
 
@@ -574,6 +693,7 @@ class SVDParser(object):
 
     def get_device(self):
         """Get the device described by this SVD"""
+        SVDXmlPreprocessing(self._root).preprocess_xml()
         return self._parse_device(self._root)
 
 

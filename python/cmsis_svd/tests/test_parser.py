@@ -335,3 +335,16 @@ class TestParserToDict(unittest.TestCase):
         parser = SVDParser.for_mcu("D1-H")
         self.assertTrue(parser is not None)
         parser.get_device().to_dict()
+
+class TestParserNXP(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        svd = os.path.join(DATA_DIR, "NXP", "LPC178x_7x.svd")
+        cls.parser = SVDParser.for_xml_file(svd)
+        cls.device = cls.parser.get_device()
+
+    def test_nested_derivedfrom(self):
+        device = self.device
+        ssp2 = [p for p in device.peripherals if p.name == "SSP2"][0]
+        ssp2cr1 = [r for r in ssp2.registers if r.name =="CR1"][0]
+        self.assertEqual( ssp2.base_address + ssp2cr1.address_offset , 0x400ac004)
