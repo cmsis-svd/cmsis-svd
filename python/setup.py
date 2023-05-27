@@ -57,6 +57,7 @@ setup(
     ],
     install_requires=[
         'six>=1.10',
+        'lxml',
     ],
     packages=find_packages(),
     include_package_data=True,
