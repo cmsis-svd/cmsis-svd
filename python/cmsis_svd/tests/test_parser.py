@@ -329,3 +329,9 @@ class TestParserPackagedData(unittest.TestCase):
         self.assertTrue(parser is not None)
         device = parser.get_device()
         self.assertTrue(len(device.peripherals) > 0)
+
+class TestParserToDict(unittest.TestCase):
+    def test_to_dict_dim_indices(self):
+        parser = SVDParser.for_mcu("D1-H")
+        self.assertTrue(parser is not None)
+        parser.get_device().to_dict()
