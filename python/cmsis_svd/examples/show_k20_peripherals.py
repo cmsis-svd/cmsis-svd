@@ -14,7 +14,13 @@
 # limitations under the License.
 #
 from cmsis_svd.parser import SVDParser
+import os
 
-parser = SVDParser.for_packaged_svd('Freescale', 'MK20D7.svd')
+SVD_ROOT = os.environ.get(
+    "SVD_ROOT",
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "data"),
+)
+
+parser = SVDParser.for_xml_file(os.path.join(SVD_ROOT, "Freescale", "MK20D7.svd"))
 for peripheral in parser.get_device().peripherals:
     print("%s @ 0x%08x" % (peripheral.name, peripheral.base_address))

@@ -25,7 +25,6 @@ from cmsis_svd.model import SVDRegisterCluster, SVDRegisterClusterArray
 from cmsis_svd.model import SVDField
 from cmsis_svd.model import SVDEnumeratedValue
 from cmsis_svd.model import SVDCpu
-import pkg_resources
 import re
 
 class ElementABC(object):
@@ -297,38 +296,6 @@ class SVDParser(object):
     @classmethod
     def for_xml_file(cls, path, remove_reserved=False):
         return cls(etree.parse(path))
-
-    @classmethod
-    def for_packaged_svd(cls, vendor, filename, remove_reserved=False):
-        resource = "data/{vendor}/{filename}".format(
-            vendor=vendor,
-            filename=filename
-        )
-
-        filename = pkg_resources.resource_filename("cmsis_svd", resource)
-        return cls.for_xml_file(filename, remove_reserved)
-
-    @classmethod
-    def for_mcu(cls, mcu):
-        mcu = mcu.lower()
-        vendors = pkg_resources.resource_listdir("cmsis_svd", "data")
-        for vendor in vendors:
-            fnames = pkg_resources.resource_listdir("cmsis_svd", "data/%s" % vendor)
-            for fname in fnames:
-                filename = fname.lower()
-                if not filename.endswith(".svd"):
-                    continue
-                filename = filename[:-4]
-                if mcu.startswith(filename):
-                    return cls.for_packaged_svd(vendor, fname)
-            for fname in fnames:
-                filename = fname.lower()
-                if not filename.endswith(".svd"):
-                    continue
-                filename = "^%s.*" % filename[:-4].replace('x', '.')
-                if re.match(filename, mcu):
-                    return cls.for_packaged_svd(vendor, fname)
-        return None
 
     def __init__(self, tree, remove_reserved=False):
         self.remove_reserved = remove_reserved
