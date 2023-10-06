@@ -304,8 +304,30 @@ class SVDParser(object):
             elif ',' in dim_index_text:
                 dim_indices = dim_index_text.split(',')
             elif '-' in dim_index_text:  # some files use <dimIndex>0-3</dimIndex> as an inclusive inclusive range
-                m = re.search(r'([0-9]+)-([0-9]+)', dim_index_text)
-                dim_indices = list(range(int(m.group(1)), int(m.group(2)) + 1))
+                start, stop = dim_index_text.split('-')
+
+                if start.isalpha() and stop.isalpha():
+                    start_val = ord(start)
+                    stop_val = ord(stop)
+
+                    dim_indices = [
+                        chr(val)
+                        for val in range(start_val, stop_val + 1)
+                    ]
+
+                elif start.isdigit() and stop.isdigit():
+                    start_val = int(start)
+                    stop_val = int(stop)
+
+                    dim_indices = [
+                        str(val)
+                        for val in range(start_val, stop_val + 1)
+                    ]
+
+                else:
+                    raise NotImplementedError(
+                        f'DimIndex={dim_index_text} is not supported.'
+                    )
             else:
                 raise ValueError("Unexpected dim_index_text: %r" % dim_index_text)
 
