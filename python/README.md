@@ -23,6 +23,15 @@ you may need to update the version of pip you are using.
 pip install -U -e 'git+https://github.com/posborne/cmsis-svd.git#egg=cmsis-svd&subdirectory=python'
 ```
 
+Note: Changes from Version 0.4
+------------------------------
+
+For a very long period of time (2016-2023), the pypi package for cmsis-svd was out
+of data and included a large number of "bundled" SVD files.  This has only grown and
+with the 0.5 release, those are no longer included as part of the python
+distributable.  Other means of providing access to the SVD definitions may be
+revisited in the future.
+
 Example
 -------
 
@@ -34,7 +43,9 @@ K20 SVD is packaged with the library, I can do the following:
 ```python
 from cmsis_svd.parser import SVDParser
 
-parser = SVDParser.for_packaged_svd('Freescale', 'MK20D7.svd')
+SVD_DATA_DIR = "..."
+
+parser = SVDParser.for_xml_file(os.path.join(SVD_DATA_DIR, 'Freescale', 'MK20D7.svd'))
 for peripheral in parser.get_device().peripherals:
     print("%s @ 0x%08x" % (peripheral.name, peripheral.base_address))
 ```
@@ -68,7 +79,9 @@ it you can do something like the following:
 ```python
 from cmsis_svd.parser import SVDParser
 
-parser = SVDParser.for_packaged_svd('Freescale', 'MK20D7.svd')
+SVD_DATA_DIR = "..."
+
+parser = SVDParser.for_xml_file(os.path.join(SVD_DATA_DIR, 'Freescale', 'MK20D7.svd'))
 svd_dict = parser.get_device().to_dict()
 print(json.dumps(svd_dict, sort_keys=True,
                  indent=4, separators=(',', ': ')))

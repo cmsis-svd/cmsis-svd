@@ -35,8 +35,8 @@ def get_long_description():
 setup(
     name="cmsis-svd",
     version=read_version(os.path.join('cmsis_svd/__init__.py')),
-    url="https://github.com/posborne/cmsis-svd",
-    description="CMSIS SVD data files and parser",
+    url="https://github.com/cmsis-svd/cmsis-svd",
+    description="CMSIS SVD parser",
     long_description=get_long_description(),
     long_description_content_type="text/markdown",
     author="Paul Osborne",
@@ -60,5 +60,4 @@ setup(
         'lxml',
     ],
     packages=find_packages(),
-    include_package_data=True,
 )
