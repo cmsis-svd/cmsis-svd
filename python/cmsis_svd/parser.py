@@ -300,12 +300,12 @@ class SVDParser(object):
         else:
             # the node represents a register array
             if dim_index_text is None:
-                dim_indices = range(0, dim)  # some files omit dimIndex
+                dim_indices = list(range(0, dim))  # some files omit dimIndex
             elif ',' in dim_index_text:
                 dim_indices = dim_index_text.split(',')
             elif '-' in dim_index_text:  # some files use <dimIndex>0-3</dimIndex> as an inclusive inclusive range
                 m = re.search(r'([0-9]+)-([0-9]+)', dim_index_text)
-                dim_indices = range(int(m.group(1)), int(m.group(2)) + 1)
+                dim_indices = list(range(int(m.group(1)), int(m.group(2)) + 1))
             else:
                 raise ValueError("Unexpected dim_index_text: %r" % dim_index_text)
 
@@ -371,12 +371,12 @@ class SVDParser(object):
         else:
             # the node represents a register array
             if dim_index_text is None:
-                dim_indices = range(0, dim)  # some files omit dimIndex
+                dim_indices = list(range(0, dim))  # some files omit dimIndex
             elif ',' in dim_index_text:
                 dim_indices = dim_index_text.split(',')
             elif '-' in dim_index_text:  # some files use <dimIndex>0-3</dimIndex> as an inclusive inclusive range
                 m = re.search(r'([0-9]+)-([0-9]+)', dim_index_text)
-                dim_indices = range(int(m.group(1)), int(m.group(2)) + 1)
+                dim_indices = list(range(int(m.group(1)), int(m.group(2)) + 1))
             else:
                 raise ValueError("Unexpected dim_index_text: %r" % dim_index_text)
 
