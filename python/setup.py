@@ -42,6 +42,7 @@ setup(
     author="Paul Osborne",
     author_email="osbpau@gmail.com",
     license="Apache 2.0",
+    python_requires=">=3.8",
     classifiers=[
         "Development Status :: 4 - Beta",
         "License :: OSI Approved :: Apache Software License",
