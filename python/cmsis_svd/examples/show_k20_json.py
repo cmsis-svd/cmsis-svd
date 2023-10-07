@@ -15,8 +15,14 @@
 #
 import json
 from cmsis_svd.parser import SVDParser
+import os
 
-parser = SVDParser.for_xml_file('data/Freescale/MK20D7.svd')
+SVD_ROOT = os.environ.get(
+    "SVD_ROOT",
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "data"),
+)
+
+parser = SVDParser.for_packaged_svd(SVD_ROOT, 'Freescale', 'MK20D7.svd')
 svd_dict = parser.get_device().to_dict()
 print(json.dumps(svd_dict, sort_keys=True,
                  indent=4, separators=(',', ': ')))

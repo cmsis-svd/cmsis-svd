@@ -23,10 +23,6 @@ THIS_DIR = os.path.dirname(__file__)
 DATA_DIR = os.path.join(THIS_DIR, "..", "..", "..", "data")
 
 
-def svdparser_for_packaged_svd(vendor, svd):
-    return SVDParser.for_xml_file(os.path.abspath(os.path.join(DATA_DIR, vendor, svd)))
-
-
 def make_svd_validator(svd_path):
     def verify_svd_validity():
         parser = SVDParser.for_xml_file(svd_path)
@@ -275,7 +271,7 @@ class TestParserNordic(unittest.TestCase):
 
 class TestParserSpansion(unittest.TestCase):
     def test_derived_register_attributes(self):
-        parser = svdparser_for_packaged_svd('Spansion', 'MB9BF46xx.svd')
+        parser = SVDParser.for_packaged_svd(DATA_DIR, 'Spansion', 'MB9BF46xx.svd')
         mft0_regs = [p.registers for p in parser.get_device().peripherals if p.name == "MFT0"][0]
         reg_map = {r.name: r for r in mft0_regs}
 
@@ -290,14 +286,14 @@ class TestParserSpansion(unittest.TestCase):
 
 class TestParserExample(unittest.TestCase):
     def test_derived_from_registers(self):
-        parser = svdparser_for_packaged_svd('ARM_SAMPLE', 'ARM_Sample.svd')
+        parser = SVDParser.for_packaged_svd(DATA_DIR, 'ARM_SAMPLE', 'ARM_Sample.svd')
         regs = {p.name: p.registers for p in parser.get_device().peripherals}
         self.assertEqual(len(regs["TIMER0"]), len(regs["TIMER1"]))
         self.assertEqual(len(regs["TIMER0"]), len(regs["TIMER2"]))
         self.assertEqual(len(regs["TIMER1"]), len(regs["TIMER2"]))
 
     def test_derived_from_peripheral_attributes(self):
-        parser = svdparser_for_packaged_svd("ARM_SAMPLE", "ARM_Sample.svd")
+        parser = SVDParser.for_packaged_svd(DATA_DIR, "ARM_SAMPLE", "ARM_Sample.svd")
         timer0 = parser.get_device().peripherals[0]
         timer1 = parser.get_device().peripherals[1]
 
@@ -325,7 +321,7 @@ class TestParserExample(unittest.TestCase):
 
 class TestParserToDict(unittest.TestCase):
     def test_to_dict_dim_indices(self):
-        parser = svdparser_for_packaged_svd("Allwinner-Community", "D1-H.svd")
+        parser = SVDParser.for_packaged_svd(DATA_DIR, "Allwinner-Community", "D1-H.svd")
         self.assertTrue(parser is not None)
         parser.get_device().to_dict()
 
@@ -341,3 +337,14 @@ class TestParserNXP(unittest.TestCase):
         ssp2 = [p for p in device.peripherals if p.name == "SSP2"][0]
         ssp2cr1 = [r for r in ssp2.registers if r.name =="CR1"][0]
         self.assertEqual( ssp2.base_address + ssp2cr1.address_offset , 0x400ac004)
+
+
+class TestTreeSearch(unittest.TestCase):
+    def test_find_basic_mcu(self):
+        self.assertIsNotNone(SVDParser.for_mcu(DATA_DIR, "LPC178x_7x"))
+
+    def test_find_deeploy_nested_mcu(self):
+        self.assertIsNotNone(SVDParser.for_mcu(DATA_DIR, "EFM32G210F128"))
+
+    def test_find_nested_vendor_filename(self):
+        self.assertIsNotNone(SVDParser.for_packaged_svd(DATA_DIR, "SiliconLabs", "EFM32G210F128.svd"))
