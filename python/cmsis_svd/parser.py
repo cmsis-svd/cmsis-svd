@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+import os
 import copy
 from lxml import etree
 
@@ -294,8 +295,76 @@ class SVDParser(object):
     """The SVDParser is responsible for mapping the SVD XML to Python Objects"""
 
     @classmethod
-    def for_xml_file(cls, path, remove_reserved=False):
+    def for_xml_file(cls, path):
+        """Create a new parser for the provided SVD XML file
+
+        These files often have either the .xml or .svd extension and may
+        be found as part of CMSIS packs or as part of the data provided
+        by the cmsis-svd project.
+        """
         return cls(etree.parse(path))
+
+    @classmethod
+    def for_packaged_svd(cls, package_root, vendor, filename):
+        """Find SVD for a given vendor/mcu within packaged data
+
+        This convenience method requires a "package_root" which is
+        expected to be the filesystem location containing the SVD
+        data from the cmsis-svd project.  This directory contains
+        a number of subdirectories with vendor names and SVD files
+        for the vendor beneath that.
+
+        In prior releases, this information was directly distributed
+        as part of the python package but that is no longer the case
+        as of version 0.5.
+        """
+        path = os.path.join(package_root, vendor, filename)
+        if os.path.exists(path):
+            return cls.for_xml_file(path)
+
+        # some vendors like SiliconLabs currently have more deeply nested
+        # directory structures, attempt to find recursively.
+        for root, _dirs, filenames in os.walk(os.path.join(package_root, vendor)):
+            for fname in filenames:
+                if fname == filename:
+                    return cls.for_xml_file(os.path.join(root, fname))
+
+        return None
+
+    @classmethod
+    def for_mcu(cls, package_root, mcu):
+        """Attempt to find SVD for a given mcu by name within package root
+
+        This convenience method requires a "package_root" which is
+        expected to be the filesystem location containing the SVD
+        data from the cmsis-svd project.  This directory contains
+        a number of subdirectories with vendor names and SVD files
+        for the vendor beneath that.
+
+        In prior releases, this information was directly distributed
+        as part of the python package but that is no longer the case
+        as of version 0.5.
+
+        This method is similar to `for_packaged_svd` but only requires
+        the "MCU" name (svd files are assumed to be named by MCU).
+        For instance, within the packaged data there might be an SVD at
+        the following path:
+
+            <package_root>/SiliconLabs/Series0/EFM32G/EFM32G210F128.svd
+
+        Note that some MCUs include an "x" in the svd name to capture
+        a family of MCUs.  This isn't applied consistently, so you will
+        need to provide a pattern that matches one of the SVD files.            
+        """
+        path = os.path.abspath(package_root)
+        expected_fname_lower = f"{mcu}.svd".lower()
+        for root, _dirs, filenames in os.walk(path):
+            for fname in filenames:
+                fname_final_lower = os.path.split(fname)[-1].lower()
+                if expected_fname_lower == fname_final_lower:
+                    return cls.for_xml_file(os.path.join(root, fname))
+                   
+        return None
 
     def __init__(self, tree, remove_reserved=False):
         self.remove_reserved = remove_reserved

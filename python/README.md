@@ -45,7 +45,7 @@ from cmsis_svd.parser import SVDParser
 
 SVD_DATA_DIR = "..."
 
-parser = SVDParser.for_xml_file(os.path.join(SVD_DATA_DIR, 'Freescale', 'MK20D7.svd'))
+parser = SVDParser.for_packaged_svd(SVD_DATA_DIR, 'Freescale', 'MK20D7.svd')
 for peripheral in parser.get_device().peripherals:
     print("%s @ 0x%08x" % (peripheral.name, peripheral.base_address))
 ```
@@ -81,7 +81,7 @@ from cmsis_svd.parser import SVDParser
 
 SVD_DATA_DIR = "..."
 
-parser = SVDParser.for_xml_file(os.path.join(SVD_DATA_DIR, 'Freescale', 'MK20D7.svd'))
+parser = SVDParser.for_packaged_svd(SVD_DATA_DIR, 'Freescale', 'MK20D7.svd')
 svd_dict = parser.get_device().to_dict()
 print(json.dumps(svd_dict, sort_keys=True,
                  indent=4, separators=(',', ': ')))
