@@ -62,7 +62,7 @@ class TextElement(ElementABC):
 class IntElement(ElementABC):
 
     def is_optional(self):
-        return false
+        return False
 
     def parse(self, el):
         text_value = el.text.strip().lower()
