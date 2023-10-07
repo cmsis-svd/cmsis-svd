@@ -101,7 +101,7 @@ def _parse_sequences(node, *tags):
                     res.append(tag.default)
                     continue
                 else:
-                    raise KeyError("Expected tag not found in correct place. Expected: {}, Element was: {}\nNode:\n{}".format(tag.tag, el, ET.tostring(node)))
+                    raise KeyError("Expected tag not found in correct place. Expected: {}, Element was: {}\nNode:\n{}".format(tag.tag, el, etree.tostring(node)))
             except StopIteration:
                 print("Res: {}".format(res))
                 yield tuple(res)
