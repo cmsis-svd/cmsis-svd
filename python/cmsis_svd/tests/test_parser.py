@@ -20,7 +20,7 @@ import os
 import unittest
 
 THIS_DIR = os.path.dirname(__file__)
-DATA_DIR = os.path.join(THIS_DIR, "..", "..", "..", "data")
+DATA_DIR = os.path.join(THIS_DIR, "..", "..", "..", "cmsis-svd-data", "data")
 
 
 def make_svd_validator(svd_path):

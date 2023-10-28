@@ -18,7 +18,8 @@ import os
 
 SVD_ROOT = os.environ.get(
     "SVD_ROOT",
-    os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "data"),
+    os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                 "..", "..", "..", "cmsis-svd-data", "data"),
 )
 
 parser = SVDParser.for_packaged_svd(SVD_ROOT, 'Freescale', 'MK20D7.svd')
