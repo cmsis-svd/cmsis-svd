@@ -11,6 +11,10 @@ jobs:
     name: "python=${{ matrix.python-version }}"
     steps:
       - uses: actions/checkout@v2
+      - name: Clone cmsis-svd-data
+        shell: bash
+        run: |
+          git clone --depth=1 -b main https://github.com/cmsis-svd/cmsis-svd-data.git
       - name: Setup python
         uses: actions/setup-python@v2
         with:

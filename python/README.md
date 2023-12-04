@@ -102,6 +102,9 @@ pip install -r dev-requirements.txt
 Then, to run the tests:
 
 ```sh
+cd cmsis-svd/
+git clone --depth=1 https://github.com/cmsis-svd/cmsis-svd-data.git
+cd python/
 nose2 .
 ```
 
