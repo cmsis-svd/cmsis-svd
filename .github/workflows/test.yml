@@ -14,7 +14,7 @@ jobs:
       - name: Clone cmsis-svd-data
         shell: bash
         run: |
-          git clone --depth=1 -b add-cmsis-svd-files-from-cmsis-svd-repository https://github.com/cmsis-svd/cmsis-svd-data.git
+          git clone --depth=1 -b main https://github.com/cmsis-svd/cmsis-svd-data.git
       - name: Setup python
         uses: actions/setup-python@v2
         with:
