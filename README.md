@@ -36,13 +36,6 @@ that does this transformation (SVDConvert.exe).
 The information can also be used for building debug tooling, test
 infrastructure, or whatever else.
 
-How to Clone This Repository
-----------------------------
-
-```text
-$ git clone --recurse-submodules https://github.com/cmsis-svd/cmsis-svd.git
-```
-
 Contributing
 ------------
 
