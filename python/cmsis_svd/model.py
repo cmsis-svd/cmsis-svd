@@ -1,452 +1,700 @@
-﻿#
-# Copyright 2015 Paul Osborne <osbpau@gmail.com>
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-import json
+"""
+
+Copyright 2015-2024 cmsis-svd Authors
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+"""
+
+from typing import (List, Optional, Any, Union, TypedDict, Generator, Type, cast,
+                    Callable, Dict)
+from dataclasses import dataclass, field, fields
+from enum import Enum
+import inspect
+import copy
+
 import six
+import lxml
+from lxml import etree
 
 
-def _check_type(value, expected_type):
-    """Perform type checking on the provided value
+################################################################################
+# Utils
+################################################################################
 
-    This is a helper that will raise ``TypeError`` if the provided value is
-    not an instance of the provided type.  This method should be used sparingly
-    but can be good for preventing problems earlier when you want to restrict
-    duck typing to make the types of fields more obvious.
-
-    If the value passed the type check it will be returned from the call.
-    """
-    if not isinstance(value, expected_type):
-        raise TypeError("Value {value!r} has unexpected type {actual_type!r}, expected {expected_type!r}".format(
-            value=value,
-            expected_type=expected_type,
-            actual_type=type(value),
-        ))
-    return value
-
-
-def _none_as_empty(v):
+def _none_as_empty(v: Any) -> Generator[Any, None, None]:
     if v is not None:
         for e in v:
             yield e
 
 
-class SVDJSONEncoder(json.JSONEncoder):
-    _TO_DICT_SKIP_KEYS = {"register_arrays", "parent"}
-
-    def default(self, obj):
-        if isinstance(obj, SVDElement):
-            eldict = {}
-            for k, v in six.iteritems(obj.__dict__):
-                if k in self._TO_DICT_SKIP_KEYS:
-                    continue
-                if k.startswith("_"):
-                    pubkey = k[1:]
-                    eldict[pubkey] = getattr(obj, pubkey)
-                else:
-                    eldict[k] = v
-            return eldict
-        else:
-            return json.JSONEncoder.default(self, obj)
+def isinstance_by_str(instance: Any, type_name: str) -> bool:
+    if (cls := globals().get(type_name, None)) and inspect.isclass(cls):
+        return isinstance(instance, cls)
+    return False
 
 
-class SVDElement(object):
+################################################################################
+# CMSIS-SVD Model Base class
+################################################################################
+
+class SVDModelSerializersBinder:
+    __serializer_classes__: Dict[str, Type] = {}
+
+    def __init__(self) -> None:
+        # Serializers Dependencies Injection
+        # Since serializers and model are tightly coupled this dependencies
+        # injection avoid circular Python import dependencies.
+        if len(self.__serializer_classes__) == 0:
+            from .serializers.json import SVDJsonSerializer
+            self.__serializer_classes__['json'] = SVDJsonSerializer
+            from .serializers.xml import SVDXmlSerializer
+            self.__serializer_classes__['xml'] = SVDXmlSerializer
+
+        json_serializer = self.__serializer_classes__['json'](self)
+        self.to_dict: Callable[..., dict] = json_serializer.to_dict
+        self.to_json: Callable[..., str] = json_serializer.to_json
+        self.to_json_file: Callable[..., None] = json_serializer.to_json_file
+        xml_serializer = self.__serializer_classes__['xml'](self)
+        self.to_xml_node: Callable[..., lxml.etree._Element] = xml_serializer.to_xml_node
+        self.to_xml: Callable[..., str] = xml_serializer.to_xml
+        self.to_xml_file: Callable[..., None] = xml_serializer.to_xml_file
+
+
+class SVDElementError(Exception):
+    pass
+
+
+@dataclass
+class SVDElement(SVDModelSerializersBinder):
     """Base class for all SVD Elements"""
+    parent: Optional['SVDElement'] = field(default=None)
 
-    def __init__(self):
-        self.parent = None
+    def __new__(cls, *args, **kwargs):
+        obj = object.__new__(cls)
+        SVDModelSerializersBinder.__init__(obj)
+        return obj
 
-    def to_dict(self):
-        # This is a little convoluted but it works and ensures a
-        # json-compatible dictionary representation (at the cost of
-        # some computational overhead)
-        encoder = SVDJSONEncoder()
-        return json.loads(encoder.encode(self))
+    def get_parent(self, svd_class: Type['SVDElement']) -> 'SVDElement':
+        current_svd_item = self
+        while parent := getattr(current_svd_item, 'parent', None):
+            if isinstance(parent, svd_class):
+                return parent
+            else:
+                current_svd_item = parent
+
+        raise SVDElementError(f'Parent of type {svd_class} not found for '
+                              f'{str(self)}')
+
+    def get_parent_device(self) -> 'SVDDevice':
+        if isinstance(self, SVDDevice):
+            return self
+        return cast(SVDDevice, self.get_parent(SVDDevice))
+
+    def get_parent_peripheral(self) -> 'SVDPeripheral':
+        if isinstance(self, SVDPeripheral):
+            return self
+        return cast(SVDPeripheral, self.get_parent(SVDPeripheral))
 
 
+################################################################################
+# CMSIS-SVD Model Data Type
+################################################################################
+
+class SVDCPUNameType(Enum):
+    CM0 = 'CM0'          # Arm Cortex-M0
+    CM0PLUS = 'CM0PLUS'  # Arm Cortex-M0+
+    CM0_PLUS = 'CM0+'    # Arm Cortex-M0+
+    CM1 = 'CM1'          # Arm Cortex-M1
+    CM3 = 'CM3'          # Arm Cortex-M3
+    CM4 = 'CM4'          # Arm Cortex-M4
+    CM7 = 'CM7'          # Arm Cortex-M7
+    CM23 = 'CM23'        # Arm Cortex-M23
+    CM33 = 'CM33'        # Arm Cortex-M33
+    CM35P = 'CM35P'      # Arm Cortex-M35P
+    CM52 = 'CM52'        # Arm Cortex-M52
+    CM55 = 'CM55'        # Arm Cortex-M55
+    CM85 = 'CM85'        # Arm Cortex-M85
+    SC000 = 'SC000'      # Arm Secure Core SC000
+    SC300 = 'SC300'      # Arm Secure Core SC300
+    CA5 = 'CA5'          # Arm Cortex-A5
+    CA7 = 'CA7'          # Arm Cortex-A7
+    CA8 = 'CA8'          # Arm Cortex-A8
+    CA9 = 'CA9'          # Arm Cortex-A9
+    CA15 = 'CA15'        # Arm Cortex-A15
+    CA17 = 'CA17'        # Arm Cortex-A17
+    CA53 = 'CA53'        # Arm Cortex-A53
+    CA57 = 'CA57'        # Arm Cortex-A57
+    CA72 = 'CA72'        # Arm Cortex-A72
+    SMC1 = 'SMC1'        # Arm China STAR-MC1
+    OTHER = 'other'      # other processor architectures
+
+
+class SVDProtectionType(Enum):
+    SECURE = 's'      # secure permission required for access
+    NON_SECURE = 'n'  # non-secure or secure permission required for access
+    PRIVILEGED = 'p'  # privileged permission required for access
+
+
+class SVDSauAccessType(Enum):
+    NON_SECURE = 'n'       # non-secure
+    SECURE_CALLABLE = 'c'  # secure callable
+
+
+class SVDAccessType(Enum):
+    READ_ONLY = 'read-only'
+    WRITE_ONLY = 'write-only'
+    READ_WRITE = 'read-write'
+    WRITE_ONCE = 'writeOnce'
+    READ_WRITE_ONCE = 'read-writeOnce'
+
+
+class SVDAddressBlockUsageType(Enum):
+    REGISTERS = 'registers'
+    BUFFER = 'buffer'
+    RESERVED = 'reserved'
+
+
+class SVDDataTypeType(Enum):
+    UINT8_T = 'uint8_t'
+    UINT16_T = 'uint16_t'
+    UINT32_T = 'uint32_t'
+    UINT64_T = 'uint64_t'
+    INT8_T = 'int8_t'
+    INT16_T = 'int16_t'
+    INT32_T = 'int32_t'
+    INT64_T = 'int64_t'
+    UINT8_T_1 = 'uint8_t *'
+    UINT16_T_1 = 'uint16_t *'
+    UINT32_T_1 = 'uint32_t *'
+    UINT64_T_1 = 'uint64_t *'
+    INT8_T_1 = 'int8_t *'
+    INT16_T_1 = 'int16_t *'
+    INT32_T_1 = 'int32_t *'
+    INT64_T_1 = 'int64_t *'
+
+
+class SVDEndianType(Enum):
+    LITTLE = 'little'
+    BIG = 'big'
+    SELECTABLE = 'selectable'
+    OTHER = 'other'
+
+
+class SVDEnumUsageType(Enum):
+    READ = "read"
+    WRITE = "write"
+    READ_WRITE = "read-write"
+
+
+class SVDModifiedWriteValuesType(Enum):
+    ONE_TO_CLEAR = 'oneToClear'
+    ONE_TO_SET = 'oneToSet'
+    ONE_TO_TOGGLE = 'oneToToggle'
+    ZERO_TO_CLEAR = 'zeroToClear'
+    ZERO_TO_SET = 'zeroToSet'
+    ZERO_TO_TOGGLE = 'zeroToToggle'
+    CLEAR = 'clear'
+    SET = 'set'
+    MODIFY = 'modify'
+
+
+class SVDReadActionType(Enum):
+    CLEAR = 'clear'
+    SET = 'set'
+    MODIFY = 'modify'
+    MODIFY_EXTERNAL = 'modifyExternal'
+
+
+SvdRegistersListType = List[Union[
+    'SVDRegister', 'SVDRegisterCluster', 'SVDRegisterArray',
+    'SVDRegisterClusterArray'
+]]
+
+
+################################################################################
+# CMSIS-SVD Model Special Elements
+################################################################################
+
+@dataclass
+class SVDDimArrayIndex(SVDElement):
+    header_enum_name: Optional[str] = field(default=None)
+    enumerated_value: List['SVDEnumeratedValue'] = field(default_factory=list)
+
+
+@dataclass
+class SVDDimElementGroup:
+    dim: Optional[int] = field(default=None)
+    dim_increment: Optional[int] = field(default=None)
+    dim_index: Optional[List[str]] = field(default=None)
+    dim_name: Optional[str] = field(default=None)
+    dim_array_index: Optional[SVDDimArrayIndex] = field(default=None)
+    dim_index_separator: Optional[str] = field(default=None)
+
+
+class DimElementGroupType(TypedDict):
+    dim: int
+    dim_increment: int
+    dim_index: Optional[List[str]]
+    dim_name: Optional[str]
+    dim_array_index: Optional[SVDDimArrayIndex]
+    dim_index_separator: Optional[str]
+
+
+@dataclass
+class SVDRegisterPropertiesGroup:
+    size: Optional[int] = field(default=None)
+    access: Optional[SVDAccessType] = field(default=None)
+    protection: Optional[SVDProtectionType] = field(default=None)
+    reset_value: Optional[int] = field(default=None)
+    reset_mask: Optional[int] = field(default=None)
+
+
+class RegisterPropertiesGroupType(TypedDict):
+    size: Optional[int]
+    access: Optional[SVDAccessType]
+    protection: Optional[SVDProtectionType]
+    reset_value: Optional[int]
+    reset_mask: Optional[int]
+
+
+################################################################################
+# CMSIS-SVD Model Main Elements
+################################################################################
+
+@dataclass
 class SVDEnumeratedValue(SVDElement):
-    def __init__(self, name, description, value, is_default):
-        SVDElement.__init__(self)
-        self.name = name
-        self.description = description
-        self.value = value
-        self.is_default = is_default
+    name: Optional[str] = field(default=None)
+    description: Optional[str] = field(default=None)
+    value: Optional[int] = field(default=None)
+    is_default: Optional[bool] = field(default=None)
 
 
-class SVDField(SVDElement):
-    def __init__(self, name, derived_from, description, bit_offset, bit_width, access, enumerated_values, modified_write_values, read_action):
-        SVDElement.__init__(self)
-        self.name = name
-        self.derived_from = derived_from
-        self.description = description
-        self.bit_offset = bit_offset
-        self.bit_width = bit_width
-        self.access = access
-        self.enumerated_values = enumerated_values
-        self.modified_write_values = modified_write_values
-        self.read_action = read_action
+@dataclass
+class SVDWriteConstraintRange(SVDElement):
+    minimum: Optional[int] = field(default=None, metadata={'required': True})
+    maximum: Optional[int] = field(default=None, metadata={'required': True})
+
+
+@dataclass
+class SVDWriteConstraint(SVDElement):
+    write_as_read: Optional[bool] = field(default=None)
+    use_enumerated_values: Optional[bool] = field(default=None)
+    range: Optional[SVDWriteConstraintRange] = field(default=None)
+
+
+@dataclass
+class SVDEnumeratedValues(SVDElement):
+    name: Optional[str] = field(default=None)
+    header_enum_name: Optional[str] = field(default=None)
+    usage: Optional[SVDEnumUsageType] = field(default=None)
+    enumerated_values: List[SVDEnumeratedValue] = field(default_factory=list)
+    derived_from: Optional[str] = field(default=None, metadata={'type': 'attribute'})
+
+    def __post_init__(self) -> None:
+        self._set_parent_association()
+
+    def _set_parent_association(self) -> None:
+        if self.enumerated_values:
+            for enumerated_value in self.enumerated_values:
+                enumerated_value.parent = self
+
+
+@dataclass
+class SVDField(SVDElement, SVDDimElementGroup):
+    name: Optional[str] = field(default=None, metadata={'required': True})
+    description: Optional[str] = field(default=None)
+    bit_offset: Optional[int] = field(default=None)
+    bit_width: Optional[int] = field(default=None)
+    lsb: Optional[int] = field(default=None)
+    msb: Optional[int] = field(default=None)
+    bit_range: Optional[str] = field(default=None)
+    access: Optional[SVDAccessType] = field(default=None)
+    modified_write_values: Optional[SVDModifiedWriteValuesType] = field(default=None)
+    write_constraint: Optional[SVDWriteConstraint] = field(default=None)
+    read_action: Optional[SVDReadActionType] = field(default=None)
+    enumerated_values: Optional[List[SVDEnumeratedValues]] = field(default=None)
+    derived_from: Optional[str] = field(default=None, metadata={'type': 'attribute'})
+
+    def __post_init__(self) -> None:
+        self._set_parent_association()
+
+    def _set_parent_association(self) -> None:
+        if self.write_constraint:
+            self.write_constraint.parent = self
+
+        if self.enumerated_values:
+            for enum_values in self.enumerated_values:
+                enum_values.parent = self
 
     @property
-    def is_enumerated_type(self):
+    def is_enumerated_type(self) -> bool:
         """Return True if the field is an enumerated type"""
         return self.enumerated_values is not None
 
     @property
-    def is_reserved(self):
-        return self.name.lower() == "reserved"
+    def is_reserved(self) -> bool:
+        return self.name.lower() == 'reserved'
 
 
-class SVDRegisterArray(SVDElement):
-    """Represent a register array in the tree"""
+@dataclass
+class SVDRegister(SVDElement, SVDDimElementGroup, SVDRegisterPropertiesGroup):
+    name: Optional[str] = field(default=None, metadata={'required': True})
+    display_name: Optional[str] = field(default=None)
+    description: Optional[str] = field(default=None)
+    alternate_group: Optional[str] = field(default=None)
+    alternate_register: Optional[str] = field(default=None)
+    address_offset: Optional[int] = field(default=None, metadata={'required': True})
+    data_type: Optional[SVDDataTypeType] = field(default=None)
+    modified_write_values: Optional[SVDModifiedWriteValuesType] = field(default=None)
+    write_constraint: Optional[SVDWriteConstraint] = field(default=None)
+    read_action: Optional[SVDReadActionType] = field(default=None)
+    fields: List[Union[SVDField, 'SVDFieldArray']] = field(default_factory=list)
+    derived_from: Optional[str] = field(default=None, metadata={'type': 'attribute'})
 
-    def __init__(self, name, derived_from, description, address_offset, size,
-                 access, protection, reset_value, reset_mask, fields,
-                 display_name, alternate_group, modified_write_values,
-                 read_action, dim, dim_indices, dim_increment):
-        SVDElement.__init__(self)
+    def __post_init__(self) -> None:
+        self._set_parent_association()
 
-        # When deriving a register, it is mandatory to specify at least the name, the description,
-        # and the addressOffset
-        self.derived_from = derived_from
-        self.name = name
-        self.description = description
-        self.address_offset = address_offset
-        self.dim = dim
-        self.dim_indices = dim_indices
-        self.dim_increment = dim_increment
+    def _set_parent_association(self) -> None:
+        if self.write_constraint:
+            self.write_constraint.parent = self
 
-        self.read_action = read_action
-        self.modified_write_values = modified_write_values
-        self.display_name = display_name
-        self.alternate_group = alternate_group
-        self.size = size
-        self.access = access
-        self.protection = protection
-        self.reset_value = reset_value
-        self.reset_mask = reset_mask
-        self.fields = fields if fields else list()
+        if self.fields:
+            for register_field in self.fields:
+                register_field.parent = self
 
-        # make parent association
-        for field in self.fields:
-            field.parent = self
+    def get_fields(self) -> List[SVDField]:
+        collect = []
+
+        for f in self.fields:
+            if isinstance(f, SVDField):
+                collect.append(f)
+            elif isinstance_by_str(f, 'SVDFieldArray'):
+                collect.extend(f.fields)
+
+        return collect
 
     @property
-    def registers(self):
-        for i in six.moves.range(self.dim):
-            display_name = self.display_name
-            if self.display_name and '%s' in self.display_name:
-                display_name = self.display_name % self.dim_indices[i]
-
-            reg = SVDRegister(
-                name=self.name % self.dim_indices[i],
-                fields=self.fields,
-                derived_from=self.derived_from,
-                description=self.description,
-                address_offset=self.address_offset + self.dim_increment * i,
-                size=self.size,
-                access=self.access,
-                protection=self.protection,
-                reset_value=self.reset_value,
-                reset_mask=self.reset_mask,
-                display_name=display_name,
-                alternate_group=self.alternate_group,
-                modified_write_values=self.modified_write_values,
-                read_action=self.read_action,
-            )
-            reg.parent = self.parent
-            yield reg
-
-    def is_reserved(self):
+    def is_reserved(self) -> bool:
         return 'reserved' in self.name.lower()
 
 
-class SVDRegister(SVDElement):
-    def __init__(self, name, derived_from, description, address_offset, size, access, protection, reset_value, reset_mask,
-                 fields, display_name, alternate_group, modified_write_values, read_action):
-        SVDElement.__init__(self)
+@dataclass
+class SVDRegisterCluster(SVDElement, SVDDimElementGroup, SVDRegisterPropertiesGroup):
+    name: Optional[str] = field(default=None, metadata={'required': True})
+    description: Optional[str] = field(default=None)
+    alternate_cluster: Optional[str] = field(default=None)
+    header_struct_name: Optional[str] = field(default=None)
+    address_offset: Optional[int] = field(default=None, metadata={'required': True})
+    registers: List[Union[SVDRegister, 'SVDRegisterArray']] = field(default_factory=list)
+    clusters: List[Union['SVDRegisterCluster', 'SVDRegisterClusterArray']] = field(default_factory=list)
+    derived_from: Optional[str] = field(default=None, metadata={'type': 'attribute'})
 
-        # When deriving a register, it is mandatory to specify at least the name, the description,
-        # and the addressOffset
-        self.derived_from = derived_from
-        self.name = name
-        self.description = description
-        self.address_offset = address_offset
+    def __post_init__(self: 'SVDRegisterCluster') -> None:
+        self._set_parent_association()
+        self._registers_address_relocation()
 
-        self.read_action = read_action
-        self.modified_write_values = modified_write_values
-        self.display_name = display_name
-        self.alternate_group = alternate_group
-        self.size = size
-        self.access = access
-        self.protection = protection
-        self.reset_value = reset_value
-        self.reset_mask = reset_mask
-        self.fields = fields
+    def _registers_address_relocation(self) -> None:
+        if self.dim is None:
+            for register in self.registers:
+                if isinstance(register, SVDRegister):
+                    register.name = f'{self.name}_{register.name}'
+                    register.address_offset = (self.address_offset
+                                               + register.address_offset)
+                elif isinstance_by_str(register, 'SVDRegisterArray'):
+                    for sub_register in register.registers:
+                        sub_register.name = f'{self.name}_{sub_register.name}'
+                        sub_register.address_offset = (self.address_offset
+                                                       + sub_register.address_offset)
 
-        # make parent association
-        for field in self.fields:
-            field.parent = self
-
-    def is_reserved(self):
-        return 'reserved' in self.name.lower()
-
-
-class SVDRegisterCluster(SVDElement):
-    """Represent a register cluster in the tree"""
-
-    def __init__(self, name, derived_from, description, address_offset, size,
-                 alternate_cluster, header_struct_name,
-                 access, protection, reset_value, reset_mask, register,
-                 cluster):
-        SVDElement.__init__(self)
-
-        # When deriving a register, it is mandatory to specify at least the name, the description,
-        # and the addressOffset
-        self.derived_from = derived_from
-        self.name = name
-        self.description = description
-        self.address_offset = address_offset
-
-        self.alternate_cluster = alternate_cluster
-        self.header_struct_name = header_struct_name
-        self.size = size
-        self.access = access
-        self.protection = protection
-        self.reset_value = reset_value
-        self.reset_mask = reset_mask
-        self.register = register
-        self.cluster = cluster
-
-        # make parent association
-        for cluster in self.cluster:
-            cluster.parent = self
-
-    def updated_register(self, reg, clu):
-        new_reg = SVDRegister(
-            name="{}_{}".format(clu.name, reg.name),
-            fields=reg.fields,
-            derived_from=reg.derived_from,
-            description=reg.description,
-            address_offset=clu.address_offset + reg.address_offset,
-            size=reg.size,
-            access=reg.access,
-            protection=reg.protection,
-            reset_value=reg.reset_value,
-            reset_mask=reg.reset_mask,
-            display_name=reg.display_name,
-            alternate_group=reg.alternate_group,
-            modified_write_values=reg.modified_write_values,
-            read_action=reg.read_action,
-        )
-        new_reg.parent = self
-        return new_reg
-
-    @property
-    def registers(self):
-        for reg in self.register:
-            yield self.updated_register(reg, self)
-        for cluster in self.cluster:
-            for reg in cluster.registers:
-                yield self.updated_register(reg, self)
-
-    def is_reserved(self):
-        return 'reserved' in self.name.lower()
-
-
-class SVDRegisterClusterArray(SVDElement):
-    """Represent a register cluster in the tree"""
-
-    def __init__(self, name, derived_from, description, address_offset, size,
-                 alternate_cluster, header_struct_name,
-                 dim, dim_indices, dim_increment,
-                 access, protection, reset_value, reset_mask, register,
-                 cluster):
-        SVDElement.__init__(self)
-
-        # When deriving a register, it is mandatory to specify at least the name, the description,
-        # and the addressOffset
-        self.derived_from = derived_from
-        self.name = name
-        self.description = description
-        self.address_offset = address_offset
-        self.dim = dim
-        self.dim_indices = dim_indices
-        self.dim_increment = dim_increment
-
-        self.alternate_cluster = alternate_cluster
-        self.header_struct_name = header_struct_name
-        self.size = size
-        self.access = access
-        self.protection = protection
-        self.reset_value = reset_value
-        self.reset_mask = reset_mask
-        self.register = register
-        self.cluster = cluster
-
-        # make parent association
-        for register in self.register:
-            register.parent = self
-        for cluster in self.cluster:
-            cluster.parent = self
-
-    def updated_register(self, reg, clu, i):
-        new_reg = SVDRegister(
-            name="{}_{}".format(clu.name % i, reg.name),
-            fields=reg.fields,
-            derived_from=reg.derived_from,
-            description=reg.description,
-            address_offset=clu.address_offset + reg.address_offset + i*clu.dim_increment,
-            size=reg.size,
-            access=reg.access,
-            protection=reg.protection,
-            reset_value=reg.reset_value,
-            reset_mask=reg.reset_mask,
-            display_name=reg.display_name,
-            alternate_group=reg.alternate_group,
-            modified_write_values=reg.modified_write_values,
-            read_action=reg.read_action,
-        )
-        new_reg.parent = self
-        return new_reg
-
-    @property
-    def registers(self):
-        for i in six.moves.range(self.dim):
-            for reg in self.register:
-                yield self.updated_register(reg, self, i)
-            for cluster in self.cluster:
-                for reg in cluster.registers:
-                    yield self.updated_register(reg, cluster, i)
-
-    def is_reserved(self):
-        return 'reserved' in self.name.lower()
-
-
-class SVDAddressBlock(SVDElement):
-    def __init__(self, offset, size, usage):
-        SVDElement.__init__(self)
-        self.offset = offset
-        self.size = size
-        self.usage = usage
-
-
-class SVDInterrupt(SVDElement):
-    def __init__(self, name, value, description):
-        SVDElement.__init__(self)
-        self.name = name
-        self.value = _check_type(value, six.integer_types)
-        self.description = description
-
-
-class SVDPeripheral(SVDElement):
-    def __init__(self, name, version, derived_from, description,
-                 prepend_to_name, base_address, address_blocks,
-                 interrupts, registers, register_arrays, size, access,
-                 protection, reset_value, reset_mask,
-                 group_name, append_to_name, disable_condition,
-                 clusters):
-        SVDElement.__init__(self)
-
-        self.name = name
-        self.version = version
-        self.derived_from = derived_from
-        self.description = description
-        self.prepend_to_name = prepend_to_name
-        self.base_address = base_address
-        self.address_blocks = address_blocks
-        self.interrupts = interrupts if interrupts else list()
-        self._registers = registers if registers else list()
-        self.register_arrays = register_arrays if register_arrays else list()
-        self.size = size  # Defines the default bit-width of any register contained in the device (implicit inheritance).
-        self.access = access  # Defines the default access rights for all registers.
-        self.protection = protection  # Defines extended access protection for all registers.
-        self.reset_value = reset_value  # Defines the default value for all registers at RESET.
-        self.reset_mask = reset_mask  # Identifies which register bits have a defined reset value.
-        self.group_name = group_name
-        self.append_to_name = append_to_name
-        self.disable_condition = disable_condition
-        self.clusters = clusters
-
-        # make parent association for complex node types
-        for i in _none_as_empty(self.interrupts):
-            i.parent = self
-        for r in _none_as_empty(self.registers):
-            r.parent = self
-        for arr in _none_as_empty(self.register_arrays):
-            arr.parent = self
-
-    @property
-    def registers(self):
-        regs = list()
-        if self._registers:
-            regs.extend(self._registers)
-        if self.register_arrays:
-            for arr in self.register_arrays:
-                regs.extend(arr.registers)
+    def _set_parent_association(self) -> None:
         if self.clusters:
             for cluster in self.clusters:
-                regs.extend(cluster.registers)
-        return regs
+                cluster.parent = self
+                if isinstance(cluster, SVDRegisterClusterArray):
+                    cluster.meta_cluster.parent = self
+
+        if self.registers:
+            for register in self.registers:
+                register.parent = self
+                if isinstance(register, SVDRegisterArray):
+                    register.meta_register.parent = self
+
+    @property
+    def is_reserved(self) -> bool:
+        return 'reserved' in self.name.lower()
 
 
+@dataclass
+class SVDAddressBlock(SVDElement):
+    offset: Optional[int] = field(default=None, metadata={'required': True})
+    size: Optional[int] = field(default=None, metadata={'required': True})
+    usage: Optional[SVDAddressBlockUsageType] = field(default=None, metadata={'required': True})
+    protection: Optional[SVDProtectionType] = field(default=None)
+
+
+@dataclass
+class SVDInterrupt(SVDElement):
+    name: Optional[str] = field(default=None, metadata={'required': True})
+    description: Optional[str] = field(default=None)
+    value: Optional[int] = field(default=None, metadata={'required': True})
+
+
+@dataclass
+class SVDPeripheral(SVDElement, SVDDimElementGroup, SVDRegisterPropertiesGroup):
+    name: Optional[str] = field(default=None, metadata={'required': True})
+    version: Optional[str] = field(default=None)
+    description: Optional[str] = field(default=None)
+    alternate_peripheral: Optional[str] = field(default=None)
+    group_name: Optional[str] = field(default=None)
+    prepend_to_name: Optional[str] = field(default=None)
+    append_to_name: Optional[str] = field(default=None)
+    header_struct_name: Optional[str] = field(default=None)
+    disable_condition: Optional[str] = field(default=None)
+    base_address: Optional[int] = field(default=None, metadata={'required': True})
+    address_blocks: Optional[List[SVDAddressBlock]] = field(default=None)
+    interrupts: Optional[List[SVDInterrupt]] = field(default=None)
+    registers: Optional[SvdRegistersListType] = field(default=None)
+    derived_from: Optional[str] = field(default=None, metadata={'type': 'attribute'})
+
+    def __post_init__(self) -> None:
+        self._set_parent_association()
+        self._set_prepend_append_to_name()
+
+    def _set_prepend_append_to_name(self) -> None:
+        if self.prepend_to_name is None and self.append_to_name is None:
+            return
+
+        for reg in self.get_registers():
+            if self.prepend_to_name is not None:
+                reg.name = self.prepend_to_name + reg.name
+            if self.append_to_name is not None:
+                reg.name += self.append_to_name
+
+    def _set_parent_association(self) -> None:
+        for interrupt in _none_as_empty(self.interrupts):
+            interrupt.parent = self
+
+        for address_block in _none_as_empty(self.address_blocks):
+            address_block.parent = self
+
+        for reg in _none_as_empty(self.registers):
+            reg.parent = self
+            if isinstance(reg, SVDRegisterArray):
+                reg.meta_register.parent = self
+
+    def _get_cluster_registers(
+        self, cluster: Union[SVDRegisterCluster, 'SVDRegisterClusterArray']
+    ) -> List['SVDRegister']:
+        registers = []
+
+        if isinstance(cluster, SVDRegisterCluster):
+            for reg in cluster.registers:
+                if isinstance(reg, SVDRegister):
+                    registers.append(reg)
+                elif isinstance_by_str(reg, 'SVDRegisterArray'):
+                    registers.extend(reg.registers)
+                elif (isinstance(reg, SVDRegisterCluster)
+                      or isinstance_by_str(reg, 'SVDRegisterClusterArray')):
+                    self._get_cluster_registers(reg)
+
+            for sub_cluster in cluster.clusters:
+                registers.extend(self._get_cluster_registers(sub_cluster))
+
+        elif isinstance_by_str(cluster, 'SVDRegisterClusterArray'):
+            for sub_cluster in cluster.clusters:
+                registers.extend(self._get_cluster_registers(sub_cluster))
+
+        return registers
+
+    def get_registers(self) -> List[SVDRegister]:
+        registers = []
+
+        for reg in _none_as_empty(self.registers):
+            if isinstance(reg, SVDRegister):
+                registers.append(reg)
+            elif isinstance_by_str(reg, 'SVDRegisterArray'):
+                registers.extend(reg.registers)
+            elif (isinstance(reg, SVDRegisterCluster)
+                  or isinstance_by_str(reg, 'SVDRegisterClusterArray')):
+                registers.extend(self._get_cluster_registers(reg))
+
+        return registers
+
+
+@dataclass
+class SVDSauRegionsConfigRegion(SVDElement):
+    base: Optional[int] = field(default=None, metadata={'required': True})
+    limit: Optional[int] = field(default=None, metadata={'required': True})
+    access: Optional[SVDSauAccessType] = field(default=None, metadata={'required': True})
+    enabled: bool = field(default=True, metadata={'type': 'attribute'})
+    name: Optional[str] = field(default=None, metadata={'type': 'attribute'})
+
+
+@dataclass
+class SVDSauRegionsConfig(SVDElement):
+    regions: List[SVDSauRegionsConfigRegion] = field(default_factory=list)
+    enabled: Optional[bool] = field(default=None, metadata={'type': 'attribute'})
+    protection_when_disabled: Optional[SVDProtectionType] = field(default=None, metadata={'type': 'attribute'})
+
+
+@dataclass
 class SVDCpu(SVDElement):
-    def __init__(self, name, revision, endian, mpu_present, fpu_present, fpu_dp, icache_present,
-                 dcache_present, itcm_present, dtcm_present, vtor_present, nvic_prio_bits,
-                 vendor_systick_config, device_num_interrupts, sau_num_regions, sau_regions_config):
-        SVDElement.__init__(self)
+    name: Optional[Union[SVDCPUNameType, str]] = field(default=None, metadata={'required': True})
+    revision: Optional[str] = field(default=None, metadata={'required': True})
+    endian: Optional[SVDEndianType] = field(default=None, metadata={'required': True})
+    mpu_present: Optional[bool] = field(default=None, metadata={'required': True})
+    fpu_present: Optional[bool] = field(default=None, metadata={'required': True})
+    fpu_dp: Optional[bool] = field(default=None)
+    dsp_present: Optional[bool] = field(default=None)
+    icache_present: Optional[bool] = field(default=None)
+    dcache_present: Optional[bool] = field(default=None)
+    itcm_present: Optional[bool] = field(default=None)
+    dtcm_present: Optional[bool] = field(default=None)
+    vtor_present: Optional[bool] = field(default=None)
+    nvic_prio_bits: Optional[int] = field(default=None, metadata={'required': True})
+    vendor_systick_config: Optional[bool] = field(default=None, metadata={'required': True})
+    device_num_interrupts: Optional[int] = field(default=None)
+    sau_num_regions: Optional[int] = field(default=None)
+    sau_regions_config: Optional[SVDSauRegionsConfig] = field(default=None)
 
-        self.name = name
-        self.revision = revision
-        self.endian = endian
-        self.mpu_present = mpu_present
-        self.fpu_present = fpu_present
-        self.fpu_dp = fpu_dp
-        self.icache_present = icache_present,
-        self.dcache_present = dcache_present,
-        self.itcm_present = itcm_present,
-        self.dtcm_present = dtcm_present,
-        self.vtor_present = vtor_present
-        self.nvic_prio_bits = nvic_prio_bits
-        self.vendor_systick_config = vendor_systick_config
-        self.device_num_interrupts = device_num_interrupts
-        self.sau_num_regions = sau_num_regions
-        self.sau_regions_config = sau_regions_config
+    def __post_init__(self) -> None:
+        self._set_parent_association()
+
+    def _set_parent_association(self) -> None:
+        if self.sau_regions_config:
+            self.sau_regions_config.parent = self
 
 
-class SVDDevice(SVDElement):
-    def __init__(self, vendor, vendor_id, name, version, description, cpu, address_unit_bits, width,
-                 peripherals, size, access, protection, reset_value, reset_mask):
-        SVDElement.__init__(self)
+@dataclass
+class SVDDevice(SVDElement, SVDRegisterPropertiesGroup):
+    vendor: Optional[str] = field(default=None)
+    vendor_id: Optional[str] = field(default=None)
+    name: Optional[str] = field(default=None, metadata={'required': True})
+    series: Optional[str] = field(default=None)
+    version: Optional[str] = field(default=None, metadata={'required': True})
+    description: Optional[str] = field(default=None, metadata={'required': True})
+    license_text: Optional[str] = field(default=None)
+    cpu: Optional[SVDCpu] = field(default=None)
+    header_system_filename: Optional[str] = field(default=None)
+    header_definitions_prefix: Optional[str] = field(default=None)
+    address_unit_bits: Optional[int] = field(default=None, metadata={'required': True})
+    width: Optional[int] = field(default=None, metadata={'required': True})
+    peripherals: List[Union[SVDPeripheral, 'SVDPeripheralArray']] = field(default_factory=list)
+    vendor_extensions: Optional[Any] = field(default=None)
+    schema_version: Optional[str] = field(default=None, metadata={'type': 'attribute', 'required': True})
+    namespace_xs: Optional[str] = field(default=None, metadata={'type': 'attribute', 'required': True})
+    xs_no_namespace_schema_location: Optional[str] = field(default=None, metadata={'type': 'attribute', 'required': True})
 
-        self.vendor = vendor
-        self.vendor_id = vendor_id
-        self.name = name
-        self.version = version
-        self.description = description
-        self.cpu = cpu
-        self.address_unit_bits = _check_type(address_unit_bits, six.integer_types)
-        self.width = _check_type(width, six.integer_types)
-        self.peripherals = peripherals if peripherals else list()
-        self.size = size  # Defines the default bit-width of any register contained in the device (implicit inheritance).
-        self.access = access  # Defines the default access rights for all registers.
-        self.protection = protection  # Defines extended access protection for all registers.
-        self.reset_value = reset_value  # Defines the default value for all registers at RESET.
-        self.reset_mask = reset_mask  # Identifies which register bits have a defined reset value.
+    def __post_init__(self) -> None:
+        self._set_parent_association()
 
-        # set up parent relationship
+    def _set_parent_association(self) -> None:
         if self.cpu:
             self.cpu.parent = self
 
-        for p in _none_as_empty(self.peripherals):
-            p.parent = self
+        for peripheral in self.peripherals:
+            peripheral.parent = self
+            if isinstance(peripheral, SVDPeripheralArray):
+                peripheral.meta_peripheral.parent = self
+
+    def get_peripherals(self) -> List[SVDPeripheral]:
+        collect = []
+        for peripheral in self.peripherals:
+            if isinstance(peripheral, SVDPeripheral):
+                collect.append(peripheral)
+            elif isinstance_by_str(peripheral, 'SVDPeripheralArray'):
+                collect.extend(peripheral.peripherals)
+        return collect
+
+
+SvdRegisterPropertiesGroupParentElements = Union[
+    SVDDevice, SVDPeripheral, SVDRegister, SVDRegisterCluster
+]
+
+
+################################################################################
+# Model Array
+################################################################################
+
+def _expand_svd_array(
+    meta_def: Union[SVDPeripheral, SVDRegister, SVDRegisterCluster, SVDField]
+) -> Union[List[SVDPeripheral], List[SVDRegister], List[SVDRegisterCluster], List[SVDField]]:
+    expansion = []
+    for i in six.moves.range(meta_def.dim):
+        params = {f.name: getattr(meta_def, f.name) for f in fields(meta_def)}
+        params = copy.deepcopy(params)
+        params['dim'] = None
+
+        if meta_def.name and '%s' in meta_def.name and meta_def.dim_index:
+            params['name'] = meta_def.name % meta_def.dim_index[i]
+
+        if (isinstance(meta_def, SVDRegister) and meta_def.display_name
+                and '%s' in meta_def.display_name and meta_def.dim_index):
+            params['display_name'] = meta_def.display_name % meta_def.dim_index[i]
+
+        if isinstance(meta_def, SVDPeripheral):
+            params['base_address'] = (meta_def.base_address
+                                      + meta_def.dim_increment * i)
+        elif isinstance(meta_def, SVDField):
+            params['bit_offset'] = (meta_def.bit_offset
+                                    + meta_def.dim_increment * i)
+        elif isinstance(meta_def, (SVDRegister, SVDRegisterCluster)):
+            params['address_offset'] = (meta_def.address_offset
+                                        + meta_def.dim_increment * i)
+
+        expansion.append(meta_def.__class__(**params))
+    return expansion
+
+
+@dataclass
+class SVDPeripheralArray(SVDElement):
+    meta_peripheral: Optional[SVDPeripheral] = None
+    peripherals: List[SVDPeripheral] = field(default_factory=list)
+
+    def __post_init__(self) -> None:
+        self.peripherals = _expand_svd_array(self.meta_peripheral)
+
+
+@dataclass
+class SVDRegisterArray(SVDElement):
+    meta_register: Optional[SVDRegister] = None
+    registers: List[SVDRegister] = field(default_factory=list)
+
+    def __post_init__(self) -> None:
+        self.registers = _expand_svd_array(self.meta_register)
+
+    @property
+    def is_reserved(self) -> bool:
+        return 'reserved' in self.meta_register.name.lower()
+
+
+@dataclass
+class SVDRegisterClusterArray(SVDElement):
+    meta_cluster: Optional[SVDRegisterCluster] = None
+    clusters: List[SVDRegisterCluster] = field(default_factory=list)
+
+    def __post_init__(self) -> None:
+        self.clusters = _expand_svd_array(self.meta_cluster)
+
+    def is_reserved(self) -> bool:
+        return 'reserved' in self.meta_cluster.name.lower()
+
+
+@dataclass
+class SVDFieldArray(SVDElement):
+    meta_field: Optional[SVDField] = None
+    fields: List[SVDField] = field(default_factory=list)
+
+    def __post_init__(self) -> None:
+        self.fields = _expand_svd_array(self.meta_field)

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Copyright 2015 Paul Osborne <osbpau@gmail.com>
+# Copyright 2015-2024 cmsis-svd Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -39,8 +39,8 @@ setup(
     description="CMSIS SVD parser",
     long_description=get_long_description(),
     long_description_content_type="text/markdown",
-    author="Paul Osborne",
-    author_email="osbpau@gmail.com",
+    author="cmsis-svd Authors",
+    author_email="",
     license="Apache 2.0",
     python_requires=">=3.8",
     classifiers=[
@@ -60,5 +60,13 @@ setup(
         'six>=1.10',
         'lxml',
     ],
+    extras_require={
+        'DEV': [
+            'nose2',
+        ]
+    },
+    package_data={
+        'cmsis_svd': ['py.typed'],
+    },
     packages=find_packages(),
 )
