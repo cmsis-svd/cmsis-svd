@@ -144,6 +144,10 @@ class SVDRegisterArray(SVDElement):
     @property
     def registers(self):
         for i in six.moves.range(self.dim):
+            display_name = self.display_name
+            if self.display_name and '%s' in self.display_name:
+                display_name = self.display_name % self.dim_indices[i]
+
             reg = SVDRegister(
                 name=self.name % self.dim_indices[i],
                 fields=self.fields,
@@ -155,7 +159,7 @@ class SVDRegisterArray(SVDElement):
                 protection=self.protection,
                 reset_value=self.reset_value,
                 reset_mask=self.reset_mask,
-                display_name=self.display_name,
+                display_name=display_name,
                 alternate_group=self.alternate_group,
                 modified_write_values=self.modified_write_values,
                 read_action=self.read_action,
