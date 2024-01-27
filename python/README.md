@@ -32,6 +32,21 @@ with the 0.5 release, those are no longer included as part of the python
 distributable.  Other means of providing access to the SVD definitions may be
 revisited in the future.
 
+
+Download CMSIS-SVD Files from the cmsis-svd Project
+---------------------------------------------------
+
+The cmsis-svd project provides an aggregation of CMSIS-SVD files collected from
+silicon vendors in the [cmsis-svd-data](https://github.com/cmsis-svd/cmsis-svd-data)
+git repository. The next examples use CMSIS-SVD files from the cmsis-svd-data
+to illustrate usages of the cmsis-svd Python package. Clone the cmsis-svd-data
+repository to follow the next examples.
+
+```text
+$ git clone --depth=1 -b main https://github.com/cmsis-svd/cmsis-svd-data.git
+```
+
+
 Example
 -------
 
@@ -43,10 +58,10 @@ K20 SVD is packaged with the library, I can do the following:
 ```python
 from cmsis_svd.parser import SVDParser
 
-SVD_DATA_DIR = "..."
+SVD_DATA_DIR = "cmsis-svd-data/data"
 
 parser = SVDParser.for_packaged_svd(SVD_DATA_DIR, 'Freescale', 'MK20D7.svd')
-for peripheral in parser.get_device().peripherals:
+for peripheral in parser.get_device().get_peripherals():
     print("%s @ 0x%08x" % (peripheral.name, peripheral.base_address))
 ```
 
@@ -79,7 +94,7 @@ it you can do something like the following:
 ```python
 from cmsis_svd.parser import SVDParser
 
-SVD_DATA_DIR = "..."
+SVD_DATA_DIR = "cmsis-svd-data/data"
 
 parser = SVDParser.for_packaged_svd(SVD_DATA_DIR, 'Freescale', 'MK20D7.svd')
 svd_dict = parser.get_device().to_dict()
