@@ -1,0 +1,7 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cmsis-svd"
+dynamic = ["version", "description", "readme", "requires-python", "license", "authors", "classifiers", "dependencies"]

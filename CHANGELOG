@@ -1,0 +1,96 @@
+This file details the changelog of CMSIS-SVD project.
+
+--------------------------------------------------------------------------------
+
+[version 1.0]
+
+Fix and Improvements:
+
+- version 1.0 new design, code factoring and improvements: https://github.com/cmsis-svd/cmsis-svd/pull/185
+  - Add CHANGELOG file.
+  - Add AUTHOR file.
+  - The banner licence of each file has been changed to 'Copyright 2015-2024 cmsis-svd Authors'
+  - Add CMSIS SVD XML Schema Definition files for versions:
+    1.0, 1.1, 1.2, 1.3.1, 1.3.2, 1.3.3, 1.3.4, 1.3.5, 1.3.6, 1.3.7, 1.3.8, 1.3.9, 1.3.10, 1.3.11.
+    Schema 1.3.11 is unofficial for the moment, but officially in review by the svd spec maintainers,
+    and brings major fixes, see @ckudera PR in https://github.com/Open-CMSIS-Pack/svd-spec/pull/14 .
+  - Add CMSIS SVD Python model XML serializer SVDXmlSerializer, which is a refactored
+    and modified version of the SVD XML serializer from the SVDSuite project.
+  - CMSIS SVD Python model improvements:
+    * CMSIS SVD spec support up to 1.3.11.
+    * Model classes are now based on Python dataclass.
+    * New SVD data types: SVDReadActionType, SVDModifiedWriteValuesType,
+      SVDEnumUsageType, SVDEndianType, SVDDataTypeType, SVDAddressBlockUsageType,
+      SVDAccessType, SVDSauAccessType, SVDProtectionType, SVDCPUNameType.
+    * Add XML serializer methods: to_xml(), to_xml_file(), to_xml_node().
+    * Add JSON serializer methods: to_json(), to_json_file().
+    * Add new methods to access to peripherals, registers and fields:
+      SVDDevice.get_peripherals(), SVDPeripheral.get_registers(), SVDRegister.get_fields()
+    * Python type hint and PEP8 review.
+  - CMSIS SVD Python parser improvements:
+    * Add method for standalone SVD XML validation via: validate_xml_tree(),
+      validate_xml_file() and validate_xml_str().
+    * Add flexible XML data validation to SVDParser.get_device() via xml_validation,
+      schema_version and schema_version_detection parameters.
+    * Add parsing for SVD XML device tag attributes: namespace and noNamespaceSchemaLocation
+    * Python type hint and PEP8 review.
+  - CMSIS SVD Python:
+    * Add pyproject.toml to avoid pip install deprecation warning.
+    * Replace Python dev-requirements.txt file by a DEV 'extras_require' in setup.py.
+    * Python README improvements.
+    * Move Python 'tests' and 'exemples' directories to the root of the Python package.
+  - Fix regex SyntaxWarning message during bitfield range parsing.
+    Reported by @brainstorm in https://github.com/cmsis-svd/cmsis-svd/pull/185#issuecomment-2375592693
+  - Fix incompatibility with the CMSIS-SVD schema for enumeratedValues in fieldType.
+    Reported by @gschwaer in https://github.com/cmsis-svd/cmsis-svd/pull/185#issuecomment-1937233034
+  - Fix improper register field filtering based on 'reserved' field name.
+    Reported by @BenBE in https://github.com/cmsis-svd/cmsis-svd/pull/185#discussion_r1797755026
+  - Fix for path traversal (CWE-22 and related) in SVDParser.for_packaged_svd()
+    Reported by @BenBE in https://github.com/cmsis-svd/cmsis-svd/pull/185#pullrequestreview-2364230915
+    Fix proposal by @ckudera in https://github.com/cmsis-svd/cmsis-svd/pull/185#issuecomment-2408710944
+
+- format display_name with dim_indices: https://github.com/cmsis-svd/cmsis-svd/pull/187
+  According to the SVD specification: https://www.keil.com/pack/doc/CMSIS/SVD/html/elem_registers.html#elem_register,
+  the 'displayName' child element of the register element can also take advantage
+  of the '%s' syntax. The only difference with 'name' is that 'displayName' is optional.
+  This patch duplicates the logic used by 'name' for 'displayName'. Because it
+  is not clear if 'displayName' must contain '%s' let's handle any error.
+
+- Remove cmsis svd data directory: https://github.com/cmsis-svd/cmsis-svd/pull/182
+  * Remove the data directory which takes up too much space.
+  * Adjust the cmsis-svd files path for Python test and examples, to handle a cloned data directory.
+  * README update for examples using the data directory.
+  * A Github test workflow update for cloning the git repository cmsis-svd-data, required for test purpose.
+
+
+New to the cmsis-svd Github organisation and Core Maintainers of this project:
+
+- Christian Kudera (@ckudera)
+- Benny Baumann (@BenBE)
+- Roman Valls Guimera (@brainstorm)
+
+
+New to the Pypi Python Package Maintainer:
+
+- Vincent Dary (@VincentDary)
+
+
+New contributors:
+- Clement Calmels (@ccalmels) made their first contribution in https://github.com/cmsis-svd/cmsis-svd/pull/187
+- Roman Valls Guimera (@brainstorm) made their first contribution in https://github.com/cmsis-svd/cmsis-svd/pull/185#issuecomment-2375592693
+
+
+Thanks:
+
+- Paul Osborne (@posborne)
+- Christian Kudera (@ckudera)
+- Benny Baumann (@BenBE)
+- Roman Valls Guimera (@brainstorm)
+- Gero Schwäricke (@gschwaer)
+- Clement Calmels (@ccalmels)
+- Vincent Dary (@VincentDary)
+- @jvogl-dev
+- @AJ528
+
+
+Again, thanks for all contributors and sorry if I missed your name here (please tell me @VincentDary !)
