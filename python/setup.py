@@ -17,8 +17,10 @@
 
 import ast
 import os
+import pdb
 import re
 from setuptools import setup, find_packages
+from setuptools.command.install import install
 
 
 def read_version(filename):
@@ -67,6 +69,11 @@ setup(
     },
     package_data={
         'cmsis_svd': ['py.typed'],
+    },
+    entry_points={
+        'console_scripts': [
+            'svd-dl=cmsis_svd.svd_dl:main'
+        ]
     },
     packages=find_packages(),
 )
