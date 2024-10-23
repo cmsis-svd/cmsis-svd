@@ -1,158 +1,40 @@
-﻿#
-# Copyright 2015 Paul Osborne <osbpau@gmail.com>
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
+﻿"""
+
+Copyright 2015-2024 cmsis-svd Authors
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+"""
+
+from typing import Union, List, Dict, Any, Tuple
+from enum import Enum
 import os
 import copy
-from lxml import etree
-
-from cmsis_svd.model import SVDDevice
-from cmsis_svd.model import SVDPeripheral
-from cmsis_svd.model import SVDInterrupt
-from cmsis_svd.model import SVDAddressBlock
-from cmsis_svd.model import SVDRegister, SVDRegisterArray
-from cmsis_svd.model import SVDRegisterCluster, SVDRegisterClusterArray
-from cmsis_svd.model import SVDField
-from cmsis_svd.model import SVDEnumeratedValue
-from cmsis_svd.model import SVDCpu
 import re
 
-class ElementABC(object):
-    def __init__(self, tag):
-        self.tag = tag
+import lxml
+from lxml import etree
+from lxml.etree import ElementTree, Element
 
-    def is_optional(self):
-        raise NotImplementedError("is_optional not implemented")
-
-    def parse(self, el):
-        raise NotImplementedError("parse not implemented")
-
-class OptionalElement(ElementABC):
-
-    def __init__(self, inner, default=None):
-        ElementABC.__init__(self, inner.tag)
-        self.inner = inner
-        self.default = default
-
-    def is_optional(self):
-        return True
-
-    def parse(self, el):
-        return self.inner.parse(el)
-
-class TextElement(ElementABC):
-
-    def is_optional(self):
-        return False
-
-    def parse(self, el):
-        return el.text
-
-class IntElement(ElementABC):
-
-    def is_optional(self):
-        return False
-
-    def parse(self, el):
-        text_value = el.text.strip().lower()
-        if text_value.startswith('0x'):
-            return int(text_value[2:], 16)  # hexadecimal
-        elif text_value.startswith('#'):
-            # TODO(posborne): Deal with strange #1xx case better
-            #
-            # Freescale will sometimes provide values that look like this:
-            #   #1xx
-            # In this case, there are a number of values which all mean the
-            # same thing as the field is a "don't care".  For now, we just
-            # replace those bits with zeros.
-            text_value = text_value.replace('x', '0')[1:]
-            is_bin = all(x in '01' for x in text_value)
-            return int(text_value, 2) if is_bin else int(text_value)  # binary
-        elif text_value.startswith('true'):
-            return 1
-        elif text_value.startswith('false'):
-            return 0
-        else:
-            return int(text_value)  # decimal
-
-def _parse_sequences(node, *tags):
-    tag_iter = iter(tags)
-    res = []
-
-    for el in node:
-        while True:
-            try:
-                tag = next(tag_iter)
-                if tag.tag == el.tag:
-                    res.append(tag.parse(el))
-                    break
-                elif tag.is_optional():
-                    res.append(tag.default)
-                    continue
-                else:
-                    raise KeyError("Expected tag not found in correct place. Expected: {}, Element was: {}\nNode:\n{}".format(tag.tag, el, etree.tostring(node)))
-            except StopIteration:
-                print("Res: {}".format(res))
-                yield tuple(res)
-                tag_iter = iter(tags)
-                res = []
-
-    if res:
-        for remtag in tag_iter:
-            if remtag.is_optional():
-                res.append(remtag.default)
-            else:
-                raise KeyError("Remaining non-optional element: {}".format(remtag))
-        yield tuple(res)
-
-
-
-def _get_text(node, tag, default=None):
-    """Get the text for the provided tag from the provided node"""
-    try:
-        return node.find(tag).text
-    except AttributeError:
-        return default
-
-
-def _get_int(node, tag, default=None):
-    text_value = _get_text(node, tag, default)
-    try:
-        if text_value != default:
-            text_value = text_value.strip().lower()
-            if text_value.startswith('0x'):
-                return int(text_value[2:], 16)  # hexadecimal
-            elif text_value.startswith('#'):
-                # TODO(posborne): Deal with strange #1xx case better
-                #
-                # Freescale will sometimes provide values that look like this:
-                #   #1xx
-                # In this case, there are a number of values which all mean the
-                # same thing as the field is a "don't care".  For now, we just
-                # replace those bits with zeros.
-                text_value = text_value.replace('x', '0')[1:]
-                is_bin = all(x in '01' for x in text_value)
-                return int(text_value, 2) if is_bin else int(text_value)  # binary
-            elif text_value.startswith('true'):
-                return 1
-            elif text_value.startswith('false'):
-                return 0
-            else:
-                return int(text_value)  # decimal
-    except ValueError:
-        return default
-    return default
+from .model import (
+    SVDDevice, SVDCpu, SVDPeripheral, SVDInterrupt, SVDAddressBlock,
+    SVDRegister, SVDRegisterArray, SVDRegisterCluster, SVDRegisterClusterArray,
+    SVDField, SVDEnumeratedValue, SVDWriteConstraint, SVDPeripheralArray,
+    SVDAccessType, SVDAddressBlockUsageType, SVDDataTypeType, SVDProtectionType,
+    SVDModifiedWriteValuesType, SVDReadActionType, SVDFieldArray, SVDCPUNameType,
+    SVDDimArrayIndex, SVDEndianType, SVDSauAccessType, SVDSauRegionsConfig,
+    SVDWriteConstraintRange, SVDSauRegionsConfigRegion, SVDEnumeratedValues,
+    DimElementGroupType, RegisterPropertiesGroupType, SVDEnumUsageType)
 
 
 class SVDXmlPreprocessing:
@@ -162,25 +44,23 @@ class SVDXmlPreprocessing:
     _REGISTER_PROPERTIES_GROUP = {
         "size", "access", "protection", "resetValue", "resetMask"}
 
-    def __init__(self, document_root):
-        self._root = document_root
+    def __init__(self, document_root: Element):
+        self._root: Element = document_root
 
     @staticmethod
-    def _propagate_register_properties_keys(targets, properties):
+    def _propagate_register_properties_keys(
+        targets: List[Element], properties: Dict[str, str]
+    ) -> None:
         for node in targets:
             for prop in properties:
                 if node.find(prop) is None and properties[prop] is not None:
                     node.append(copy.deepcopy(properties[prop]))
 
-    def _propagate_register_properties_group(self):
+    def _propagate_register_properties_group(self) -> None:
         rpg = {k: self._root.find(k) for k in self._REGISTER_PROPERTIES_GROUP}
 
         self._propagate_register_properties_keys(
             self._root.findall('.//peripheral'), rpg)
-
-        self._propagate_register_properties_keys(
-            self._root.findall('.//sauRegionsConfig[@protectionWhenDisabled]'),
-            {'protection': rpg['protection']})
 
         for periph in self._root.findall(".//peripheral"):
             rpg_copy = copy.deepcopy(rpg)
@@ -208,30 +88,29 @@ class SVDXmlPreprocessing:
                 reg.findall('.//field'), {'access': rpg_copy['access']})
 
     @staticmethod
-    def _derive_tag(src, dst, override=True):
-        dst_tags = [t.tag for t in dst.findall('./')] if override else list()
+    def _derive_tag(src: Element, dst: Element, override: bool = True) -> None:
+        dst_tags = [t.tag for t in dst.findall('./')] if override else []
         for src_tag in filter(lambda t: t.tag not in dst_tags, src.findall('./')):
             dst.append(copy.deepcopy(src_tag))
 
-    def _derived_from_enumerated_values(self):
+    def _derived_from_enumerated_values(self) -> None:
         for dst in self._root.findall('.//enumeratedValues[@derivedFrom]'):
-            src = self._root.find('.//enumeratedValues[name="{}"]'
-                                  .format(dst.attrib['derivedFrom']))
+            src = self._root.find(f'.//enumeratedValues'
+                                  f'[name="{dst.attrib["derivedFrom"]}"]')
             if src is not None:
-                 for src_tag in src.findall('./enumeratedValue'):
-                     self._derive_tag(src_tag, dst)
+                for src_tag in src.findall('./enumeratedValue'):
+                    self._derive_tag(src_tag, dst)
 
-    def _derived_from_field(self):
+    def _derived_from_field(self) -> None:
         for dst in self._root.findall('.//field[@derivedFrom]'):
             derived_path = dst.attrib['derivedFrom'].split('.')
 
             if len(derived_path) == 1:
-                src = dst.find('../field[name="{}"]'.format(derived_path[0]))
+                src = dst.find(f'../field[name="{derived_path[0]}"]')
             elif len(derived_path) == 3:
-                src = self._root.find('.//peripheral[name="{}"]'
-                                      '//register[name="{}"]//field[name="{}"]'
-                                      .format(derived_path[0], derived_path[1],
-                                              derived_path[3]))
+                src = self._root.find(f'.//peripheral[name="{derived_path[0]}"]'
+                                      f'//register[name="{derived_path[1]}"]'
+                                      f'//field[name="{derived_path[3]}"]')
             else:
                 src = None
 
@@ -239,16 +118,15 @@ class SVDXmlPreprocessing:
                     and dst.find('./description') is not None):
                 self._derive_tag(src, dst)
 
-    def _derived_from_register(self):
+    def _derived_from_register(self) -> None:
         for dst in self._root.findall('.//register[@derivedFrom]'):
             derived_path = dst.attrib['derivedFrom'].split('.')
 
             if len(derived_path) == 1:
-                src = dst.find('../register[name="{}"]'.format(derived_path[0]))
+                src = dst.find(f'../register[name="{derived_path[0]}"]')
             elif len(derived_path) == 2:
-                src = self._root.find('.//peripheral[name="{}"]'
-                                      '//register[name="{}"]'.format(
-                                      derived_path[0], derived_path[1]))
+                src = self._root.find(f'.//peripheral[name="{derived_path[0]}"]'
+                                      f'//register[name="{derived_path[1]}"]')
             else:
                 src = None
 
@@ -257,16 +135,15 @@ class SVDXmlPreprocessing:
                     and dst.find('./addressOffset') is not None):
                 self._derive_tag(src, dst)
 
-    def _derived_from_cluster(self):
+    def _derived_from_cluster(self) -> None:
         for dst in self._root.findall('.//cluster[@derivedFrom]'):
             derived_path = dst.attrib['derivedFrom'].split('.')
 
             if len(derived_path) == 1:
-                src = dst.find('../cluster[name="{}"]'.format(derived_path[0]))
+                src = dst.find(f'../cluster[name="{derived_path[0]}"]')
             elif len(derived_path) == 2:
-                src = self._root.find('.//peripheral[name="{}"]'
-                                      '//cluster[name="{}"]'.format(
-                                      derived_path[0], derived_path[1]))
+                src = self._root.find(f'.//peripheral[name="{derived_path[0]}"]'
+                                      f'//cluster[name="{derived_path[1]}"]')
             else:
                 src = None
 
@@ -275,14 +152,14 @@ class SVDXmlPreprocessing:
                     and dst.find('./addressOffset') is not None):
                 self._derive_tag(src, dst)
 
-    def _derived_from_peripherals(self):
+    def _derived_from_peripherals(self) -> None:
         for dst in self._root.findall('.//peripheral[@derivedFrom]'):
-            src = self._root.find('.//peripheral[name="{}"]'.format(
-                                  dst.attrib['derivedFrom']))
+            src = self._root.find(f'.//peripheral'
+                                  f'[name="{dst.attrib["derivedFrom"]}"]')
             if src is not None:
                 self._derive_tag(src, dst)
 
-    def preprocess_xml(self):
+    def preprocess_xml(self) -> None:
         self._derived_from_enumerated_values()
         self._derived_from_field()
         self._derived_from_register()
@@ -291,11 +168,153 @@ class SVDXmlPreprocessing:
         self._propagate_register_properties_group()
 
 
-class SVDParser(object):
+def _get_text(node: Element, tag: str, default: Any = None) -> Union[str, Any]:
+    """Get the text for the provided tag from the provided node"""
+    try:
+        return node.find(tag).text
+    except AttributeError:
+        return default
+
+
+def _get_int(node: Element, tag: str, default: Any = None) -> Union[int, Any]:
+    text_value = _get_text(node, tag, default)
+    try:
+        if text_value != default:
+            text_value = text_value.strip().lower()
+
+            if text_value.startswith('0x'):
+                ret_value = int(text_value[2:], 16)  # hexadecimal
+            elif text_value.startswith('#'):
+                # TODO(posborne): Deal with strange #1xx case better
+                #
+                # Freescale will sometimes provide values that look like this:
+                #   #1xx
+                # In this case, there are a number of values which all mean the
+                # same thing as the field is a "don't care".  For now, we just
+                # replace those bits with zeros.
+                text_value = text_value.replace('x', '0')[1:]
+                is_bin = all(x in '01' for x in text_value)
+                ret_value = int(text_value, 2) if is_bin else int(text_value)  # binary
+            elif text_value.startswith('true'):
+                ret_value = 1
+            elif text_value.startswith('false'):
+                ret_value = 0
+            else:
+                ret_value = int(text_value)  # decimal
+
+            return ret_value
+    except ValueError:
+        return default
+    return default
+
+
+def _parse_bool(text_value: str) -> Union[bool, None]:
+    text_bool = text_value.lower().strip()
+
+    if text_bool == '0' or text_bool == 'false':
+        return False
+    elif text_bool == '1' or text_bool == 'true':
+        return True
+
+    return None
+
+
+def _get_bool(node: Element, tag: str, default: Any = None) -> Union[bool, Any]:
+    if text_value := _get_text(node, tag, default):
+        return _parse_bool(text_value)
+    return None
+
+
+def _is_reserved_name(name: str) -> bool:
+    normalized_name = name.lower().replace(' ', '')
+    if 'reserved' == normalized_name:
+        return True
+    return False
+
+
+def scan_schema_versions() -> List[str]:
+    versions: List[str] = []
+    with os.scandir(os.path.join(os.path.dirname(__file__), 'schemas')) as it:
+        for entry in it:
+            xsd = re.search(r'^CMSIS-SVD((_[0-9]{1,2}){1,3})\.xsd$', entry.name)
+            if xsd is not None and entry.is_file():
+                versions.append(xsd.group(1)[1:].replace('_', '.'))
+    return versions
+
+
+SVD_SCHEMA_VERSIONS = scan_schema_versions()
+
+
+class SVDParserValidationError(Exception):
+    pass
+
+
+class SVDParser:
     """The SVDParser is responsible for mapping the SVD XML to Python Objects"""
 
+    @staticmethod
+    def _get_latest_schema_version() -> str:
+        if len(SVD_SCHEMA_VERSIONS) == 0:
+            raise SVDParserValidationError('SVD schema versions not found.')
+
+        def parse_version(version):
+            return list(map(int, version.split('.')))
+
+        versions = list(map(parse_version, SVD_SCHEMA_VERSIONS))
+        latest = max(versions)
+        return '.'.join(map(str, latest))
+
     @classmethod
-    def for_xml_file(cls, path):
+    def validate_xml_tree(
+        cls, tree: lxml.etree._ElementTree, schema_version: str = 'latest',
+        schema_version_detection: bool = True
+    ) -> Tuple[bool, str]:
+        root = tree.getroot()
+
+        schema_ver_validation = schema_version
+        if schema_version == 'latest':
+            schema_ver_validation = cls._get_latest_schema_version()
+
+        if schema_version_detection:
+            parsed_schema_version = root.get('schemaVersion')
+            if parsed_schema_version is not None:
+                if parsed_schema_version in SVD_SCHEMA_VERSIONS:
+                    schema_ver_validation = parsed_schema_version
+                else:
+                    raise SVDParserValidationError(
+                        f'Invalid detected schema version '
+                        f'"{parsed_schema_version}"')
+
+        version_part = schema_ver_validation.replace('.', '_')
+        schema_file_path = os.path.join(os.path.dirname(__file__), 'schemas',
+                                        f'CMSIS-SVD_{version_part}.xsd')
+
+        if not os.path.exists(schema_file_path):
+            raise SVDParserValidationError(
+                f'Schema file not found: {schema_file_path}')
+
+        with open(schema_file_path, 'rb') as f:
+            xmlschema = lxml.etree.XMLSchema(lxml.etree.parse(f))
+
+        if not xmlschema.validate(tree):
+            return False, (f'CMSIS-SVD Schema Version {schema_ver_validation}'
+                           f': {xmlschema.error_log}')
+
+        return True, ''
+
+    @classmethod
+    def validate_xml_file(
+        cls, file_path: Union[str, os.PathLike], *args, **kwargs
+    ) -> Tuple[bool, str]:
+        return cls.validate_xml_tree(etree.parse(file_path), *args, **kwargs)
+
+    @classmethod
+    def validate_xml_str(cls, xml_str: str, *args, **kwargs) -> Tuple[bool, str]:
+        return cls.validate_xml_tree(
+            lxml.etree.fromstring(xml_str).getroottree(), *args, **kwargs)
+
+    @classmethod
+    def for_xml_file(cls, path: Union[str, os.PathLike]) -> 'SVDParser':
         """Create a new parser for the provided SVD XML file
 
         These files often have either the .xml or .svd extension and may
@@ -305,7 +324,9 @@ class SVDParser(object):
         return cls(etree.parse(path))
 
     @classmethod
-    def for_packaged_svd(cls, package_root, vendor, filename):
+    def for_packaged_svd(
+        cls, package_root: Union[str, os.PathLike], vendor: str, filename: str
+    ) -> Union['SVDParser', None]:
         """Find SVD for a given vendor/mcu within packaged data
 
         This convenience method requires a "package_root" which is
@@ -318,7 +339,7 @@ class SVDParser(object):
         as part of the python package but that is no longer the case
         as of version 0.5.
         """
-        path = os.path.join(package_root, vendor, filename)
+        path = os.path.join(package_root, vendor, os.path.basename(filename))
         if os.path.exists(path):
             return cls.for_xml_file(path)
 
@@ -332,7 +353,9 @@ class SVDParser(object):
         return None
 
     @classmethod
-    def for_mcu(cls, package_root, mcu):
+    def for_mcu(
+        cls, package_root: Union[str, os.PathLike], mcu: str
+    ) -> Union['SVDParser', None]:
         """Attempt to find SVD for a given mcu by name within package root
 
         This convenience method requires a "package_root" which is
@@ -354,7 +377,7 @@ class SVDParser(object):
 
         Note that some MCUs include an "x" in the svd name to capture
         a family of MCUs.  This isn't applied consistently, so you will
-        need to provide a pattern that matches one of the SVD files.            
+        need to provide a pattern that matches one of the SVD files.
         """
         path = os.path.abspath(package_root)
         expected_fname_lower = f"{mcu}.svd".lower()
@@ -363,375 +386,485 @@ class SVDParser(object):
                 fname_final_lower = os.path.split(fname)[-1].lower()
                 if expected_fname_lower == fname_final_lower:
                     return cls.for_xml_file(os.path.join(root, fname))
-                   
         return None
 
-    def __init__(self, tree, remove_reserved=False):
-        self.remove_reserved = remove_reserved
-        self._tree = tree
-        self._root = self._tree.getroot()
+    def __init__(self, tree: ElementTree, remove_reserved: bool = False):
+        self.remove_reserved: bool = remove_reserved
+        self._tree: ElementTree = tree
+        self._root: Element = self._tree.getroot()
 
-    def _parse_enumerated_value(self, enumerated_value_node):
+    @staticmethod
+    def _parse_dim_index(text_value: str) -> Tuple[str, List[str]]:
+        if ',' in text_value:
+            dim_index = text_value.split(',')
+            return ',', dim_index
+        elif '-' in text_value:
+            # some files use <dimIndex>0-3</dimIndex> as an inclusive inclusive
+            # range
+            start, stop = text_value.split('-')
+            dim_index = []
+
+            if start.isalpha() and stop.isalpha():
+                start_val = ord(start)
+                stop_val = ord(stop)
+                dim_index = [chr(val) for val in range(start_val, stop_val + 1)]
+
+            elif start.isdigit() and stop.isdigit():
+                start_val = int(start)
+                stop_val = int(stop)
+                dim_index = [str(val) for val in range(start_val, stop_val + 1)]
+
+            return '-', dim_index
+        else:
+            raise ValueError(f'Unexpected dim_index_text: "{text_value}"')
+
+    @staticmethod
+    def _parse_access_type(text_value: str) -> Union[SVDAccessType, None]:
+        access_text = text_value.strip()
+
+        if access_text in [v.value for v in SVDAccessType]:
+            access_value = SVDAccessType(access_text)
+        elif access_text == SVDAccessType.WRITE_ONCE.value.lower():  # fix
+            access_value = SVDAccessType(SVDAccessType.WRITE_ONCE)
+        elif access_text == SVDAccessType.READ_WRITE_ONCE.value.lower():  # fix
+            access_value = SVDAccessType(SVDAccessType.READ_WRITE_ONCE)
+        elif access_text == 'write':  # fix
+            access_value = SVDAccessType(SVDAccessType.WRITE_ONLY)
+        else:
+            print(f'[WARNING] Invalid access type "{access_text}"')
+            access_value = None
+
+        return access_value
+
+    @staticmethod
+    def _parse_enumerated_value(
+        enumerated_value_node: Element
+    ) -> SVDEnumeratedValue:
         return SVDEnumeratedValue(
             name=_get_text(enumerated_value_node, 'name'),
             description=_get_text(enumerated_value_node, 'description'),
             value=_get_int(enumerated_value_node, 'value'),
-            is_default=_get_int(enumerated_value_node, 'isDefault')
+            is_default=_get_bool(enumerated_value_node, 'isDefault')
         )
 
-    def _parse_field(self, field_node, register_node):
-        enumerated_values = []
-        for enumerated_value_node in field_node.findall("./enumeratedValues/enumeratedValue"):
-            enumerated_values.append(self._parse_enumerated_value(enumerated_value_node))
+    def _parse_dim_array_index(
+        self, dim_array_node: Element
+    ) -> SVDDimArrayIndex:
+        enum_values = [self._parse_enumerated_value(ev)
+                       for ev in dim_array_node.findall('./enumeratedValue')]
 
-        modified_write_values=_get_text(field_node, 'modifiedWriteValues')
-        read_action=_get_text(field_node, 'readAction')
-        bit_range = _get_text(field_node, 'bitRange')
-        bit_offset = _get_int(field_node, 'bitOffset')
-        bit_width = _get_int(field_node, 'bitWidth')
-        msb = _get_int(field_node, 'msb')
-        lsb = _get_int(field_node, 'lsb')
-        if bit_range is not None:
-            m = re.search('\[([0-9]+):([0-9]+)\]', bit_range)
-            bit_offset = int(m.group(2))
-            bit_width = 1 + (int(m.group(1)) - int(m.group(2)))
-        elif msb is not None:
-            bit_offset = lsb
-            bit_width = 1 + (msb - lsb)
-
-        return SVDField(
-            name=_get_text(field_node, 'name'),
-            derived_from=field_node.get('derivedFrom'),
-            description=_get_text(field_node, 'description'),
-            bit_offset=bit_offset,
-            bit_width=bit_width,
-            access=_get_text(field_node, 'access'),
-            enumerated_values=enumerated_values or None,
-            modified_write_values=modified_write_values,
-            read_action=read_action,
+        return SVDDimArrayIndex(
+            header_enum_name=_get_text(dim_array_node, 'headerEnumName'),
+            enumerated_value=enum_values
         )
 
-    def _parse_registers(self, register_node):
-        fields = []
-        for field_node in register_node.findall('.//field'):
-            node = self._parse_field(field_node, register_node)
-            if not self.remove_reserved or 'reserved' not in node.name.lower():
-                fields.append(node)
+    def _parse_dim_element_group(self, node: Element) -> DimElementGroupType:
+        dim = _get_int(node, 'dim')
 
-        dim = _get_int(register_node, 'dim')
-        name = _get_text(register_node, 'name')
-        derived_from = register_node.get('derivedFrom')
-        description = _get_text(register_node, 'description')
-        address_offset = _get_int(register_node, 'addressOffset')
-        size = _get_int(register_node, 'size')
-        access = _get_text(register_node, 'access')
-        protection = _get_text(register_node, 'protection')
-        reset_value = _get_int(register_node, 'resetValue')
-        reset_mask = _get_int(register_node, 'resetMask')
-        dim_increment = _get_int(register_node, 'dimIncrement')
-        dim_index_text = _get_text(register_node, 'dimIndex')
-        display_name = _get_text(register_node, 'displayName')
-        alternate_group = _get_text(register_node, 'alternateGroup')
-        modified_write_values = _get_text(register_node, 'modifiedWriteValues')
-        read_action = _get_text(register_node, 'readAction')
-
-        if dim is None:
-            return SVDRegister(
-                name=name,
-                fields=fields,
-                derived_from=derived_from,
-                description=description,
-                address_offset=address_offset,
-                size=size,
-                access=access,
-                protection=protection,
-                reset_value=reset_value,
-                reset_mask=reset_mask,
-                display_name=display_name,
-                alternate_group=alternate_group,
-                modified_write_values=modified_write_values,
-                read_action=read_action,
-            )
+        if dim_index_str := _get_text(node, 'dimIndex'):
+            dim_index_sep, dim_index = self._parse_dim_index(dim_index_str)
         else:
-            # the node represents a register array
-            if dim_index_text is None:
-                dim_indices = list(range(0, dim))  # some files omit dimIndex
-            elif ',' in dim_index_text:
-                dim_indices = dim_index_text.split(',')
-            elif '-' in dim_index_text:  # some files use <dimIndex>0-3</dimIndex> as an inclusive inclusive range
-                start, stop = dim_index_text.split('-')
+            dim_index_sep, dim_index = None, None
 
-                if start.isalpha() and stop.isalpha():
-                    start_val = ord(start)
-                    stop_val = ord(stop)
+        # fix some files omitting dimIndex
+        if dim is not None and dim_index is None:
+            dim_index = list(range(0, dim))
+            dim_index_sep = '-'
 
-                    dim_indices = [
-                        chr(val)
-                        for val in range(start_val, stop_val + 1)
-                    ]
+        dim_array_idx = None
+        if (dim_array_idx_node := node.find('dimArrayIndex')) is not None:
+            dim_array_idx = self._parse_dim_array_index(dim_array_idx_node)
 
-                elif start.isdigit() and stop.isdigit():
-                    start_val = int(start)
-                    stop_val = int(stop)
+        return DimElementGroupType(
+            dim=dim,
+            dim_increment=_get_int(node, 'dimIncrement'),
+            dim_index=dim_index,
+            dim_name=_get_text(node, 'dimName'),
+            dim_array_index=dim_array_idx,
+            dim_index_separator=dim_index_sep,
+        )
 
-                    dim_indices = [
-                        str(val)
-                        for val in range(start_val, stop_val + 1)
-                    ]
+    def _parse_register_properties_group(
+        self, node: Element
+    ) -> RegisterPropertiesGroupType:
+        if access := _get_text(node, 'access'):
+            access = self._parse_access_type(access)
 
-                else:
-                    raise NotImplementedError(
-                        f'DimIndex={dim_index_text} is not supported.'
-                    )
-            else:
-                raise ValueError("Unexpected dim_index_text: %r" % dim_index_text)
+        if protection := _get_text(node, 'protection'):
+            protection = SVDProtectionType(protection)
 
-            # yield `SVDRegisterArray` (caller will differentiate on type)
-            return SVDRegisterArray(
-                name=name,
-                fields=fields,
-                derived_from=derived_from,
-                description=description,
-                address_offset=address_offset,
-                size=size,
-                access=access,
-                protection=protection,
-                reset_value=reset_value,
-                reset_mask=reset_mask,
-                display_name=display_name,
-                alternate_group=alternate_group,
-                modified_write_values=modified_write_values,
-                read_action=read_action,
-                dim=dim,
-                dim_indices=dim_indices,
-                dim_increment=dim_increment,
-            )
+        return RegisterPropertiesGroupType(
+            size=_get_int(node, 'size'),
+            access=access,
+            protection=protection,
+            reset_value=_get_int(node, 'resetValue'),
+            reset_mask=_get_int(node, 'resetMask'),
+        )
 
-    def _parse_cluster(self, cluster_node):
-        dim = _get_int(cluster_node, 'dim')
-        name = _get_text(cluster_node, 'name')
-        derived_from = cluster_node.get('derivedFrom')
-        description = _get_text(cluster_node, 'description')
-        address_offset = _get_int(cluster_node, 'addressOffset')
-        size = _get_int(cluster_node, 'size')
-        access = _get_text(cluster_node, 'access')
-        protection = _get_text(cluster_node, 'protection')
-        reset_value = _get_int(cluster_node, 'resetValue')
-        reset_mask = _get_int(cluster_node, 'resetMask')
-        dim_increment = _get_int(cluster_node, 'dimIncrement')
-        dim_index_text = _get_text(cluster_node, 'dimIndex')
-        alternate_cluster = _get_text(cluster_node, 'alternateCluster')
-        header_struct_name = _get_text(cluster_node, 'headerStructName')
-        cluster = []
-        for sub_cluster_node in cluster_node.findall("./cluster"):
-            cluster.append(self._parse_cluster(sub_cluster_node))
-        register = []
-        for reg_node in cluster_node.findall("./register"):
-            register.append(self._parse_registers(reg_node))
+    @staticmethod
+    def _parse_address_block_usage_type(
+        text_value: str
+    ) -> Union[SVDAddressBlockUsageType, None]:
+        usage_text = text_value.strip()
 
-        if dim is None:
-            return SVDRegisterCluster(
-                name=name,
-                derived_from=derived_from,
-                description=description,
-                address_offset=address_offset,
-                size=size,
-                access=access,
-                protection=protection,
-                reset_value=reset_value,
-                reset_mask=reset_mask,
-                alternate_cluster=alternate_cluster,
-                header_struct_name=header_struct_name,
-                register=register,
-                cluster=cluster,
-            )
+        if usage_text in [v.value for v in SVDAddressBlockUsageType]:
+            usage = SVDAddressBlockUsageType(usage_text)
         else:
-            # the node represents a register array
-            if dim_index_text is None:
-                dim_indices = list(range(0, dim))  # some files omit dimIndex
-            elif ',' in dim_index_text:
-                dim_indices = dim_index_text.split(',')
-            elif '-' in dim_index_text:  # some files use <dimIndex>0-3</dimIndex> as an inclusive inclusive range
-                m = re.search(r'([0-9]+)-([0-9]+)', dim_index_text)
-                dim_indices = list(range(int(m.group(1)), int(m.group(2)) + 1))
-            else:
-                raise ValueError("Unexpected dim_index_text: %r" % dim_index_text)
+            usage = None
 
-            # yield `SVDRegisterArray` (caller will differentiate on type)
-            return SVDRegisterClusterArray(
-                name=name,
-                derived_from=derived_from,
-                description=description,
-                address_offset=address_offset,
-                size=size,
-                access=access,
-                protection=protection,
-                reset_value=reset_value,
-                reset_mask=reset_mask,
-                alternate_cluster=alternate_cluster,
-                header_struct_name=header_struct_name,
-                register=register,
-                cluster=cluster,
-                dim=dim,
-                dim_increment=dim_increment,
-                dim_indices=dim_indices,
-            )
+        return usage
 
-    def _parse_address_block(self, address_block_node):
+    def _parse_address_block(
+        self, address_block_node: Element
+    ) -> Union[SVDAddressBlock, None]:
+        usage = None
+        if usage_text := _get_text(address_block_node, 'usage'):
+            usage = self._parse_address_block_usage_type(usage_text)
+
+        if protection := _get_text(address_block_node, 'protection'):
+            protection = SVDProtectionType(protection)
+
         return SVDAddressBlock(
-            _get_int(address_block_node, 'offset'),
-            _get_int(address_block_node, 'size'),
-            _get_text(address_block_node, 'usage')
+            offset=_get_int(address_block_node, 'offset'),
+            size=_get_int(address_block_node, 'size'),
+            usage=usage,
+            protection=protection
         )
 
-    def _parse_interrupts(self, interrupt_node):
-        tags = [
-            TextElement('name'),
-            OptionalElement(TextElement('description')),
-            TextElement('value'),
-        ]
+    @staticmethod
+    def _parse_interrupt(interrupt_node: Element) -> SVDInterrupt:
+        return SVDInterrupt(
+            name=_get_text(interrupt_node, 'name'),
+            description=_get_text(interrupt_node, 'description'),
+            value=_get_int(interrupt_node, 'value'),
+        )
 
-        for (name, value, description) in _parse_sequences(interrupt_node, *tags):
-            yield SVDInterrupt(
-                name=_get_text(interrupt_node, 'name'),
-                value=_get_int(interrupt_node, 'value'),
-                description=_get_text(interrupt_node, 'description'))
+    @staticmethod
+    def _parse_write_constraint(
+        write_constraint_node: Element
+    ) -> SVDWriteConstraint:
+        write_constraint_range = None
+        if (range_node := write_constraint_node.find('./range')) is not None:
+            write_constraint_range = SVDWriteConstraintRange(
+                minimum=_get_bool(range_node, 'minimum'),
+                maximum=_get_bool(range_node, 'maximum')
+            )
 
-    def _parse_peripheral(self, peripheral_node):
-        # parse registers
-        registers = None if peripheral_node.find('registers') is None else []
-        register_arrays = None if peripheral_node.find('registers') is None else []
-        for register_node in peripheral_node.findall('./registers/register'):
-            reg = self._parse_registers(register_node)
-            if isinstance(reg, SVDRegisterArray):
-                register_arrays.append(reg)
-            else:
-                registers.append(reg)
+        return SVDWriteConstraint(
+            write_as_read=_get_bool(write_constraint_node, 'writeAsRead'),
+            use_enumerated_values=_get_bool(write_constraint_node, 'useEnumeratedValues'),
+            range=write_constraint_range
+        )
 
-        clusters = []
-        for cluster_node in peripheral_node.findall('./registers/cluster'):
-            reg = self._parse_cluster(cluster_node)
-            clusters.append(reg)
+    @staticmethod
+    def _parse_usage_type(text_value: str) -> SVDEnumUsageType:
+        usage_text = text_value.strip().lower()
+        return SVDEnumUsageType(usage_text)
 
-        # parse all interrupts for the peripheral
-        interrupts = []
-        for interrupt_node in peripheral_node.findall('./interrupt'):
-            for interrupt in self._parse_interrupts(interrupt_node):
-                interrupts.append(interrupt)
-        interrupts = interrupts if interrupts else None
+    def _parse_enumerated_values(
+        self, enumerated_values_node: Element
+    ) -> SVDEnumeratedValues:
+        enum_values = [self._parse_enumerated_value(ev)
+                       for ev in enumerated_values_node.findall('./enumeratedValue')]
 
-        # parse all address blocks for the peripheral
-        address_blocks = []
-        for address_block_node in peripheral_node.findall('./addressBlock'):
-            address_blocks.append(self._parse_address_block(address_block_node))
-        address_blocks = address_blocks if address_blocks else None
+        if usage := _get_text(enumerated_values_node, 'usage'):
+            usage = self._parse_usage_type(usage)
 
-        return SVDPeripheral(
-            # <name>identifierType</name>
-            # <version>xs:string</version>
-            # <description>xs:string</description>
+        return SVDEnumeratedValues(
+            name=_get_text(enumerated_values_node, 'name'),
+            header_enum_name=_get_text(enumerated_values_node, 'headerEnumName'),
+            usage=usage,
+            enumerated_values=enum_values
+        )
+
+    def _parse_field(self, field_node: Element) -> Union[SVDField, SVDFieldArray]:
+        dim_element_group = self._parse_dim_element_group(field_node)
+
+        enum_values = None
+        if (enum_values_nodes := field_node.findall('./enumeratedValues')) is not None:
+            enum_values = [self._parse_enumerated_values(ev) for ev in enum_values_nodes]
+
+        mod_w_value = _get_text(field_node, 'modifiedWriteValues')
+        mod_w_value = SVDModifiedWriteValuesType(mod_w_value) if mod_w_value else None
+
+        read_action = _get_text(field_node, 'readAction')
+        read_action = SVDReadActionType(read_action) if read_action else None
+
+        write_constraint = None
+        if (write_constraint_node := field_node.find('writeConstraint')) is not None:
+            write_constraint = self._parse_write_constraint(write_constraint_node)
+
+        access = None
+        if (access_text := _get_text(field_node, 'access')) is not None:
+            access = self._parse_access_type(access_text)
+
+        field = SVDField(
+            name=_get_text(field_node, 'name'),
+            description=_get_text(field_node, 'description'),
+            lsb=_get_int(field_node, 'lsb'),
+            msb=_get_int(field_node, 'msb'),
+            bit_offset=_get_int(field_node, 'bitOffset'),
+            bit_width=_get_int(field_node, 'bitWidth'),
+            bit_range=_get_text(field_node, 'bitRange'),
+            access=access,
+            modified_write_values=mod_w_value,
+            write_constraint=write_constraint,
+            read_action=read_action,
+            enumerated_values=enum_values or None,
+            derived_from=field_node.get('derivedFrom'),
+            **dim_element_group
+        )
+
+        if field.bit_range is not None:
+            m = re.search('\\[([0-9]+):([0-9]+)\\]', field.bit_range)
+            field.bit_offset = int(m.group(2))
+            field.bit_width = 1 + (int(m.group(1)) - int(m.group(2)))
+        elif field.msb is not None:
+            field.bit_offset = field.lsb
+            field.bit_width = 1 + (field.msb - field.lsb)
+
+        if field.dim is not None:
+            return SVDFieldArray(meta_field=field)
+        else:
+            return field
+
+    def _parse_register(
+        self, register_node: Element
+    ) -> Union[SVDRegister, SVDRegisterArray]:
+        fields = [self._parse_field(f) for f in register_node.findall('./fields/field')
+                  if not self.remove_reserved or not _is_reserved_name(f.name)]
+
+        dim_element_group = self._parse_dim_element_group(register_node)
+        properties_group = self._parse_register_properties_group(register_node)
+
+        data_type = _get_text(register_node, 'dataType')
+        data_type = SVDDataTypeType(data_type) if data_type else None
+
+        mod_w_value = _get_text(register_node, 'modifiedWriteValues')
+        mod_w_value = (SVDModifiedWriteValuesType(mod_w_value) if mod_w_value
+                       else None)
+
+        read_action = _get_text(register_node, 'readAction')
+        read_action = SVDReadActionType(read_action) if read_action else None
+
+        write_constraint = None
+        if (w_c_node := register_node.find('./writeConstraint')) is not None:
+            write_constraint = self._parse_write_constraint(w_c_node)
+
+        register = SVDRegister(
+            name=_get_text(register_node, 'name'),
+            display_name=_get_text(register_node, 'displayName'),
+            description=_get_text(register_node, 'description'),
+            alternate_group=_get_text(register_node, 'alternateGroup'),
+            alternate_register=_get_text(register_node, 'alternateRegister'),
+            address_offset=_get_int(register_node, 'addressOffset'),
+            data_type=data_type,
+            modified_write_values=mod_w_value,
+            write_constraint=write_constraint,
+            read_action=read_action,
+            fields=fields,
+            derived_from=register_node.get('derivedFrom'),
+            **dim_element_group,
+            **properties_group
+        )
+
+        if register.dim is not None:
+            return SVDRegisterArray(meta_register=register)
+        else:
+            return register
+
+    def _parse_cluster(
+        self, cluster_node: Element
+    ) -> Union[SVDRegisterCluster, SVDRegisterClusterArray]:
+        dim_element_group = self._parse_dim_element_group(cluster_node)
+        properties_group = self._parse_register_properties_group(cluster_node)
+
+        sub_cluster = [self._parse_cluster(c)
+                       for c in cluster_node.findall('./cluster')]
+
+        registers = [self._parse_register(r)
+                     for r in cluster_node.findall('register')]
+
+        cluster = SVDRegisterCluster(
+            name=_get_text(cluster_node, 'name'),
+            description=_get_text(cluster_node, 'description'),
+            alternate_cluster=_get_text(cluster_node, 'alternateCluster'),
+            header_struct_name=_get_text(cluster_node, 'headerStructName'),
+            address_offset=_get_int(cluster_node, 'addressOffset'),
+            derived_from=cluster_node.get('derivedFrom'),
+            clusters=sub_cluster,
+            registers=registers,
+            **dim_element_group,
+            **properties_group
+        )
+
+        if cluster.dim is not None:
+            return SVDRegisterClusterArray(meta_cluster=cluster)
+        else:
+            return cluster
+
+    def _parse_peripheral(
+        self, peripheral_node: Element
+    ) -> Union[SVDPeripheral, SVDPeripheralArray]:
+        dim_element_group = self._parse_dim_element_group(peripheral_node)
+        properties_group = self._parse_register_properties_group(peripheral_node)
+
+        address_blocks = [self._parse_address_block(ad)
+                          for ad in peripheral_node.findall('./addressBlock')]
+
+        interrupts = [self._parse_interrupt(i)
+                      for i in peripheral_node.findall('./interrupt')]
+
+        registers = [self._parse_register(r)
+                     for r in peripheral_node.findall('./registers/register')]
+
+        registers += [self._parse_cluster(r)
+                      for r in peripheral_node.findall('./registers/cluster')]
+
+        peripheral = SVDPeripheral(
             name=_get_text(peripheral_node, 'name'),
             version=_get_text(peripheral_node, 'version'),
-            derived_from=peripheral_node.get('derivedFrom'),
             description=_get_text(peripheral_node, 'description'),
-
-            # <groupName>identifierType</groupName>
-            # <prependToName>identifierType</prependToName>
-            # <appendToName>identifierType</appendToName>
-            # <disableCondition>xs:string</disableCondition>
-            # <baseAddress>scaledNonNegativeInteger</baseAddress>
+            alternate_peripheral=_get_text(peripheral_node, 'alternaPeripheral'),
             group_name=_get_text(peripheral_node, 'groupName'),
             prepend_to_name=_get_text(peripheral_node, 'prependToName'),
             append_to_name=_get_text(peripheral_node, 'appendToName'),
+            header_struct_name=_get_text(peripheral_node, 'headerStructName'),
             disable_condition=_get_text(peripheral_node, 'disableCondition'),
             base_address=_get_int(peripheral_node, 'baseAddress'),
-
-            # <!-- registerPropertiesGroup -->
-            # <size>scaledNonNegativeInteger</size>
-            # <access>accessType</access>
-            # <resetValue>scaledNonNegativeInteger</resetValue>
-            # <resetMask>scaledNonNegativeInteger</resetMask>
-            size=_get_int(peripheral_node, "size"),
-            access=_get_text(peripheral_node, 'access'),
-            reset_value=_get_int(peripheral_node, "resetValue"),
-            reset_mask=_get_int(peripheral_node, "resetMask"),
-
-            # <addressBlock>
-            #     <offset>scaledNonNegativeInteger</offset>
-            #     <size>scaledNonNegativeInteger</size>
-            #     <usage>usageType</usage>
-            #     <protection>protectionStringType</protection>
-            # </addressBlock>
-            address_blocks=address_blocks,
-
-            # <interrupt>
-            #     <name>identifierType</name>
-            #     <value>scaledNonNegativeInteger</value>
-            #     <description>xs:string</description>
-            # </interrupt>
-            interrupts=interrupts,
-
-            # <registers>
-            #     ...
-            # </registers>
-            register_arrays=register_arrays,
-            registers=registers,
-
-            # <cluster>
-            #    ...
-            # </cluster>
-            clusters=clusters,
-
-            # (not mentioned in docs -- applies to all registers)
-            protection=_get_text(peripheral_node, 'protection'),
+            address_blocks=address_blocks or None,
+            interrupts=interrupts or None,
+            registers=registers or None,
+            derived_from=peripheral_node.get('derivedFrom'),
+            **dim_element_group,
+            **properties_group,
         )
 
-    def _parse_device(self, device_node):
-        peripherals = []
-        for peripheral_node in device_node.findall('.//peripheral'):
-            peripherals.append(self._parse_peripheral(peripheral_node))
-        cpu_node = device_node.find('./cpu')
-        cpu = SVDCpu(
-            name=_get_text(cpu_node, 'name'),
+        if peripheral.dim is not None:
+            return SVDPeripheralArray(meta_peripheral=peripheral)
+        else:
+            return peripheral
+
+    @staticmethod
+    def _parse_sau_regions_config_region(
+        region_node: Element
+    ) -> SVDSauRegionsConfigRegion:
+        return SVDSauRegionsConfigRegion(
+            base=_get_int(region_node, 'base'),
+            limit=_get_int(region_node, 'limit'),
+            access=SVDSauAccessType(_get_text(region_node, 'access')),
+            enabled=_parse_bool(region_node.get('enabled')),
+            name=region_node.get('name')
+        )
+
+    def _parse_sau_regions_config(
+        self, sau_region_config_node: Element
+    ) -> SVDSauRegionsConfig:
+        regions = [self._parse_sau_regions_config_region(r)
+                   for r in sau_region_config_node.findall('./region')]
+
+        if protection := sau_region_config_node.get('protectionWhenDisabled'):
+            protection = SVDProtectionType(protection)
+
+        return SVDSauRegionsConfig(
+            enabled=_parse_bool(sau_region_config_node.get('enabled')),
+            protection_when_disabled=protection,
+            regions=regions
+        )
+
+    def _parse_cpu(self, cpu_node: Element) -> SVDCpu:
+        endian = _get_text(cpu_node, 'endian')
+        endian = SVDEndianType(endian) if endian is not None else None
+
+        sau_region_config = None
+        if (sau_region_config_node := cpu_node.find('./sauRegionsConfig')) is not None:
+            sau_region_config = self._parse_sau_regions_config(
+                    sau_region_config_node)
+
+        cpu_dict = {e.name: e.value for e in SVDCPUNameType}
+        if (cpu_name := _get_text(cpu_node, 'name')) in cpu_dict.values():
+            cpu_name = SVDCPUNameType(cpu_name)
+        else:
+            cpu_dict.update({'CUSTOM': cpu_name})
+            cpu_name = Enum('SVDCPUNameType', names=cpu_dict)(cpu_name)
+
+        return SVDCpu(
+            name=cpu_name,
             revision=_get_text(cpu_node, 'revision'),
-            endian=_get_text(cpu_node, 'endian'),
-            mpu_present=_get_int(cpu_node, 'mpuPresent'),
-            fpu_present=_get_int(cpu_node, 'fpuPresent'),
-            fpu_dp=_get_int(cpu_node, 'fpuDP'),
-            icache_present=_get_int(cpu_node, 'icachePresent'),
-            dcache_present=_get_int(cpu_node, 'dcachePresent'),
-            itcm_present=_get_int(cpu_node, 'itcmPresent'),
-            dtcm_present=_get_int(cpu_node, 'dtcmPresent'),
-            vtor_present=_get_int(cpu_node, 'vtorPresent'),
+            endian=endian,
+            mpu_present=_get_bool(cpu_node, 'mpuPresent'),
+            fpu_present=_get_bool(cpu_node, 'fpuPresent'),
+            fpu_dp=_get_bool(cpu_node, 'fpuDP'),
+            icache_present=_get_bool(cpu_node, 'icachePresent'),
+            dcache_present=_get_bool(cpu_node, 'dcachePresent'),
+            itcm_present=_get_bool(cpu_node, 'itcmPresent'),
+            dtcm_present=_get_bool(cpu_node, 'dtcmPresent'),
+            vtor_present=_get_bool(cpu_node, 'vtorPresent'),
             nvic_prio_bits=_get_int(cpu_node, 'nvicPrioBits'),
-            vendor_systick_config=_get_int(cpu_node, 'vendorSystickConfig'),
+            vendor_systick_config=_get_bool(cpu_node, 'vendorSystickConfig'),
             device_num_interrupts=_get_int(cpu_node, 'deviceNumInterrupts'),
             sau_num_regions=_get_int(cpu_node, 'sauNumRegions'),
-            sau_regions_config=_get_text(cpu_node, 'sauRegionsConfig')
+            sau_regions_config=sau_region_config
         )
+
+    def _parse_device(self, device_node: Element) -> SVDDevice:
+        properties_group = self._parse_register_properties_group(device_node)
+
+        peripherals = [self._parse_peripheral(p)
+                       for p in device_node.findall('./peripherals/peripheral')]
+
+        cpu = None
+        if (cpu_node := device_node.find('./cpu')) is not None:
+            cpu = self._parse_cpu(cpu_node)
+
+        nsmap_xs = device_node.nsmap.get('xs')
+        if nsmap_xs:
+            attr_name = f'{{{device_node.nsmap["xs"]}}}noNamespaceSchemaLocation'
+            xs_no_namespace_schema_location = device_node.get(attr_name)
+        else:
+            xs_no_namespace_schema_location = None
 
         return SVDDevice(
             vendor=_get_text(device_node, 'vendor'),
             vendor_id=_get_text(device_node, 'vendorID'),
             name=_get_text(device_node, 'name'),
+            series=_get_text(device_node, 'series'),
             version=_get_text(device_node, 'version'),
             description=_get_text(device_node, 'description'),
+            license_text=_get_text(device_node, 'licenseText'),
             cpu=cpu,
+            header_system_filename=_get_text(device_node, 'headerSystemFilename'),
+            header_definitions_prefix=_get_text(device_node, 'headerDefinitionsPrefix'),
             address_unit_bits=_get_int(device_node, 'addressUnitBits'),
             width=_get_int(device_node, 'width'),
             peripherals=peripherals,
-            size=_get_int(device_node, "size"),
-            access=_get_text(device_node, 'access'),
-            protection=_get_text(device_node, 'protection'),
-            reset_value=_get_int(device_node, "resetValue"),
-            reset_mask=_get_int(device_node, "resetMask")
+            schema_version=device_node.get('schemaVersion'),
+            namespace_xs=nsmap_xs,
+            xs_no_namespace_schema_location=xs_no_namespace_schema_location,
+            **properties_group
         )
 
-    def get_device(self):
-        """Get the device described by this SVD"""
+    def get_device(
+        self, xml_validation: bool = False, schema_version: str = 'latest',
+        schema_version_detection: bool = True
+    ) -> SVDDevice:
+        """Get the device described by this SVD
+
+        To validate the loaded SVD XML file before parsing, specify the
+        `xml_validation` boolean flag. In this case the `SVDParser` try to
+        retrieve the XML schema version used by the file via the `schemaVersion`
+        attribute of the `device` tag, otherwise if not found the version
+        specified by the `schema_version` argument is used, which is the last
+        SVD schema version by default. Also, the auto-detection of the schema
+        version can be deactivated via the  `schema_version_detection` boolean
+        flag, in this case the schema version used is the version provided by the
+        `schema_version` argument.
+        """
+        if xml_validation:
+            is_valid, err_str = self.validate_xml_tree(
+                self._tree, schema_version, schema_version_detection)
+            if not is_valid:
+                raise SVDParserValidationError(err_str)
+
         SVDXmlPreprocessing(self._root).preprocess_xml()
         return self._parse_device(self._root)
-
-
-def duplicate_array_of_registers(svdreg):  # expects a SVDRegister which is an array of registers
-    assert (svdreg.dim == len(svdreg.dim_index))

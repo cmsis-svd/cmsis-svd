@@ -9,11 +9,13 @@ It provides parsers that make code generation and tooling based on SVD
 easier to build. Most parsers simply parse a provided SVD file and
 turn it into a data structure more easily used in that language.
 
+- [Python Package](https://github.com/cmsis-svd/cmsis-svd)
+
 What is CMSIS-SVD
 -----------------
 
 ARM provides the following description of
-[CMSIS-SVD (System View Description)](http://www.keil.com/pack/doc/CMSIS/SVD/html/index.html)
+[CMSIS-SVD (System View Description)](https://open-cmsis-pack.github.io/svd-spec/main/index.html)
 
 > The CMSIS System View Description format(CMSIS-SVD) formalizes the
 > description of the system contained in ARM Cortex-M processor-based
