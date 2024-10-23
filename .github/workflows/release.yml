@@ -16,7 +16,7 @@ jobs:
 
       - name: Build package
         run: |
-          python setup.py sdist bdist_wheel
+          cd python && python setup.py sdist bdist_wheel
 
       - name: Extract tag name
         run: echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
