@@ -16,7 +16,7 @@ limitations under the License.
 
 """
 
-__version__ = "1.0"
+__version__ = "0.6"
 
 from .parser import SVDParser
 from .serializers.xml import SVDXmlSerializer
