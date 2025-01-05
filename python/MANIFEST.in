@@ -1,2 +1,4 @@
 include README.md
 recursive-include cmsis_svd/schemas *
+recursive-exclude tests *
+recursive-exclude examples *
