@@ -10,13 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     name: "python=${{ matrix.python-version }}"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Clone cmsis-svd-data
         shell: bash
         run: |
           git clone --depth=1 -b main https://github.com/cmsis-svd/cmsis-svd-data.git
       - name: Setup python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5.2.0
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install Dependencies
