@@ -227,7 +227,7 @@ def _get_bool(node: Element, tag: str, default: Any = None) -> Union[bool, Any]:
 
 def _is_reserved_name(name: str) -> bool:
     normalized_name = name.lower().replace(' ', '')
-    if 'reserved' == normalized_name:
+    if 'reserved' in normalized_name:
         return True
     return False
 
@@ -632,7 +632,7 @@ class SVDParser:
         self, register_node: Element
     ) -> Union[SVDRegister, SVDRegisterArray]:
         fields = [self._parse_field(f) for f in register_node.findall('./fields/field')
-                  if not self.remove_reserved or not _is_reserved_name(f.name)]
+                  if not self.remove_reserved or not _is_reserved_name(_get_text(f, 'name'))]
 
         dim_element_group = self._parse_dim_element_group(register_node)
         properties_group = self._parse_register_properties_group(register_node)
