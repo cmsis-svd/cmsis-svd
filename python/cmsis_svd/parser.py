@@ -227,7 +227,7 @@ def _get_bool(node: Element, tag: str, default: Any = None) -> Union[bool, Any]:
 
 def _is_reserved_name(name: str) -> bool:
     normalized_name = name.lower().replace(' ', '')
-    if 'reserved' == normalized_name:
+    if 'reserved' in normalized_name:
         return True
     return False
 
