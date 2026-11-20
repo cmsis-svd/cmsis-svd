@@ -22,6 +22,8 @@ import os
 
 import unittest
 
+from lxml import etree
+
 from cmsis_svd import SVDParser
 from cmsis_svd.model import (
     SVDEndianType, SVDAddressBlockUsageType, SVDAccessType, SVDDevice,
@@ -422,3 +424,87 @@ class TestParserXmlValidation(unittest.TestCase):
                                              schema_version='1.3.10',
                                              schema_version_detection=False)
         assert isinstance(self.device, SVDDevice)
+
+
+DERIVED_FIELD_SVD = """<?xml version="1.0" encoding="utf-8"?>
+<device schemaVersion="1.3">
+  <name>DERIVED_FIELD</name>
+  <addressUnitBits>8</addressUnitBits>
+  <width>32</width>
+  <size>32</size>
+  <access>read-write</access>
+  <peripherals>
+    <peripheral>
+      <name>P1</name>
+      <baseAddress>0x40000000</baseAddress>
+      <registers>
+        <register>
+          <name>CR</name>
+          <addressOffset>0x0</addressOffset>
+          <fields>
+            <field>
+              <name>EN</name>
+              <description>enable</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-only</access>
+            </field>
+            <field derivedFrom="EN">
+              <name>EN2</name>
+              <description>enable 2</description>
+              <bitOffset>8</bitOffset>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    <peripheral>
+      <name>P2</name>
+      <baseAddress>0x40001000</baseAddress>
+      <registers>
+        <register>
+          <name>CR</name>
+          <addressOffset>0x0</addressOffset>
+          <fields>
+            <field derivedFrom="P1.CR.EN">
+              <name>EN</name>
+              <description>enable of P2</description>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+  </peripherals>
+</device>
+"""
+
+
+class TestParserDerivedFromField(unittest.TestCase):
+    """Field derivedFrom with a field name in the same register, and with a
+    PERIPHERAL.REGISTER.FIELD path."""
+    fields: dict
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        tree = etree.ElementTree(etree.fromstring(DERIVED_FIELD_SVD.encode()))
+        device = SVDParser(tree).get_device()
+        cls.fields = {
+            f"{p.name}.{r.name}.{f.name}": f
+            for p in device.get_peripherals()
+            for r in p.get_registers()
+            for f in r.get_fields()
+        }
+
+    def test_derived_from_field_same_register(self) -> None:
+        field = self.fields["P1.CR.EN2"]
+        self.assertEqual(field.description, "enable 2")
+        self.assertEqual(field.bit_offset, 8)  # own value is kept
+        self.assertEqual(field.bit_width, 2)
+        self.assertEqual(field.access, SVDAccessType.READ_ONLY)
+
+    def test_derived_from_field_full_path(self) -> None:
+        field = self.fields["P2.CR.EN"]
+        self.assertEqual(field.description, "enable of P2")
+        self.assertEqual(field.bit_offset, 3)
+        self.assertEqual(field.bit_width, 2)
+        self.assertEqual(field.access, SVDAccessType.READ_ONLY)

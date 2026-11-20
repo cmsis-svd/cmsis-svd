@@ -110,7 +110,7 @@ class SVDXmlPreprocessing:
             elif len(derived_path) == 3:
                 src = self._root.find(f'.//peripheral[name="{derived_path[0]}"]'
                                       f'//register[name="{derived_path[1]}"]'
-                                      f'//field[name="{derived_path[3]}"]')
+                                      f'//field[name="{derived_path[2]}"]')
             else:
                 src = None
 
